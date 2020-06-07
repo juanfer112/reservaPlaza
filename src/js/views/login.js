@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Alert } from "react-router-dom";
 
 import "../../styles/home.scss";
 
@@ -10,7 +10,6 @@ export const Login = () => {
 	var [password, setPassword] = useState("");
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
-	var ConditionalLink = store.validation ? Link : Login;
 	return (
 		<div className="container">
 			<div className="row">
@@ -42,14 +41,19 @@ export const Login = () => {
 								¿Olvido su contraseña?
 							</a>
 							<div className="text-center mt-4">
-								<ConditionalLink to={{ pathname: "/profile/" + user.toLowerCase() }}>
-									<button
-										type="button"
-										className="btn btn-primary mx-auto "
-										onClick={() => actions.checkUser(user, password)}>
-										Login
-									</button>
-								</ConditionalLink>
+								<button
+									type="button"
+									className="btn btn-primary mx-auto "
+									onClick={() => {
+										actions.checkUser(user, password);
+										store.validation ? (
+											<Link to={{ pathname: "/profile/" + user.toLowerCase() }} />
+										) : (
+											<Alert>Wrong pass or user</Alert>
+										);
+									}}>
+									Login
+								</button>
 							</div>
 						</div>
 					) : (
