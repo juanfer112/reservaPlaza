@@ -10,6 +10,7 @@ export const Login = () => {
 	var [password, setPassword] = useState("");
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
+
 	return (
 		<div className="container">
 			<div className="row">
@@ -41,19 +42,18 @@ export const Login = () => {
 								¿Olvido su contraseña?
 							</a>
 							<div className="text-center mt-4">
-								<button
-									type="button"
-									className="btn btn-primary mx-auto "
-									onClick={() => {
-										actions.checkUser(user, password);
-										store.validation ? (
-											<Link to={{ pathname: "/profile/" + user.toLowerCase() }} />
-										) : (
-											<Alert>Wrong pass or user</Alert>
-										);
-									}}>
-									Login
-								</button>
+								{
+									<Link to={"/profile/" + user}>
+										<button
+											type="button"
+											className="btn btn-primary mx-auto "
+											onClick={() => {
+												actions.checkUser(user, password);
+											}}>
+											Login
+										</button>
+									</Link>
+								}
 							</div>
 						</div>
 					) : (
