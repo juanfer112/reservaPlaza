@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					user: "Mattia",
 					password: "Tozzi"
 				}
-			]
+			],
+			validation: false
 		},
 		actions: {
 			checkUser: (us, pa) => {
@@ -19,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				partners.map(elements => {
 					if (elements.user == us && elements.password == pa) {
-						console.log("permiso para ingreos");
+						setStore({ validation: true });
 					}
 				});
 			},
