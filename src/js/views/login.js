@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link, Alert } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../../styles/home.scss";
 
@@ -10,6 +10,13 @@ export const Login = () => {
 	var [password, setPassword] = useState("");
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
+
+	useEffect(
+		() => {
+			actions.checkUser(user, password);
+		},
+		[user, password]
+	);
 
 	return (
 		<div className="container">
@@ -42,18 +49,28 @@ export const Login = () => {
 								¿Olvido su contraseña?
 							</a>
 							<div className="text-center mt-4">
-								{
-									<Link to={"/profile/" + user}>
+								{store.validation ? (
+									<Link to={"/profile/" + user.toLowerCase()}>
 										<button
 											type="button"
 											className="btn btn-primary mx-auto "
 											onClick={() => {
-												actions.checkUser(user, password);
+												return (
+													actions.setUserHolder(user, password),
+													actions.checkMaster(user, password)
+												);
 											}}>
 											Login
 										</button>
 									</Link>
-								}
+								) : (
+									<button
+										type="button"
+										className="btn btn-primary mx-auto "
+										onClick={() => alert("Revisa tu usuario o contraseña")}>
+										Login
+									</button>
+								)}
 							</div>
 						</div>
 					) : (
