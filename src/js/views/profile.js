@@ -1,6 +1,7 @@
 import React, { useState, useContext, useReducer } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { Calendar } from "../component/calendar";
 
 import "../../styles/home.scss";
 
@@ -50,7 +51,7 @@ export const Profile = () => {
 				<>
 					<button onClick={() => setProgram(true)}>Programa Semanale</button>
 					<ul>
-						{store.partners.map((item, index) => {
+						{store.partners.map(item => {
 							if (!item.admin) {
 								return (
 									<Link to={"/profile/" + item.user.toLowerCase()}>
@@ -64,10 +65,10 @@ export const Profile = () => {
 					</ul>
 				</>
 			) : (
-				<>
+				<div>
 					<button onClick={() => setProgram(false)}>Lista Clientes</button>
-					<h1>AQUI SE MUESTRA EL PROGRAMA</h1>
-				</>
+					<Calendar />
+				</div>
 			)}
 		</div>
 	);

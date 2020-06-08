@@ -4,14 +4,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			partners: [
 				{
 					admin: true,
-					user: "juan",
-					password: "pollan",
+					user: "j",
+					password: "p",
 					logo: "http://placehold.it/500x325"
 				},
 				{
 					admin: false,
-					user: "Mattia",
-					password: "Tozzi",
+					user: "m",
+					password: "t",
 					logo: "http://placehold.it/500x325",
 					hours: 0
 				}
