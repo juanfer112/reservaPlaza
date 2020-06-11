@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Login } from "./views/login";
-import { Profile } from "./views/profile";
+import { Day } from "./component/day";
+import { ProfileUsers } from "./views/profileUsers";
+import { Scheduler } from "./component/scheduler";
 
 import injectContext from "./store/appContext";
 
@@ -18,8 +19,8 @@ export const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Switch>
-						<Route exact path="/" component={Login} />
-						<Route path="/profile/:theid" component={Profile} />
+						<Route exact path="/" component={Scheduler} />
+						<Route path="/profile/:theid" component={ProfileUsers} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
 				</ScrollToTop>
