@@ -6,9 +6,13 @@ import { Day } from "./day";
 import "../../styles/home.scss";
 
 export const Scheduler = () => {
-	var days = [];
-	for (let day = 0; day < 7; day++) {
-		days.push(<Day />);
+	var week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+	var array = [];
+
+	for (let hours = 0; hours < 24; hours++) {
+		array.push(<Day week={hours} />);
 	}
-	return <div className="week">{days}</div>;
+	return <><Day week={week} /> { array };</>
+		
 };
+		
