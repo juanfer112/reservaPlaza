@@ -7,15 +7,23 @@ import "../../styles/home.scss";
 
 export const Day = n => {
 	const array = [];
+	const [color, setColor] = useState("");
 	for (let days = 0; days < 8; days++) {
 		array.push(days);
 	}
-
 	return (
-		<div>
+		<div className="week">
 			{array.map((item, index) => {
 				return (
-					<div className="days border bg-danger text-center" key={index}>
+					<div
+						id={n.week[index]}
+						className={"days border text-center " + color}
+						key={index}
+						onClick={e => {
+							if (e.target.id === "") {
+								e.target.className = "days border text-center bg-success";
+							}
+						}}>
 						{n.week[index]}
 					</div>
 				);

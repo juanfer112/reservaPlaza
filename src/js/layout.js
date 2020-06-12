@@ -4,8 +4,9 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Day } from "./component/day";
 import { ProfileUsers } from "./views/profileUsers";
+import { Login } from "./views/login";
+import { Calendar } from "./views/calendar";
 import { Scheduler } from "./component/scheduler";
-
 import injectContext from "./store/appContext";
 
 //create your first component
@@ -19,7 +20,7 @@ export const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Switch>
-						<Route exact path="/" component={Scheduler} />
+						<Route exact path="/" component={Calendar} />
 						<Route path="/profile/:theid" component={ProfileUsers} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>

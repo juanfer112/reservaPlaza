@@ -4,4 +4,6 @@ import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
 
-export const Calendar = () => {};
+export const Calendar = () => {
+	return <Scheduler />;
+};
