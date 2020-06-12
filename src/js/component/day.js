@@ -24,7 +24,7 @@ export const Day = n => {
 								? { background: "white", fontWeight: "bold" }
 								: { background: "white", fontWeight: "normal" }
 						}
-						className={"days border text-center "}
+						className={"days pl-3"}
 						onClick={e => {
 							if (!week.includes(e.target.id) && index !== 0) {
 								if (e.target.style.background == "white") {
