@@ -9,7 +9,7 @@ export const Day = n => {
 	const array = [];
 	const week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
-	for (let days = 0; days < 8; days++) {
+	for (let days = 0; days < week.length; days++) {
 		array.push(days);
 	}
 	return (
@@ -24,7 +24,7 @@ export const Day = n => {
 								? { background: "white", fontWeight: "bold" }
 								: { background: "white", fontWeight: "normal" }
 						}
-						className={"days pl-3"}
+						className="days "
 						onClick={e => {
 							if (!week.includes(e.target.id) && index !== 0) {
 								if (e.target.style.background == "white") {

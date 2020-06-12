@@ -2,6 +2,8 @@
     height: 35px;
     width: 120px;
     border: 1px solid #a3acb2;    
+    text-align: center;
+    
 }
 .week{
     display: flex;
@@ -12,3 +14,29 @@
     align-self: center;
     justify-self: center;
 }
+hr {
+      color: #f00;
+      background-color: #f00;
+      height: 5px;
+    }
+    .logo img, .photProfile img{
+        width: 50px;
+        height: 50px;
+    }
+    header{
+        display: flex;
+        justify-content: space-between;
+    }
+    header h1{
+        margin: auto;   
+    }
+    .btngroup{
+       display: flex;
+       justify-content: space-between;
+        
+    }
+    .btngroup2{
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+    }
