@@ -5,5 +5,9 @@ import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
 
 export const Calendar = () => {
-	return <Scheduler />;
+	return (
+		<div className="scheduler">
+			<Scheduler />
+		</div>
+	);
 };

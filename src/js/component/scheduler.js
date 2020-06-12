@@ -6,14 +6,14 @@ import { Day } from "./day";
 import "../../styles/home.scss";
 
 export const Scheduler = () => {
-	var week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+	const week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 	var array = [];
 	for (let hours = 0; hours < 24; hours++) {
-		array.push(<Day week={[hours + "-" + (hours + 1)]} />);
+		array.push(<Day hours={[hours + "-" + (hours + 1)]} />);
 	}
 	return (
 		<div>
-			<Day week={week} /> {array};
+			<Day hours={week} bold={"true"} /> {array}
 		</div>
 	);
 };

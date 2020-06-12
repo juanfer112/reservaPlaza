@@ -7,7 +7,8 @@ import "../../styles/home.scss";
 
 export const Day = n => {
 	const array = [];
-	const [color, setColor] = useState("");
+	const week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+
 	for (let days = 0; days < 8; days++) {
 		array.push(days);
 	}
@@ -16,15 +17,24 @@ export const Day = n => {
 			{array.map((item, index) => {
 				return (
 					<div
-						id={n.week[index]}
-						className={"days border text-center " + color}
 						key={index}
+						id={n.hours[index] || n.hours + week[index]}
+						style={
+							n.bold
+								? { background: "white", fontWeight: "bold" }
+								: { background: "white", fontWeight: "normal" }
+						}
+						className={"days border text-center "}
 						onClick={e => {
-							if (e.target.id === "") {
-								e.target.className = "days border text-center bg-success";
+							if (!week.includes(e.target.id) && index !== 0) {
+								if (e.target.style.background == "white") {
+									e.target.style.background = "rgb(145, 188, 179)";
+								} else if (e.target.style.background == "rgb(145, 188, 179)") {
+									e.target.style.background = "white";
+								}
 							}
 						}}>
-						{n.week[index]}
+						{n.hours[index]}
 					</div>
 				);
 			})}
@@ -33,5 +43,6 @@ export const Day = n => {
 };
 
 Day.propTypes = {
-	n: PropTypes.any
+	n: PropTypes.any,
+	bold: PropTypes.any
 };
