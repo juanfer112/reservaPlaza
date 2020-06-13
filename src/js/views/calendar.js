@@ -4,28 +4,15 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
+import { Navbar } from "../component/navbar";
 
 export const Calendar = () => {
 	const [dropdownOpen, setOpen] = useState(false);
 
 	const toggle = () => setOpen(!dropdownOpen);
 	return (
-		<div className="scheduler">
-			<header>
-				<div className="logo">
-					<img src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png" alt="logo" />
-				</div>
-				<div>
-					<h1>SISTEMA DE RESERVA</h1>
-				</div>
-				<div className="photProfile">
-					<img
-						src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
-						alt="profile"
-					/>
-				</div>
-			</header>
-			<hr />
+		<div className="scheduler pt-3">
+			<Navbar />
 			<div className="main">
 				<div className="btngroup">
 					<button type="button" className="btn btn-success  btnDropdown">
@@ -62,7 +49,7 @@ export const Calendar = () => {
 
 				<Scheduler />
 			</div>
-			<div className="btngroup2">
+			<div className="btngroup2 mb-5">
 				<button type="button" className="btn btn-success mx-3">
 					Finalizar
 				</button>
