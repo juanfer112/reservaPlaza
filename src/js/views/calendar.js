@@ -1,10 +1,14 @@
 import React, { useState, useContext, useReducer } from "react";
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
 
 export const Calendar = () => {
+	const [dropdownOpen, setOpen] = useState(false);
+
+	const toggle = () => setOpen(!dropdownOpen);
 	return (
 		<div className="scheduler">
 			<header>
@@ -27,23 +31,16 @@ export const Calendar = () => {
 					Ver espacios
 				</button>
 
-				<div className="dropdown mb-5">
-					<button
-						type="button"
-						className="btn btn-success dropdown-toggle "
-						data-toggle="dropdown"
-						onClick={() => {
-							const dropdown = ["cocina", "sin cocina", "formacion"];
-							<ul className="dropdown-menu" id="dropdown">
-								{dropdown.map((items, index) => {
-									console.log(items);
-									return <li key={index}>{items}</li>;
-								})}
-							</ul>;
-						}}>
-						Dropdown button
-					</button>
-				</div>
+				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+					<DropdownToggle caret>Button Dropdown</DropdownToggle>
+					<DropdownMenu>
+						<DropdownItem header>Header</DropdownItem>
+						<DropdownItem disabled>Action</DropdownItem>
+						<DropdownItem>Another Action</DropdownItem>
+						<DropdownItem divider />
+						<DropdownItem>Another Action</DropdownItem>
+					</DropdownMenu>
+				</ButtonDropdown>
 
 				<div>
 					<textarea className="form-control mb-5" rows="1" id="comment">
