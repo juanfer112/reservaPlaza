@@ -26,39 +26,40 @@ export const Calendar = () => {
 				</div>
 			</header>
 			<hr />
-			<div className="btngroup">
-				<button type="button" className="btn btn-success mb-5">
-					Ver espacios
-				</button>
+			<div className="main">
+				<div className="btngroup">
+					<button type="button" className="btn btn-success  btnDropdown">
+						Ver espacios
+					</button>
 
-				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-					<DropdownToggle caret>Button Dropdown</DropdownToggle>
-					<DropdownMenu>
-						<DropdownItem header>Header</DropdownItem>
-						<DropdownItem disabled>Action</DropdownItem>
-						<DropdownItem>Another Action</DropdownItem>
-						<DropdownItem divider />
-						<DropdownItem>Another Action</DropdownItem>
-					</DropdownMenu>
-				</ButtonDropdown>
+					<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown">
+						<DropdownToggle caret size="sm" color="success">
+							Espacio a utilizar
+						</DropdownToggle>
+						<DropdownMenu>
+							<DropdownItem>Cocina</DropdownItem>
+							<DropdownItem>Barra</DropdownItem>
+							<DropdownItem>Formación</DropdownItem>
+						</DropdownMenu>
+					</ButtonDropdown>
 
-				<div>
-					<textarea className="form-control mb-5" rows="1" id="comment">
-						Mes en curso
-					</textarea>
+					<div>
+						<textarea className="form-control " rows="1">
+							Mes en curso
+						</textarea>
+					</div>
+					<div>
+						<textarea className="form-control " rows="1">
+							Hs contratadas
+						</textarea>
+					</div>
+					<div>
+						<textarea className="form-control " rows="1" id="comment">
+							horas aplicadas
+						</textarea>
+					</div>
 				</div>
-				<div>
-					<textarea className="form-control mb-5" rows="1" id="comment">
-						Hs contratadas
-					</textarea>
-				</div>
-				<div>
-					<textarea className="form-control mb-5" rows="1" id="comment">
-						horas aplicadas
-					</textarea>
-				</div>
-			</div>
-			<div className="scheduler">
+
 				<Scheduler />
 			</div>
 			<div className="btngroup2">
