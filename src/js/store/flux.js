@@ -49,6 +49,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			checkMail: mail => {},
+			reserved: id => {
+				console.log(id);
+			},
 
 			addHours: (hours, name) => {
 				const store = getStore();

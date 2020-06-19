@@ -14,17 +14,13 @@ export const Scheduler = () => {
 		if (hours == 0) {
 			array.push(<div className="title text-center font-weight-bold">{header}</div>);
 		} else {
-			if (hours > 0 && hours < 11) {
-				time = `0${hours - 1}:00`;
-			} else {
-				time = `${hours - 1}:00`;
-			}
-			if (hours < 10) {
-				time2 = `0${hours}:00`;
-			} else {
-				time2 = `${hours}:00`;
-			}
-			array.push(<div className="cell text-center">{[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]} </div>);
+			hours > 0 && hours < 11 ? (time = `0${hours - 1}:00`) : (time = `${hours - 1}:00`);
+
+			hours < 10 ? (time2 = `0${hours}:00`) : (time2 = `${hours}:00`);
+
+			array.push(
+				<div className="hours text-center">{[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]} </div>
+			);
 		}
 	}
 	return (
