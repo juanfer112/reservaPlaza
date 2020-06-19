@@ -13,12 +13,13 @@ export const Calendar = () => {
 	return (
 		<div className="scheduler pt-3">
 			<Navbar />
+
 			<div className="btngroup my-3">
 				<button type="button" className="btn btn-success  btnDropdown">
 					Ver espacios
 				</button>
 
-				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown ml-3">
+				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown ">
 					<DropdownToggle caret size="sm" color="success">
 						Espacio a utilizar
 					</DropdownToggle>
@@ -30,22 +31,24 @@ export const Calendar = () => {
 				</ButtonDropdown>
 
 				<div>
-					<textarea className="form-control ml-3" rows="1">
+					<textarea className="form-control " rows="1">
 						Mes en curso
 					</textarea>
 				</div>
 				<div>
-					<textarea className="form-control ml-3" rows="1">
+					<textarea className="form-control " rows="1">
 						Hs contratadas
 					</textarea>
 				</div>
 				<div>
-					<textarea className="form-control ml-3" rows="1">
+					<textarea className="form-control " rows="1">
 						horas aplicadas
 					</textarea>
 				</div>
 			</div>
-			<Scheduler />
+			<div className="container cont-cal">
+				<Scheduler />
+			</div>
 			<div className="btngroup2 mb-5">
 				<button type="button" className="btn btn-success mx-3">
 					Finalizar

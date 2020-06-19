@@ -29,7 +29,7 @@ export const Scheduler = () => {
 	}
 	return (
 		<div className="row justify-content-center">
-			<div className="day col-1 p-0">{array}</div>
+			<div className=" day col p-0">{array}</div>
 			{days.map((item, index) => {
 				return <NewDay key={index} day={item} />;
 			})}

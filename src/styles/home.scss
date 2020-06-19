@@ -2,7 +2,7 @@
     border: solid 1px #a3acb2;    
 }
 .cell{
-    height: 35px;
+    height: 28px;
     border: solid 1px #a3acb2;    
 }
 .scheduler{
@@ -45,10 +45,17 @@ header h1{
 .btnDropdown{
     height:40px;
     width: 170px;
+    margin-right: 5px;
 }
 .form-control{
     width:170px;
+    margin-left: 5px;
 }
 .hours{
     padding: 0px;
+}
+.cont-cal{
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
 }

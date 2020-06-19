@@ -11,5 +11,6 @@ export const NewDay = n => {
 			holder.push(<div className="cell" />);
 		}
 	}
-	return <div className="day col-1 p-0">{holder}</div>;
+
+	return <div className="day col  p-0">{holder}</div>;
 };
