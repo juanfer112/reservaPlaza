@@ -13,42 +13,39 @@ export const Calendar = () => {
 	return (
 		<div className="scheduler pt-3">
 			<Navbar />
-			<div className="main">
-				<div className="btngroup">
-					<button type="button" className="btn btn-success  btnDropdown">
-						Ver espacios
-					</button>
+			<div className="btngroup my-3">
+				<button type="button" className="btn btn-success  btnDropdown">
+					Ver espacios
+				</button>
 
-					<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown">
-						<DropdownToggle caret size="sm" color="success">
-							Espacio a utilizar
-						</DropdownToggle>
-						<DropdownMenu>
-							<DropdownItem>Cocina</DropdownItem>
-							<DropdownItem>Barra</DropdownItem>
-							<DropdownItem>Formación</DropdownItem>
-						</DropdownMenu>
-					</ButtonDropdown>
+				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown ml-3">
+					<DropdownToggle caret size="sm" color="success">
+						Espacio a utilizar
+					</DropdownToggle>
+					<DropdownMenu>
+						<DropdownItem>Cocina</DropdownItem>
+						<DropdownItem>Barra</DropdownItem>
+						<DropdownItem>Formación</DropdownItem>
+					</DropdownMenu>
+				</ButtonDropdown>
 
-					<div>
-						<textarea className="form-control " rows="1">
-							Mes en curso
-						</textarea>
-					</div>
-					<div>
-						<textarea className="form-control " rows="1">
-							Hs contratadas
-						</textarea>
-					</div>
-					<div>
-						<textarea className="form-control " rows="1" id="comment">
-							horas aplicadas
-						</textarea>
-					</div>
+				<div>
+					<textarea className="form-control ml-3" rows="1">
+						Mes en curso
+					</textarea>
 				</div>
-
-				<Scheduler />
+				<div>
+					<textarea className="form-control ml-3" rows="1">
+						Hs contratadas
+					</textarea>
+				</div>
+				<div>
+					<textarea className="form-control ml-3" rows="1">
+						horas aplicadas
+					</textarea>
+				</div>
 			</div>
+			<Scheduler />
 			<div className="btngroup2 mb-5">
 				<button type="button" className="btn btn-success mx-3">
 					Finalizar

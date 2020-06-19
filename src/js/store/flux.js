@@ -48,9 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			checkMail: mail => {
-				console.log(mail);
-			},
+			checkMail: mail => {},
 
 			addHours: (hours, name) => {
 				const store = getStore();

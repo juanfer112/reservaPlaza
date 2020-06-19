@@ -1,12 +1,10 @@
-import React, { useState, useContext, useReducer } from "react";
-import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
-import { Day } from "./day";
+import React from "react";
+import { NewDay } from "./newDay";
 
 import "../../styles/home.scss";
 
 export const Scheduler = () => {
-	const week = ["Horas", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+	const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 	var array = [];
 	for (let hours = 0; hours < 24; hours++) {
 		let time = "";
@@ -21,11 +19,14 @@ export const Scheduler = () => {
 		} else {
 			time2 = `${hours + 1}:00`;
 		}
-		array.push(<Day hours={[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]} />);
+		array.push(<div className="cell">{[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]} </div>);
 	}
 	return (
-		<div>
-			<Day hours={week} bold={"true"} /> {array}
+		<div className="row justify-content-center">
+			<div className="col">{array}</div>
+			{days.map((item, index) => {
+				return <NewDay key={index} day={item} />;
+			})}
 		</div>
 	);
 };
