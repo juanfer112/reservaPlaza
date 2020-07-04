@@ -1,9 +1,9 @@
-.title{
-    border: solid 1px #a3acb2;    
+body{
+    overflow-x: hidden;
 }
 .cell{
     height: 28px;
-    border: solid 1px #a3acb2;    
+    border: solid 1px #a3acb2;
 }
 .scheduler{
     display: flex;
@@ -16,26 +16,48 @@
 hr {
     background-color: rgb(17, 105, 17);
     height: 5px;
-    width: 100vw;
+    width: 100%;
 }
-.logo img, .photProfile img{
-    width: 50px;
-    height: 50px;
-    margin: 0px 50px;  
+.logo, .logo-perfil{
+    width: 80px;
+    height: 80px;
+    margin: 0;
 }
 header{
     display: flex;
-    justify-content: space-between;
-    width: 100vw;
+    justify-content: space-around;
+    width: 100%;
 }
 header h1{
     margin: auto;   
 }
-.btngroup{
+.hours{
     display: flex;
-    width: 100vw;
+    flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 10px;  
+    padding: 0px;
+}
+.hours > p {
+    font-size: 2vh; 
+}
+.title{
+    border: solid 1px #a3acb2;  
+    font-size: 2vh;  
+}
+.cont-cal{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+.hours{
+    height: 28px;
+    border: solid 1px #a3acb2; 
+}
+.btngroup{
+   
+    margin-bottom: 10px;
+    width: 78%;
+    height: 100%;
 }
 .btngroup2{
     margin-top: 10px;
@@ -43,23 +65,19 @@ header h1{
     justify-content: center;
 }
 .btnDropdown{
-    height:40px;
-    width: 170px;
-    margin-right: 5px;
+    height: 100%;
+    width: 18%;
 }
-.form-control{
-    width:170px;
-    margin-left: 5px;
-}
-.hours{
-    padding: 0px;
-}
-.cont-cal{
+.list-group-horizontal{
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
+    justify-content: space-evenly;
+    align-content: baseline;
+    width: 78%;
+    height: 4%;
 }
-.hours{
-    height: 28px;
-    border: solid 1px #a3acb2; 
+textarea{
+    height: 100%;
+    border-color: #e4e6e8;
+    text-align:center;
 }

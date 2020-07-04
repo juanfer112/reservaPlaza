@@ -10,17 +10,16 @@ export const Calendar = () => {
 	const [dropdownOpen, setOpen] = useState(false);
 
 	const toggle = () => setOpen(!dropdownOpen);
+
 	return (
 		<div className="scheduler pt-3">
 			<Navbar />
 
-			<div className="btngroup my-3">
-				<button type="button" className="btn btn-success  btnDropdown">
-					Ver espacios
-				</button>
+			<div className="list-group list-group-horizontal  my-3">
+				<button className="btn btn-block btn-success btnDropdown">Ver espacios</button>
 
-				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="btnDropdown ">
-					<DropdownToggle caret size="sm" color="success">
+				<ButtonDropdown className="btnDropdown" isOpen={dropdownOpen} toggle={toggle}>
+					<DropdownToggle className="btnDropdown" caret size="md" color="success">
 						Espacio a utilizar
 					</DropdownToggle>
 					<DropdownMenu>
@@ -29,26 +28,15 @@ export const Calendar = () => {
 						<DropdownItem>Formación</DropdownItem>
 					</DropdownMenu>
 				</ButtonDropdown>
-
-				<div>
-					<textarea className="form-control " rows="1">
-						Mes en curso
-					</textarea>
-				</div>
-				<div>
-					<textarea className="form-control " rows="1">
-						Hs contratadas
-					</textarea>
-				</div>
-				<div>
-					<textarea className="form-control " rows="1">
-						horas aplicadas
-					</textarea>
-				</div>
+				<textarea className="btnDropdown" placeholder="Mes en curso" />
+				<textarea className="btnDropdown" placeholder="Horas contratadas" />
+				<textarea className="btnDropdown" placeholder="Horas aplicadas" />
 			</div>
-			<div className="container cont-cal">
+
+			<div className="cont-cal">
 				<Scheduler />
 			</div>
+
 			<div className="btngroup2 mb-5">
 				<button type="button" className="btn btn-success mx-3">
 					Finalizar

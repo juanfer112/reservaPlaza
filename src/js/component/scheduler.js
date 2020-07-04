@@ -19,12 +19,14 @@ export const Scheduler = () => {
 			hours < 10 ? (time2 = `0${hours}:00`) : (time2 = `${hours}:00`);
 
 			array.push(
-				<div className="hours text-center">{[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]} </div>
+				<div className="hours text-center">
+					<p>{[time + "-" + (time2 !== "24:00" ? time2 : "00:00")]}</p>
+				</div>
 			);
 		}
 	}
 	return (
-		<div className="row justify-content-center">
+		<div className="row justify-content-center flex-nowrap">
 			<div className=" day col p-0">{array}</div>
 			{days.map((item, index) => {
 				return <NewDay key={index} day={item} />;
