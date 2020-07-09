@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Day } from "./component/day";
 import { ProfileUsers } from "./views/profileUsers";
 import { Login } from "./views/login";
 import { Calendar } from "./views/calendar";
-import { Scheduler } from "./component/scheduler";
+import { Balance } from "./views/balance";
 import injectContext from "./store/appContext";
+import { Link } from "react-router-dom";
 
 //create your first component
 export const Layout = () => {
@@ -20,8 +20,17 @@ export const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Switch>
-						<Route exact path="/" component={Calendar} />
+						<Route exact path="/">
+							<>
+								<Link to={"/login"}>LOGIN!</Link>
+								<Link to={"/reserva"}>RESERVA!</Link>
+								<Link to={"/balance"}>BALANCE!</Link>
+							</>
+						</Route>
 						<Route path="/profile/:theid" component={ProfileUsers} />
+						<Route path="/login" component={Login} />
+						<Route path="/reserva" component={Calendar} />
+						<Route path="/balance" component={Balance} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
 				</ScrollToTop>

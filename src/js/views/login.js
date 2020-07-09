@@ -19,12 +19,12 @@ export const Login = () => {
 	);
 
 	return (
-		<div className="container">
-			<div className="row">
-				<div className="col-6 mx-auto col-md-4 mt-4 text-center">
+		<div className="container d-flex justify-content-center">
+			<div className="rowLogin">
+				<div className="col-6 col-md-4 mt-4 text-center">
 					<h1 className="text-center mb-5">LOG IN</h1>
 					{!forgot ? (
-						<div className=" card card-body my-3 p-5">
+						<div className="card card-body my-3 p-5">
 							<div className=" input-group">
 								<input
 									className="form-control"
@@ -33,7 +33,7 @@ export const Login = () => {
 									placeholder="USUARIO"
 								/>
 							</div>
-							<div className=" input-group my-2">
+							<div className="input-group my-2">
 								<input
 									className="form-control"
 									type="password"
@@ -42,7 +42,6 @@ export const Login = () => {
 								/>
 							</div>
 							<a
-								href="#"
 								onClick={() => {
 									setForgot(true);
 								}}>
@@ -91,6 +90,7 @@ export const Login = () => {
 					)}
 				</div>
 			</div>
+			<Link to={"/"}>BACK!</Link>
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ export const Scheduler = () => {
 		let time2 = "";
 
 		if (hours == 0) {
-			array.push(<div className="title text-center font-weight-bold">{header}</div>);
+			array.push(<div className="titleH text-center font-weight-bold">{header}</div>);
 		} else {
 			hours > 0 && hours < 11 ? (time = `0${hours - 1}:00`) : (time = `${hours - 1}:00`);
 
@@ -26,7 +26,7 @@ export const Scheduler = () => {
 		}
 	}
 	return (
-		<div className="row justify-content-center flex-nowrap">
+		<div className="row rowSched justify-content-center flex-nowrap">
 			<div className=" day col p-0">{array}</div>
 			{days.map((item, index) => {
 				return <NewDay key={index} day={item} />;

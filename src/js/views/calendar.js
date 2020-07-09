@@ -12,10 +12,9 @@ export const Calendar = () => {
 	const toggle = () => setOpen(!dropdownOpen);
 
 	return (
-		<div className="scheduler pt-3">
+		<div className="scheduler">
 			<Navbar />
-
-			<div className="list-group list-group-horizontal  my-3">
+			<div className="list-group list-group-horizontal">
 				<button className="btn btn-block btn-success btnDropdown">Ver espacios</button>
 
 				<ButtonDropdown className="btnDropdown" isOpen={dropdownOpen} toggle={toggle}>
@@ -28,22 +27,18 @@ export const Calendar = () => {
 						<DropdownItem>Formación</DropdownItem>
 					</DropdownMenu>
 				</ButtonDropdown>
-				<textarea className="btnDropdown" placeholder="Mes en curso" />
-				<textarea className="btnDropdown" placeholder="Horas contratadas" />
-				<textarea className="btnDropdown" placeholder="Horas aplicadas" />
+				<input className="btnDropdown" placeholder="Mes en curso" />
+				<input className="btnDropdown" placeholder="Horas contratadas" />
+				<input className="btnDropdown" placeholder="Horas aplicadas" />
 			</div>
 
 			<div className="cont-cal">
 				<Scheduler />
 			</div>
 
-			<div className="btngroup2 mb-5">
-				<button type="button" className="btn btn-success mx-3">
-					Finalizar
-				</button>
-				<button type="button" className="btn btn-success mx-3">
-					Reservar otro espacio
-				</button>
+			<div className="list-group list-group-horizontal d-flex justify-content-center">
+				<button className="btn btn-success btnDropdown2">Finalizar</button>
+				<button className="btn btn-success btnDropdown2">Reservar otro espacio</button>
 			</div>
 		</div>
 	);
