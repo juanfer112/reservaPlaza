@@ -7,7 +7,8 @@ import {
 	endOfDay,
 	isLastDayOfMonth,
 	addDays,
-	parse
+	parse,
+	subHours
 } from "date-fns";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -20,14 +21,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			pullPeople: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises/"
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
 				setStore({ user: data[0] });
 			},
 			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
@@ -36,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postSchedules: () => {
 				const store = getStore();
 				if (store.schedules.length > 0) {
-					fetch("https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/", {
+					fetch("https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -119,13 +120,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				var reser = [];
 				store.reserved.map(date => {
-					reser.push(format(new Date(date["date"]), "yyyy-MM-dd HH:mm:ss"));
+					reser.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 				});
 				if (reser.includes(id)) {
-					console.log(reser, id);
 					return " bg-danger";
 				} else {
-					return "";
+					return " ";
 				}
 			}
 		}
@@ -133,3 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
+
+// const parisTimeZone = "Europe/Paris";
+// format(parisDate, "yyyy-MM-dd HH:mm:ss zzz", { timeZone: "Europe/Paris" });
+// const parisDate = utcToZonedTime(date, parisTimeZone);
