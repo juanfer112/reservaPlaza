@@ -1,26 +1,51 @@
+import {
+	compareAsc,
+	format,
+	getDay,
+	startOfWeek,
+	getISOWeek,
+	endOfDay,
+	isLastDayOfMonth,
+	addDays,
+	parse
+} from "date-fns";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			partners: [
-				{
-					admin: true,
-					user: "j",
-					password: "p",
-					logo: "http://placehold.it/500x325"
-				},
-				{
-					admin: false,
-					user: "m",
-					password: "t",
-					logo: "http://placehold.it/500x325",
-					hours: 0
-				}
-			],
-			validation: false,
-			master: false
+			user: [],
+			week: [],
+			schedules: [],
+			reserved: []
 		},
 
 		actions: {
+			pullPeople: async (
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises/"
+			) => {
+				let response = await fetch(url);
+				let data = await response.json();
+				setStore({ user: data[0] });
+			},
+			pullScheduler: async (
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
+			) => {
+				let response = await fetch(url);
+				let data = await response.json();
+				setStore({ reserved: data });
+			},
+			postSchedules: () => {
+				const store = getStore();
+				if (store.schedules.length > 0) {
+					fetch("https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(store.schedules)
+					});
+				}
+			},
+
 			checkMaster: (us, pa) => {
 				const store = getStore();
 				const partners = store.partners;
@@ -39,18 +64,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			setUserHolder: (us, pa) => {
-				const store = getStore();
-				store.partners.map(profile => {
-					if (profile.user == us && profile.password == pa) {
-						setStore({ userHolder: profile });
-					}
-				});
-			},
 
 			checkMail: mail => {},
 
 			reserved: id => {},
+
+			cellID: day => {
+				var arr = [];
+				var firstWeekDay = startOfWeek(endOfDay(day), {
+					weekStartsOn: 1
+				});
+				for (let x = 0; x < 7; x++) {
+					arr.push(firstWeekDay);
+					firstWeekDay = addDays(firstWeekDay, 1);
+				}
+				setStore({ week: arr });
+			},
+			transformDay: day => {
+				if (day.toString().slice(0, 3) == "Sun") {
+					return "Lunes";
+				} else if (day.toString().slice(0, 3) == "Mon") {
+					return "Martes";
+				} else if (day.toString().slice(0, 3) == "Tue") {
+					return "Miercoles";
+				} else if (day.toString().slice(0, 3) == "Wed") {
+					return "Jueves";
+				} else if (day.toString().slice(0, 3) == "Thu") {
+					return "Viernes";
+				} else if (day.toString().slice(0, 3) == "Fri") {
+					return "Sabado";
+				} else if (day.toString().slice(0, 3) == "Sat") {
+					return "Domingo";
+				}
+			},
 
 			addHours: (hours, name) => {
 				const store = getStore();
@@ -60,6 +106,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore((item.hours = item.hours + hours));
 					}
 				});
+			},
+
+			addToSchedules: date => {
+				const store = getStore();
+				setStore({
+					schedules: [...store.schedules, { date: date, enterprise_id: store.user.id, space_id: 1 }]
+				});
+			},
+
+			reservedDate: id => {
+				const store = getStore();
+				var reser = [];
+				store.reserved.map(date => {
+					reser.push(format(new Date(date["date"]), "yyyy-MM-dd HH:mm:ss"));
+				});
+				if (reser.includes(id)) {
+					console.log(reser, id);
+					return " bg-danger";
+				} else {
+					return "";
+				}
 			}
 		}
 	};

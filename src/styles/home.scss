@@ -3,7 +3,8 @@ body{
     padding-top: 6vw;
 }
 .navbar{
-    height: 6vw;
+    display: flex;
+    flex-wrap: wrap;
     border-top: 0.3vw solid #35553e;
     border-bottom: 0.1vw solid #a3acb2;
     box-shadow: 0 0.1vw 0 rgba(12,13,14,0.15);
@@ -57,7 +58,7 @@ p{
 .cont-cal{
     display: flex;
     flex-wrap: wrap;
-    width: 80vw;
+    width: 100vw;
 }
 .hours{
     display: flex;

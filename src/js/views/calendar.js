@@ -7,8 +7,9 @@ import { Scheduler } from "../component/scheduler";
 import { Navbar } from "../component/navbar";
 
 export const Calendar = () => {
-	const [dropdownOpen, setOpen] = useState(false);
+	const { store, actions } = useContext(Context);
 
+	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
 
 	return (
@@ -31,13 +32,14 @@ export const Calendar = () => {
 				<input className="btnDropdown" placeholder="Horas contratadas" />
 				<input className="btnDropdown" placeholder="Horas aplicadas" />
 			</div>
-
 			<div className="cont-cal">
 				<Scheduler />
 			</div>
 
 			<div className="list-group list-group-horizontal d-flex justify-content-center">
-				<button className="btn btn-success btnDropdown2">Finalizar</button>
+				<button className="btn btn-success btnDropdown2" onClick={() => actions.postSchedules()}>
+					Finalizar
+				</button>
 				<button className="btn btn-success btnDropdown2">Reservar otro espacio</button>
 			</div>
 		</div>
