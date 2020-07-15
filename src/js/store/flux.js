@@ -1,31 +1,26 @@
-import {
-	compareAsc,
-	format,
-	getDay,
-	startOfWeek,
-	getISOWeek,
-	endOfDay,
-	isLastDayOfMonth,
-	addDays,
-	parse,
-	subHours
-} from "date-fns";
+import { format, startOfWeek, endOfDay, addDays, subHours, addWeeks, subWeeks } from "date-fns";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: [],
 			week: [],
 			schedules: [],
-			reserved: []
+			reserved: [],
+			night: false
 		},
 
 		actions: {
-			pullPeople: async (
+			pullPeoples: async (
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
 				setStore({ user: data[0] });
+			},
+			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
+				let response = await fetch(url);
+				let data = await response.json();
+				setStore({ spaces: data });
 			},
 			pullScheduler: async (
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
@@ -82,20 +77,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ week: arr });
 			},
 			transformDay: day => {
-				if (day.toString().slice(0, 3) == "Sun") {
-					return "Lunes";
-				} else if (day.toString().slice(0, 3) == "Mon") {
-					return "Martes";
+				var dayNumber = day.toString().slice(8, 10);
+				if (day.toString().slice(0, 3) == "Mon") {
+					return "Lunes " + dayNumber;
 				} else if (day.toString().slice(0, 3) == "Tue") {
-					return "Miercoles";
+					return "Martes " + dayNumber;
 				} else if (day.toString().slice(0, 3) == "Wed") {
-					return "Jueves";
+					return "Miercoles " + dayNumber;
 				} else if (day.toString().slice(0, 3) == "Thu") {
-					return "Viernes";
+					return "Jueves " + dayNumber;
 				} else if (day.toString().slice(0, 3) == "Fri") {
-					return "Sabado";
+					return "Viernes " + dayNumber;
 				} else if (day.toString().slice(0, 3) == "Sat") {
-					return "Domingo";
+					return "Sabado " + dayNumber;
+				} else if (day.toString().slice(0, 3) == "Sun") {
+					return "Domingo " + dayNumber;
 				}
 			},
 
@@ -111,9 +107,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addToSchedules: date => {
 				const store = getStore();
-				setStore({
-					schedules: [...store.schedules, { date: date, enterprise_id: store.user.id, space_id: 1 }]
+				const check = [];
+				store.schedules.map(sched => {
+					check.push(sched["date"]);
 				});
+				if (!check.includes(date)) {
+					setStore({
+						schedules: [...store.schedules, { date: date, enterprise_id: store.user.id, space_id: 1 }]
+					});
+				}
 			},
 
 			reservedDate: id => {
@@ -127,13 +129,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					return " ";
 				}
+			},
+
+			changeNight: () => {
+				const store = getStore();
+				store.night ? setStore({ night: false }) : setStore({ night: true });
+			},
+
+			changeWeek: beforeAfter => {
+				const store = getStore();
+				var arr = [];
+				store.week.map(day => {
+					if (beforeAfter == "after") {
+						arr.push(addWeeks(day, 1));
+					} else if (beforeAfter == "before") {
+						arr.push(subWeeks(day, 1));
+					}
+				});
+				setStore({ week: arr });
 			}
 		}
 	};
 };
 
 export default getState;
-
-// const parisTimeZone = "Europe/Paris";
-// format(parisDate, "yyyy-MM-dd HH:mm:ss zzz", { timeZone: "Europe/Paris" });
-// const parisDate = utcToZonedTime(date, parisTimeZone);

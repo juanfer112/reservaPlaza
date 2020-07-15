@@ -32,15 +32,14 @@ export const Calendar = () => {
 				<input className="btnDropdown" placeholder="Horas contratadas" />
 				<input className="btnDropdown" placeholder="Horas aplicadas" />
 			</div>
-			<div className="cont-cal">
-				<Scheduler />
-			</div>
-
-			<div className="list-group list-group-horizontal d-flex justify-content-center">
-				<button className="btn btn-success btnDropdown2" onClick={() => actions.postSchedules()}>
+			<div className="ciao" onClick={() => actions.changeWeek("before")} />
+			<a onClick={() => actions.changeNight()}>BLA BLA BLA 24H</a>
+			<div className="ciao" onClick={() => actions.changeWeek("after")} />
+			<Scheduler />
+			<div className="row justify-content-center fixed-bottom">
+				<button className="btn btn-success confirm p-0 mb-5" onClick={() => actions.postSchedules()}>
 					Finalizar
 				</button>
-				<button className="btn btn-success btnDropdown2">Reservar otro espacio</button>
 			</div>
 		</div>
 	);

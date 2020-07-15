@@ -22,9 +22,10 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.pullPeople();
+			state.actions.pullPeoples();
 			state.actions.pullScheduler();
 			state.actions.cellID(new Date());
+			state.actions.pullSpaces();
 		}, []);
 
 		return (
