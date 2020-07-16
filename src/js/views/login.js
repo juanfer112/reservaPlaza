@@ -26,20 +26,10 @@ export const Login = () => {
 					{!forgot ? (
 						<div className="card card-body my-3 p-5">
 							<div className=" input-group">
-								<input
-									className="form-control"
-									type="text"
-									onChange={e => setUser((user = e.target.value))}
-									placeholder="USUARIO"
-								/>
+								<input className="form-control" type="text" placeholder="USUARIO" />
 							</div>
 							<div className="input-group my-2">
-								<input
-									className="form-control"
-									type="password"
-									onChange={e => setPassword((password = e.target.value))}
-									placeholder="CONTRASEÑA"
-								/>
+								<input className="form-control" type="password" placeholder="CONTRASEÑA" />
 							</div>
 							<a
 								onClick={() => {
@@ -50,15 +40,7 @@ export const Login = () => {
 							<div className="text-center mt-4">
 								{store.validation ? (
 									<Link to={"/profile/" + user.toLowerCase()}>
-										<button
-											type="button"
-											className="btn btn-primary mx-auto "
-											onClick={() => {
-												return (
-													actions.setUserHolder(user, password),
-													actions.checkMaster(user, password)
-												);
-											}}>
+										<button type="button" className="btn btn-primary mx-auto ">
 											Login
 										</button>
 									</Link>
@@ -74,16 +56,8 @@ export const Login = () => {
 						</div>
 					) : (
 						<>
-							<input
-								className="form-control "
-								type="email"
-								placeholder="Correo electronico"
-								onChange={e => setMail((mail = e.target.value))}
-							/>
-							<button
-								type="button"
-								className="btn btn-primary mx-auto my-5"
-								onClick={() => actions.checkMail(mail)}>
+							<input className="form-control " type="email" placeholder="Correo electronico" />
+							<button type="button" className="btn btn-primary mx-auto my-5">
 								Restablecer
 							</button>
 						</>

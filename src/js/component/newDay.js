@@ -1,23 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import {
-	compareAsc,
-	format,
-	getDay,
-	startOfWeek,
-	getISOWeek,
-	endOfDay,
-	isLastDayOfMonth,
-	addDays,
-	addHours,
-	subHours
-} from "date-fns";
+import { format, addHours } from "date-fns";
 import "../../styles/home.scss";
 
 export const NewDay = n => {
 	const { actions, store } = useContext(Context);
 	var day = n.day;
 	var holder = [];
+	var night = !store.night ? " d-none" : "";
 
 	for (let x = 0; x < 25; x++) {
 		if (x == 0) {
@@ -28,9 +18,10 @@ export const NewDay = n => {
 			);
 		} else {
 			const id = format(day, "yyyy-MM-dd HH:mm:ss").toString();
+			var name = x < 7 ? "cell" + night + actions.reservedDate(id) : "cell" + actions.reservedDate(id);
 			holder.push(
 				<div
-					className={"cell" + actions.reservedDate(id)}
+					className={name}
 					key={x}
 					id={id}
 					onClick={e => {

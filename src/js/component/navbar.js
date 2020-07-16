@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar fixed-top bg-white justify-content-between">
+		<nav className="navbar bg-white justify-content-between w-100">
 			<Link to={"/"}>BACK!</Link>
 			<img className="logo" src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png" />
 
