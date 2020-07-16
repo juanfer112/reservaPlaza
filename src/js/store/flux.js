@@ -100,7 +100,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							...store.schedules,
 							{ date: date, enterprise_id: store.user.id, space_id: store.selectedSpace["id"] }
 						]
-				})}
+					});
+				}
 			},
 
 			reservedDate: id => {
