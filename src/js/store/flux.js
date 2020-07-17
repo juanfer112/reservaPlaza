@@ -2,12 +2,11 @@ import { format, startOfWeek, endOfDay, addDays, subHours, addWeeks, subWeeks } 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: [],
+			user: {},
 			week: [],
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			selectedSpace: {},
 			night: false
 		},
 
@@ -19,11 +18,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let data = await response.json();
 				setStore({ user: data[0] });
 			},
+
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ spaces: data });
+				setStore({ spaces: data, selectedSpace: data[0] });
 			},
+
 			pullScheduler: async (
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
 			) => {
@@ -31,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let data = await response.json();
 				setStore({ reserved: data });
 			},
+
 			postSchedules: () => {
 				const store = getStore();
 				if (store.schedules.length > 0) {
@@ -44,10 +46,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			checkMail: mail => {},
-
-			reserved: id => {},
-
 			cellID: day => {
 				var arr = [];
 				var firstWeekDay = startOfWeek(endOfDay(day), {
@@ -59,6 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				setStore({ week: arr });
 			},
+
 			transformDay: day => {
 				var dayNumber = day.toString().slice(8, 10);
 				if (day.toString().slice(0, 3) == "Mon") {

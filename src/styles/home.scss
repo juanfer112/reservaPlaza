@@ -61,9 +61,9 @@ p{
     border-right: solid 0.1vw #a3acb2;
 }
 .btnDropdown{
-    height: 3vw;
+    height: 4vw;
     width: 14vw;
-    font-size: 1vw;
+    font-size: 2vw;
 }
 .list-group{
     display: flex;
@@ -102,6 +102,16 @@ input::placeholder{
 .fa{
     font-size: 4vw;
 }
+.fa-info-circle{
+    font-size: 1vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .dropD{
     width: 14vw;
+}
+.nightHours{
+    display: flex;
+    align-items: center;
 }
