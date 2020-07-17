@@ -1,0 +1,33 @@
+class MyModelViewSoftDel(ModelView):
+    column_display_pk = True
+    
+    def get_query(self):        
+        return self.session.query(self.model).filter(self.model.is_active==True)
+
+    def delete_model(self, model):
+        try:
+            self.on_model_delete(model)
+            model.is_active = False
+            self.session.commit()
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                flash(gettext('Failed to delete record. %(error)s', error=str(ex)), 'error')
+                log.exception('Failed to delete record.')
+            self.session.rollback()
+            return False
+        else:
+            self.after_model_delete(model)
+        return True
+
+
+
+
+
+lsof -i tcp:3000
+kill -9 50386
+
+
+
+
+
+json.dump(datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ'))
