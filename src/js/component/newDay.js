@@ -26,8 +26,13 @@ export const NewDay = n => {
 					id={id}
 					onClick={e => {
 						if (e.target.className != "cell bg-danger") {
-							actions.addToSchedules(id);
-							e.target.className += "bg-success";
+							if (e.target.className == "cell") {
+								actions.addSchedules(id);
+								e.target.className += " bg-success";
+							} else {
+								e.target.className = "cell";
+								actions.removeSchedules(id);
+							}
 						}
 					}}
 				/>

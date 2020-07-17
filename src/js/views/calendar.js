@@ -47,7 +47,7 @@ export const Calendar = () => {
 			</div>
 
 			<Scheduler />
-			<div className="row bg-white fixed-bottom py-3">
+			<div className="footer row bg-white fixed-bottom py-3">
 				<p className="nightHours ml-4">
 					<p>
 						Servicio 24H disponible, pinches

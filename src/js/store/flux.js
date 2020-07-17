@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			addToSchedules: date => {
+			addSchedules: date => {
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
@@ -103,6 +103,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			removeSchedules: id => {
+				const store = getStore();
+				const check = [];
+				store.schedules.map(date => {
+					if (date["date"] != id) {
+						check.push(date);
+					}
+				});
+				setStore({ schedules: check });
+			},
+
 			reservedDate: id => {
 				const store = getStore();
 				var reser = [];
@@ -112,7 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (reser.includes(id)) {
 					return " bg-danger";
 				} else {
-					return " ";
+					return "";
 				}
 			},
 
