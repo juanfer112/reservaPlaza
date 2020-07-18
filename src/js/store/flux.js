@@ -122,6 +122,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				if (reser.includes(id)) {
 					return " bg-danger";
+				} else if (id < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
+					return " bg-danger";
 				} else {
 					return "";
 				}
