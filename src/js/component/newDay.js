@@ -25,7 +25,7 @@ export const NewDay = n => {
 					key={x}
 					id={id}
 					onClick={e => {
-						if (e.target.className != "cell bg-danger") {
+						if (e.target.className != "cell reserved") {
 							if (e.target.className == "cell") {
 								actions.addSchedules(id);
 								e.target.className += " bg-success";

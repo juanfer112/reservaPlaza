@@ -103,27 +103,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			removeSchedules: id => {
+			removeSchedules: cellDate => {
 				const store = getStore();
 				const check = [];
 				store.schedules.map(date => {
-					if (date["date"] != id) {
+					if (date["date"] != cellDate) {
 						check.push(date);
 					}
 				});
 				setStore({ schedules: check });
 			},
 
-			reservedDate: id => {
+			reservedDate: cellDate => {
 				const store = getStore();
-				var reser = [];
+				var reserved = [];
 				store.reserved.map(date => {
-					reser.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+					reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 				});
-				if (reser.includes(id)) {
-					return " bg-danger";
-				} else if (id < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
-					return " bg-danger";
+				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
+					return " reserved";
 				} else {
 					return "";
 				}
