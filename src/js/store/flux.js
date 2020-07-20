@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			addToSchedules: date => {
+			addSchedules: date => {
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
@@ -103,16 +103,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			reservedDate: id => {
+			removeSchedules: cellDate => {
 				const store = getStore();
-				var reser = [];
-				store.reserved.map(date => {
-					reser.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+				const check = [];
+				store.schedules.map(date => {
+					if (date["date"] != cellDate) {
+						check.push(date);
+					}
 				});
-				if (reser.includes(id)) {
-					return " bg-danger";
+				setStore({ schedules: check });
+			},
+
+			reservedDate: cellDate => {
+				const store = getStore();
+				var reserved = [];
+				store.reserved.map(date => {
+					reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+				});
+				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
+					return " reserved";
 				} else {
-					return " ";
+					return "";
 				}
 			},
 
