@@ -12,10 +12,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			pullPeoples: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
+				url = "https://3000-f1fa4061-344a-4a5c-beee-e0ad0a4fd351.ws-eu01.gitpod.io/enterprises"
 			) => {
+				const store = getStore();
+
 				let response = await fetch(url);
 				let data = await response.json();
+
 				setStore({ user: data[0] });
 			},
 
@@ -142,6 +145,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			}
+			/*valArray: item => {
+				const valArray = [];
+				Object.keys(item).map(key => {
+					if (!Array.isArray(item[key]) && item[key].slice(0, 4) !== "http") {
+						valArray.push(item[key]);
+					}
+				});
+				return valArray;
+			},*/
+			/*keyArray: item => {
+				const keyArray = [];
+				Object.keys(item).map(key => {
+					if (!Array.isArray(item[key]) && item[key].slice(0, 4) !== "http") {
+						keyArray.push(getActions().toUpp(key));
+					}
+				});
+                return keyArray;
+            }*/
 		}
 	};
 };

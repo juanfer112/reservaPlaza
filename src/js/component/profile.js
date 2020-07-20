@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 
 export const Profile = () => {
+	const { store, actions } = useContext(Context);
+	var newArray = [];
 	return (
 		<div className="container">
 			<div className="row justify-content">
@@ -14,8 +16,23 @@ export const Profile = () => {
 						className="avatarProfile float-left rounded-circle mr-2"
 					/>
 
-					<h1>Name</h1>
-					<h3>Brands</h3>
+					<div>
+						{Object.keys(store.user).map((element, index) => {
+							console.log(element);
+							if (element == "brands") {
+								let array = [];
+								Object.values(store.user[element]).map((brand, index) => {
+									console.log(brand);
+									console.log(brand["name"]);
+									newArray += array.concat(brand["name"], " ");
+									console.log(newArray);
+								});
+							}
+
+							return <div key={index}>{element}</div>;
+						})}
+					</div>
+					<h3>{newArray}</h3>
 					<div className="row justify-content">
 						<div className="col-sm-12 col-md-6">
 							<strong>email@gmail.com</strong>
