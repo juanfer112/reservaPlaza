@@ -117,9 +117,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reservedDate: cellDate => {
 				const store = getStore();
 				var reserved = [];
-				store.reserved.map(date => {
-					reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
-				});
+				store.selectedSpace
+					? store.reserved.map(date => {
+							if (date["spaceID"] == store.selectedSpace["id"]) {
+								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+							}
+					  })
+					: "loading";
 				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
 					return " reserved";
 				} else {
