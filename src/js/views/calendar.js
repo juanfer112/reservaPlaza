@@ -13,8 +13,8 @@ export const Calendar = () => {
 	return (
 		<div className="scheduler">
 			<Navbar />
-			<div className="list-group list-group-horizontal">
-				<ButtonDropdown className="btnDropdown" isOpen={dropdownOpen} toggle={toggle}>
+			<div className="list-group-horizontal my-4">
+				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
 						<i className="fa fa-info-circle pt-1 pr-2" />
 						{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
@@ -29,25 +29,33 @@ export const Calendar = () => {
 						})}
 					</DropdownMenu>
 				</ButtonDropdown>
-				<p>{"Te quedan " + (store.user != undefined ? store.user["tot_hours"] : "loading...") + " horas!"}</p>
+				<p className="mr-auto ml-4">
+					{"Te quedan " + (store.user != undefined ? store.user["tot_hours"] : "loading...") + " horas!"}
+				</p>
 			</div>
-			<div className="d-flex justify-content-between mx-3 w-100">
-				<i
-					className="fa fa-arrow-left ml-3 mb-1"
-					aria-hidden="true"
-					onClick={() => actions.changeWeek("before")}>
-					semana -1
-				</i>
-				<i
-					className="fa fa-arrow-right mr-3 mb-1"
-					aria-hidden="true"
-					onClick={() => actions.changeWeek("after")}>
-					semana +1
-				</i>
+			<div className="d-flex align-items-center justify-content-between w-100">
+				<div className="d-flex">
+					<i
+						className="fa fa-arrow-left ml-3 mb-1"
+						aria-hidden="true"
+						onClick={() => actions.changeWeek("before")}
+					/>
+					<p className="ml-2">semana anterior</p>
+				</div>
+				<h3 className="mb-0">{actions.currentMonth()}</h3>
+				<div className="d-flex">
+					<p className="mr-2">semana siguiente</p>
+					<i
+						className="fa fa-arrow-right mr-3 mb-1"
+						aria-hidden="true"
+						onClick={() => actions.changeWeek("after")}
+					/>
+				</div>
 			</div>
 
 			<Scheduler />
-			<div className="footer row bg-white fixed-bottom py-3">
+
+			<div className="footer row bg-white py-3">
 				<p className="nightHours ml-4">
 					<p>
 						Servicio 24H disponible, pinches

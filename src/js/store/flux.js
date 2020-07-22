@@ -156,6 +156,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ selectedSpace: space });
 					}
 				});
+			},
+
+			currentMonth: () => {
+				var currentMonth = format(endOfDay(new Date()), "L");
+				var allMonth = [
+					"Enero",
+					"Febrero",
+					"Marzo",
+					"Abril",
+					"Mayo",
+					"Junio",
+					"Julio",
+					"Agosto",
+					"Septiembre",
+					"Octubre",
+					"Noviembre",
+					"Diciembre"
+				];
+				for (let month = 0; month < allMonth.length; month++) {
+					console.log(month, allMonth[month]);
+					if (month == currentMonth - 1) return allMonth[month];
+				}
 			}
 		}
 	};
