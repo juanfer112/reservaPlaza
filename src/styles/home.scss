@@ -88,7 +88,9 @@ button{
     align-items: center;
 }
 .footer{
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
     border-top: 0.05rem solid #a3acb2;
     box-shadow: 0 0.05rem 0 rgba(12,13,14,0.15);
 }
@@ -100,6 +102,7 @@ button{
     overflow-y: hidden;
     white-space:nowrap;
     width: 100vw;
+    margin-bottom: 7rem;
 }
 .day {
     display: inline-table;
@@ -129,4 +132,34 @@ button{
     height: 2rem;
     border-bottom: solid 0.05rem #a3acb2;
     border-right: solid 0.05rem #a3acb2;
+}
+
+@media screen and (min-width: 1000px){
+    body{
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 600px){
+    div.rowSched > div:first-child{
+        width: 6rem;
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+    }
+    div.rowSched > div:nth-child(2){
+        margin-left: 6rem;
+    }        
+    .list-group-horizontal{
+        justify-content: space-evenly;
+    }
+    .btnDropdown{
+        height: 3rem;
+        width: 10rem;
+        font-size: 1.5rem;
+        margin: 0 !important;
+    }
+    .availableHours{
+        margin: 0 !important;
+    }
 }

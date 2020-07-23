@@ -10,11 +10,10 @@ export const Calendar = () => {
 	const { store, actions } = useContext(Context);
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
-	var colore = store.myWidth ? store.myWidth : "";
+
 	return (
 		<div className="scheduler">
 			<Navbar />
-			<h1>{colore}</h1>
 			<div className="list-group-horizontal my-4">
 				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
@@ -31,10 +30,20 @@ export const Calendar = () => {
 						})}
 					</DropdownMenu>
 				</ButtonDropdown>
-				<p className="mr-auto ml-4">
-					{"Te quedan " + (store.user != undefined ? store.user["tot_hours"] : "loading...") + " horas!"}
+				<p className="availableHours mr-auto ml-4">
+					{(store.user != undefined ? store.user["tot_hours"] : "loading...") + "/H restantes"}
 				</p>
 			</div>
+			<p className="nightHours ml-4">
+				<p>
+					Servicio 24H disponible, pinches
+					<i className="text-primary" onClick={() => actions.changeNight()}>
+						{" "}
+						aqui{" "}
+					</i>
+					para reservar horas de noche
+				</p>
+			</p>
 			<div className="d-flex align-items-center justify-content-between w-100">
 				<div className="d-flex">
 					<i
@@ -42,11 +51,8 @@ export const Calendar = () => {
 						aria-hidden="true"
 						onClick={() => actions.changeWeek("before")}
 					/>
-					<p className="ml-2">semana anterior</p>
 				</div>
-				<h3 className="mb-0">{actions.currentMonth()}</h3>
 				<div className="d-flex">
-					<p className="mr-2">semana siguiente</p>
 					<i
 						className="fa fa-arrow-right mr-3 mb-1"
 						aria-hidden="true"
@@ -56,19 +62,8 @@ export const Calendar = () => {
 			</div>
 
 			<Scheduler />
-
-			<div className="footer row bg-white py-3">
-				<p className="nightHours ml-4">
-					<p>
-						Servicio 24H disponible, pinches
-						<i className="text-primary" onClick={() => actions.changeNight()}>
-							{" "}
-							aqui{" "}
-						</i>
-						para reservar horas de noche
-					</p>
-				</p>
-				<button className="confirm btn btn-success mx-auto pb-5" onClick={() => actions.postSchedules()}>
+			<div className="footer fixed-bottom bg-white py-3">
+				<button className="confirm btn btn-success pb-5" onClick={() => actions.postSchedules()}>
 					Finalizar
 				</button>
 			</div>

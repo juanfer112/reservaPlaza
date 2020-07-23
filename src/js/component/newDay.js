@@ -41,5 +41,5 @@ export const NewDay = n => {
 		}
 	}
 
-	return <div className="day col  p-0">{holder}</div>;
+	return <div className="day col p-0">{holder}</div>;
 };

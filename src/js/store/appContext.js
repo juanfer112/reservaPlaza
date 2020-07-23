@@ -24,17 +24,6 @@ const injectContext = PassedComponent => {
 			state.actions.pullSpaces();
 		}, []);
 
-		useEffect(
-			() => {
-				window.addEventListener("resize", () => {
-					const myWidth = window.innerWidth;
-					state.actions.setWidth(myWidth);
-					console.log(state.store.myWidth);
-				});
-			},
-			[window]
-		);
-
 		return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />

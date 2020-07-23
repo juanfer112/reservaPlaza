@@ -7,8 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			night: false,
-			myWidth: window.innerWidth
+			night: false
 		},
 
 		actions: {
@@ -61,20 +60,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			transformDay: day => {
 				var dayNumber = day.toString().slice(8, 10);
+				var month = format(day, "LL").toString();
 				if (day.toString().slice(0, 3) == "Mon") {
-					return "Lunes " + dayNumber;
+					return "Lunes " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Tue") {
-					return "Martes " + dayNumber;
+					return "Martes " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Wed") {
-					return "Miercoles " + dayNumber;
+					return "Miercoles " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Thu") {
-					return "Jueves " + dayNumber;
+					return "Jueves " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Fri") {
-					return "Viernes " + dayNumber;
+					return "Viernes " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Sat") {
-					return "Sabado " + dayNumber;
+					return "Sabado " + dayNumber + "/" + month;
 				} else if (day.toString().slice(0, 3) == "Sun") {
-					return "Domingo " + dayNumber;
+					return "Domingo " + dayNumber + "/" + month;
 				}
 			},
 
@@ -157,31 +157,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ selectedSpace: space });
 					}
 				});
-			},
-
-			currentMonth: () => {
-				var currentMonth = format(endOfDay(new Date()), "L");
-				var allMonth = [
-					"Enero",
-					"Febrero",
-					"Marzo",
-					"Abril",
-					"Mayo",
-					"Junio",
-					"Julio",
-					"Agosto",
-					"Septiembre",
-					"Octubre",
-					"Noviembre",
-					"Diciembre"
-				];
-				for (let month = 0; month < allMonth.length; month++) {
-					if (month == currentMonth - 1) return allMonth[month];
-				}
-			},
-
-			setWidth: myWidth => {
-				setStore({ myWidth: myWidth });
 			}
 		}
 	};
