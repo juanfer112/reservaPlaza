@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			night: false
+			night: false,
+			myWidth: window.innerWidth
 		},
 
 		actions: {
@@ -175,9 +176,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"Diciembre"
 				];
 				for (let month = 0; month < allMonth.length; month++) {
-					console.log(month, allMonth[month]);
 					if (month == currentMonth - 1) return allMonth[month];
 				}
+			},
+
+			setWidth: myWidth => {
+				setStore({ myWidth: myWidth });
 			}
 		}
 	};

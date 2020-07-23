@@ -8,7 +8,7 @@ export const Scheduler = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="row rowSched">
+		<div className="rowSched">
 			<div className="day col p-0">
 				<HoursColumn />
 			</div>

@@ -10,12 +10,6 @@ i{
     border-bottom: 0.05rem solid #a3acb2;
     box-shadow: 0 0.05rem 0 rgba(12,13,14,0.15);
 }
-.cell{
-    cursor: copy;
-    height: 2rem;
-    border-bottom: solid 0.05rem #a3acb2;
-    border-right: solid 0.05rem #a3acb2;
-}
 .scheduler{
     width: 100%;
     display: flex;
@@ -39,27 +33,6 @@ p{
     font-size: 1.4rem;
     margin: 0;
     padding: 0;
-}
-.title{
-    border-top: solid 0.05rem #a3acb2;
-    border-bottom: solid 0.05rem #a3acb2;
-    border-right: solid 0.05rem #a3acb2;
-    font-size: 1.4rem;
-    height: 2rem;
-}
-.titleH{
-    border: solid 0.05rem #a3acb2;
-    font-size: 1.4rem;
-    height: 2rem;
-}
-.hours{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
-    border-bottom: solid 0.05rem #a3acb2; 
-    border-left: solid 0.05rem #a3acb2; 
-    border-right: solid 0.05rem #a3acb2;
 }
 .btnDropdown{
     height: 4rem;
@@ -92,11 +65,6 @@ input::placeholder{
     margin-left: 1rem;
     color: #35553e;
 }
-.rowSched{
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x:scroll;
-}
 button{
     background-color: red;
     width: 30px;
@@ -127,6 +95,38 @@ button{
 .reserved {
   background-color: #a3acb2;
 }
-.day{
-    min-width: 12.5rem;
+.rowSched {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space:nowrap;
+    width: 100vw;
+}
+.day {
+    display: inline-table;
+    white-space:normal;
+    max-width: 12.5rem;
+}
+.title{
+    border-top: solid 0.05rem #a3acb2;
+    border-bottom: solid 0.05rem #a3acb2;
+    border-right: solid 0.05rem #a3acb2;
+    font-size: 1.4rem;
+    height: 2rem;
+}
+.titleH{
+    border: solid 0.05rem #a3acb2;
+    font-size: 1.4rem;
+    height: 2rem;
+}
+.hours{
+    height: 2rem;
+    border-bottom: solid 0.05rem #a3acb2; 
+    border-left: solid 0.05rem #a3acb2; 
+    border-right: solid 0.05rem #a3acb2;
+}
+.cell{
+    cursor: copy;
+    height: 2rem;
+    border-bottom: solid 0.05rem #a3acb2;
+    border-right: solid 0.05rem #a3acb2;
 }

@@ -10,9 +10,11 @@ export const Calendar = () => {
 	const { store, actions } = useContext(Context);
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
+	var colore = store.myWidth ? store.myWidth : "";
 	return (
 		<div className="scheduler">
 			<Navbar />
+			<h1>{colore}</h1>
 			<div className="list-group-horizontal my-4">
 				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
