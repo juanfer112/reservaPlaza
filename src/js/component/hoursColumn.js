@@ -7,7 +7,6 @@ export const HoursColumn = () => {
 	var night = !store.night ? " d-none" : "";
 	for (let hours = 0; hours < 25; hours++) {
 		let header = "HORAS";
-
 		if (hours == 0) {
 			array.push(
 				<div key={hours} className="titleH text-center font-weight-bold">

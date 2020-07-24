@@ -1,4 +1,15 @@
-import { format, startOfWeek, endOfDay, addDays, subHours, addWeeks, subWeeks } from "date-fns";
+import {
+	format,
+	startOfWeek,
+	endOfDay,
+	addDays,
+	subHours,
+	addWeeks,
+	subWeeks,
+	formatRelative,
+	subDays
+} from "date-fns";
+import { es } from "date-fns/locale/es";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -7,7 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			night: false
+			night: false,
+			ciao: format(new Date(2014, 1, 11), "EEEE", { locale: es })
 		},
 
 		actions: {
@@ -59,22 +71,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			transformDay: day => {
-				var dayNumber = day.toString().slice(8, 10);
-				if (day.toString().slice(0, 3) == "Mon") {
-					return "Lunes " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Tue") {
-					return "Martes " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Wed") {
-					return "Miercoles " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Thu") {
-					return "Jueves " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Fri") {
-					return "Viernes " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Sat") {
-					return "Sabado " + dayNumber;
-				} else if (day.toString().slice(0, 3) == "Sun") {
-					return "Domingo " + dayNumber;
-				}
+				var dayNumber = format(day, "d");
+				var month = format(day, "LL").toString();
+				var dayAndMonth = dayNumber + "/" + month;
+				var dayNameIndex = format(day, "i").toString();
+				const arrayDayNames = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
+				return arrayDayNames[dayNameIndex - 1] + dayAndMonth;
 			},
 
 			addHours: (hours, name) => {
