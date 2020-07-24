@@ -1,10 +1,11 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
 import { Navbar } from "../component/navbar";
+import { ConfirModal } from "../component/confirModal";
 
 export const Calendar = () => {
 	const { store, actions } = useContext(Context);
@@ -36,7 +37,7 @@ export const Calendar = () => {
 			</div>
 			<p className="nightHours ml-4">
 				<p>
-					Servicio 24H disponible, pinches
+					Servicio 24H disponible, pincha
 					<i className="text-primary" onClick={() => actions.changeNight()}>
 						{" "}
 						aqui{" "}
@@ -62,11 +63,7 @@ export const Calendar = () => {
 			</div>
 
 			<Scheduler />
-			<div className="footer fixed-bottom bg-white py-3">
-				<button className="confirm btn btn-success pb-5" onClick={() => actions.postSchedules()}>
-					Finalizar
-				</button>
-			</div>
+			<ConfirModal />
 		</div>
 	);
 };
