@@ -9,7 +9,7 @@ import {
 	formatRelative,
 	subDays
 } from "date-fns";
-import { es } from "date-fns/locale/es";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -18,8 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			night: false,
-			ciao: format(new Date(2014, 1, 11), "EEEE", { locale: es })
+			night: false
 		},
 
 		actions: {
@@ -45,16 +44,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ reserved: data });
 			},
 
-			postSchedules: () => {
+			postSchedules: async (
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
+			) => {
 				const store = getStore();
 				if (store.schedules.length > 0) {
-					fetch("https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules", {
+					let response = await fetch(url, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
 						body: JSON.stringify(store.schedules)
 					});
+					window.location.reload(false);
 				}
 			},
 
