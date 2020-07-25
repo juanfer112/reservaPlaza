@@ -11,6 +11,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
+			checkUser: async (email, password) => {
+				let response = await fetch(
+					"https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/login",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password
+						})
+					}
+				);
+				let data = await response.json();
+				if (typeof data.access_token != "undefined") {
+					setStore({ token: data.access_token });
+				} else {
+					Notify.error(data.access_token);
+				}
+			},
+			isLogged: () => {
+				const store = getStore();
+				console.log(store.token, "store token");
+				if (store.token != "") {
+					fetch("https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/protected", {
+						method: "GET",
+						header: {
+							"Content-Type": "application/json",
+							autorization: "Bearer" + store.token
+						}
+					});
+				}
+			},
+
 			pullPeoples: async (
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
 			) => {
