@@ -148,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else if (beforeAfter == "beforeDay") {
 					setStore({ currentDay: subDays(day, 1) });
 				}
-				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
+				arrWeek.length > 0 ? setStore({ week: arrWeek, schedules: [] }) : "";
 			},
 
 			selectedSpace: i => {
