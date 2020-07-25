@@ -5,10 +5,10 @@ import "../../styles/home.scss";
 import { NewDay } from "./newDay";
 import { format, startOfDay, addHours, subHours } from "date-fns";
 
-export const AdminBalance = () => {
+export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
-	var currentDay = startOfDay(new Date());
+	var currentDay = n.day;
 
 	for (let hour = 0; hour < 25; hour++) {
 		var holderSpacesHours = [];
@@ -43,9 +43,5 @@ export const AdminBalance = () => {
 		adminScheduler.push(<tr>{holderSpacesHours}</tr>);
 		currentDay = addHours(currentDay, 1);
 	}
-	return (
-		<div className="container mt-5">
-			<table className="table table-bordered">{adminScheduler}</table>
-		</div>
-	);
+	return <table className="table table-bordered">{adminScheduler}</table>;
 };
