@@ -1,14 +1,4 @@
-import {
-	format,
-	startOfWeek,
-	endOfDay,
-	addDays,
-	subHours,
-	addWeeks,
-	subWeeks,
-	formatRelative,
-	subDays
-} from "date-fns";
+import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -18,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			reserved: [],
 			spaces: [],
-			night: false
+			night: false,
+			currentDay: startOfDay(new Date())
 		},
 
 		actions: {
@@ -118,12 +109,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ schedules: check });
 			},
 
-			reservedDate: cellDate => {
+			reservedDate: (cellDate, spaceID) => {
 				const store = getStore();
 				var reserved = [];
+				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
 				store.selectedSpace
 					? store.reserved.map(date => {
-							if (date["spaceID"] == store.selectedSpace["id"]) {
+							if (date["spaceID"] == selectedSpaceID) {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
@@ -140,17 +132,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				store.night ? setStore({ night: false }) : setStore({ night: true });
 			},
 
-			changeWeek: beforeAfter => {
+			changeWeekOrDay: beforeAfter => {
 				const store = getStore();
-				var arr = [];
+				var arrWeek = [];
+				var day = store.currentDay;
 				store.week.map(day => {
-					if (beforeAfter == "after") {
-						arr.push(addWeeks(day, 1));
-					} else if (beforeAfter == "before") {
-						arr.push(subWeeks(day, 1));
+					if (beforeAfter == "afterWeek") {
+						arrWeek.push(addWeeks(day, 1));
+					} else if (beforeAfter == "beforeWeek") {
+						arrWeek.push(subWeeks(day, 1));
 					}
 				});
-				setStore({ week: arr });
+				if (beforeAfter == "afterDay") {
+					setStore({ currentDay: addDays(day, 1) });
+				} else if (beforeAfter == "beforeDay") {
+					setStore({ currentDay: subDays(day, 1) });
+				}
+				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
 			},
 
 			selectedSpace: i => {

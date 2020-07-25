@@ -50,14 +50,14 @@ export const Calendar = () => {
 					<i
 						className="fa fa-arrow-left ml-3 mb-1"
 						aria-hidden="true"
-						onClick={() => actions.changeWeek("before")}
+						onClick={() => actions.changeWeekOrDay("beforeWeek")}
 					/>
 				</div>
 				<div className="d-flex">
 					<i
 						className="fa fa-arrow-right mr-3 mb-1"
 						aria-hidden="true"
-						onClick={() => actions.changeWeek("after")}
+						onClick={() => actions.changeWeekOrDay("afterWeek")}
 					/>
 				</div>
 			</div>
