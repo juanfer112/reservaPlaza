@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reserved: [],
 			spaces: [],
 			night: false,
-			currentDay: startOfDay(new Date())
+			currentDay: startOfDay(new Date()),
+			selectedCellHolder: []
 		},
 
 		actions: {
@@ -93,7 +94,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						schedules: [
 							...store.schedules,
 							{ date: date, enterprise_id: store.user.id, space_id: store.selectedSpace["id"] }
-						]
+						],
+						selectedCellHolder: [...store.selectedCellHolder, date]
 					});
 				}
 			},
@@ -119,9 +121,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
-					: "loading";
+					: "wait";
 				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
 					return " reserved";
+				} else if (store.selectedCellHolder.includes(cellDate)) {
+					return " bg-success";
 				} else {
 					return "";
 				}
@@ -143,12 +147,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						arrWeek.push(subWeeks(day, 1));
 					}
 				});
+				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
+
 				if (beforeAfter == "afterDay") {
 					setStore({ currentDay: addDays(day, 1) });
 				} else if (beforeAfter == "beforeDay") {
 					setStore({ currentDay: subDays(day, 1) });
 				}
-				arrWeek.length > 0 ? setStore({ week: arrWeek, schedules: [] }) : "";
 			},
 
 			selectedSpace: i => {

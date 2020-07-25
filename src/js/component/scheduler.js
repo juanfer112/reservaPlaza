@@ -11,7 +11,7 @@ export const Scheduler = () => {
 			<div className="day col p-0">
 				<HoursColumn />
 			</div>
-			{store.week.map((item, index) => {
+			{store.week.map(item => {
 				return <NewDay key={item} day={item} />;
 			})}
 		</div>
