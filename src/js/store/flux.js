@@ -1,14 +1,4 @@
-import {
-	format,
-	startOfWeek,
-	endOfDay,
-	addDays,
-	subHours,
-	addWeeks,
-	subWeeks,
-	formatRelative,
-	subDays
-} from "date-fns";
+import { format, startOfWeek, endOfDay, addDays, subHours, addWeeks, subWeeks } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -118,12 +108,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ schedules: check });
 			},
 
-			reservedDate: cellDate => {
+			reservedDate: (cellDate, spaceID) => {
 				const store = getStore();
 				var reserved = [];
+				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
 				store.selectedSpace
 					? store.reserved.map(date => {
-							if (date["spaceID"] == store.selectedSpace["id"]) {
+							if (date["spaceID"] == selectedSpaceID) {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
