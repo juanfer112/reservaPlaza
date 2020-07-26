@@ -20,19 +20,21 @@ export const AdminBalance = n => {
 				holderSpacesHours.push(
 					<>
 						<th />
-						<th>{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-0 text-center">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
-				holderSpacesHours.push(<th>{store.spaces[currentSpace]["name"]}</th>);
+				holderSpacesHours.push(<th className="px-0 text-center">{store.spaces[currentSpace]["name"]}</th>);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th>{titleHour}</th>
-						<td className={className} id={store.spaces[currentSpace]["id"] + " " + id}>
+						<th className="px-0 text-center">{titleHour}</th>
+						<td
+							className={"px-0 text-center " + className}
+							id={store.spaces[currentSpace]["id"] + " " + id}>
 							{store.spaces[currentSpace]["schedules"].map(i => {
 								if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
-									return i["id"];
+									return i["enterprise_id"];
 								}
 							})}
 						</td>
@@ -40,10 +42,10 @@ export const AdminBalance = n => {
 				);
 			} else {
 				holderSpacesHours.push(
-					<td className={className} id={store.spaces[currentSpace]["id"] + " " + id}>
+					<td className={"px-0 text-center " + className} id={store.spaces[currentSpace]["id"] + " " + id}>
 						{store.spaces[currentSpace]["schedules"].map(i => {
 							if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
-								return i["id"];
+								return i["enterprise_id"];
 							}
 						})}
 					</td>
