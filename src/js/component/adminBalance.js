@@ -9,11 +9,9 @@ export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
 	var currentDay = n.day;
-
 	for (let hour = 0; hour < 25; hour++) {
 		var holderSpacesHours = [];
 		var titleHour = hour < 11 ? `0${hour - 1}:00` : `${hour - 1}:00`;
-
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
@@ -31,13 +29,25 @@ export const AdminBalance = n => {
 				holderSpacesHours.push(
 					<>
 						<th>{titleHour}</th>
-						<td className={className} id={id}>
-							{id}
+						<td className={className} id={store.spaces[currentSpace]["id"] + " " + id}>
+							{store.spaces[currentSpace]["schedules"].map(i => {
+								if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
+									return i["id"];
+								}
+							})}
 						</td>
 					</>
 				);
 			} else {
-				holderSpacesHours.push(<td className={className} id={id} />);
+				holderSpacesHours.push(
+					<td className={className} id={store.spaces[currentSpace]["id"] + " " + id}>
+						{store.spaces[currentSpace]["schedules"].map(i => {
+							if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
+								return i["id"];
+							}
+						})}
+					</td>
+				);
 			}
 		}
 		adminScheduler.push(<tr>{holderSpacesHours}</tr>);

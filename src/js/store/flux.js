@@ -123,13 +123,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 							}
 					  })
 					: "wait";
-				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
+				if (reserved.includes(cellDate)) {
+					return " reserved";
+				} else if (cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss") && spaceID == undefined) {
 					return " reserved";
 				} else if (store.selectedCellHolder.includes(cellDate)) {
 					return " bg-success";
 				} else {
 					return "";
 				}
+			},
+
+			reservedDateAdmin: (cellDate, spaceID) => {
+				const store = getStore();
+				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
+				store.selectedSpace
+					? store.reserved.map(date => {
+							if (date["space_id"] == selectedSpaceID) {
+								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+							}
+					  })
+					: "wait";
 			},
 
 			changeNight: () => {
