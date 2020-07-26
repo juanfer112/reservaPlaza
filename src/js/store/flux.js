@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			spaces: [],
 			night: false,
 			currentDay: startOfDay(new Date()),
-			selectedCellHolder: []
+			selectedCellHolder: [],
+			confirModal: false
 		},
 
 		actions: {
@@ -19,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[0] });
+				setStore({ user: data[3] });
 			},
 
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
@@ -40,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
 			) => {
 				const store = getStore();
-				if (store.schedules.length > 0) {
+				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
 					let response = await fetch(url, {
 						method: "POST",
 						headers: {
@@ -117,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
 				store.selectedSpace
 					? store.reserved.map(date => {
-							if (date["spaceID"] == selectedSpaceID) {
+							if (date["space_id"] == selectedSpaceID) {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
