@@ -32,7 +32,7 @@ export const Calendar = () => {
 					</DropdownMenu>
 				</ButtonDropdown>
 				<p className="availableHours mr-auto ml-4">
-					{(store.user != undefined ? store.user["tot_hours"] : "loading...") + "/H restantes"}
+					{(store.user != undefined ? store.user["current_hours"] : "loading...") + "/H restantes"}
 				</p>
 			</div>
 			<p className="nightHours ml-4">
