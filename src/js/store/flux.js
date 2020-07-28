@@ -9,7 +9,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reserved: [],
 			spaces: [],
 			night: false,
-			currentDay: startOfDay(new Date())
+			currentDay: startOfDay(new Date()),
+			selectedCellHolder: [],
+			confirModal: false
 		},
 
 		actions: {
@@ -18,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[0] });
+				setStore({ user: data[3] });
 			},
 
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
@@ -39,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
 			) => {
 				const store = getStore();
-				if (store.schedules.length > 0) {
+				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
 					let response = await fetch(url, {
 						method: "POST",
 						headers: {
@@ -93,7 +95,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						schedules: [
 							...store.schedules,
 							{ date: date, enterprise_id: store.user.id, space_id: store.selectedSpace["id"] }
-						]
+						],
+						selectedCellHolder: [...store.selectedCellHolder, date]
 					});
 				}
 			},
@@ -115,13 +118,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
 				store.selectedSpace
 					? store.reserved.map(date => {
-							if (date["spaceID"] == selectedSpaceID) {
+							if (date["space_id"] == selectedSpaceID) {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
-					: "loading";
+					: "wait";
 				if (reserved.includes(cellDate) || cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss")) {
 					return " reserved";
+				} else if (store.selectedCellHolder.includes(cellDate)) {
+					return " bg-success";
 				} else {
 					return "";
 				}
@@ -143,12 +148,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						arrWeek.push(subWeeks(day, 1));
 					}
 				});
+				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
+
 				if (beforeAfter == "afterDay") {
 					setStore({ currentDay: addDays(day, 1) });
 				} else if (beforeAfter == "beforeDay") {
 					setStore({ currentDay: subDays(day, 1) });
 				}
-				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
 			},
 
 			selectedSpace: i => {

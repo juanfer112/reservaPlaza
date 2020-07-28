@@ -32,7 +32,7 @@ export const Calendar = () => {
 					</DropdownMenu>
 				</ButtonDropdown>
 				<p className="availableHours mr-auto ml-4">
-					{(store.user != undefined ? store.user["tot_hours"] : "loading...") + "/H restantes"}
+					{(store.user != undefined ? store.user["current_hours"] : "loading...") + "/H restantes"}
 				</p>
 			</div>
 			<p className="nightHours ml-4">
@@ -50,14 +50,18 @@ export const Calendar = () => {
 					<i
 						className="fa fa-arrow-left ml-3 mb-1"
 						aria-hidden="true"
-						onClick={() => actions.changeWeekOrDay("beforeWeek")}
+						onClick={() => {
+							actions.changeWeekOrDay("beforeWeek");
+						}}
 					/>
 				</div>
 				<div className="d-flex">
 					<i
 						className="fa fa-arrow-right mr-3 mb-1"
 						aria-hidden="true"
-						onClick={() => actions.changeWeekOrDay("afterWeek")}
+						onClick={() => {
+							actions.changeWeekOrDay("afterWeek");
+						}}
 					/>
 				</div>
 			</div>

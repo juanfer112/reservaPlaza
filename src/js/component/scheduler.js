@@ -6,14 +6,13 @@ import "../../styles/home.scss";
 
 export const Scheduler = () => {
 	const { store, actions } = useContext(Context);
-
 	return (
 		<div className="rowSched">
 			<div className="day col p-0">
 				<HoursColumn />
 			</div>
-			{store.week.map((item, index) => {
-				return <NewDay key={index} day={item} />;
+			{store.week.map(item => {
+				return <NewDay key={item} day={item} />;
 			})}
 		</div>
 	);
