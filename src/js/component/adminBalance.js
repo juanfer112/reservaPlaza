@@ -9,13 +9,17 @@ export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
 	var currentDay = n.day;
+	var night = !store.night ? " d-none" : "";
+
 	for (let hour = 0; hour < 25; hour++) {
 		var holderSpacesHours = [];
 		var titleHour = hour < 11 ? `0${hour - 1}:00` : `${hour - 1}:00`;
+
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
 			let className = actions.reservedDate(id, spaceID);
+
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
@@ -52,7 +56,7 @@ export const AdminBalance = n => {
 				);
 			}
 		}
-		adminScheduler.push(<tr>{holderSpacesHours}</tr>);
+		adminScheduler.push(<tr className={hour > 0 && hour < 9 ? night : ""}>{holderSpacesHours}</tr>);
 		currentDay = addHours(currentDay, 1);
 	}
 	return <table className="table table-bordered">{adminScheduler}</table>;

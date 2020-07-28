@@ -37,6 +37,7 @@ export const Calendar = () => {
 			</div>
 			<p className="nightHours ml-4">
 				<p>
+					{" "}
 					Servicio 24H disponible, pincha
 					<i className="text-primary" onClick={() => actions.changeNight()}>
 						{" "}
