@@ -181,6 +181,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ selectedSpace: space });
 					}
 				});
+			},
+
+			changeSchedule: cellId => {
+				const store = getStore();
+				var id = cellId.slice(0, 1);
+				var date = cellId.slice(2, cellId.length);
+				store.reserved.map(obj => {
+					if (new Date(date).toString() == new Date(obj["date"]).toString() && obj["space_id"] == id) {
+						console.log(obj);
+					}
+				});
 			}
 		}
 	};
