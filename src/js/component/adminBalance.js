@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
 import { NewDay } from "./newDay";
-import { format, startOfDay, addHours, subHours } from "date-fns";
+import { format, addHours, subHours } from "date-fns";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
 	var currentDay = n.day;
 	var night = !store.night ? " d-none" : "";
+	const [show, setShow] = useState(false);
+	function toggle() {
+		setShow(!show);
+	}
 
 	for (let hour = 0; hour < 25; hour++) {
 		var holderSpacesHours = [];
@@ -34,11 +39,16 @@ export const AdminBalance = n => {
 					<>
 						<th className="px-0 text-center">{titleHour}</th>
 						<td
-							className={"px-0 text-center " + className}
+							onClick={e => {
+								if (className == " reserved") {
+									setShow(!show), actions.changeSchedule(e.target.id);
+								}
+							}}
+							className={"px-0 text-center" + className}
 							id={store.spaces[currentSpace]["id"] + " " + id}>
 							{store.spaces[currentSpace]["schedules"].map(i => {
 								if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
-									return i["enterprise_id"];
+									return i["enterprise_name"];
 								}
 							})}
 						</td>
@@ -46,10 +56,17 @@ export const AdminBalance = n => {
 				);
 			} else {
 				holderSpacesHours.push(
-					<td className={"px-0 text-center " + className} id={store.spaces[currentSpace]["id"] + " " + id}>
+					<td
+						onClick={e => {
+							if (className == " reserved") {
+								setShow(!show), actions.changeSchedule(e.target.id);
+							}
+						}}
+						className={"px-0 text-center" + className}
+						id={store.spaces[currentSpace]["id"] + " " + id}>
 						{store.spaces[currentSpace]["schedules"].map(i => {
-							if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
-								return i["enterprise_id"];
+							if (id == format(subHours(new Date(i["date"]), 2), "yyyy-Mp M-dd HH:mm:ss")) {
+								return i["enterprise_name"];
 							}
 						})}
 					</td>
@@ -59,5 +76,42 @@ export const AdminBalance = n => {
 		adminScheduler.push(<tr className={hour > 0 && hour < 9 ? night : ""}>{holderSpacesHours}</tr>);
 		currentDay = addHours(currentDay, 1);
 	}
-	return <table className="table table-bordered">{adminScheduler}</table>;
+	return (
+		<>
+			<table className="table table-bordered">{adminScheduler}</table>
+			<Modal backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+				{store.confirModal ? (
+					<ModalBody>
+						<h2 className="text-center">Quieres confirmar las siguientes reservas?</h2>
+						<ul className="text-center list-group">
+							{store.schedules.map((date, index) => {
+								return (
+									<li className="list-group-item border-0 p-0" key={index}>
+										<h4>{date.date}</h4>
+									</li>
+								);
+							})}
+						</ul>
+					</ModalBody>
+				) : (
+					<ModalBody>
+						<h1>No tienes suficientes horas disponibles! (PHONE NUMBER)</h1>
+					</ModalBody>
+				)}
+				<ModalFooter className="m-auto">
+					<Button
+						color="primary"
+						onClick={() => {
+							actions.postSchedules();
+							setShow(!show);
+						}}>
+						Confirmar
+					</Button>
+					<Button color="secondary" onClick={() => setShow(!show)}>
+						Cancelar
+					</Button>
+				</ModalFooter>
+			</Modal>
+		</>
+	);
 };

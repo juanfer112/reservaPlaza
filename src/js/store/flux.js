@@ -30,7 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/" +
+					format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
@@ -158,8 +159,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				store.week.map(day => {
 					if (beforeAfter == "afterWeek") {
 						arrWeek.push(addWeeks(day, 1));
+						setStore({ currentDay: addDays(day, 1) });
 					} else if (beforeAfter == "beforeWeek") {
 						arrWeek.push(subWeeks(day, 1));
+						setStore({ currentDay: subDays(day, 1) });
 					}
 				});
 				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
@@ -176,6 +179,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				store.spaces.map((space, index) => {
 					if (index == i) {
 						setStore({ selectedSpace: space });
+					}
+				});
+			},
+
+			changeSchedule: cellId => {
+				const store = getStore();
+				var id = cellId.slice(0, 1);
+				var date = cellId.slice(2, cellId.length);
+				store.reserved.map(obj => {
+					if (new Date(date).toString() == new Date(obj["date"]).toString() && obj["space_id"] == id) {
+						console.log(obj);
 					}
 				});
 			}

@@ -26,6 +26,13 @@ const injectContext = PassedComponent => {
 
 		useEffect(
 			() => {
+				state.actions.pullScheduler();
+			},
+			[state.store.currentDay]
+		);
+
+		useEffect(
+			() => {
 				if (state.store.schedules.length > state.store.user.current_hours) {
 					state.store.confirModal = false;
 				} else {
