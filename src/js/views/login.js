@@ -53,14 +53,6 @@ export const Login = () => {
 									}}>
 									Login
 								</button>
-								<button
-									type="button"
-									className="btn btn-primary mx-auto "
-									onClick={() => {
-										actions.isLogged();
-									}}>
-									isLogged
-								</button>
 							</div>
 						</div>
 					) : (
