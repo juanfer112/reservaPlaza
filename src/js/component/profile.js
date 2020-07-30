@@ -8,9 +8,24 @@ export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	var newArray = [];
 
+	var obj1 = Object.keys(store.user).map((element, index) => {
+		console.log(element);
+		if (element == "brands") {
+			let array = [];
+
+			Object.values(store.user[element]).map((brand, index) => {
+				console.log(brand);
+				console.log(brand["name"]);
+				newArray += array.concat(brand["name"], " ");
+				console.log(newArray);
+			});
+			return null;
+		}
+	});
+	console.log(obj1);
 	var obj = Object.values(store.user).map((items, index) => {
 		console.log(items);
-		return items;
+		return <div key={index}>{items}</div>;
 	});
 	console.log(obj);
 
@@ -26,29 +41,30 @@ export const Profile = () => {
 					<div>
 						{Object.keys(store.user).map((element, index) => {
 							console.log(element);
-							if (element == "brands") {
-								let array = [];
-								Object.values(store.user[element]).map((brand, index) => {
-									console.log(brand);
-									console.log(brand["name"]);
-									newArray += array.concat(brand["name"], " ");
-									console.log(newArray);
-								});
-							} else if (
+							console.log(store.user[element], "store.user[element]");
+
+							if (
 								element == "email" ||
 								element == "phone" ||
 								element == "name" ||
-								element == "tot_hours"
+								element == "tot_hours" ||
+								element == "cif"
 							) {
-								Object.values(store.user[element]).map((values, index) => {
-									console.log(values);
-								});
+								return (
+									<div key={index}>
+										{element}:{store.user[element]}
+									</div>
+								);
+							} else if (element == "brands") {
+								return (
+									<div key={index}>
+										{element}:{newArray}
+									</div>
+								);
 							}
-
-							return <div key={index}>{element}</div>;
 						})}
 					</div>
-					<h3>{newArray}</h3>
+
 					<div className="row justify-content">
 						<div className="col-sm-12 col-md-6">
 							<strong>email@gmail.com</strong>
