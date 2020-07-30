@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			pullPeoples: async (
-				url = "https://3000-f1fa4061-344a-4a5c-beee-e0ad0a4fd351.ws-eu01.gitpod.io/enterprises"
+				url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/enterprises"
 			) => {
 				const store = getStore();
 

@@ -7,6 +7,13 @@ import "../../styles/home.scss";
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	var newArray = [];
+
+	var obj = Object.values(store.user).map((items, index) => {
+		console.log(items);
+		return items;
+	});
+	console.log(obj);
+
 	return (
 		<div className="container">
 			<div className="row justify-content">
@@ -26,6 +33,15 @@ export const Profile = () => {
 									console.log(brand["name"]);
 									newArray += array.concat(brand["name"], " ");
 									console.log(newArray);
+								});
+							} else if (
+								element == "email" ||
+								element == "phone" ||
+								element == "name" ||
+								element == "tot_hours"
+							) {
+								Object.values(store.user[element]).map((values, index) => {
+									console.log(values);
 								});
 							}
 
