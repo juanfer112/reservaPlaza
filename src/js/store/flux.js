@@ -1,5 +1,6 @@
 import { format, startOfWeek, endOfDay, addDays, subHours, addWeeks, subWeeks } from "date-fns";
 const getState = ({ getStore, getActions, setStore }) => {
+	const url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io";
 	return {
 		store: {
 			user: {},
@@ -12,58 +13,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			checkUser: async (email, password) => {
-				let response = await fetch(
-					"https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/login",
-					{
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password
-						})
-					}
-				);
+				let response = await fetch(`${url}/login`, {
+					method: "POST",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
+				});
 				let data = await response.json();
 				if (typeof data.access_token != "undefined") {
 					setStore({ token: data.access_token });
+					sessionStorage.setItem("access_token", data.access_token);
 				} else {
-					Notify.error(data.access_token);
+					return "no se ha generado un token";
 				}
 			},
-			isLogged: () => {
+			isLogged: async () => {
 				const store = getStore();
-				console.log(store.token, "store token");
+
 				if (store.token != "") {
-					fetch("https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/protected", {
+					let response = await fetch(`${url}/protected`, {
 						method: "GET",
-						header: {
+						headers: {
 							"Content-Type": "application/json",
-							autorization: "Bearer" + store.token
+							authorization: "Bearer " + store.token
 						}
+					});
+					let data = await response.json();
+				} else {
+					JSON.stringify({
+						msg: "no hay token"
 					});
 				}
 			},
+			logout: () => {
+				const store = getStore();
+				setStore({ token: null });
+				sessionStorage.setItem("access_token", null);
+			},
 
-			pullPeoples: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
-			) => {
-				let response = await fetch(url);
+			pullPeoples: async () => {
+				let response = await fetch(`${url}/enterprises`);
 				let data = await response.json();
 				setStore({ user: data[0] });
 			},
 
-			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
-				let response = await fetch(url);
+			pullSpaces: async () => {
+				let response = await fetch(`${url}/spaces`);
 				let data = await response.json();
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 
-			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
-			) => {
-				let response = await fetch(url);
+			pullScheduler: async () => {
+				let response = await fetch(`${url}/schedules`);
 				let data = await response.json();
 				setStore({ reserved: data });
 			},
@@ -71,7 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postSchedules: () => {
 				const store = getStore();
 				if (store.schedules.length > 0) {
-					fetch("https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules", {
+					fetch(`${url}/schedules`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
