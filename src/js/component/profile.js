@@ -9,16 +9,6 @@ export const Profile = () => {
 	const sortStringKeys = (a, b) => (a[4] < b[0] ? 1 : -1);
 	var newArray = [];
 
-	var obj1 = Object.keys(store.user).map((element, index) => {
-		if (element == "brands") {
-			let array = [];
-			Object.values(store.user[element]).map((brand, index) => {
-				newArray += array.concat(brand["name"], " ");
-			});
-			return null;
-		}
-	});
-	console.log(obj1);
 	var obj = Object.values(store.user).map((items, index) => {
 		console.log(items);
 		return <div key={index}>{items}</div>;
@@ -26,7 +16,7 @@ export const Profile = () => {
 	console.log(obj);
 
 	return (
-		<div className="container">
+		<div className="container mt-5">
 			<div className="row justify-content">
 				<img
 					src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
@@ -34,25 +24,29 @@ export const Profile = () => {
 				/>
 
 				<div className="col-sm-10 col-md-6 shadow">
-					<div>
+					<div className="row justify-content">
 						{Object.keys(store.user)
 							.sort(sortStringKeys)
 							.map((element, index) => {
-								if (
-									element == "email" ||
-									element == "phone" ||
-									element == "name" ||
-									element == "tot_hours" ||
-									element == "cif"
-								) {
+								if (element == "email" || element == "phone" || element == "name") {
 									return (
-										<div key={index}>
+										<div className="col-sm-12 col-md-6 " key={index}>
+											{element}:{store.user[element]}
+										</div>
+									);
+								} else if (element == "tot_hours" || element == "cif") {
+									return (
+										<div className="col-sm-12 col-md-6 " key={index}>
 											{element}:{store.user[element]}
 										</div>
 									);
 								} else if (element == "brands") {
+									Object.values(store.user[element]).map((brand, index) => {
+										let array = [];
+										newArray += array.concat(brand["name"], " ");
+									});
 									return (
-										<div key={index}>
+										<div className="col-sm-12 " key={index}>
 											{element}:{newArray}
 										</div>
 									);
@@ -61,7 +55,6 @@ export const Profile = () => {
 					</div>
 				</div>
 			</div>
-			PROFILE
 		</div>
 	);
 };
