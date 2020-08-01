@@ -22,10 +22,10 @@ export const AdminBalance = n => {
 	}
 
 	var hoursOptions = [];
-	for (let x = 0; x < 24; x++) {
-		let value = x < 10 ? (value = "0" + x.toString() + ":00") : (value = x.toString() + ":00");
+	for (let hour = 0; hour < 24; hour++) {
+		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
 		hoursOptions.push(
-			<option key={x} value={value}>
+			<option key={hour} value={value}>
 				{value}
 			</option>
 		);
