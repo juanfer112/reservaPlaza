@@ -42,8 +42,8 @@ export const Balance = () => {
 						/>
 					</div>
 				</div>
-				{<AdminBalance day={currentDay} />}
 			</div>
+			{<AdminBalance day={currentDay} />}
 		</>
 	);
 };

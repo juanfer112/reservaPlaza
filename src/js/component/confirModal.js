@@ -9,6 +9,7 @@ export const ConfirModal = () => {
 	function toggle() {
 		setShow(!show);
 	}
+
 	return (
 		<>
 			<button className="confirm fixed-bottom btn btn-success pb-5" onClick={() => setShow(!show)}>
@@ -38,7 +39,6 @@ export const ConfirModal = () => {
 						color="primary"
 						onClick={() => {
 							actions.postSchedules();
-							setShow(!show);
 						}}>
 						Confirmar
 					</Button>
