@@ -25,7 +25,7 @@ export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
 	var currentDay = store.currentDay;
-	var week = store.week;
+	console.log(format(startOfMonth(currentDay), "d"));
 	var night = !store.night ? " d-none" : "";
 	const [show, setShow] = useState(false);
 	function toggle() {
@@ -54,16 +54,42 @@ export const ResumeReserve = n => {
 	});
 
 	var blanks = [];
-	for (let d = 0; d < startOfMonth(currentDay); d++) {
-		blanks.push(<td className="empty-slot">{d}</td>);
+	for (let i = 0; i < format(startOfMonth(currentDay), "d"); i++) {
+		blanks.push(<td className="empty-slot">{""}</td>);
 	}
 
 	var daysInMonth = [];
-	for (let d = 0; d < getDaysInMonth(currentDay); d++) {
-		daysInMonth.push(<td className="empty-slot">{d}</td>);
+	for (let d = 1; d <= getDaysInMonth(currentDay); d++) {
+		let className = d == format(currentDay, "d") ? "day current-day" : "day";
+		daysInMonth.push(
+			<td key={d} className={className}>
+				<span>{d}</span>
+			</td>
+		);
 	}
-	console.log("daysInMonth:", daysInMonth);
-	console.log(startOfMonth(currentDay));
+
+	var totalSlots = [...blanks, ...daysInMonth];
+	var rows = [];
+	var cells = [];
+
+	totalSlots.forEach((row, i) => {
+		if (i % 7 != 0) {
+			cells.push(row);
+		} else {
+			let insertRow = cells.slice();
+			rows.push(insertRow);
+			cells = [];
+			cells.push(row);
+		}
+		if (i == totalSlots.length - 1) {
+			let insertRow = cells.slice();
+			rows.push(insertRow);
+		}
+	});
+
+	var trElems = rows.map((d, i) => {
+		return <tr key={i * 80}>{d}</tr>;
+	});
 
 	return (
 		<>
@@ -74,15 +100,10 @@ export const ResumeReserve = n => {
 					</thead>
 					<tbody>
 						<tr>{weekofday}</tr>
+						{trElems}
 					</tbody>
 				</table>
 			</div>
-			<Button
-				onClick={() => {
-					dayofweek();
-				}}>
-				presiona
-			</Button>
 		</>
 	);
 };
