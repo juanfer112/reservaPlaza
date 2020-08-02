@@ -4,4 +4,6 @@ import { Link } from "react-router-dom";
 
 import "../../styles/home.scss";
 
-export const Profile = item => {};
+export const Profile = item => {
+	return <div>PROFILE</div>;
+};
