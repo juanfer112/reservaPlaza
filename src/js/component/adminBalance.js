@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
 import { NewDay } from "./newDay";
-import { format, addHours, subHours } from "date-fns";
+import { format, addHours, subHours, subDays } from "date-fns";
 import { Table, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const AdminBalance = n => {
@@ -42,16 +42,18 @@ export const AdminBalance = n => {
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2" />
-						<th className="px-2 text-center">{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-2 thFirst bg-white" />
+						<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
-				holderSpacesHours.push(<th className="px-2 text-center">{store.spaces[currentSpace]["name"]}</th>);
+				holderSpacesHours.push(
+					<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+				);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 text-center">{titleHour}</th>
+						<th className="px-2 text-center tHours bg-white">{titleHour}</th>
 						<td
 							onClick={e => {
 								if (className == " reserved") {
@@ -95,9 +97,27 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<Table responsive striped bordered hover variant="dark">
-				{adminScheduler}
-			</Table>
+			<div className="d-flex justify-content-center sticky-top p-2 my-2 bg-white w-100">
+				<p>
+					{" "}
+					Pincha
+					<i className="text-primary" onClick={() => actions.changeNight()}>
+						{" "}
+						aqui{" "}
+					</i>
+					para ver todas las horas!
+				</p>
+			</div>
+			<div className="title text-center font-weight-bold mx-5">
+				{actions.transformDay(subDays(currentDay, 1))}
+			</div>
+			<div className="row mb-5">
+				<div className="container-fluid container-balance mx-5">
+					<Table responsive striped bordered hover variant="dark">
+						{adminScheduler}
+					</Table>
+				</div>
+			</div>
 			<Modal className="modalChange" backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
 				<ModalBody>
 					{store.scheduleToChange ? (
