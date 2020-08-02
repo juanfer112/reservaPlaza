@@ -7,6 +7,10 @@ import { ResumeReserve } from "../component/resumeReserve";
 import "../../styles/home.scss";
 
 export const ProfileUsers = () => {
+	const style = {
+		position: "relative",
+		margin: "50px auto"
+	};
 	return (
 		<div>
 			<div>
@@ -16,7 +20,7 @@ export const ProfileUsers = () => {
 				<Profile />
 			</div>
 			<div>
-				<ResumeReserve />
+				<ResumeReserve style={style} />
 			</div>
 		</div>
 	);
