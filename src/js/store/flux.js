@@ -216,7 +216,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				date ? (newScheduleToChange.date = date) : "";
 				space_name ? (newScheduleToChange.space_name = space_name) : "";
 				setStore({ scheduleToChange: newScheduleToChange });
-				console.log(store.scheduleToChange);
 			}
 		}
 	};

@@ -112,9 +112,7 @@ button{
     max-width: 12.5rem;
 }
 .title{
-    border-top: solid 0.05rem #dee2e6;
-    border-bottom: solid 0.05rem #dee2e6;
-    border-right: solid 0.05rem #dee2e6;
+    border: solid 0.05rem #dee2e6;
     font-size: 1.4rem;
     height: 2rem;
 }
@@ -147,10 +145,39 @@ Button{
     max-height: 400px;
     padding: 15px;
 }
-input[type="time"]::-webkit-calendar-picker-indicator {
-    display: none;
+.thSpace{
+    z-index: 1;
+    position: sticky; 
+    top: 0; 
+    background-clip: padding-box;
 }
-
+.tHours{
+    z-index: 0;
+    position: sticky; 
+    left: 0; 
+    background-clip: padding-box;
+}
+td{
+    z-index: -1;
+    background-clip: padding-box;
+}
+.table-responsive{
+    border-right: solid 0.05rem #dee2e6;
+}
+Table{
+    border-collapse: separate;
+    border-spacing: 0;    
+}
+.thFirst{
+    position: sticky; 
+    left: 0; 
+    top: 0;
+    background-clip: padding-box;
+    z-index: 2;
+}
+.container-balance{
+    overflow: auto;
+}
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
