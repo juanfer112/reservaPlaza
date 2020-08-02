@@ -4,16 +4,31 @@ import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
 import { NewDay } from "./newDay";
 import { format, addHours, subHours } from "date-fns";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Table, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	var adminScheduler = [];
 	var currentDay = n.day;
 	var night = !store.night ? " d-none" : "";
+	var scheduleSpaceIDToChange;
+	var scheduleDateToChange;
+	var scheduleDateHourToChange;
+
 	const [show, setShow] = useState(false);
+
 	function toggle() {
 		setShow(!show);
+	}
+
+	var hoursOptions = [];
+	for (let hour = 0; hour < 24; hour++) {
+		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
+		hoursOptions.push(
+			<option key={hour} value={value}>
+				{value}
+			</option>
+		);
 	}
 
 	for (let hour = 0; hour < 25; hour++) {
@@ -24,31 +39,31 @@ export const AdminBalance = n => {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
 			let className = actions.reservedDate(id, spaceID);
-
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th />
-						<th className="px-0 text-center">{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-2" />
+						<th className="px-2 text-center">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
-				holderSpacesHours.push(<th className="px-0 text-center">{store.spaces[currentSpace]["name"]}</th>);
+				holderSpacesHours.push(<th className="px-2 text-center">{store.spaces[currentSpace]["name"]}</th>);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-0 text-center">{titleHour}</th>
+						<th className="px-2 text-center">{titleHour}</th>
 						<td
 							onClick={e => {
 								if (className == " reserved") {
-									setShow(!show), actions.changeSchedule(e.target.id);
+									setShow(!show),
+										actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 								}
 							}}
-							className={"px-0 text-center" + className}
-							id={store.spaces[currentSpace]["id"] + " " + id}>
-							{store.spaces[currentSpace]["schedules"].map(i => {
-								if (id == format(subHours(new Date(i["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
-									return i["enterprise_name"];
+							className={"px-2 text-center" + className}
+							id={id}>
+							{store.spaces[currentSpace]["schedules"].map(schedule => {
+								if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
+									return schedule["enterprise_name"];
 								}
 							})}
 						</td>
@@ -59,14 +74,15 @@ export const AdminBalance = n => {
 					<td
 						onClick={e => {
 							if (className == " reserved") {
-								setShow(!show), actions.changeSchedule(e.target.id);
+								setShow(!show),
+									actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 							}
 						}}
-						className={"px-0 text-center" + className}
-						id={store.spaces[currentSpace]["id"] + " " + id}>
-						{store.spaces[currentSpace]["schedules"].map(i => {
-							if (id == format(subHours(new Date(i["date"]), 2), "yyyy-Mp M-dd HH:mm:ss")) {
-								return i["enterprise_name"];
+						className={"px-2 text-center" + className}
+						id={id}>
+						{store.spaces[currentSpace]["schedules"].map(schedule => {
+							if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
+								return schedule["enterprise_name"];
 							}
 						})}
 					</td>
@@ -76,38 +92,79 @@ export const AdminBalance = n => {
 		adminScheduler.push(<tr className={hour > 0 && hour < 9 ? night : ""}>{holderSpacesHours}</tr>);
 		currentDay = addHours(currentDay, 1);
 	}
+
 	return (
 		<>
-			<table className="table table-bordered">{adminScheduler}</table>
-			<Modal backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
-				{store.confirModal ? (
-					<ModalBody>
-						<h2 className="text-center">Quieres confirmar las siguientes reservas?</h2>
-						<ul className="text-center list-group">
-							{store.schedules.map((date, index) => {
-								return (
-									<li className="list-group-item border-0 p-0" key={index}>
-										<h4>{date.date}</h4>
-									</li>
-								);
-							})}
+			<Table responsive striped bordered hover variant="dark">
+				{adminScheduler}
+			</Table>
+			<Modal className="modalChange" backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+				<ModalBody>
+					{store.scheduleToChange ? (
+						<ul className="list-group">
+							<li className="d-flex justify-content-center py-2">
+								<h3 className="text-center">{store.scheduleToChange["enterprise_name"]}</h3>
+							</li>
+							<li className="d-flex row list-group-item text-left text-capitalize">
+								<h3 className="col-2">Salas:</h3>
+								<select onChange={e => (scheduleSpaceIDToChange = e.target.value)} className="col-9">
+									{store.spaces.map(space => {
+										if (store.scheduleToChange["space_id"] == space["id"]) {
+											return (
+												<option selected key={space["id"]} value={space["id"]}>
+													{space["name"]}
+												</option>
+											);
+										} else {
+											return (
+												<option key={space["id"]} value={space["id"]}>
+													{space["name"]}
+												</option>
+											);
+										}
+									})}
+								</select>
+							</li>
+							<li className="d-flex row list-group-item text-left text-capitalize">
+								<h3 className="col-2">Fecha:</h3>
+								<input
+									onChange={e => (scheduleDateToChange = e.target.value)}
+									className="col-6"
+									type="date"
+									onKeyDown={e => e.preventDefault()}
+								/>
+								<h3 className="col-1 ml-3">H:</h3>
+								<select onChange={e => (scheduleDateHourToChange = e.target.value)} className="col-2">
+									{hoursOptions}
+								</select>
+							</li>
 						</ul>
-					</ModalBody>
-				) : (
-					<ModalBody>
-						<h1>No tienes suficientes horas disponibles! (PHONE NUMBER)</h1>
-					</ModalBody>
-				)}
+					) : (
+						""
+					)}
+				</ModalBody>
 				<ModalFooter className="m-auto">
 					<Button
 						color="primary"
-						onClick={() => {
-							actions.postSchedules();
-							setShow(!show);
-						}}>
+						onClick={
+							store.scheduleToChange
+								? () => {
+										actions.changeSchedule(
+											scheduleSpaceIDToChange,
+											scheduleDateToChange,
+											scheduleDateHourToChange
+										);
+										actions.changeSchedulePUT();
+								  }
+								: ""
+						}>
 						Confirmar
 					</Button>
-					<Button color="secondary" onClick={() => setShow(!show)}>
+					<Button
+						color="secondary"
+						onClick={() => {
+							setShow(!show);
+						}}>
 						Cancelar
 					</Button>
 				</ModalFooter>

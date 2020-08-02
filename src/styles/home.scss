@@ -140,6 +140,17 @@ Button{
     width: 8rem;
     text-align: center;
 }
+.modalChange {
+    position: relative;
+    overflow-y: auto;
+    max-width: 50rem;
+    max-height: 400px;
+    padding: 15px;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
