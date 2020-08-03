@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentDay: startOfDay(new Date()),
 			selectedCellHolder: [],
 			confirModal: false,
-			schedules: []
+			schedules: [],
+			enterprises: []
 		},
 
 		actions: {
@@ -20,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[3] });
+				setStore({ user: data[3], enterprises: data });
 			},
 
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
@@ -30,10 +31,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/" +
-					format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
 			) => {
-				let response = await fetch(url);
+				let response = await fetch(url + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString());
 				let data = await response.json();
 				setStore({ reserved: data });
 			},
