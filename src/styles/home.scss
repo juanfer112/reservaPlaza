@@ -216,3 +216,29 @@ Button{
     border-radius: 2%;
     color:white;
 }
+.month-popup{
+    position: absolute;
+    padding: 5px;
+    background:white;
+    border:2px solid skyblue;
+
+}
+.month-popup div{
+    padding: 0.3em;
+}
+.nav-month{
+    position: absolute;
+    top: 0.6em;
+    font-size: 0.6em;
+    right: 3px;
+
+}
+.editor-year{
+    max-width: 3.6em;
+}
+.label-month, .label-year{
+    font-size: 0.6em;
+}
+.label-month{
+    cursor: pointer;
+}

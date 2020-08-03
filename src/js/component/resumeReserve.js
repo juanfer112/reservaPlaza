@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
-import { NewDay } from "./newDay";
+import { MonthNav } from "./monthNav";
 import {
 	format,
 	addHours,
@@ -27,6 +27,7 @@ export const ResumeReserve = n => {
 	console.log(position);
 	var adminScheduler = [];
 	var currentDay = store.currentDay;
+	console.log(format(startOfMonth(currentDay), "i"));
 	var night = !store.night ? " d-none" : "";
 	const [show, setShow] = useState(false);
 	function toggle() {
@@ -55,8 +56,12 @@ export const ResumeReserve = n => {
 	});
 
 	var blanks = [];
-	for (let i = 0; i < format(currentDay, "i") - 1; i++) {
-		blanks.push(<td className="empty-slot">{""}</td>);
+	for (let i = 0; i < format(startOfMonth(currentDay), "i") - 1; i++) {
+		blanks.push(
+			<td key={i * 20} className="empty-slot">
+				{""}
+			</td>
+		);
 	}
 	console.log(blanks, format(currentDay, "i"));
 
@@ -75,10 +80,8 @@ export const ResumeReserve = n => {
 	var rows = [];
 
 	totalSlots.forEach((row, i) => {
-		console.log(totalSlots);
 		if (i % 7 != 0) {
 			cells.push(row);
-			console.log(cells);
 		} else {
 			let insertRow = cells.slice();
 			rows.push(insertRow);
@@ -100,7 +103,11 @@ export const ResumeReserve = n => {
 			<div className="calendar-container">
 				<table className="calendar">
 					<thead>
-						<tr className="calendar-header" />
+						<tr className="calendar-header">
+							<td colSpan="5">
+								<MonthNav />
+							</td>
+						</tr>
 					</thead>
 					<tbody>
 						<tr>{weekdays}</tr>
