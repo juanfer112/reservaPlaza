@@ -6,14 +6,10 @@ import "../../styles/home.scss";
 
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
+	/*función para modificar y asignar posiciones de las keys cuando realizo un mapeo de elementos*/
 	const sortStringKeys = (a, b) => (a[4] < b[0] ? 1 : -1);
+	/*--------------------------------------------------------------------------------------------*/
 	var newArray = [];
-
-	var obj = Object.values(store.user).map((items, index) => {
-		console.log(items);
-		return <div key={index}>{items}</div>;
-	});
-	console.log(obj);
 
 	return (
 		<div className="container mt-5">
