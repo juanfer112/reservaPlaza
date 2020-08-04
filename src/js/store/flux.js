@@ -145,24 +145,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			}
-			/*valArray: item => {
-				const valArray = [];
-				Object.keys(item).map(key => {
-					if (!Array.isArray(item[key]) && item[key].slice(0, 4) !== "http") {
-						valArray.push(item[key]);
-					}
-				});
-				return valArray;
-			},*/
-			/*keyArray: item => {
-				const keyArray = [];
-				Object.keys(item).map(key => {
-					if (!Array.isArray(item[key]) && item[key].slice(0, 4) !== "http") {
-						keyArray.push(getActions().toUpp(key));
-					}
-				});
-                return keyArray;
-            }*/
 		}
 	};
 };
