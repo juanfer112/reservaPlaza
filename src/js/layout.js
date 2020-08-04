@@ -26,10 +26,11 @@ export const Layout = () => {
 								<Link to={"/login"}>LOGIN!</Link>
 								<Link to={"/reserva"}>RESERVA!</Link>
 								<Link to={"/balance"}>BALANCE!</Link>
+								<Link to={"/profile"}>PROFILE!</Link>
 								<Link to={"/listOfUsers"}>USER LIST!</Link>
 							</>
 						</Route>
-						<Route path="/profile/:theid" component={ProfileUsers} />
+						<Route path="/profile" component={ProfileUsers} />
 						<Route path="/login" component={Login} />
 						<Route path="/reserva" component={Calendar} />
 						<Route path="/balance" component={Balance} />
