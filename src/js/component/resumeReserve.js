@@ -1,49 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
 import {
 	format,
-	addHours,
-	subHours,
 	addMonths,
 	startOfWeek,
-	endOfDay,
-	addDays,
-	subDays,
-	addWeeks,
-	subWeeks,
 	startOfDay,
 	isFirstDayOfMonth,
 	startOfMonth,
-	getDaysInMonth
+	getDaysInMonth,
+	getMonth
 } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
-	var position = n.style;
-	console.log(position);
-	var adminScheduler = [];
-	var currentDay = store.currentDay;
-	console.log(format(startOfMonth(currentDay), "i"));
-	var night = !store.night ? " d-none" : "";
-	const [show, setShow] = useState(false);
-	function toggle() {
-		setShow(!show);
-	}
-
-	const dayofweek = () => {
-		var dayNumber = format(currentDay, "d");
-		var month = format(currentDay, "LL").toString();
-		console.log(startOfMonth(currentDay));
-		var dayAndMonth = dayNumber + "/" + month;
-		var dayNameIndex = format(currentDay, "i").toString();
-		const arrayDayNames = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
-		console.log("days:", arrayDayNames[dayNameIndex - 1] + dayAndMonth);
-		return arrayDayNames[dayNameIndex - 1];
-	};
+	const dataPickerdate = n.dataPickerdate;
+	const currentDay = store.currentDay;
+	const currentMonth = getMonth(currentDay, "M");
+	const selectedMonth = getMonth(dataPickerdate, "M");
 
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
 
@@ -56,18 +32,18 @@ export const ResumeReserve = n => {
 	});
 
 	var blanks = [];
-	for (let i = 0; i < format(startOfMonth(currentDay), "i") - 1; i++) {
+	for (let i = 0; i < format(startOfMonth(dataPickerdate), "i") - 1; i++) {
 		blanks.push(
 			<td key={i * 20} className="empty-slot">
 				{""}
 			</td>
 		);
 	}
-	console.log(blanks, format(currentDay, "i"));
 
 	var daysInMonth = [];
-	for (let d = 1; d <= getDaysInMonth(currentDay); d++) {
-		let className = d == format(currentDay, "d") ? "days current-day" : "days";
+	for (let d = 1; d <= getDaysInMonth(dataPickerdate); d++) {
+		let className =
+			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
 		daysInMonth.push(
 			<td key={d} className={className}>
 				<span>{d}</span>
@@ -99,22 +75,9 @@ export const ResumeReserve = n => {
 	});
 
 	return (
-		<>
-			<div className="calendar-container">
-				<table className="calendar">
-					<thead>
-						<tr className="calendar-header">
-							<td colSpan="5">
-								<MonthNav />
-							</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>{weekdays}</tr>
-						{trElems}
-					</tbody>
-				</table>
-			</div>
-		</>
+		<tbody>
+			<tr>{weekdays}</tr>
+			{trElems}
+		</tbody>
 	);
 };

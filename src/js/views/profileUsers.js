@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Profile } from "../component/profile";
 import { Navbar } from "../component/navbar";
 import { ResumeReserve } from "../component/resumeReserve";
+import { MonthNav } from "../component/monthNav";
 import "../../styles/home.scss";
 
 export const ProfileUsers = () => {
@@ -11,6 +12,7 @@ export const ProfileUsers = () => {
 		position: "relative",
 		margin: "50px auto"
 	};
+
 	return (
 		<div>
 			<div>
@@ -20,7 +22,7 @@ export const ProfileUsers = () => {
 				<Profile />
 			</div>
 			<div>
-				<ResumeReserve style={style} />
+				<MonthNav style={style} />
 			</div>
 		</div>
 	);

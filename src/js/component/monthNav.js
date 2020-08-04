@@ -1,43 +1,28 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
-import { NewDay } from "./newDay";
+import { ResumeReserve } from "./resumeReserve";
 import {
 	format,
-	addHours,
-	subHours,
 	addMonths,
-	startOfWeek,
-	endOfDay,
-	addDays,
-	subDays,
-	addWeeks,
-	subWeeks,
 	startOfDay,
 	isFirstDayOfMonth,
 	startOfMonth,
 	getDaysInMonth,
-	getMonth
+	getMonth,
+	setMonth
 } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
-export const MonthNav = n => {
+export const MonthNav = () => {
 	const { actions, store } = useContext(Context);
-	var position = n.style;
-	console.log(position);
-	var adminScheduler = [];
-	var currentDay = store.currentDay;
-	console.log(format(startOfMonth(currentDay), "i"));
-	var night = !store.night ? " d-none" : "";
-	const [showMonth, showMonthpopup] = useState(false);
+	const currentDay = store.currentDay;
+	const currentMonth = getMonth(currentDay, "M");
+	const [showMonth, setMonthDatapicker] = useState(currentMonth);
+	const [showListMonth, showMonthpopup] = useState(false);
+	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
 	const [show, setShow] = useState(false);
-	function toggle() {
-		setShow(!show);
-	}
-	const month = letter => {
-		return format(currentDay, letter);
-	};
+
 	const arrayMonthsNames = [
 		"Enero ",
 		"Febrero ",
@@ -56,12 +41,29 @@ export const MonthNav = n => {
 	const monthsTranslator = n => {
 		return arrayMonthsNames[n - 1];
 	};
+	const month = (letter = "M") => {
+		return monthsTranslator(format(currentDay, letter));
+	};
+
+	const setMonths = (e, month) => {
+		let monthNo = arrayMonthsNames.indexOf(month);
+		let resultcurrentmonth = getMonth(currentDay, "M");
+
+		setMonthDatapicker(monthNo);
+		setDataPickerdate(addMonths(currentDay, monthNo - resultcurrentmonth));
+	};
 
 	const selectMonthList = () => {
 		let popup = arrayMonthsNames.map(month => {
 			return (
 				<div key={month}>
-					<a href="#">{month}</a>
+					<a
+						href="#"
+						onClick={e => {
+							setMonths(e, month);
+						}}>
+						{month}
+					</a>
 				</div>
 			);
 		});
@@ -70,11 +72,23 @@ export const MonthNav = n => {
 
 	return (
 		<>
-			<span className="label-month" onClick={e => showMonthpopup(!showMonth)}>
-				{monthsTranslator(month("M"))}
-
-				{showMonth ? <>{selectMonthList()}</> : <>nada</>}
-			</span>
+			<div className="calendar-container">
+				<table className="calendar">
+					<thead>
+						<tr className="calendar-header">
+							<td colSpan="5">
+								<span className="label-month" onClick={e => showMonthpopup(!showListMonth)}>
+									{arrayMonthsNames[showMonth]}
+									{"  "}
+									2020
+									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
+								</span>
+							</td>
+						</tr>
+					</thead>
+					<ResumeReserve dataPickerdate={dataPickerdate} currentMonth={currentMonth} />
+				</table>
+			</div>
 		</>
 	);
 };
