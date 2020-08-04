@@ -18,16 +18,21 @@ export const NewDay = n => {
 			);
 		} else {
 			const id = format(day, "yyyy-MM-dd HH:mm:ss").toString();
-			var name = x < 7 ? "cell" + night + actions.reservedDate(id) : "cell" + actions.reservedDate(id);
+			var className = x < 7 ? "cell" + night + actions.reservedDate(id) : "cell" + actions.reservedDate(id);
 			holder.push(
 				<div
-					className={name}
+					className={className}
 					key={x}
 					id={id}
 					onClick={e => {
-						if (e.target.className != "cell bg-danger") {
-							actions.addToSchedules(id);
-							e.target.className += "bg-success";
+						if (e.target.className != "cell reserved") {
+							if (e.target.className == "cell") {
+								actions.addSchedules(id);
+								e.target.className += " bg-success";
+							} else {
+								e.target.className = "cell";
+								actions.removeSchedules(id);
+							}
 						}
 					}}
 				/>
@@ -36,5 +41,5 @@ export const NewDay = n => {
 		}
 	}
 
-	return <div className="day col  p-0">{holder}</div>;
+	return <div className="day col p-0">{holder}</div>;
 };
