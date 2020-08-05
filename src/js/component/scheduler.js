@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { NewDay } from "./newDay";
 import { Context } from "../store/appContext";
 import { HoursColumn } from "./hoursColumn";

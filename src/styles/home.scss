@@ -1,4 +1,4 @@
-i{
+i, u{
     cursor: pointer;
 }
 .navbar{
@@ -25,6 +25,9 @@ i{
 .logo, .perfil{
     width: 4rem;
     height: 4rem;
+}
+.avatarProfile{
+    height: 8vw;
 }
 .perfil{
     cursor: pointer;
@@ -112,9 +115,7 @@ button{
     max-width: 12.5rem;
 }
 .title{
-    border-top: solid 0.05rem #dee2e6;
-    border-bottom: solid 0.05rem #dee2e6;
-    border-right: solid 0.05rem #dee2e6;
+    border: solid 0.05rem #dee2e6;
     font-size: 1.4rem;
     height: 2rem;
 }
@@ -139,6 +140,46 @@ Button{
     height: 2rem;
     width: 8rem;
     text-align: center;
+}
+.modalChange {
+    position: relative;
+    overflow-y: auto;
+    max-width: 50rem;
+    max-height: 400px;
+    padding: 15px;
+}
+.thSpace{
+    z-index: 1;
+    position: sticky; 
+    top: 0; 
+    background-clip: padding-box;
+}
+.tHours{
+    z-index: 0;
+    position: sticky; 
+    left: 0; 
+    background-clip: padding-box;
+}
+td{
+    z-index: -1;
+    background-clip: padding-box;
+}
+.table-responsive{
+    border-right: solid 0.05rem #dee2e6;
+}
+Table{
+    border-collapse: separate;
+    border-spacing: 0;    
+}
+.thFirst{
+    position: sticky; 
+    left: 0; 
+    top: 0;
+    background-clip: padding-box;
+    z-index: 2;
+}
+.container-balance{
+    overflow: auto;
 }
 @media screen and (min-width: 1000px){
     body{

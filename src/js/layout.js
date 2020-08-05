@@ -6,6 +6,7 @@ import { ProfileUsers } from "./views/profileUsers";
 import { Login } from "./views/login";
 import { Calendar } from "./views/calendar";
 import { Balance } from "./views/balance";
+import { ListOfUsers } from "./views/listOfUsers";
 import injectContext from "./store/appContext";
 import { Link } from "react-router-dom";
 
@@ -26,12 +27,14 @@ export const Layout = () => {
 								<Link to={"/reserva"}>RESERVA!</Link>
 								<Link to={"/balance"}>BALANCE!</Link>
 								<Link to={"/profile"}>PROFILE!</Link>
+								<Link to={"/listOfUsers"}>USER LIST!</Link>
 							</>
 						</Route>
 						<Route path="/profile" component={ProfileUsers} />
 						<Route path="/login" component={Login} />
 						<Route path="/reserva" component={Calendar} />
 						<Route path="/balance" component={Balance} />
+						<Route path="/listOfUsers" component={ListOfUsers} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
 				</ScrollToTop>

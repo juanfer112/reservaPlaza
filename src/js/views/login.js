@@ -11,13 +11,6 @@ export const Login = () => {
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
 
-	useEffect(
-		() => {
-			actions.checkUser(user, password);
-		},
-		[user, password]
-	);
-
 	return (
 		<div className="container d-flex justify-content-center">
 			<div className="rowLogin">

@@ -5,22 +5,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			user: {},
 			week: [],
-			schedules: [],
 			reserved: [],
 			spaces: [],
 			night: false,
 			currentDay: startOfDay(new Date()),
 			selectedCellHolder: [],
-			confirModal: false
+			confirModal: false,
+			schedules: [],
+			enterprises: []
 		},
 
 		actions: {
 			pullPeoples: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
+				url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/enterprises"
 			) => {
+				const store = getStore();
+
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[3] });
+				setStore({ user: data[3], enterprises: data });
+
 			},
 
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
@@ -30,10 +34,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/" +
-					format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
 			) => {
-				let response = await fetch(url);
+				let response = await fetch(url + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString());
 				let data = await response.json();
 				setStore({ reserved: data });
 			},
@@ -52,6 +55,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					window.location.reload(false);
 				}
+			},
+			changeSchedulePUT: async (
+				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
+			) => {
+				const store = getStore();
+				let response = await fetch(url + store.scheduleToChange["id"], {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(store.scheduleToChange)
+				});
+				window.location.reload(false);
 			},
 
 			cellID: day => {
@@ -73,16 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var dayNameIndex = format(day, "i").toString();
 				const arrayDayNames = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
 				return arrayDayNames[dayNameIndex - 1] + dayAndMonth;
-			},
-
-			addHours: (hours, name) => {
-				const store = getStore();
-				const partners = store.partners;
-				partners.map(item => {
-					if (item.user == name) {
-						setStore((item.hours = item.hours + hours));
-					}
-				});
 			},
 
 			addSchedules: date => {
@@ -183,15 +189,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			changeSchedule: cellId => {
+			selectScheduleToChange: (cellId, id) => {
 				const store = getStore();
-				var id = cellId.slice(0, 1);
-				var date = cellId.slice(2, cellId.length);
+				var id = id.toString();
+				var date = cellId;
 				store.reserved.map(obj => {
-					if (new Date(date).toString() == new Date(obj["date"]).toString() && obj["space_id"] == id) {
-						console.log(obj);
+					if (
+						new Date(date).toString() == subHours(new Date(obj["date"]), 2).toString() &&
+						obj["space_id"].toString() == id
+					) {
+						setStore({ scheduleToChange: obj });
 					}
 				});
+			},
+
+			changeSchedule: (scheduleSpaceIDToChange, scheduleDateToChange, scheduleDateHourToChange) => {
+				const store = getStore();
+				let newScheduleToChange = store.scheduleToChange;
+				let space_id = parseInt(scheduleSpaceIDToChange);
+				let date = scheduleDateToChange + " " + scheduleDateHourToChange;
+				let space_name = "";
+
+				store.spaces.map(currentSpaceName => {
+					if (currentSpaceName["id"] == space_id) {
+						space_name = currentSpaceName["name"];
+					}
+				});
+				space_id ? (newScheduleToChange.space_id = space_id) : "";
+				date ? (newScheduleToChange.date = date) : "";
+				space_name ? (newScheduleToChange.space_name = space_name) : "";
+				setStore({ scheduleToChange: newScheduleToChange });
 			}
 		}
 	};

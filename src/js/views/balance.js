@@ -11,39 +11,23 @@ export const Balance = () => {
 	return (
 		<>
 			<Navbar />
-			<div className="container-fluid px-5 ml-auto ">
-				<p className="nightHours d-flex justify-content-center my-3">
-					<p>
-						{" "}
-						Pincha
-						<i className="text-primary" onClick={() => actions.changeNight()}>
-							{" "}
-							aqui{" "}
-						</i>
-						para ver todas las horas!
-					</p>
-				</p>
-				<div className="d-flex align-items-center justify-content-between w-100 my-3">
-					<div className="d-flex">
-						<i
-							className="fa fa-arrow-left mx-3 mb-1"
-							aria-hidden="true"
-							onClick={() => actions.changeWeekOrDay("beforeDay")}
-						/>
-						<p>{format(subDays(currentDay, 1), "dd/MM")}</p>
-					</div>
-					<h1>{format(currentDay, "dd/MM")}</h1>
-					<div className="d-flex">
-						<p>{format(addDays(currentDay, 1), "dd/MM")}</p>
-						<i
-							className="fa fa-arrow-right mx-3 mb-1"
-							aria-hidden="true"
-							onClick={() => actions.changeWeekOrDay("afterDay")}
-						/>
-					</div>
-				</div>
-				{<AdminBalance day={currentDay} />}
+
+			<div className="d-flex justify-content-between mt-3">
+				<i
+					className="fa fa-arrow-left mx-3 mb-1"
+					aria-hidden="true"
+					onClick={() => actions.changeWeekOrDay("beforeWeek")}
+				/>
+				<i
+					className="fa fa-arrow-right mx-3 mb-1"
+					aria-hidden="true"
+					onClick={() => actions.changeWeekOrDay("afterWeek")}
+				/>
 			</div>
+
+			{store.week.map(item => {
+				return <AdminBalance key={item} day={item} />;
+			})}
 		</>
 	);
 };
