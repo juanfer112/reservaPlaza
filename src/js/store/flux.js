@@ -17,23 +17,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			pullPeoples: async (
-				url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io/enterprises"
+				url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/enterprises"
 			) => {
 				const store = getStore();
 
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[3], enterprises: data });
+				setStore({ user: data[0], enterprises: data });
 			},
 
-			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
+			pullSpaces: async (url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/spaces") => {
 				let response = await fetch(url);
 				let data = await response.json();
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 
 			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
+				url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/schedules/"
 			) => {
 				let response = await fetch(url + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString());
 				let data = await response.json();
@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			postSchedules: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
+				url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/schedules"
 			) => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			changeSchedulePUT: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
+				url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/schedules/"
 			) => {
 				const store = getStore();
 				let response = await fetch(url + store.scheduleToChange["id"], {
