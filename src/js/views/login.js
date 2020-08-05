@@ -46,10 +46,7 @@ export const Login = () => {
 									className="btn btn-primary mx-auto "
 									onClick={() => {
 										actions.checkUser(user, password);
-										if (user != "" && password != "") {
-											actions.isLogged();
-										}
-										console.log(user, password);
+										actions.isLogged();
 									}}>
 									Login
 								</button>
