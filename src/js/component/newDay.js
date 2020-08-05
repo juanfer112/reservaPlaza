@@ -18,10 +18,10 @@ export const NewDay = n => {
 			);
 		} else {
 			const id = format(day, "yyyy-MM-dd HH:mm:ss").toString();
-			var name = x < 7 ? "cell" + night + actions.reservedDate(id) : "cell" + actions.reservedDate(id);
+			var className = x < 7 ? "cell" + night + actions.reservedDate(id) : "cell" + actions.reservedDate(id);
 			holder.push(
 				<div
-					className={name}
+					className={className}
 					key={x}
 					id={id}
 					onClick={e => {
@@ -41,5 +41,5 @@ export const NewDay = n => {
 		}
 	}
 
-	return <div className="day col  p-0">{holder}</div>;
+	return <div className="day col p-0">{holder}</div>;
 };
