@@ -17,7 +17,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-
 			checkUser: async (email, password) => {
 				let response = await fetch(`${url}/login`, {
 					method: "POST",
@@ -40,7 +39,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			isLogged: async () => {
 				const store = getStore();
-
 				if (store.token != "") {
 					let response = await fetch(`${url}/protected`, {
 						method: "GET",
@@ -75,15 +73,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullScheduler: async () => {
-         	/*let response = await fetch(`${url}/schedules`);*//*esta linea hay que ajustar a la siguiente liena de codigo*/
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
-				let response = await fetch(url + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString());
+				/*let response = await fetch(`${url}/schedules`);*/ /*esta linea hay que ajustar a la siguiente liena de codigo*/
+				let response = await fetch(
+					`${url}/schedules/` + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+				);
 				let data = await response.json();
 				setStore({ reserved: data });
 			},
 
 			postSchedules: async () => {
-				const store = getStore();      
+				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
 					let response = await fetch(`${url}/schedules`, {
 						method: "POST",
@@ -92,15 +91,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(store.schedules)
 					});
-                    window.location.reload(false);
-                }
-		},
-			
-			changeSchedulePUT: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
-			) => {
+					window.location.reload(false);
+				}
+			},
+
+			changeSchedulePUT: async () => {
 				const store = getStore();
-				let response = await fetch(url + store.scheduleToChange["id"], {
+				let response = await fetch(`${url}/schedules/` + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
