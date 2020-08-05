@@ -24,7 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let response = await fetch(url);
 				let data = await response.json();
 				setStore({ user: data[3], enterprises: data });
-
 			},
 
 			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
