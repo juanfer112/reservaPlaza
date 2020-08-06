@@ -16,11 +16,12 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
-	const dataPickerdate = n.dataPickerdate;
+	const dataMonthPickerdate = n.dataMonthPickerdate;
+	const updatedDate = n.updatedDate;
 	const currentDay = store.currentDay;
 	const currentMonth = getMonth(currentDay, "M");
-	const selectedMonth = getMonth(dataPickerdate, "M");
-
+	const selectedMonth = getMonth(dataMonthPickerdate, "M");
+	console.log("newupdate:", updatedDate);
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
 
 	const weekdays = arrayDay.map(day => {
@@ -32,7 +33,8 @@ export const ResumeReserve = n => {
 	});
 
 	var blanks = [];
-	for (let i = 0; i < format(startOfMonth(dataPickerdate), "i") - 1; i++) {
+	for (let i = 0; i < format(startOfMonth(dataMonthPickerdate), "i") - 1; i++) {
+		console.log("formatstartofmonth:", startOfMonth(updatedDate));
 		blanks.push(
 			<td key={i * 20} className="empty-slot">
 				{""}
@@ -41,7 +43,7 @@ export const ResumeReserve = n => {
 	}
 
 	var daysInMonth = [];
-	for (let d = 1; d <= getDaysInMonth(dataPickerdate); d++) {
+	for (let d = 1; d <= getDaysInMonth(dataMonthPickerdate); d++) {
 		let className =
 			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
 		daysInMonth.push(
