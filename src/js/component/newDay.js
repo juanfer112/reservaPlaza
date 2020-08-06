@@ -28,6 +28,7 @@ export const NewDay = n => {
 						if (e.target.className != "cell reserved") {
 							if (e.target.className == "cell") {
 								actions.addSchedules(id);
+								console.log("id:", id);
 								e.target.className += " bg-success";
 							} else {
 								e.target.className = "cell";

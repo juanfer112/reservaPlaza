@@ -10,7 +10,8 @@ import {
 	startOfMonth,
 	getDaysInMonth,
 	getMonth,
-	setMonth
+	setMonth,
+	getYear
 } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
@@ -80,9 +81,15 @@ export const MonthNav = () => {
 								<span className="label-month" onClick={e => showMonthpopup(!showListMonth)}>
 									{arrayMonthsNames[showMonth]}
 									{"  "}
-									2020
+
 									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
 								</span>
+								<input
+									defaultValue={getYear(currentDay)}
+									className="editor-year"
+									type="number"
+									placeholder="year"
+								/>
 							</td>
 						</tr>
 					</thead>

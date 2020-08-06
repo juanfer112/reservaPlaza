@@ -91,9 +91,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addSchedules: date => {
+				console.log("date:", date);
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
+					console.log("sched:", sched);
 					check.push(sched["date"]);
 				});
 				if (!check.includes(date)) {
@@ -119,6 +121,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			reservedDate: (cellDate, spaceID) => {
+				console.log("cellDate:", cellDate);
+				console.log("spaceID:", spaceID);
 				const store = getStore();
 				var reserved = [];
 				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
