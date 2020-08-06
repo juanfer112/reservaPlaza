@@ -11,13 +11,6 @@ export const Login = () => {
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
 
-	useEffect(
-		() => {
-			actions.checkUser(user, password);
-		},
-		[user, password]
-	);
-
 	return (
 		<div className="container d-flex justify-content-center">
 			<div className="rowLogin">
@@ -26,10 +19,20 @@ export const Login = () => {
 					{!forgot ? (
 						<div className="card card-body my-3 p-5">
 							<div className=" input-group">
-								<input className="form-control" type="text" placeholder="USUARIO" />
+								<input
+									className="form-control"
+									type="email"
+									placeholder="USUARIO"
+									onChange={e => setUser((user = e.target.value))}
+								/>
 							</div>
 							<div className="input-group my-2">
-								<input className="form-control" type="password" placeholder="CONTRASEÑA" />
+								<input
+									className="form-control"
+									type="password"
+									placeholder="CONTRASEÑA"
+									onChange={e => setPassword((password = e.target.value))}
+								/>
 							</div>
 							<a
 								onClick={() => {
@@ -38,20 +41,15 @@ export const Login = () => {
 								¿Olvido su contraseña?
 							</a>
 							<div className="text-center mt-4">
-								{store.validation ? (
-									<Link to={"/profile/" + user.toLowerCase()}>
-										<button type="button" className="btn btn-primary mx-auto ">
-											Login
-										</button>
-									</Link>
-								) : (
-									<button
-										type="button"
-										className="btn btn-primary mx-auto "
-										onClick={() => alert("Revisa tu usuario o contraseña")}>
-										Login
-									</button>
-								)}
+								<button
+									type="button"
+									className="btn btn-primary mx-auto "
+									onClick={() => {
+										actions.checkUser(user, password);
+										actions.isLogged();
+									}}>
+									Login
+								</button>
 							</div>
 						</div>
 					) : (

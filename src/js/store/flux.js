@@ -1,6 +1,7 @@
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
+	const url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io";
 	return {
 		store: {
 			user: {},
@@ -16,11 +17,66 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			pullPeoples: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/enterprises"
-			) => {
-				let response = await fetch(url);
-				let data = await response.json();
+			pull: async (endpoint, data = null) => {
+				const store = getStore();
+				if (data == null) {
+					data = {};
+				}
+				data.headers = {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*",
+					Authorization: "Bearer " + store.token
+				};
+				let response = await fetch(
+					"https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/" + endpoint,
+					data
+				);
+				let response_json = await response.json();
+				if (!response.ok) {
+					let msg = response_json.msg ? response_json.msg : response_json.message;
+					alert(msg);
+				} else if (data && response.ok) {
+					window.location.reload(false);
+				}
+				return response_json;
+			},
+
+			checkUser: async (email, password) => {
+				let data = await getActions().pull("login", {
+					method: "POST",
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
+				});
+				if (typeof data.access_token != "undefined") {
+					setStore({ token: data.access_token });
+					sessionStorage.setItem("access_token", data.access_token);
+				} else {
+					return "no se ha generado un token";
+				}
+			},
+
+			isLogged: async () => {
+				const store = getStore();
+				if (store.token != "") {
+					let data = await getActions().pull("protected", {
+						method: "GET"
+					});
+				} else {
+					JSON.stringify({
+						msg: "no hay token"
+					});
+				}
+			},
+			logout: () => {
+				const store = getStore();
+				setStore({ token: null });
+				sessionStorage.setItem("access_token", null);
+			},
+
+			pullEnterprises: async () => {
+				let data = await getActions().pull("enterprises");
 				setStore({ user: data[0], enterprises: data });
 			},
 
@@ -34,24 +90,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 				);
 				setStore({ reserved: data });
-			},
-
-			pull: async (endpoint, data = null) => {
-				data.headers = {
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*"
-				};
-				let response = await fetch(
-					"https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/" + endpoint,
-					data
-				);
-				let response_json = await response.json();
-				if (!response.ok) {
-					alert(response_json.message);
-				} else if (data && response.ok) {
-					window.location.reload(false);
-				}
-				return response_json;
 			},
 
 			postSchedules: async () => {
@@ -72,11 +110,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			changeSchedulePUT: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
-			) => {
+			changeSchedulePUT: async () => {
 				const store = getStore();
-				let response = await fetch(url + store.scheduleToChange["id"], {
+				let response = await getActions().pull("schedules" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
