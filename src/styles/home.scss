@@ -1,4 +1,4 @@
-i, u{
+i, u, td.reserved{
     cursor: pointer;
 }
 .navbar{
@@ -53,17 +53,12 @@ input:focus{
     outline: none;
 }
 input::placeholder{
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 .scheduler-title{
     font-size: 2rem;
     margin-left: 1rem;
     color: #35553e;
-}
-button{
-    background-color: red;
-    width: 30px;
-    height: 30px;
 }
 .fa{
     font-size: 3rem;
@@ -134,8 +129,8 @@ button{
     border-right: solid 0.05rem #dee2e6;
 }
 Button{
-    height: 2rem;
-    width: 8rem;
+    min-height: 2rem;
+    min-width: 8rem;
     text-align: center;
 }
 .modalChange {

@@ -6,9 +6,6 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 export const ConfirModal = () => {
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
-	function toggle() {
-		setShow(!show);
-	}
 
 	return (
 		<>

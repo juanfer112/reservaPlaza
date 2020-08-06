@@ -21,47 +21,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				let response = await fetch(url);
 				let data = await response.json();
-				setStore({ user: data[3], enterprises: data });
+				setStore({ user: data[0], enterprises: data });
 			},
 
-			pullSpaces: async (url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/spaces") => {
-				let response = await fetch(url);
-				let data = await response.json();
+			pullSpaces: async () => {
+				let data = await getActions().pull("spaces");
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 
-			pullScheduler: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
-			) => {
-				let response = await fetch(url + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString());
-				let data = await response.json();
+			pullScheduler: async () => {
+				let data = await getActions().pull(
+					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+				);
 				setStore({ reserved: data });
 			},
 
-			postSchedules: async (
-				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules"
-			) => {
-				const store = getStore();
-				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
-					let response = await fetch(url, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(store.schedules)
-					});
+			pull: async (endpoint, data = null) => {
+				data.headers = {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				};
+				let response = await fetch(
+					"https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/" + endpoint,
+					data
+				);
+				let response_json = await response.json();
+				if (!response.ok) {
+					alert(response_json.message);
+				} else if (data && response.ok) {
 					window.location.reload(false);
 				}
+				return response_json;
 			},
+
+			postSchedules: async () => {
+				const store = getStore();
+				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
+					let response_json = await getActions().pull("schedules", {
+						method: "POST",
+						headers: {},
+						body: JSON.stringify(store.schedules)
+					});
+				}
+			},
+			postEnterprises: async body => {
+				let response_json = await getActions().pull("enterprises", {
+					method: "POST",
+					headers: {},
+					body: JSON.stringify(body)
+				});
+			},
+
 			changeSchedulePUT: async (
 				url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/schedules/"
 			) => {
 				const store = getStore();
 				let response = await fetch(url + store.scheduleToChange["id"], {
 					method: "PUT",
-					headers: {
-						"Content-Type": "application/json"
-					},
+					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
 				});
 				window.location.reload(false);
