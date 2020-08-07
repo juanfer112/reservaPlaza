@@ -20,17 +20,14 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 export const MonthNav = () => {
 	const { actions, store } = useContext(Context);
 	const currentDay = store.currentDay;
-	console.log("currentDay:", format(currentDay, "d"));
 	const currentMonth = getMonth(currentDay, "M");
+
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showYear, setYearDatapicker] = useState(getYear(currentDay));
-	console.log("showYear:", showYear);
-
 	const [showListMonth, showMonthpopup] = useState(false);
 	const [dataMonthPickerdate, setDataMonthPickerdate] = useState(currentDay);
 	const [show, setShow] = useState(false);
-	var updatedDate = set(currentDay, { year: showYear, month: showMonth, date: format(currentDay, "d") });
-
+	const updatedDate = set(currentDay, { year: showYear, month: showMonth, date: format(currentDay, "d") });
 	const arrayMonthsNames = [
 		"Enero ",
 		"Febrero ",
@@ -56,15 +53,11 @@ export const MonthNav = () => {
 	const setMonths = (e, month) => {
 		let monthNo = arrayMonthsNames.indexOf(month);
 		let resultcurrentmonth = getMonth(currentDay, "M");
-
 		setMonthDatapicker(monthNo);
-		setDataMonthPickerdate(addMonths(updatedDate, monthNo - resultcurrentmonth));
 	};
 
 	const setYear = e => {
-		console.log(e.target.value);
-
-		setYearDatapicker(getYear(new Date(e.target.value, 7, 6)));
+		setYearDatapicker(getYear(new Date(e.target.value, showMonth, format(currentDay, "d"))));
 	};
 
 	const selectMonthList = () => {
@@ -103,7 +96,6 @@ export const MonthNav = () => {
 									type="number"
 									placeholder="year"
 									onChange={e => {
-										console.log(e.target.value);
 										setYear(e);
 									}}
 									value={showYear}
@@ -115,6 +107,7 @@ export const MonthNav = () => {
 						dataMonthPickerdate={dataMonthPickerdate}
 						currentMonth={currentMonth}
 						updatedDate={updatedDate}
+						showMonth={showMonth}
 					/>
 				</table>
 			</div>
