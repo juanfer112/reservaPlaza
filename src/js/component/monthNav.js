@@ -29,22 +29,25 @@ export const MonthNav = () => {
 		"Noviembre ",
 		"Diciembre "
 	];
+	/*traductor de meses de ingles a español de los meses renderizados*/
 
 	const monthsTranslator = n => {
 		return arrayMonthsNames[n - 1];
 	};
+
 	const month = (letter = "M") => {
 		return monthsTranslator(format(currentDay, letter));
 	};
-
+	/*Seteo de meses en listado*/
 	const setMonths = (e, month) => {
 		let monthNo = arrayMonthsNames.indexOf(month);
 		setMonthDatapicker(monthNo);
 	};
+	/*seteo de año en la cabecera*/
 	const setYear = e => {
 		setYearDatapicker(getYear(new Date(e.target.value, showMonth, format(currentDay, "d"))));
 	};
-
+	/*Seleccion de mes del año en lista menu*/
 	const selectMonthList = () => {
 		let popup = arrayMonthsNames.map(month => {
 			return (
