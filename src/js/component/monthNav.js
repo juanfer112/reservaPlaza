@@ -21,9 +21,9 @@ export const MonthNav = () => {
 	const { actions, store } = useContext(Context);
 	const currentDay = store.currentDay;
 	const currentMonth = getMonth(currentDay, "M");
-
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showYear, setYearDatapicker] = useState(getYear(currentDay));
+
 	const [showListMonth, showMonthpopup] = useState(false);
 	const [dataMonthPickerdate, setDataMonthPickerdate] = useState(currentDay);
 	const [show, setShow] = useState(false);
@@ -52,10 +52,8 @@ export const MonthNav = () => {
 
 	const setMonths = (e, month) => {
 		let monthNo = arrayMonthsNames.indexOf(month);
-		let resultcurrentmonth = getMonth(currentDay, "M");
 		setMonthDatapicker(monthNo);
 	};
-
 	const setYear = e => {
 		setYearDatapicker(getYear(new Date(e.target.value, showMonth, format(currentDay, "d"))));
 	};
@@ -108,6 +106,7 @@ export const MonthNav = () => {
 						currentMonth={currentMonth}
 						updatedDate={updatedDate}
 						showMonth={showMonth}
+						showYear={showYear}
 					/>
 				</table>
 			</div>

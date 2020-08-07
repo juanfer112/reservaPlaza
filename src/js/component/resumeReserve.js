@@ -10,7 +10,8 @@ import {
 	isFirstDayOfMonth,
 	startOfMonth,
 	getDaysInMonth,
-	getMonth
+	getMonth,
+	getYear
 } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
@@ -18,12 +19,10 @@ export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
 	const dataMonthPickerdate = n.dataMonthPickerdate;
 	const selectedMonth = n.showMonth;
+	const selectedYear = n.showYear;
 	const updatedDate = n.updatedDate;
 	const currentDay = store.currentDay;
 	const currentMonth = n.currentMonth;
-	console.log("currentMonth:", currentMonth);
-
-	console.log("selectedMonth:", selectedMonth);
 
 	/*renderizado de los dias de la semana*/
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
@@ -48,7 +47,9 @@ export const ResumeReserve = n => {
 	var daysInMonth = [];
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
 		let className =
-			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
+			d == format(currentDay, "d") && selectedMonth == currentMonth && selectedYear == getYear(currentDay)
+				? "days current-day"
+				: "days";
 
 		daysInMonth.push(
 			<td
@@ -61,6 +62,14 @@ export const ResumeReserve = n => {
 						selectedMonth,
 						"getMonth:",
 						getMonth(currentDay, "M"),
+						"className:",
+						className
+					);
+					console.log(
+						"selectedYear:",
+						selectedYear,
+						"getYear:",
+						getYear(currentDay),
 						"className:",
 						className
 					);
