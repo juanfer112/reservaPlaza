@@ -24,8 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				data.headers = {
 					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*",
-					Authorization: "Bearer " + store.token
+					"Access-Control-Allow-Origin": "*"
 				};
 				let response = await fetch(urlBase + endpoint, data);
 				let response_json = await response.json();
@@ -64,8 +63,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 			},
+
 			logout: () => {
-				const store = getStore();
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
@@ -108,11 +107,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changeSchedulePUT: async () => {
-				const store = getStore();
-				let response = await getActions().pull("schedules" + store.scheduleToChange["id"], {
+				let response = await getActions().pull("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
+				});
+				window.location.reload(false);
+			},
+
+			changeEnterprisePUT: async enterprise => {
+				console.log(enterprise);
+				let response = await getActions().pull("enterprises/" + enterprise["id"], {
+					method: "PUT",
+					headers: {},
+					body: JSON.stringify(enterprise)
 				});
 				window.location.reload(false);
 			},

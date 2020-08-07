@@ -10,6 +10,7 @@ export const CreateUser = editEnterprise => {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(editEnterprise.edit);
 	const newEnterprise = {};
+	const enterpriseToPUT = {};
 
 	useEffect(
 		() => {
@@ -127,16 +128,26 @@ export const CreateUser = editEnterprise => {
 						onClick={e => {
 							e.preventDefault();
 							let form = new FormData(document.getElementById("nameform"));
-							for (var keyValue of form.entries()) {
-								if (keyValue[0] == "current_hours" || keyValue[0] == "tot_hours") {
-									newEnterprise[keyValue[0].toString()] = parseInt(keyValue[1]);
-								} else {
-									newEnterprise[keyValue[0].toString()] = keyValue[1].toString();
+							if (edit == false) {
+								for (var keyValue of form.entries()) {
+									if (keyValue[0] == "current_hours" || keyValue[0] == "tot_hours") {
+										newEnterprise[keyValue[0].toString()] = parseInt(keyValue[1]);
+									} else {
+										newEnterprise[keyValue[0].toString()] = keyValue[1].toString();
+									}
 								}
+								actions.postEnterprises(newEnterprise);
+							} else if (edit != false) {
+								enterpriseToPUT["id"] = edit["id"];
+								for (var keyValue of form.entries()) {
+									if (keyValue[0] == "current_hours" || keyValue[0] == "tot_hours") {
+										enterpriseToPUT[keyValue[0].toString()] = parseInt(keyValue[1]);
+									} else {
+										enterpriseToPUT[keyValue[0].toString()] = keyValue[1].toString();
+									}
+								}
+								actions.changeEnterprisePUT(enterpriseToPUT);
 							}
-
-							actions.postEnterprises(newEnterprise);
-
 							return false;
 						}}>
 						Confirmar
@@ -150,9 +161,6 @@ export const CreateUser = editEnterprise => {
 					</Button>
 				</ModalFooter>
 			</Modal>
-			{/* <Modal isOpen={edit} toggle={() => setEdit(!edit)}>
-				<h1>CIAO</h1>
-			</Modal> */}
 		</>
 	);
 };
