@@ -1,22 +1,42 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
 import { Button, Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 import FormControl from "reactstrap";
-export const CreateUser = () => {
-	const { store, actions } = useContext(Context);
-	const [show, setShow] = useState(false);
 
+export const CreateUser = editEnterprise => {
+	const { store, actions } = useContext(Context);
+
+	const [show, setShow] = useState(false);
+	const [edit, setEdit] = useState(editEnterprise.edit);
 	const newEnterprise = {};
+
+	useEffect(
+		() => {
+			setEdit(editEnterprise.edit);
+		},
+		[editEnterprise.edit]
+	);
+	useEffect(
+		() => {
+			setShow(editEnterprise.show);
+		},
+		[edit]
+	);
 	return (
 		<>
-			<button className="font-weight-bold btn btn-success p-3 mt-4" onClick={() => setShow(!show)}>
+			<button
+				className="font-weight-bold btn btn-success p-3 mt-4"
+				onClick={() => {
+					setEdit(false);
+					setShow(!show);
+				}}>
 				Nuevo Usuario
 			</button>
-			<Modal backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+			<Modal isOpen={show} toggle={() => setShow(!show)}>
 				<ModalBody>
 					<form id="nameform">
-						<h2 className="text-center">Alta nuevo usuario</h2>
+						{edit == false ? <h2 className="text-center">Alta nuevo usuario</h2> : <h2>Edicion usuario</h2>}
 						<div className="form-group">
 							<input
 								required
@@ -24,6 +44,7 @@ export const CreateUser = () => {
 								name="name"
 								className="form-control"
 								placeholder="Nombre de usuario"
+								defaultValue={edit != false ? edit.name : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -33,6 +54,7 @@ export const CreateUser = () => {
 								name="last_name"
 								className="form-control"
 								placeholder="Apellido"
+								defaultValue={edit != false ? edit.last_name : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -42,6 +64,7 @@ export const CreateUser = () => {
 								name="email"
 								className="form-control"
 								placeholder="Correo Electronico"
+								defaultValue={edit != false ? edit.email : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -51,13 +74,28 @@ export const CreateUser = () => {
 								name="password"
 								className="form-control"
 								placeholder="Contraseña"
+								defaultValue={edit != false ? edit.password : ""}
 							/>
 						</div>
 						<div className="form-group">
-							<input required type="text" name="cif" className="form-control" placeholder="CIF" />
+							<input
+								required
+								type="text"
+								name="cif"
+								className="form-control"
+								placeholder="CIF"
+								defaultValue={edit != false ? edit.cif : ""}
+							/>
 						</div>
 						<div className="form-group">
-							<input required type="tel" name="phone" className="form-control" placeholder="Teléfono" />
+							<input
+								required
+								type="tel"
+								name="phone"
+								className="form-control"
+								placeholder="Teléfono"
+								defaultValue={edit != false ? edit.phone : ""}
+							/>
 						</div>
 						<div className="form-group">
 							<input
@@ -66,6 +104,7 @@ export const CreateUser = () => {
 								name="tot_hours"
 								className="form-control"
 								placeholder="Horas contratadas"
+								defaultValue={edit != false ? edit.tot_hours : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -75,6 +114,7 @@ export const CreateUser = () => {
 								name="current_hours"
 								className="form-control"
 								placeholder="Horas restantes"
+								defaultValue={edit != false ? edit.current_hours : ""}
 							/>
 						</div>
 					</form>
@@ -101,11 +141,18 @@ export const CreateUser = () => {
 						}}>
 						Confirmar
 					</Button>
-					<Button color="secondary" onClick={() => setShow(!show)}>
+					<Button
+						color="secondary"
+						onClick={() => {
+							setShow(false);
+						}}>
 						Cancelar
 					</Button>
 				</ModalFooter>
 			</Modal>
+			{/* <Modal isOpen={edit} toggle={() => setEdit(!edit)}>
+				<h1>CIAO</h1>
+			</Modal> */}
 		</>
 	);
 };

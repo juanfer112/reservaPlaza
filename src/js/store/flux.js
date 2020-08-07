@@ -1,7 +1,7 @@
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io";
+	const urlBase = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
 	return {
 		store: {
 			user: {},
@@ -27,16 +27,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"Access-Control-Allow-Origin": "*",
 					Authorization: "Bearer " + store.token
 				};
-				let response = await fetch(
-					"https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/" + endpoint,
-					data
-				);
+				let response = await fetch(urlBase + endpoint, data);
 				let response_json = await response.json();
 				if (!response.ok) {
 					let msg = response_json.msg ? response_json.msg : response_json.message;
 					alert(msg);
-				} else if (data && response.ok) {
-					window.location.reload(false);
 				}
 				return response_json;
 			},
@@ -101,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(store.schedules)
 					});
 				}
+				window.location.reload(false);
 			},
 			postEnterprises: async body => {
 				let response_json = await getActions().pull("enterprises", {
@@ -108,6 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {},
 					body: JSON.stringify(body)
 				});
+				window.location.reload(false);
 			},
 
 			changeSchedulePUT: async () => {

@@ -8,12 +8,12 @@ import { CreateUser } from "../component/createUser";
 export const ListOfUsers = () => {
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
-
+	const [edit, setEdit] = useState(false);
 	return (
 		<>
 			<Navbar />
 			<div className="container">
-				<CreateUser show={show ? show : ""} />
+				<CreateUser show={show ? show : ""} edit={edit ? edit : false} />
 				<table className="table mr-auto table-responsive table-bordered table-striped">
 					<thead>
 						<tr>
@@ -37,9 +37,15 @@ export const ListOfUsers = () => {
 					<tbody>
 						{store.enterprises.map((user, index) => {
 							return (
-								<tr key={user}>
+								<tr key={user + index}>
 									<th scope="row">
-										<u>{user["name"]}</u>
+										<u
+											onClick={() => {
+												setEdit(user);
+												setShow(true);
+											}}>
+											{user["name"]}
+										</u>
 									</th>
 									<td>{user["tot_hours"]}</td>
 									<td>{user["current_hours"]}</td>
