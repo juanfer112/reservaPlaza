@@ -2,19 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ResumeReserve } from "./resumeReserve";
-import {
-	format,
-	addMonths,
-	startOfDay,
-	isFirstDayOfMonth,
-	startOfMonth,
-	getDaysInMonth,
-	getMonth,
-	setMonth,
-	getYear,
-	addYears,
-	set
-} from "date-fns";
+import { format, getMonth, getYear, set } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const MonthNav = () => {
@@ -23,7 +11,6 @@ export const MonthNav = () => {
 	const currentMonth = getMonth(currentDay, "M");
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showYear, setYearDatapicker] = useState(getYear(currentDay));
-
 	const [showListMonth, showMonthpopup] = useState(false);
 	const [dataMonthPickerdate, setDataMonthPickerdate] = useState(currentDay);
 	const [show, setShow] = useState(false);
