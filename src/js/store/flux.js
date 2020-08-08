@@ -242,7 +242,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				store.spaces.map((space, index) => {
 					if (index == i) {
-						setStore({ selectedSpace: space });
+						setStore({ selectedSpace: space, selectedCellHolder: [], schedules: [] });
 					}
 				});
 			},
