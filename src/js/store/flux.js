@@ -1,7 +1,7 @@
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io";
+	const url = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io";
 	return {
 		store: {
 			user: {},
@@ -61,9 +61,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullPeoples: async () => {
+				const store = getStore();
 				let response = await fetch(`${url}/enterprises`);
 				let data = await response.json();
-				setStore({ user: data[3], enterprises: data });
+				setStore({ user: data[0], enterprises: data });
 			},
 
 			pullSpaces: async () => {
@@ -74,6 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			pullScheduler: async () => {
 				/*let response = await fetch(`${url}/schedules`);*/ /*esta linea hay que ajustar a la siguiente liena de codigo*/
+				const store = getStore();
 				let response = await fetch(
 					`${url}/schedules/` + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 				);
