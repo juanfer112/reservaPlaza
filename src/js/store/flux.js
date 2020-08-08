@@ -1,7 +1,8 @@
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const urlBase = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
+const urlBase = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
+
 	return {
 		store: {
 			user: {},
@@ -43,6 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					})
 				});
+				let data = await response.json();
 				if (typeof data.access_token != "undefined") {
 					setStore({ token: data.access_token });
 					sessionStorage.setItem("access_token", data.access_token);
@@ -50,7 +52,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return "no se ha generado un token";
 				}
 			},
-
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
@@ -97,7 +98,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
-			postEnterprises: async body => {
+
+      postEnterprises: async body => {
 				let response_json = await getActions().pull("enterprises", {
 					method: "POST",
 					headers: {},
