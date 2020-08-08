@@ -8,12 +8,17 @@ import { CreateUser } from "../component/createUser";
 export const ListOfUsers = () => {
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
-	const [edit, setEdit] = useState(false);
+	const [enterprise, setEdit] = useState(null);
+
+	const toggleModalCallback = hideOrShow => {
+		setShow(hideOrShow);
+	};
+
 	return (
 		<>
 			<Navbar />
-			<div className="container">
-				<CreateUser show={show ? show : ""} edit={edit ? edit : false} />
+			<div className="container ">
+				<CreateUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
 				<table className="table mr-auto table-responsive table-bordered table-striped">
 					<thead>
 						<tr>

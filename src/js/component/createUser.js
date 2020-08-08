@@ -4,40 +4,38 @@ import { Context } from "../store/appContext";
 import { Button, Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 import FormControl from "reactstrap";
 
-export const CreateUser = editEnterprise => {
+export const CreateUser = props => {
 	const { store, actions } = useContext(Context);
 
-	const [show, setShow] = useState(false);
-	const [edit, setEdit] = useState(editEnterprise.edit);
+	const [enterprise, setEnterprise] = useState(props.enterprise);
 	const newEnterprise = {};
 	const enterpriseToPUT = {};
 
 	useEffect(
 		() => {
-			setEdit(editEnterprise.edit);
+			setEnterprise(props.enterprise);
 		},
-		[editEnterprise.edit]
+		[props.enterprise]
 	);
-	useEffect(
-		() => {
-			setShow(editEnterprise.show);
-		},
-		[edit]
-	);
+
 	return (
 		<>
 			<button
-				className="font-weight-bold btn btn-success p-3 mt-4"
+				className="font-weight-bold btn btn-success fixed-bottom p-3 m-4"
 				onClick={() => {
-					setEdit(false);
-					setShow(!show);
+					setEnterprise(null);
+					props.toggleModalCallback(true);
 				}}>
 				Nuevo Usuario
 			</button>
-			<Modal isOpen={show} toggle={() => setShow(!show)}>
+			<Modal isOpen={props.show} toggle={() => props.toggleModalCallback(false)}>
 				<ModalBody>
 					<form id="nameform">
-						{edit == false ? <h2 className="text-center">Alta nuevo usuario</h2> : <h2>Edicion usuario</h2>}
+						{enterprise == null ? (
+							<h2 className="text-center">Alta nuevo usuario</h2>
+						) : (
+							<h2>Edicion usuario</h2>
+						)}
 						<div className="form-group">
 							<input
 								required
@@ -45,7 +43,7 @@ export const CreateUser = editEnterprise => {
 								name="name"
 								className="form-control"
 								placeholder="Nombre de usuario"
-								defaultValue={edit != false ? edit.name : ""}
+								defaultValue={enterprise != null ? enterprise.name : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -55,7 +53,7 @@ export const CreateUser = editEnterprise => {
 								name="last_name"
 								className="form-control"
 								placeholder="Apellido"
-								defaultValue={edit != false ? edit.last_name : ""}
+								defaultValue={enterprise != null ? enterprise.last_name : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -65,7 +63,7 @@ export const CreateUser = editEnterprise => {
 								name="email"
 								className="form-control"
 								placeholder="Correo Electronico"
-								defaultValue={edit != false ? edit.email : ""}
+								defaultValue={enterprise != null ? enterprise.email : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -75,7 +73,7 @@ export const CreateUser = editEnterprise => {
 								name="password"
 								className="form-control"
 								placeholder="Contraseña"
-								defaultValue={edit != false ? edit.password : ""}
+								defaultValue={enterprise != null ? enterprise.password : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -85,7 +83,7 @@ export const CreateUser = editEnterprise => {
 								name="cif"
 								className="form-control"
 								placeholder="CIF"
-								defaultValue={edit != false ? edit.cif : ""}
+								defaultValue={enterprise != null ? enterprise.cif : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -95,7 +93,7 @@ export const CreateUser = editEnterprise => {
 								name="phone"
 								className="form-control"
 								placeholder="Teléfono"
-								defaultValue={edit != false ? edit.phone : ""}
+								defaultValue={enterprise != null ? enterprise.phone : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -105,7 +103,7 @@ export const CreateUser = editEnterprise => {
 								name="tot_hours"
 								className="form-control"
 								placeholder="Horas contratadas"
-								defaultValue={edit != false ? edit.tot_hours : ""}
+								defaultValue={enterprise != null ? enterprise.tot_hours : ""}
 							/>
 						</div>
 						<div className="form-group">
@@ -115,7 +113,7 @@ export const CreateUser = editEnterprise => {
 								name="current_hours"
 								className="form-control"
 								placeholder="Horas restantes"
-								defaultValue={edit != false ? edit.current_hours : ""}
+								defaultValue={enterprise != null ? enterprise.current_hours : ""}
 							/>
 						</div>
 					</form>
@@ -128,7 +126,7 @@ export const CreateUser = editEnterprise => {
 						onClick={e => {
 							e.preventDefault();
 							let form = new FormData(document.getElementById("nameform"));
-							if (edit == false) {
+							if (enterprise == null) {
 								for (var keyValue of form.entries()) {
 									if (keyValue[0] == "current_hours" || keyValue[0] == "tot_hours") {
 										newEnterprise[keyValue[0].toString()] = parseInt(keyValue[1]);
@@ -137,8 +135,8 @@ export const CreateUser = editEnterprise => {
 									}
 								}
 								actions.postEnterprises(newEnterprise);
-							} else if (edit != false) {
-								enterpriseToPUT["id"] = edit["id"];
+							} else if (enterprise != null) {
+								enterpriseToPUT["id"] = enterprise["id"];
 								for (var keyValue of form.entries()) {
 									if (keyValue[0] == "current_hours" || keyValue[0] == "tot_hours") {
 										enterpriseToPUT[keyValue[0].toString()] = parseInt(keyValue[1]);
@@ -155,7 +153,7 @@ export const CreateUser = editEnterprise => {
 					<Button
 						color="secondary"
 						onClick={() => {
-							setShow(false);
+							props.toggleModalCallback(false);
 						}}>
 						Cancelar
 					</Button>
