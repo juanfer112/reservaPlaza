@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { HoursColumn } from "./hoursColumn";
 import "../../styles/home.scss";
-import { NewDay } from "./newDay";
 import { format, addHours, subHours, subDays } from "date-fns";
 import { Table, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
@@ -16,10 +14,6 @@ export const AdminBalance = n => {
 	var scheduleDateHourToChange;
 
 	const [show, setShow] = useState(false);
-
-	function toggle() {
-		setShow(!show);
-	}
 
 	var hoursOptions = [];
 	for (let hour = 0; hour < 24; hour++) {

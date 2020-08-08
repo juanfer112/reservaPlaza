@@ -18,7 +18,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.pullPeoples();
+			state.actions.pullEnterprises();
 			state.actions.pullScheduler();
 			state.actions.cellID(new Date());
 			state.actions.pullSpaces();

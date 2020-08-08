@@ -1,7 +1,8 @@
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const url = "https://3000-ebfc5e10-75a2-4403-9edc-4116365f86b5.ws-eu01.gitpod.io";
+const urlBase = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
+
 	return {
 		store: {
 			user: {},
@@ -17,13 +18,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
+			pull: async (endpoint, data = null) => {
+				const store = getStore();
+				if (data == null) {
+					data = {};
+				}
+				data.headers = {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				};
+				let response = await fetch(urlBase + endpoint, data);
+				let response_json = await response.json();
+				if (!response.ok) {
+					let msg = response_json.msg ? response_json.msg : response_json.message;
+					alert(msg);
+				}
+				return response_json;
+			},
+
 			checkUser: async (email, password) => {
-				let response = await fetch(`${url}/login`, {
+				let data = await getActions().pull("login", {
 					method: "POST",
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-						"Content-Type": "application/json"
-					},
 					body: JSON.stringify({
 						email: email,
 						password: password
@@ -40,69 +55,74 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
-					let response = await fetch(`${url}/protected`, {
-						method: "GET",
-						headers: {
-							"Content-Type": "application/json",
-							authorization: "Bearer " + store.token
-						}
+					let data = await getActions().pull("protected", {
+						method: "GET"
 					});
-					let data = await response.json();
 				} else {
 					JSON.stringify({
 						msg: "no hay token"
 					});
 				}
 			},
+
 			logout: () => {
-				const store = getStore();
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
 
-			pullPeoples: async () => {
-				let response = await fetch(`${url}/enterprises`);
-				let data = await response.json();
-				setStore({ user: data[3], enterprises: data });
+			pullEnterprises: async () => {
+				let data = await getActions().pull("enterprises");
+				setStore({ user: data[0], enterprises: data });
 			},
 
 			pullSpaces: async () => {
-				let response = await fetch(`${url}/spaces`);
-				let data = await response.json();
+				let data = await getActions().pull("spaces");
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 
 			pullScheduler: async () => {
-				/*let response = await fetch(`${url}/schedules`);*/ /*esta linea hay que ajustar a la siguiente liena de codigo*/
-				let response = await fetch(
-					`${url}/schedules/` + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+				let data = await getActions().pull(
+					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 				);
-				let data = await response.json();
 				setStore({ reserved: data });
 			},
 
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
-					let response = await fetch(`${url}/schedules`, {
+					let response_json = await getActions().pull("schedules", {
 						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
+						headers: {},
 						body: JSON.stringify(store.schedules)
 					});
-					window.location.reload(false);
 				}
+				window.location.reload(false);
+			},
+
+      postEnterprises: async body => {
+				let response_json = await getActions().pull("enterprises", {
+					method: "POST",
+					headers: {},
+					body: JSON.stringify(body)
+				});
+				window.location.reload(false);
 			},
 
 			changeSchedulePUT: async () => {
-				const store = getStore();
-				let response = await fetch(`${url}/schedules/` + store.scheduleToChange["id"], {
+				let response = await getActions().pull("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
-					headers: {
-						"Content-Type": "application/json"
-					},
+					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
+				});
+				window.location.reload(false);
+			},
+
+			changeEnterprisePUT: async enterprise => {
+				console.log(enterprise);
+				let response = await getActions().pull("enterprises/" + enterprise["id"], {
+					method: "PUT",
+					headers: {},
+					body: JSON.stringify(enterprise)
 				});
 				window.location.reload(false);
 			},
