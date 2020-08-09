@@ -1,7 +1,8 @@
+import url from "../endpoints/url.js";
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const urlBase = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
+	const urlBase = url;
 	return {
 		store: {
 			user: {},
