@@ -2,16 +2,8 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ResumeReserve } from "./resumeReserve";
-import {
-	format,
-	addMonths,
-	startOfDay,
-	isFirstDayOfMonth,
-	startOfMonth,
-	getDaysInMonth,
-	getMonth,
-	setMonth
-} from "date-fns";
+import { ResumeModal } from "../component/resumeModal";
+import { format, addMonths, getDaysInMonth, getMonth, setMonth } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const MonthNav = () => {
@@ -22,6 +14,9 @@ export const MonthNav = () => {
 	const [showListMonth, showMonthpopup] = useState(false);
 	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
 	const [show, setShow] = useState(false);
+	const showModalCallback = visibility => {
+		setShow(visibility);
+	};
 
 	const arrayMonthsNames = [
 		"Enero ",
@@ -86,7 +81,12 @@ export const MonthNav = () => {
 							</td>
 						</tr>
 					</thead>
-					<ResumeReserve dataPickerdate={dataPickerdate} currentMonth={currentMonth} />
+					<ResumeReserve
+						dataPickerdate={dataPickerdate}
+						currentMonth={currentMonth}
+						showModalCallback={showModalCallback}
+					/>
+					<ResumeModal showModalCallback={showModalCallback} show={show} />
 				</table>
 			</div>
 		</>

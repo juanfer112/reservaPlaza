@@ -2,16 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
-import {
-	format,
-	addMonths,
-	startOfWeek,
-	startOfDay,
-	isFirstDayOfMonth,
-	startOfMonth,
-	getDaysInMonth,
-	getMonth
-} from "date-fns";
+import { format, startOfMonth, getDaysInMonth, getMonth } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
@@ -39,17 +30,28 @@ export const ResumeReserve = n => {
 			</td>
 		);
 	}
+	/*-----------------------------------------------------------------------------------------------------*/
+	/*Establecer cantidad de dias por mes*/
 
 	var daysInMonth = [];
 	for (let d = 1; d <= getDaysInMonth(dataPickerdate); d++) {
 		let className =
 			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
 		daysInMonth.push(
-			<td key={d} className={className}>
+			<td
+				key={d}
+				className={className}
+				onClick={() => {
+					console.log("hola");
+					n.showModalCallback(true);
+				}}>
 				<span>{d}</span>
 			</td>
 		);
 	}
+	/*----------------------------------------------------------------------------------------------------------------*/
+	/*----------------------------------------------------------------------------------------------------------------*/
+	/*generar matriz 5x7 de dias correspondientes del mes y completado con dias de otros mes */
 
 	var totalSlots = [...blanks, ...daysInMonth];
 	var cells = [];
@@ -73,7 +75,7 @@ export const ResumeReserve = n => {
 	var trElems = rows.map((d, i) => {
 		return <tr key={i * 80}>{d}</tr>;
 	});
-
+	/*------------------------------------------------------------------------------------------------------------*/
 	return (
 		<tbody>
 			<tr>{weekdays}</tr>
