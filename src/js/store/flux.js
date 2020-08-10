@@ -104,6 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changeSchedulePUT: async () => {
+				const store = getStore();
 				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},

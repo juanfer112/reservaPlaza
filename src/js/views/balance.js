@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const Balance = () => {
 	const { store, actions } = useContext(Context);
-
+	const arrayDays = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
 	const listRefs = store.week.map((ref, index) => {
 		return useRef(index);
 	});
@@ -28,8 +28,21 @@ export const Balance = () => {
 					onClick={() => actions.changeWeekOrDay("afterWeek")}
 				/>
 			</div>
-			<button onClick={() => executeScroll(listRefs[5])} className="fixed-bottom">
-				Click to scroll{" "}
+			<div className="btn-toolbar m-3">
+				{store.week.map((week, index) => {
+					return (
+						<button
+							type="button"
+							className="btn btn-md btn-secondary border"
+							key={week}
+							onClick={() => executeScroll(listRefs[index])}>
+							{arrayDays[index]}
+						</button>
+					);
+				})}
+			</div>
+			<button className="fixed-bottom btn-md m-5 ml-auto btn-secondary" onClick={() => window.scrollTo(0, 0)}>
+				CIAO
 			</button>
 			{store.week.map((item, index) => {
 				return (
