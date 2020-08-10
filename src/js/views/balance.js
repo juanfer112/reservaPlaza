@@ -1,17 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { addDays, subDays, startOfDay, format } from "date-fns";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Navbar } from "../component/navbar";
 import { AdminBalance } from "../component/adminBalance";
+import { Link } from "react-router-dom";
 
 export const Balance = () => {
 	const { store, actions } = useContext(Context);
-	var currentDay = store.currentDay;
+
+	const listRefs = store.week.map((ref, index) => {
+		return useRef(index);
+	});
+	const executeScroll = myRef => window.scrollTo(0, myRef.current.offsetTop);
 	return (
 		<>
 			<Navbar />
-
 			<div className="d-flex justify-content-between mt-3">
 				<i
 					className="fa fa-arrow-left mx-3 mb-1"
@@ -24,9 +28,15 @@ export const Balance = () => {
 					onClick={() => actions.changeWeekOrDay("afterWeek")}
 				/>
 			</div>
-
-			{store.week.map(item => {
-				return <AdminBalance key={item} day={item} />;
+			<button onClick={() => executeScroll(listRefs[5])} className="fixed-bottom">
+				Click to scroll{" "}
+			</button>
+			{store.week.map((item, index) => {
+				return (
+					<div key={item} ref={listRefs[index]}>
+						<AdminBalance day={item} />
+					</div>
+				);
 			})}
 		</>
 	);
