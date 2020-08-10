@@ -52,7 +52,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 			},
-
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
@@ -95,6 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
+			
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",
@@ -145,9 +145,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addSchedules: date => {
+				console.log("date:", date);
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
+					console.log("sched:", sched);
 					check.push(sched["date"]);
 				});
 				if (!check.includes(date)) {
