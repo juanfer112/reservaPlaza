@@ -298,3 +298,26 @@ Table{
 .label-month{
     cursor: pointer;
 }
+/*leyenda para vista .perfil cliente*/
+.legend{
+    display: flex;
+}
+.legend-details{
+    padding: 0.3em;
+}
+.legend-green{
+    
+    background: green;
+    border: 0.05rem solid #999
+}
+.legend-blue{
+    background:blue;
+    
+    border: 0.05rem solid #999
+}
+span:before {
+  content: "";
+  display: inline-block;
+  width:0.938em;
+  height: 0.938em;
+}

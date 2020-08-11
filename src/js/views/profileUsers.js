@@ -29,6 +29,14 @@ export const ProfileUsers = () => {
 			<div>
 				<MonthNav style={style} />
 			</div>
+			<div className="legend">
+				<div className="legend-details">
+					Dias reservados :<span className="legend-green">{""}</span>
+				</div>
+				<div className="legend-details">
+					Día actual :<span className="legend-blue">{""}</span>
+				</div>
+			</div>
 		</div>
 	);
 };
