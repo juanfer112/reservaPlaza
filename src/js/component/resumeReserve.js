@@ -2,19 +2,21 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
-import { format, startOfMonth, getDaysInMonth, getMonth, getYear } from "date-fns";
+import { format, startOfMonth, subHours, getDaysInMonth, getMonth, getYear } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
-	const dataPickerdate = n.dataPickerdate;
+	const dataMonthPickerdate = n.dataMonthPickerdate;
+	const selectedMonth = n.showMonth;
+	const selectedYear = n.showYear;
+	const updatedDate = n.updatedDate;
 	const currentDay = store.currentDay;
-	const currentMonth = getMonth(currentDay, "M");
-	const selectedMonth = getMonth(dataPickerdate, "M");
-	const selectedYear = getYear(dataPickerdate, "YYYY");
+	const currentMonth = n.currentMonth;
+	const fechas = n.fechas;
 
+	/*renderizado de los dias de la semana*/
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
-
 	const weekdays = arrayDay.map(day => {
 		return (
 			<td key={day} className="week-day">
@@ -23,8 +25,9 @@ export const ResumeReserve = n => {
 		);
 	});
 
+	/*Generar espacios libres si */
 	var blanks = [];
-	for (let i = 0; i < format(startOfMonth(dataPickerdate), "i") - 1; i++) {
+	for (let i = 0; i < format(startOfMonth(updatedDate), "i") - 1; i++) {
 		blanks.push(
 			<td key={i * 20} className="empty-slot">
 				{""}
@@ -33,26 +36,33 @@ export const ResumeReserve = n => {
 	}
 	/*-----------------------------------------------------------------------------------------------------*/
 	/*Establecer cantidad de dias por mes*/
-
 	var daysInMonth = [];
-	for (let d = 1; d <= getDaysInMonth(dataPickerdate); d++) {
-		let id = format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd HH:mm:ss");
-
-		let className =
-			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
-		daysInMonth.push(
-			<td
-				id={id}
-				key={d}
-				className={className}
-				onClick={e => {
-					actions.pullSchedulerByMonth(id);
-					n.showModalCallback(true);
-					n.updateDateCallback(id);
-				}}>
-				<span>{d}</span>
-			</td>
+	var result = [];
+  
+	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
+		const result = fechas.filter(
+			fecha =>
+				format(subHours(new Date(fecha.date), 2), "yyyy-MM-dd") ===
+				format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd")
 		);
+
+		if (d != format(currentDay, "d")) {
+			let className = result.length > 0 ? "reserved-day days" : "days";
+
+			daysInMonth.push(
+				<td key={d} className={className}>
+					<span>{d}</span>
+				</td>
+			);
+		} else {
+			let className = result.length > 0 ? "current-day days" : "days";
+
+			daysInMonth.push(
+				<td key={d} className={className}>
+					<span>{d}</span>
+				</td>
+			);
+		}
 	}
 	/*----------------------------------------------------------------------------------------------------------------*/
 	/*----------------------------------------------------------------------------------------------------------------*/

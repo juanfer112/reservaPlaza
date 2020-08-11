@@ -177,6 +177,9 @@ Table{
 .container-balance{
     overflow: auto;
 }
+.btn-md{
+    min-width: 0;
+}
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
@@ -255,6 +258,14 @@ Table{
 }
 .current-day{
     background-color: #4285f4;
+    width:28px;
+    height: 28px;
+   
+    border-radius: 50%;
+    color:white;
+}
+.reserved-day{
+    background-color: #9efc91;
     width:28px;
     height: 28px;
     line-height: 28px;
