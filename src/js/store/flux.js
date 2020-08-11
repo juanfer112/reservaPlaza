@@ -1,8 +1,9 @@
+import url from "../endpoints/url.js";
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-	const urlBase = "https://3000-a2272d71-11c2-4a78-8b4c-24e04821553b.ws-eu01.gitpod.io/";
 
+	const urlBase = url;
 	return {
 		store: {
 			user: {},
@@ -18,25 +19,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			pull: async (endpoint, data = null) => {
+			newFetch: async (endpoint, data = {}) => {
 				const store = getStore();
-				if (data == null) {
-					data = {};
-				}
 				data.headers = {
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*"
+					...{
+						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "*"
+						/* token */
+					},
+					...data.headers
 				};
 				let response = await fetch(urlBase + endpoint, data);
 				let response_json = await response.json();
 				if (!response.ok) {
 					let msg = response_json.msg ? response_json.msg : response_json.message;
 					alert(msg);
-				}
-				return response_json;
+					return null;
+				} else return response_json;
 			},
 			checkUser: async (email, password) => {
-				let data = await getActions().pull("login", {
+				let data = await getActions().newFetch("login", {
 					method: "POST",
 					body: JSON.stringify({
 						email: email,
@@ -44,22 +46,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				});
 
-				if (typeof data.access_token != "undefined") {
-					setStore({ token: data.access_token });
-					sessionStorage.setItem("access_token", data.access_token);
-				} else {
-					return "no se ha generado un token";
+				if (data != null) {
+					if (typeof data.access_token != "undefined") {
+						setStore({ token: data.access_token });
+						sessionStorage.setItem("access_token", data.access_token);
+					}
 				}
 			},
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
-					let data = await getActions().pull("protected", {
+					let data = await getActions().newFetch("protected", {
 						method: "GET"
-					});
-				} else {
-					JSON.stringify({
-						msg: "no hay token"
 					});
 				}
 			},
@@ -68,17 +66,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.setItem("access_token", null);
 			},
 			pullEnterprises: async () => {
-				const store = getStore();
-				let data = await getActions().pull("enterprises");
+				let data = await getActions().newFetch("enterprises");
 				setStore({ user: data[0], enterprises: data });
 			},
 			pullSpaces: async () => {
-				let data = await getActions().pull("spaces");
+				let data = await getActions().newFetch("spaces");
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 			pullScheduler: async () => {
-				const store = getStore();
-				let data = await getActions().pull(
+				let data = await getActions().newFetch(
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 				);
 				setStore({ reserved: data });
@@ -86,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
-					let response_json = await getActions().pull("schedules", {
+					let response_json = await getActions().newFetch("schedules", {
 						method: "POST",
 						headers: {},
 						body: JSON.stringify(store.schedules)
@@ -94,8 +90,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
+		
 			postEnterprises: async body => {
-				let response_json = await getActions().pull("enterprises", {
+				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",
 					headers: {},
 					body: JSON.stringify(body)
@@ -104,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changeSchedulePUT: async () => {
-				let response = await getActions().pull("schedules/" + store.scheduleToChange["id"], {
+				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
@@ -114,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			changeEnterprisePUT: async enterprise => {
 				console.log(enterprise);
-				let response = await getActions().pull("enterprises/" + enterprise["id"], {
+				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
 					headers: {},
 					body: JSON.stringify(enterprise)
@@ -144,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addSchedules: date => {
+				console.log("date:", date);
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
@@ -163,12 +161,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			removeSchedules: cellDate => {
 				const store = getStore();
 				const check = [];
+				const checkHolder = [];
 				store.schedules.map(date => {
 					if (date["date"] != cellDate) {
 						check.push(date);
 					}
 				});
-				setStore({ schedules: check });
+				store.selectedCellHolder.map(date => {
+					if (date != cellDate) {
+						checkHolder.push(date);
+					}
+				});
+				setStore({ schedules: check, selectedCellHolder: checkHolder });
 			},
 
 			reservedDate: (cellDate, spaceID) => {
@@ -236,7 +240,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				store.spaces.map((space, index) => {
 					if (index == i) {
-						setStore({ selectedSpace: space });
+						setStore({ selectedSpace: space, selectedCellHolder: [], schedules: [] });
 					}
 				});
 			},
