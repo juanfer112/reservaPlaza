@@ -25,6 +25,17 @@ export const ProfileUsers = () => {
 			<div>
 				<MonthNav style={style} />
 			</div>
+			<div className="legend">
+				<div className="legend-details">
+					reservado :<span>verde</span>
+				</div>
+				<div className="legend-details">
+					dia actual :<span>azul</span>
+				</div>
+				<div className="legend-details">
+					por reservar :<span>blanco</span>
+				</div>
+			</div>
 		</div>
 	);
 };
