@@ -94,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
-			
+
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",

@@ -1,0 +1,338 @@
+
+.login-background{
+    background-image:url('https://imgk.timesnownews.com/story/1550587496-Cooking-GettyImages.jpg?tr=w-600,h-450,fo-auto');
+    background-size: cover;
+    background-attachment: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    font-family: new time Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+ul{
+    margin-bottom: 50px;
+}
+ul a {
+    font-size: 29px;
+    color: white;
+}
+ul a:hover{
+    text-decoration: none;
+
+}
+.first-row{
+    margin-top: 120px;
+    box-shadow: -1px 1px 50px 10px black;
+}
+.log-in{
+    border-bottom: 2px solid #f44c89;
+    padding: 10px;
+
+}
+ .label{
+    font-size: 19px;
+    color:white;
+    font-weight: normal;
+ }
+ .control-label{
+     color:white;
+
+ }
+
+
+.form-control{
+    background: transparent;
+    border-radius: 0px;
+    border: 0px;
+    border-bottom-color: 1px solid #f44c89;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+// i, u, td.reserved{
+//     cursor: pointer;
+// }
+// .navbar{
+//     display: flex;
+//     justify-content: space-around;
+//     flex-wrap: wrap;
+//     width: 100%;
+//     border-top: 0.15rem solid #35553e;
+//     border-bottom: 0.05rem solid #a3acb2;
+//     box-shadow: 0 0.05rem 0 rgba(12,13,14,0.15);
+// }
+// .scheduler{
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column; 
+//     align-items: center;
+// }
+// .rowLogin{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 50rem;
+// }
+// .logo, .perfil{
+//     width: 4rem;
+//     height: 4rem;
+// }
+// .avatarProfile{
+//     height: 8vw;
+// }
+// .perfil{
+//     cursor: pointer;
+// }
+// p{
+//     font-size: 1.4rem;
+//     margin: 0;
+//     padding: 0;
+// }
+// .btnDropdown{
+//     height: 4rem;
+//     width: 13rem;
+//     font-size: 2rem; 
+// }
+// .list-group-horizontal{
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-around;
+//     width: 100%;
+// }
+// input{
+//     border-color: #e4e6e8;
+//     text-align:center;
+// }
+// input:focus{
+//     outline: none;
+// }
+// input::placeholder{
+//     font-size: 1rem;
+// }
+// .scheduler-title{
+//     font-size: 2rem;
+//     margin-left: 1rem;
+//     color: #35553e;
+// }
+// .fa{
+//     font-size: 3rem;
+// }
+// .fa-info-circle{
+//     cursor: help;
+//     font-size: 0.8rem;
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+// }
+// .dropD{
+//     width: 7rem;
+// }
+// .nightHours{
+//     display: flex;
+//     align-items: center;
+// }
+// .footer{
+//     display: flex;
+//     justify-content: center;
+//     width: 15rem;    
+//     border: 0.05rem solid #a3acb2;
+//     box-shadow: 0 0.05rem 0 rgba(12,13,14,0.15);
+// }
+// .confirm{    
+//     margin: auto;
+//     margin-bottom: 1rem;
+//     height: 1.2rem;
+//     width: 10rem;
+//     font-size: 2rem; 
+// }
+// .reserved {
+//   background-color: #a3acb2;
+// }
+// .rowSched {
+//     overflow-x: auto;
+//     overflow-y: hidden;
+//     white-space:nowrap;
+//     width: 100vw;
+//     margin-bottom: 7rem;
+// }
+// .day {
+//     display: inline-table;
+//     white-space:normal;
+//     max-width: 12.5rem;
+// }
+// .title{
+//     border: solid 0.05rem #dee2e6;
+//     font-size: 1.4rem;
+//     height: 2rem;
+// }
+// .titleH{
+//     border: solid 0.05rem #dee2e6;
+//     font-size: 1.4rem;
+//     height: 2rem;
+// }
+// .hours{
+//     height: 2rem;
+//     border-bottom: solid 0.05rem #dee2e6; 
+//     border-left: solid 0.05rem #dee2e6; 
+//     border-right: solid 0.05rem #dee2e6;
+// }
+// .cell{
+//     cursor: copy;
+//     height: 2rem;
+//     border-bottom: solid 0.05rem #dee2e6;
+//     border-right: solid 0.05rem #dee2e6;
+// }
+// Button{
+//     min-height: 2rem;
+//     min-width: 8rem;
+//     text-align: center;
+// }
+// .modalChange {
+//     position: relative;
+//     overflow-y: auto;
+//     max-width: 50rem;
+//     max-height: 400px;
+//     padding: 15px;
+// }
+// .thSpace{
+//     z-index: 1;
+//     position: sticky; 
+//     top: 0; 
+//     background-clip: padding-box;
+// }
+// .tHours{
+//     z-index: 0;
+//     position: sticky; 
+//     left: 0; 
+//     background-clip: padding-box;
+// }
+// td{
+//     z-index: -1;
+//     background-clip: padding-box;
+// }
+// .table-responsive{
+//     border-right: solid 0.05rem #dee2e6;
+//     margin-bottom: 6rem;
+// }
+// Table{
+//     border-collapse: separate;
+//     border-spacing: 0;    
+// }
+// .thFirst{
+//     position: sticky; 
+//     left: 0; 
+//     top: 0;
+//     background-clip: padding-box;
+//     z-index: 2;
+// }
+// .container-balance{
+//     overflow: auto;
+// }
+// @media screen and (min-width: 1000px){
+//     body{
+//         overflow-x: hidden;
+//     }
+// }
+// @media screen and (max-width: 600px){
+//     div.rowSched > div:first-child{
+//         width: 6rem;
+//         position: absolute;
+//         z-index: 1;
+//         background-color: white;
+//     }
+//     div.rowSched > div:nth-child(2){
+//         margin-left: 6rem;
+//     }        
+//     .list-group-horizontal{
+//         justify-content: space-evenly;
+//     }
+//     .btnDropdown{
+//         height: 3rem;
+//         width: 10rem;
+//         font-size: 1.5rem;
+//         margin: 0 !important;
+//     }
+//     .availableHours{
+//         margin: 0 !important;
+//     }
+// }
+
+
+// /*css RESUMEN RESERVAS*/
+// .calendar-container,.calendar,.calendar-header, td, tr{
+//     padding: 0;
+//     margin: 0
+// }
+// .calendar-container{ 
+//     border: 2px solid skyblue;
+//     }
+// .calendar{
+//     background-color: white;
+//     border-spacing: 0;
+//     border-collapse: collapse;
+//     width: 100%;
+// }
+// .calendar-header{
+//     border-bottom: 1px dashed skyblue;
+//     font-size: 1.6em;
+// }
+// .calendar-header td{
+//     border-spacing: 0;
+//     padding-left: 5px;
+// }
+// .days, .empty-slot, .week-day{
+//     text-align: center;
+//     height: 40px;
+// }
+// .week-day{
+//     font-size: 0.8em;
+// }
+// .days{
+//     font-size: 0.8em;
+// }
+// .days{
+//     cursor: pointer;
+//     width: 24px;
+//     height: 24px;
+//     line-height: 24px;
+// }
+// .current-day{
+//     background-color: #4285f4;
+//     width:28px;
+//     height: 28px;
+//     line-height: 28px;
+//     border-radius: 2%;
+//     color:white;
+// }
+// .month-popup{
+//     position: absolute;
+//     padding: 5px;
+//     background:white;
+//     border:2px solid skyblue;
+
+// }
+// .month-popup div{
+//     padding: 0.3em;
+// }
+// .nav-month{
+//     position: absolute;
+//     top: 0.6em;
+//     font-size: 0.6em;
+//     right: 3px;
+
+// }
+// .editor-year{
+//     max-width: 3.6em;
+// }
+// .label-month, .label-year{
+//     font-size: 0.6em;
+// }
+// .label-month{
+//     cursor: pointer;
+// }
