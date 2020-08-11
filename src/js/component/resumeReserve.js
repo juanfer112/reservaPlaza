@@ -38,7 +38,7 @@ export const ResumeReserve = n => {
 	/*Establecer cantidad de dias por mes*/
 	var daysInMonth = [];
 	var result = [];
-  
+
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
 		const result = fechas.filter(
 			fecha =>
