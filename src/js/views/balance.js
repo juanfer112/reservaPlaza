@@ -13,6 +13,7 @@ export const Balance = () => {
 		return useRef(index);
 	});
 	const executeScroll = myRef => window.scrollTo(0, myRef.current.offsetTop);
+
 	return (
 		<>
 			<Navbar />
