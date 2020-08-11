@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ResumeReserve } from "./resumeReserve";
-import { format, getMonth, getYear, set } from "date-fns";
+import { ResumeModal } from "../component/resumeModal";
+import { format, addMonths, getDaysInMonth, getMonth, setMonth } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const MonthNav = () => {
@@ -12,9 +13,15 @@ export const MonthNav = () => {
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showYear, setYearDatapicker] = useState(getYear(currentDay));
 	const [showListMonth, showMonthpopup] = useState(false);
-	const [dataMonthPickerdate, setDataMonthPickerdate] = useState(currentDay);
+	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
+	const [dates, setDates] = useState(currentDay);
 	const [show, setShow] = useState(false);
-	const updatedDate = set(currentDay, { year: showYear, month: showMonth, date: format(currentDay, "d") });
+	const updateDateCallback = id => {
+		setDates(id);
+	};
+	const showModalCallback = visibility => {
+		setShow(visibility);
+	};
 	const arrayMonthsNames = [
 		"Enero ",
 		"Febrero ",
@@ -95,13 +102,12 @@ export const MonthNav = () => {
 						</tr>
 					</thead>
 					<ResumeReserve
-						dataMonthPickerdate={dataMonthPickerdate}
+						dataPickerdate={dataPickerdate}
 						currentMonth={currentMonth}
-						updatedDate={updatedDate}
-						showMonth={showMonth}
-						showYear={showYear}
-						fechas={fechas}
+						showModalCallback={showModalCallback}
+						updateDateCallback={updateDateCallback}
 					/>
+					<ResumeModal showModalCallback={showModalCallback} show={show} dataPickerdate={dates} />
 				</table>
 			</div>
 		</>

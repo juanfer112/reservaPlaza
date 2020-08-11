@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
 import { format, startOfMonth, subHours, getDaysInMonth, getMonth, getYear } from "date-fns";
-
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
@@ -35,10 +34,11 @@ export const ResumeReserve = n => {
 			</td>
 		);
 	}
-
+	/*-----------------------------------------------------------------------------------------------------*/
+	/*Establecer cantidad de dias por mes*/
 	var daysInMonth = [];
 	var result = [];
-
+  
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
 		const result = fechas.filter(
 			fecha =>
@@ -64,6 +64,9 @@ export const ResumeReserve = n => {
 			);
 		}
 	}
+	/*----------------------------------------------------------------------------------------------------------------*/
+	/*----------------------------------------------------------------------------------------------------------------*/
+	/*generar matriz de dias correspondientes del mes y completado con dias de otros mes */
 
 	var totalSlots = [...blanks, ...daysInMonth];
 	var cells = [];
@@ -87,7 +90,7 @@ export const ResumeReserve = n => {
 	var trElems = rows.map((d, i) => {
 		return <tr key={i * 80}>{d}</tr>;
 	});
-
+	/*------------------------------------------------------------------------------------------------------------*/
 	return (
 		<tbody>
 			<tr>{weekdays}</tr>
