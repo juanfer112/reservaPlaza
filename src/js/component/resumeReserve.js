@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
-import { format, startOfMonth, getDaysInMonth, getMonth } from "date-fns";
+import { format, startOfMonth, getDaysInMonth, getMonth, getYear } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
@@ -11,6 +11,7 @@ export const ResumeReserve = n => {
 	const currentDay = store.currentDay;
 	const currentMonth = getMonth(currentDay, "M");
 	const selectedMonth = getMonth(dataPickerdate, "M");
+	const selectedYear = getYear(dataPickerdate, "YYYY");
 
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
 
@@ -35,15 +36,19 @@ export const ResumeReserve = n => {
 
 	var daysInMonth = [];
 	for (let d = 1; d <= getDaysInMonth(dataPickerdate); d++) {
+		let id = format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd HH:mm:ss");
+
 		let className =
 			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
 		daysInMonth.push(
 			<td
+				id={id}
 				key={d}
 				className={className}
-				onClick={() => {
-					console.log("hola");
+				onClick={e => {
+					actions.pullSchedulerByMonth(id);
 					n.showModalCallback(true);
+					n.updateDateCallback(id);
 				}}>
 				<span>{d}</span>
 			</td>
@@ -51,7 +56,7 @@ export const ResumeReserve = n => {
 	}
 	/*----------------------------------------------------------------------------------------------------------------*/
 	/*----------------------------------------------------------------------------------------------------------------*/
-	/*generar matriz 5x7 de dias correspondientes del mes y completado con dias de otros mes */
+	/*generar matriz de dias correspondientes del mes y completado con dias de otros mes */
 
 	var totalSlots = [...blanks, ...daysInMonth];
 	var cells = [];

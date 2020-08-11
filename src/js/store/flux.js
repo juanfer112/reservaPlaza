@@ -84,6 +84,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ reserved: data });
 			},
 
+			pullSchedulerByMonth: async date => {
+				let data = await getActions().newFetch("schedules_by_month_and_year/" + date.toString());
+				setStore({ reserved: data });
+			},
+
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {

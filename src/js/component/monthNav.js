@@ -13,7 +13,11 @@ export const MonthNav = () => {
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showListMonth, showMonthpopup] = useState(false);
 	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
+	const [dates, setDates] = useState(currentDay);
 	const [show, setShow] = useState(false);
+	const updateDateCallback = id => {
+		setDates(id);
+	};
 	const showModalCallback = visibility => {
 		setShow(visibility);
 	};
@@ -85,8 +89,9 @@ export const MonthNav = () => {
 						dataPickerdate={dataPickerdate}
 						currentMonth={currentMonth}
 						showModalCallback={showModalCallback}
+						updateDateCallback={updateDateCallback}
 					/>
-					<ResumeModal showModalCallback={showModalCallback} show={show} />
+					<ResumeModal showModalCallback={showModalCallback} show={show} dataPickerdate={dates} />
 				</table>
 			</div>
 		</>
