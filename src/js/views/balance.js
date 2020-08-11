@@ -8,6 +8,7 @@ import { AdminBalance } from "../component/adminBalance";
 export const Balance = () => {
 	const { store, actions } = useContext(Context);
 	var currentDay = store.currentDay;
+	console.log(currentDay);
 	return (
 		<>
 			<Navbar />

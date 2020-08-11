@@ -64,6 +64,9 @@ export const MonthNav = () => {
 		});
 		return <div className="month-popup">{popup}</div>;
 	};
+	const fechas = store.reserved.map((reservadas, item) => {
+		return reservadas;
+	});
 
 	return (
 		<>
@@ -97,6 +100,7 @@ export const MonthNav = () => {
 						updatedDate={updatedDate}
 						showMonth={showMonth}
 						showYear={showYear}
+						fechas={fechas}
 					/>
 				</table>
 			</div>

@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
-import { format, startOfMonth, getDaysInMonth, getMonth, getYear } from "date-fns";
+import { format, startOfMonth, subHours, getDaysInMonth, getMonth, getYear } from "date-fns";
+
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
@@ -13,6 +14,7 @@ export const ResumeReserve = n => {
 	const updatedDate = n.updatedDate;
 	const currentDay = store.currentDay;
 	const currentMonth = n.currentMonth;
+	const fechas = n.fechas;
 
 	/*renderizado de los dias de la semana*/
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
@@ -35,38 +37,32 @@ export const ResumeReserve = n => {
 	}
 
 	var daysInMonth = [];
-	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
-		let className =
-			d == format(currentDay, "d") && selectedMonth == currentMonth && selectedYear == getYear(currentDay)
-				? "days current-day"
-				: "days";
+	var result = [];
 
-		daysInMonth.push(
-			<td
-				key={d}
-				className={className}
-				onClick={() => {
-					console.log("d:", d, "formatday:", format(currentDay, "d"), "className:", className);
-					console.log(
-						"selectedMonth:",
-						selectedMonth,
-						"getMonth:",
-						getMonth(currentDay, "M"),
-						"className:",
-						className
-					);
-					console.log(
-						"selectedYear:",
-						selectedYear,
-						"getYear:",
-						getYear(currentDay),
-						"className:",
-						className
-					);
-				}}>
-				<span>{d}</span>
-			</td>
+	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
+		const result = fechas.filter(
+			fecha =>
+				format(subHours(new Date(fecha.date), 2), "yyyy-MM-dd") ===
+				format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd")
 		);
+
+		if (d != format(currentDay, "d")) {
+			let className = result.length > 0 ? "reserved-day days" : "days";
+
+			daysInMonth.push(
+				<td key={d} className={className}>
+					<span>{d}</span>
+				</td>
+			);
+		} else {
+			let className = result.length > 0 ? "current-day days" : "days";
+
+			daysInMonth.push(
+				<td key={d} className={className}>
+					<span>{d}</span>
+				</td>
+			);
+		}
 	}
 
 	var totalSlots = [...blanks, ...daysInMonth];
