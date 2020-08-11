@@ -27,13 +27,10 @@ export const ProfileUsers = () => {
 			</div>
 			<div className="legend">
 				<div className="legend-details">
-					reservado :<span>verde</span>
+					Dias reservados :<span className="legend-green">{""}</span>
 				</div>
 				<div className="legend-details">
-					dia actual :<span>azul</span>
-				</div>
-				<div className="legend-details">
-					por reservar :<span>blanco</span>
+					Día actual :<span className="legend-blue">{""}</span>
 				</div>
 			</div>
 		</div>
