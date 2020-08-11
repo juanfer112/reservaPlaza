@@ -7,16 +7,31 @@ import FormControl from "reactstrap";
 
 export const ResumeModal = props => {
 	const { store, actions } = useContext(Context);
-
+	var arrayHours = [];
 	const reservedHours = store.reserved.map((hours, i) => {
-		if (format(new Date(props.dataPickerdate), "d") == format(new Date(hours["date"]), "d"))
-			return <div key={hours + i}>{format(new Date(hours["date"]), "hh:mm aaaa")}</div>;
+		if (format(new Date(props.dataPickerdate), "d") == format(new Date(hours["date"]), "d")) {
+			arrayHours.push(hours["date"]);
+			return (
+				<li className="list-group-item border-0 p-0" key={hours + i}>
+					<h4>{format(new Date(hours["date"]), "hh:mm aaaa")}</h4>
+				</li>
+			);
+		}
 	});
 
 	return (
 		<>
 			<Modal isOpen={props.show} toggle={() => props.showModalCallback(false)}>
-				<ModalBody>{reservedHours}</ModalBody>
+				{arrayHours.length > 0 ? (
+					<ModalBody>
+						<ul className="text-center list-group">{reservedHours}</ul>
+					</ModalBody>
+				) : (
+					<ModalBody>
+						<ul className="text-center list-group">No hay horas reservadas</ul>
+					</ModalBody>
+				)}
+
 				<ModalFooter className="m-auto">
 					<Button
 						color="secondary"
