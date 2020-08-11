@@ -177,6 +177,9 @@ Table{
 .container-balance{
     overflow: auto;
 }
+.btn-md{
+    min-width: 0;
+}
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
