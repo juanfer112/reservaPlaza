@@ -177,6 +177,9 @@ Table{
 .container-balance{
     overflow: auto;
 }
+.btn-md{
+    min-width: 0;
+}
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
@@ -231,7 +234,12 @@ Table{
 }
 .days, .empty-slot, .week-day{
     text-align: center;
-    height: 40px;
+    height: 1rem;
+}
+.empty-slot{
+    border-bottom: solid 0.05rem #dee2e6;
+    border-right: solid 0.05rem #dee2e6;
+    border-top: solid 0.05rem #dee2e6;
 }
 .week-day{
     font-size: 0.8em;
@@ -244,9 +252,20 @@ Table{
     width: 24px;
     height: 24px;
     line-height: 24px;
+    border-bottom: solid 0.05rem #dee2e6;
+    border-right: solid 0.05rem #dee2e6;
+    border-top: solid 0.05rem #dee2e6;
 }
 .current-day{
     background-color: #4285f4;
+    width:28px;
+    height: 28px;
+   
+    border-radius: 50%;
+    color:white;
+}
+.reserved-day{
+    background-color: #9efc91;
     width:28px;
     height: 28px;
     line-height: 28px;

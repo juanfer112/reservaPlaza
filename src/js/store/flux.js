@@ -2,6 +2,7 @@ import url from "../endpoints/url.js";
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
+
 	const urlBase = url;
 	return {
 		store: {
@@ -36,7 +37,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return null;
 				} else return response_json;
 			},
-
 			checkUser: async (email, password) => {
 				let data = await getActions().newFetch("login", {
 					method: "POST",
@@ -45,6 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					})
 				});
+
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
 						setStore({ token: data.access_token });
@@ -52,7 +53,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 			},
-
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
@@ -61,22 +61,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 			},
-
 			logout: () => {
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
-
 			pullEnterprises: async () => {
 				let data = await getActions().newFetch("enterprises");
 				setStore({ user: data[0], enterprises: data });
 			},
-
 			pullSpaces: async () => {
 				let data = await getActions().newFetch("spaces");
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
-
 			pullScheduler: async () => {
 				let data = await getActions().newFetch(
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
@@ -84,6 +80,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ reserved: data });
 			},
 
+			pullSchedulerByMonth: async date => {
+				let data = await getActions().newFetch("schedules_by_month_and_year/" + date.toString());
+				setStore({ reserved: data });
+			},
+      
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
@@ -95,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
+		
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",
@@ -105,6 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changeSchedulePUT: async () => {
+				const store = getStore();
 				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},
@@ -145,6 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addSchedules: date => {
+				console.log("date:", date);
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
