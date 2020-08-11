@@ -91,7 +91,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-center sticky-top p-2 my-2 bg-white w-100">
+			<div className="d-flex justify-content-center p-2 my-2 bg-white w-100">
 				<p>
 					{" "}
 					Pincha

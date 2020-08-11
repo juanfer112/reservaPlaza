@@ -2,7 +2,6 @@ import url from "../endpoints/url.js";
 import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
-
 	const urlBase = url;
 	return {
 		store: {
@@ -84,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let data = await getActions().newFetch("schedules_by_month_and_year/" + date.toString());
 				setStore({ reserved: data });
 			},
-      
+
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
@@ -96,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				window.location.reload(false);
 			},
-		
+
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",

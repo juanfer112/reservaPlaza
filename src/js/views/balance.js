@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const Balance = () => {
 	const { store, actions } = useContext(Context);
-	const arrayDays = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
+	const arrayDays = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 	const listRefs = store.week.map((ref, index) => {
 		return useRef(index);
 	});

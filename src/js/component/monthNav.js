@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ResumeReserve } from "./resumeReserve";
 import { ResumeModal } from "../component/resumeModal";
-import { format, addMonths, getDaysInMonth, getMonth, setMonth } from "date-fns";
+import { format, addMonths, getYear, getDaysInMonth, getMonth, setMonth, set } from "date-fns";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const MonthNav = () => {
@@ -16,6 +16,7 @@ export const MonthNav = () => {
 	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
 	const [dates, setDates] = useState(currentDay);
 	const [show, setShow] = useState(false);
+	const updatedDate = set(currentDay, { year: showYear, month: showMonth, date: format(currentDay, "d") });
 	const updateDateCallback = id => {
 		setDates(id);
 	};
@@ -106,6 +107,10 @@ export const MonthNav = () => {
 						currentMonth={currentMonth}
 						showModalCallback={showModalCallback}
 						updateDateCallback={updateDateCallback}
+						updatedDate={updatedDate}
+						showMonth={showMonth}
+						showYear={showYear}
+						fechas={fechas}
 					/>
 					<ResumeModal showModalCallback={showModalCallback} show={show} dataPickerdate={dates} />
 				</table>
