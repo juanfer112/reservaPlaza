@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			selectedCellHolder: [],
 			confirModal: false,
 			schedules: [],
-			enterprises: []
+			enterprises: [],
+			reservedByMonth: []
 		},
 
 		actions: {
@@ -36,7 +37,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return null;
 				} else return response_json;
 			},
-
 			checkUser: async (email, password) => {
 				let data = await getActions().newFetch("login", {
 					method: "POST",
@@ -45,6 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					})
 				});
+
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
 						setStore({ token: data.access_token });
@@ -60,27 +61,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 			},
-
 			logout: () => {
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
-
 			pullEnterprises: async () => {
 				let data = await getActions().newFetch("enterprises");
 				setStore({ user: data[0], enterprises: data });
 			},
-
 			pullSpaces: async () => {
 				let data = await getActions().newFetch("spaces");
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
-
 			pullScheduler: async () => {
 				let data = await getActions().newFetch(
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
 				);
 				setStore({ reserved: data });
+			},
+
+			pullSchedulerByMonth: async date => {
+				console.log("date:", date);
+				let data = await getActions().newFetch("schedules_by_month_and_year/" + date.toString());
+				setStore({ reservedByMonth: data });
 			},
 
 			postSchedules: async () => {
@@ -105,6 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changeSchedulePUT: async () => {
+				const store = getStore();
 				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {},
@@ -149,7 +153,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
-					console.log("sched:", sched);
 					check.push(sched["date"]);
 				});
 				if (!check.includes(date)) {

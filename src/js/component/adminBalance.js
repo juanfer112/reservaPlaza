@@ -91,7 +91,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-center sticky-top p-2 my-2 bg-white w-100">
+			<div className="d-flex justify-content-center p-2 my-2 bg-white w-100">
 				<p>
 					{" "}
 					Pincha
@@ -102,7 +102,7 @@ export const AdminBalance = n => {
 					para ver todas las horas!
 				</p>
 			</div>
-			<div className="title text-center font-weight-bold mx-5">
+			<div ref={n.ref} className="title text-center font-weight-bold mx-5">
 				{actions.transformDay(subDays(currentDay, 1))}
 			</div>
 			<div className="row mb-5">
