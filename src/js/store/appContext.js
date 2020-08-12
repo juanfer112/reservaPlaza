@@ -30,6 +30,9 @@ const injectContext = PassedComponent => {
 			},
 			[state.store.currentDay]
 		);
+		useEffect(() => {
+			state.actions.pullSchedulerByMonth(state.store.currentDay);
+		}, []);
 
 		useEffect(
 			() => {

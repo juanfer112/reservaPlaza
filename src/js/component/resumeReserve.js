@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
@@ -7,6 +7,7 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
+
 	const dataMonthPickerdate = n.dataMonthPickerdate;
 	const selectedMonth = n.showMonth;
 	const selectedYear = n.showYear;
@@ -14,6 +15,12 @@ export const ResumeReserve = n => {
 	const currentDay = store.currentDay;
 	const currentMonth = n.currentMonth;
 	const fechas = n.fechas;
+	useEffect(
+		() => {
+			actions.pullSchedulerByMonth(updatedDate);
+		},
+		[selectedMonth, selectedYear]
+	);
 
 	/*renderizado de los dias de la semana*/
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
@@ -40,7 +47,7 @@ export const ResumeReserve = n => {
 	var result = [];
 
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
-		let id = format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd HH:mm:ss");
+		let id = new Date(selectedYear, selectedMonth, d);
 
 		let className =
 			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";

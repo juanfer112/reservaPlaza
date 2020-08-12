@@ -82,7 +82,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			pullSchedulerByMonth: async date => {
 				console.log("date:", date);
-				let data = await getActions().newFetch("schedules_by_month_and_year/" + date.toString());
+				let data = await getActions().newFetch(
+					"schedules_by_month_and_year/" + format(date, "yyyy-MM-dd HH:mm:ss").toString()
+				);
 				setStore({ reservedByMonth: data });
 			},
 

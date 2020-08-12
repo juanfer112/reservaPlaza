@@ -13,7 +13,6 @@ export const MonthNav = () => {
 	const [showMonth, setMonthDatapicker] = useState(currentMonth);
 	const [showYear, setYearDatapicker] = useState(getYear(currentDay));
 	const [showListMonth, showMonthpopup] = useState(false);
-	const [dataPickerdate, setDataPickerdate] = useState(currentDay);
 	const [dates, setDates] = useState(currentDay);
 	const [show, setShow] = useState(false);
 	const updatedDate = set(currentDay, { year: showYear, month: showMonth, date: format(currentDay, "d") });
@@ -103,7 +102,6 @@ export const MonthNav = () => {
 						</tr>
 					</thead>
 					<ResumeReserve
-						dataPickerdate={dataPickerdate}
 						currentMonth={currentMonth}
 						showModalCallback={showModalCallback}
 						updateDateCallback={updateDateCallback}
