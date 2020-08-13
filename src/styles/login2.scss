@@ -1,91 +1,97 @@
 
 .login-background{
-    background-image:url('https://imgk.timesnownews.com/story/1550587496-Cooking-GettyImages.jpg?tr=w-600,h-450,fo-auto');
+    background-image:url('https://images.squarespace-cdn.com/content/v1/52e94776e4b057038de7cc93/1574111687331-2X14CAJWFF6SHTT97Q46/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5dNb1QJw9casjKdtTg1_-y4jz4ptJBmI9gQmbjSQnNGng/A08F07D2-392D-47A4-B7F4-D36AF16CA036.JPG?format=1500w');
     background-size: cover;
     background-attachment: fixed;
-    min-width: 100%;
-    min-height: 100%;
+    max-width: 75em;
     font-family: new time Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 0;
+    
 }
-.first-row{
-    margin-top: 65px;
-    box-shadow: -1px 1px 50px 10px black;
+img{
+    background-image:url('https://imgk.timesnownews.com/story/1550587496-Cooking-GettyImages.jpg?tr=w-600,h-450,fo-auto');
+    background-size: cover;
+    width: 100%; 
+    
+}
+.col-md-8{
+    background: rgba(0,0,0,0.5);
+    box-shadow: -0.0625rem 0.0625rem 3.125rem 0.625rem black;
+    padding: 0.625rem;
+    margin-top: 4rem;
+}
+ul{
+   margin-bottom: 1.25rem;
+   text-align: center;
+   padding: 0;
  }
- ul{
-   margin-bottom: 50px;
- }
+ 
  ul a{
-    font-size: 29px;
+    font-size: 1.82rem;
     color: white;
+    
  }
 ul a:hover{
     text-decoration: none;
     color: gray;
 }
 .log-in{
-    border-bottom: 2px solid #f44c89;
-    padding: 10px;
- }
+    border-bottom: 0.125rem solid lightgreen;
+    padding: 0.3125rem;
+    text-align: center;
+
+} 
+.first-row{
+    margin-top: 3.125rem;
+    box-shadow: -1px 1px 50px 10px black;
+}
 .label{
-     font-size: 20px;
+     font-size: 1.25rem;
      color:white;
      font-weight: normal;
-  }
-//  .control-label{
-//      color:white;
-
-//  }
-
-
+}
 .form-control{
     background: transparent;
-    border-radius: 0px;
+    border-radius: 0px; 
     border: 0px;
-    border-bottom: 1px solid #f44c89;
-    margin-bottom: 30px;
-    font-size: 22px;
+    border-bottom: 0.125rem solid lightgreen;
+    margin-bottom: 1.875rem;
+    font-size: 1.375rem;
     color: white;
-    padding: 20px;
+    width: 80%;
  }
 
 input[type="checkbox"]{
-    height:15px;
-    width: 15px; 
+    height:0.9375rem;
+    width: 0.9375rem; 
 }
 small{
-    font-size: 19px;
+    font-size: 1.25em;
     color:white;
 }
 .btn-info{
-    background: #f44c89;
-    border: 2px solid #f44c89;
-    border-radius: 0px;
-    width: 360px;
-    margin-top: 20px;
-    font-size: 20px;
     background: transparent;
+    border-bottom: 0px;
+    width: 90%;
+    border: 0.125em solid lightgreen;
+    font-size: 1.25em;
+    border-radius: 0px;
+    margin-top: 1.25rem; 
 }
 .btn-info:hover{
-    background:  #f44c89;
-    border:2px solid  #f44c89;
-
+    background: lightgreen;
+    border:0.125rem solid  lightgreen;
 }
 p{
-    font-size: 16px;
-    margin-top: 40px;
+    font-size: 1rem;
+    margin-top: 1rem;
     color:gray; 
 }
-img{
-    background-image:url('https://imgk.timesnownews.com/story/1550587496-Cooking-GettyImages.jpg?tr=w-600,h-450,fo-auto');
-    background-size: cover;
-    width: 450px;
-    height: 477px;
 
+@media screen and (max-width: 767px){
+    img{
+        display: none;
+    }
 }
-
-
-
 
 
 

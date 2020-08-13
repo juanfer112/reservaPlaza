@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { ProfileUsers } from "./views/profileUsers";
 import { Login } from "./views/login";
 import { NewLogin } from "./views/newlogin";
+import { NewLogin2 } from "./views/newlogin2";
 import { Calendar } from "./views/calendar";
 import { Balance } from "./views/balance";
 import { ListOfUsers } from "./views/listOfUsers";
@@ -26,6 +27,7 @@ export const Layout = () => {
 							<>
 								<Link to={"/login"}>LOGIN!</Link>
 								<Link to={"/newlogin"}>NEW LOGIN!</Link>
+								<Link to={"/newlogin2"}>NEW LOGIN2!</Link>
 								<Link to={"/reserva"}>RESERVA!</Link>
 								<Link to={"/balance"}>BALANCE!</Link>
 								<Link to={"/profile"}>PROFILE!</Link>
@@ -35,6 +37,7 @@ export const Layout = () => {
 						<Route path="/profile" component={ProfileUsers} />
 						<Route path="/login" component={Login} />
 						<Route path="/newlogin" component={NewLogin} />
+						<Route path="/newlogin2" component={NewLogin2} />
 						<Route path="/reserva" component={Calendar} />
 						<Route path="/balance" component={Balance} />
 						<Route path="/listOfUsers" component={ListOfUsers} />
