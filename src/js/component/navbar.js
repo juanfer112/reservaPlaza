@@ -6,7 +6,12 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar bg-white">
 			<div className="d-flex align-items-center">
-				<img className="logo" src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png" />
+				<Link to={"/login"}>
+					<img
+						className="logo"
+						src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png"
+					/>
+				</Link>
 				<h1 className="scheduler-title">B-Chicken</h1>
 			</div>
 			<Link to={"/"}>

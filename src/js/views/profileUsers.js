@@ -25,6 +25,7 @@ export const ProfileUsers = () => {
 			</div>
 			<div>
 				<Profile />
+				<Link to={"/reserva/:theid"}>RESERVA!</Link>
 			</div>
 			<div>
 				<MonthNav style={style} />

@@ -46,7 +46,6 @@ export const Login = () => {
 									className="btn btn-primary mx-auto "
 									onClick={() => {
 										actions.checkUser(user, password);
-										actions.isLogged();
 									}}>
 									Login
 								</button>
@@ -62,7 +61,9 @@ export const Login = () => {
 					)}
 				</div>
 			</div>
-			<Link to={"/"}>BACK!</Link>
+			<Link to={"/reserva/:theid"}>RESERVA!</Link>
+
+			<Link to={"/balance/:theid"}>BALANCE!</Link>
 		</div>
 	);
 };

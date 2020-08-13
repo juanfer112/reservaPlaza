@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { ProfileUsers } from "./views/profileUsers";
@@ -21,15 +21,8 @@ export const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Switch>
-						<Route exact path="/">
-							<>
-								<Link to={"/login"}>LOGIN!</Link>
-								<Link to={"/reserva"}>RESERVA!</Link>
-								<Link to={"/balance"}>BALANCE!</Link>
-								<Link to={"/profile"}>PROFILE!</Link>
-								<Link to={"/listOfUsers"}>USER LIST!</Link>
-							</>
-						</Route>
+						<Route exact path="/" component={Login} />
+
 						<Route path="/profile" component={ProfileUsers} />
 						<Route path="/login" component={Login} />
 						<Route path="/reserva" component={Calendar} />

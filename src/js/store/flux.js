@@ -51,14 +51,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data.access_token });
 						sessionStorage.setItem("access_token", data.access_token);
 					}
+					getActions().isLogged();
 				}
 			},
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
 					let data = await getActions().newFetch("protected", {
-						method: "GET"
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + store.token
+						}
 					});
+					console.log(data.logged_in_as);
+					return data.logged_in_as;
 				}
 			},
 			logout: () => {

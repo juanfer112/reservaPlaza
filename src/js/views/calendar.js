@@ -15,6 +15,8 @@ export const Calendar = () => {
 	return (
 		<div className="scheduler">
 			<Navbar />
+
+			<Link to={"/profile/:theid"}>PROFILE!</Link>
 			<div className="list-group-horizontal my-4">
 				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
