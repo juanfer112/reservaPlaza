@@ -15,7 +15,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			confirModal: false,
 			schedules: [],
 			enterprises: [],
-			reservedByMonth: []
+			reservedByMonth: [],
+			admin: false,
+			token: null
 		},
 
 		actions: {
@@ -48,10 +50,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
-						setStore({ token: data.access_token });
+						setStore({ token: data.access_token, admin: data.is_admin });
 						sessionStorage.setItem("access_token", data.access_token);
 					}
-					getActions().isLogged();
 				}
 			},
 			isLogged: async () => {
@@ -61,19 +62,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
-							authorization: "Bearer " + store.token
+							authorization: "Bearer " + sessionStorage.access_token
 						}
 					});
-					console.log(data.logged_in_as);
 					return data.logged_in_as;
 				}
 			},
-			logout: () => {
+			logout: async () => {
+				const store = getStore();
+				let data = await getActions().newFetch("logout", {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + store.token
+					}
+				});
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
 			pullEnterprises: async () => {
-				let data = await getActions().newFetch("enterprises");
+				const store = getStore();
+				let data = await getActions().newFetch("enterprises", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + store.token
+					}
+				});
 				setStore({ user: data[0], enterprises: data });
 			},
 			pullSpaces: async () => {
@@ -81,16 +96,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 			pullScheduler: async () => {
+				const store = getStore();
 				let data = await getActions().newFetch(
-					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString()
+					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString(),
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + store.token
+						}
+					}
 				);
 				setStore({ reserved: data });
 			},
 
 			pullSchedulerByMonth: async date => {
-				console.log("date:", date);
+				const store = getStore();
 				let data = await getActions().newFetch(
-					"schedules_by_month_and_year/" + format(date, "yyyy-MM-dd HH:mm:ss").toString()
+					"schedules_by_month_and_year/" + format(date, "yyyy-MM-dd HH:mm:ss").toString(),
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + store.token
+						}
+					}
 				);
 				setStore({ reservedByMonth: data });
 			},
