@@ -33,73 +33,81 @@ export const CreateOrEditUser = props => {
 				if (element.value.length > 4 && element.value.length < 80) {
 					newEnterprise["name"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("El nombre es invalido");
-					element.placeholder = arrayError[index];
+					element.value = "";
+
+					element.className += " invalid";
+					element.placeholder = "El nombre es invalido";
 				}
 			}
 			if (name == "last_name") {
 				if (element.value.length > 4 && element.value.length < 80) {
 					newEnterprise["last_name"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("El apellido es invalido");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "El apellido es invalido";
 				}
 			}
 			if (name == "email") {
 				if (element.value.length < 80 && regexEmail.test(String(element.value).toLowerCase())) {
 					newEnterprise["email"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("El correo es invalido");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "El correo es invalido";
 				}
 			}
 			if (name == "password") {
 				if (element.value.length > 8 && element.value.length < 80) {
 					newEnterprise["password"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("La contrasseña es invalida");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "La contrasseña es invalida";
 				}
 			}
 			if (name == "cif") {
 				if (element.value.length == 9) {
 					newEnterprise["cif"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("El cif es invalido");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "El cif es invalido";
 				}
 			}
 			if (name == "phone") {
-				if (element.value.length == 9) {
+				if (element.value.length >= 9) {
 					newEnterprise["phone"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("El numero de telefono es invalido");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "El numero de telefono es invalido";
 				}
 			}
 			if (name == "tot_hours") {
-				if (element.value >= 0 && typeof element.value == "number") {
+				if (element.value >= 0 && typeof parseInt(element.value) == "number") {
 					newEnterprise["tot_hours"] = element.value;
-					console.log(element.value == 0);
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("Utilizar un numero mayor o igual a 0");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "Utilizar un numero mayor o igual a 0";
 				}
 			}
 			if (name == "current_hours") {
-				if (element.value >= 0 && typeof element.value == "number") {
+				if (element.value >= 0 && typeof parseInt(element.value) == "number") {
 					newEnterprise["current_hours"] = element.value;
 				} else {
-					element.style.borderColor = "#ff3636";
 					arrayError.push("Utilizar un numero mayor o igual a 0");
-					element.placeholder = arrayError[index];
+					element.value = "";
+					element.className += " invalid";
+					element.placeholder = "Utilizar un numero mayor o igual a 0";
 				}
 			}
 		});
