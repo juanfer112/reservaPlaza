@@ -36,6 +36,7 @@ export const ConfirModal = () => {
 						color="primary"
 						onClick={() => {
 							actions.postSchedules();
+							setShow(!show);
 						}}>
 						Confirmar
 					</Button>

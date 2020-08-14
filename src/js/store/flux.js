@@ -96,8 +96,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {},
 						body: JSON.stringify(store.schedules)
 					});
+					getActions().pullScheduler();
 				}
-				window.location.reload(false);
 			},
 
 			postEnterprises: async body => {
@@ -106,7 +106,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {},
 					body: JSON.stringify(body)
 				});
-				window.location.reload(false);
+				getActions().pullEnterprises();
+				return response_json;
 			},
 
 			changeSchedulePUT: async () => {
@@ -116,17 +117,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {},
 					body: JSON.stringify(store.scheduleToChange)
 				});
-				window.location.reload(false);
+				getActions().pullScheduler();
 			},
 
 			changeEnterprisePUT: async enterprise => {
-				console.log(enterprise);
 				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
 					headers: {},
 					body: JSON.stringify(enterprise)
 				});
-				window.location.reload(false);
+				getActions().pullEnterprises();
 			},
 
 			cellID: day => {

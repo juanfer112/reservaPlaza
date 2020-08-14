@@ -3,9 +3,11 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reac
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
+import arrowButton from "../../../assets/right.png";
 import { Scheduler } from "../component/scheduler";
 import { Navbar } from "../component/navbar";
 import { ConfirModal } from "../component/confirModal";
+import { SpacesModal } from "../component/spacesModal";
 
 export const Calendar = () => {
 	const { store, actions } = useContext(Context);
@@ -15,10 +17,11 @@ export const Calendar = () => {
 	return (
 		<div className="scheduler">
 			<Navbar />
+
 			<div className="list-group-horizontal my-4">
 				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
-						<i className="fa fa-info-circle pt-1 pr-2" />
+						<SpacesModal />
 						{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 					</DropdownToggle>
 					<DropdownMenu className="dropD text-center font-weight-bold">
@@ -46,25 +49,21 @@ export const Calendar = () => {
 					para reservar horas de noche
 				</p>
 			</p>
-			<div className="d-flex align-items-center justify-content-between w-100">
-				<div className="d-flex">
-					<i
-						className="fa fa-arrow-left ml-3 mb-1"
-						aria-hidden="true"
-						onClick={() => {
-							actions.changeWeekOrDay("beforeWeek");
-						}}
-					/>
-				</div>
-				<div className="d-flex">
-					<i
-						className="fa fa-arrow-right mr-3 mb-1"
-						aria-hidden="true"
-						onClick={() => {
-							actions.changeWeekOrDay("afterWeek");
-						}}
-					/>
-				</div>
+			<div className="d-flex align-items-center justify-content-between w-75">
+				<img
+					className="arrowButtonLeft"
+					src={arrowButton}
+					onClick={() => {
+						actions.changeWeekOrDay("beforeWeek");
+					}}
+				/>
+				<img
+					className="arrowButtonRight"
+					src={arrowButton}
+					onClick={() => {
+						actions.changeWeekOrDay("afterWeek");
+					}}
+				/>
 			</div>
 
 			<Scheduler />

@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+.title-font{
+    font-family: 'Abril Fatface', cursive;
+}
+.img-space{
+    width: 10rem;
+    max-height: 7rem;
+}
 i, u, td.reserved{
     cursor: pointer;
 }
 .navbar{
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
-    border-top: 0.15rem solid #35553e;
-    border-bottom: 0.05rem solid #a3acb2;
-    box-shadow: 0 0.05rem 0 rgba(12,13,14,0.15);
+    background-color: #E3F0B8;
 }
 .scheduler{
     width: 100%;
@@ -59,8 +64,7 @@ input::placeholder{
     font-size: 1rem;
 }
 .scheduler-title{
-    font-size: 2rem;
-    margin-left: 1rem;
+    font-size: 3.5rem;
     color: #35553e;
 }
 .fa{
@@ -68,10 +72,20 @@ input::placeholder{
 }
 .fa-info-circle{
     cursor: help;
-    font-size: 0.8rem;
+    font-size: 1rem;
     position: absolute;
     top: 0;
     right: 0;
+}
+.fa-info-circle:hover{
+    font-size: 2rem;
+}
+.arrowButtonLeft{
+    margin: 2rem;
+    transform: scaleX(-1);
+}
+.arrowButtonRight{
+    margin: 2rem;
 }
 .dropD{
     width: 7rem;
