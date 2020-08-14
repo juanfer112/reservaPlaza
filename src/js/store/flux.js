@@ -77,6 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						authorization: "Bearer " + store.token
 					}
 				});
+				console.log(data);
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
