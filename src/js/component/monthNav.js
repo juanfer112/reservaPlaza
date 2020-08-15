@@ -99,6 +99,9 @@ export const MonthNav = () => {
 									value={showYear}
 								/>
 							</td>
+							<td colSpan="2" className="nav-month">
+								<i className="prev fa fa-fw fa-chevron-left" />
+							</td>
 						</tr>
 					</thead>
 					<ResumeReserve

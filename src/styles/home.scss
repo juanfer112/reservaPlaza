@@ -27,7 +27,7 @@ i, u, td.reserved{
     height: 4rem;
 }
 .avatarProfile{
-    height: 8vw;
+    height: 4rem;
 }
 .perfil{
     cursor: pointer;
@@ -236,11 +236,8 @@ Table{
     text-align: center;
     height: 1rem;
 }
-.empty-slot{
-    border-bottom: solid 0.05rem #dee2e6;
-    border-right: solid 0.05rem #dee2e6;
-    border-top: solid 0.05rem #dee2e6;
-}
+
+
 .week-day{
     font-size: 0.8em;
 }
@@ -252,9 +249,7 @@ Table{
     width: 24px;
     height: 24px;
     line-height: 24px;
-    border-bottom: solid 0.05rem #dee2e6;
-    border-right: solid 0.05rem #dee2e6;
-    border-top: solid 0.05rem #dee2e6;
+  
 }
 .current-day{
     background-color: #4285f4;
@@ -290,7 +285,8 @@ Table{
 
 }
 .editor-year{
-    max-width: 3.6em;
+    max-width: 3.1em;
+    max-height: 1.2em;
 }
 .label-month, .label-year{
     font-size: 0.6em;
@@ -307,11 +303,11 @@ Table{
 }
 .legend-green{
     
-    background: green;
+    background: #9efc91;
     border: 0.05rem solid #999
 }
 .legend-blue{
-    background:blue;
+    background: #4285f4;
     
     border: 0.05rem solid #999
 }
@@ -330,5 +326,5 @@ span:before {
 }
 .forgotPasword{
     cursor: pointer;
-
 }
+

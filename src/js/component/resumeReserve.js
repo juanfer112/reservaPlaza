@@ -75,7 +75,7 @@ export const ResumeReserve = n => {
 				</td>
 			);
 		} else {
-			let className = result.length > 0 ? "current-day days" : "days";
+			let className = result.length > 0 ? "reserved-day days" : "days";
 
 			daysInMonth.push(
 				<td
@@ -87,7 +87,7 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span>{d}</span>
+					<span className="current-day">{d}</span>
 				</td>
 			);
 		}

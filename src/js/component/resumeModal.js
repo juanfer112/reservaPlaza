@@ -8,6 +8,8 @@ import FormControl from "reactstrap";
 export const ResumeModal = props => {
 	const { store, actions } = useContext(Context);
 	var arrayHours = [];
+	var arraySpace = [];
+
 	const reservedHours = store.reservedByMonth.map((hours, i) => {
 		if (format(new Date(props.dataPickerdate), "d") == format(new Date(hours["date"]), "d")) {
 			arrayHours.push(hours["date"]);
@@ -18,13 +20,41 @@ export const ResumeModal = props => {
 			);
 		}
 	});
+	const reservedSpace = store.reservedByMonth.map((space, i) => {
+		if (format(new Date(props.dataPickerdate), "d") == format(new Date(space["date"]), "d")) {
+			console.log("hours:", space);
+			arraySpace.push(space["space_name"]);
+			return (
+				<li className="list-group-item border-0 p-0" key={space + i}>
+					<h4>{arraySpace}</h4>
+				</li>
+			);
+		}
+	});
 
 	return (
 		<>
 			<Modal isOpen={props.show} toggle={() => props.showModalCallback(false)}>
 				{arrayHours.length > 0 ? (
 					<ModalBody>
-						<ul className="text-center list-group">{reservedHours}</ul>
+						<table className="table mr-auto table-responsive table-bordered table-striped">
+							<thead>
+								<tr>
+									<th className="text-center align-middle text-secondary" scope="col">
+										Salas seleccionadas
+									</th>
+									<th className="text-center align-middle text-secondary" scope="col">
+										Horario seleccionado
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{reservedSpace}</td>
+									<td>{reservedHours}</td>
+								</tr>
+							</tbody>
+						</table>
 					</ModalBody>
 				) : (
 					<ModalBody>

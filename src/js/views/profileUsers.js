@@ -30,10 +30,10 @@ export const ProfileUsers = () => {
 			</div>
 			<div className="legend">
 				<div className="legend-details">
-					Dias reservados :<span className="legend-green">{""}</span>
+					Dias reservados <span className="legend-green">{""}</span>
 				</div>
 				<div className="legend-details">
-					Día actual :<span className="legend-blue">{""}</span>
+					Día actual <span className="legend-blue">{""}</span>
 				</div>
 			</div>
 		</div>
