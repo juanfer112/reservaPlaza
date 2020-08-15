@@ -17,21 +17,30 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-		useEffect(() => {
-			state.actions.pullEnterprises();
-			state.actions.pullScheduler();
-			state.actions.cellID(new Date());
-			state.actions.pullSpaces();
-		}, []);
+		useEffect(
+			() => {
+				if (state.store.token != null) {
+					state.actions.pullEnterprises();
+					state.actions.pullScheduler();
+					state.actions.cellID(new Date());
+					state.actions.pullSpaces();
+				}
+			},
+			[state.store.token]
+		);
 
 		useEffect(
 			() => {
-				state.actions.pullScheduler();
+				if (state.store.token != null) {
+					state.actions.pullScheduler();
+				}
 			},
 			[state.store.currentDay]
 		);
 		useEffect(() => {
-			state.actions.pullSchedulerByMonth(state.store.currentDay);
+			if (state.store.token != null) {
+				state.actions.pullSchedulerByMonth(state.store.currentDay);
+			}
 		}, []);
 
 		useEffect(
