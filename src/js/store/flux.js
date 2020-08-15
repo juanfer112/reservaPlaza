@@ -67,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			pullEnterprises: async () => {
 				let data = await getActions().newFetch("enterprises");
+				console.log(data);
 				setStore({ user: data[0], enterprises: data });
 			},
 			pullSpaces: async () => {
