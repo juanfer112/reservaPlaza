@@ -45,7 +45,6 @@ export const Navbar = () => {
 							<DropdownItem
 								onClick={e => {
 									actions.logout();
-									console.log(item["text"]);
 								}}
 								key={index}>
 								<Link to={"/login"}>{item["text"]}</Link>
