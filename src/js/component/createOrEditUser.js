@@ -91,7 +91,7 @@ export const CreateOrEditUser = props => {
 				}
 			}
 			if (name == "tot_hours") {
-				if (element.value >= 0 && typeof parseInt(element.value) == "number") {
+				if (element.value.length > 0 && element.value >= 0 && typeof parseInt(element.value) == "number") {
 					newEnterprise["tot_hours"] = element.value;
 				} else {
 					arrayError.push("Utilizar un numero mayor o igual a 0");
@@ -101,7 +101,7 @@ export const CreateOrEditUser = props => {
 				}
 			}
 			if (name == "current_hours") {
-				if (element.value >= 0 && typeof parseInt(element.value) == "number") {
+				if (element.value.length > 0 && element.value >= 0 && typeof parseInt(element.value) == "number") {
 					newEnterprise["current_hours"] = element.value;
 				} else {
 					arrayError.push("Utilizar un numero mayor o igual a 0");
@@ -201,7 +201,7 @@ export const CreateOrEditUser = props => {
 								name="tot_hours"
 								className="form-control"
 								placeholder="Horas contratadas"
-								defaultValue={enterprise ? enterprise.tot_hours : ""}
+								defaultValue={enterprise ? enterprise.tot_hours : "0"}
 							/>
 						</div>
 						<div className="form-group">
@@ -211,7 +211,7 @@ export const CreateOrEditUser = props => {
 								name="current_hours"
 								className="form-control"
 								placeholder="Horas restantes"
-								defaultValue={enterprise ? enterprise.current_hours : ""}
+								defaultValue={enterprise ? enterprise.current_hours : "0"}
 							/>
 						</div>
 					</form>
