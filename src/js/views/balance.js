@@ -17,6 +17,7 @@ export const Balance = () => {
 	return (
 		<>
 			<Navbar />
+			<Link to={"/listOfUsers/:theid"}>USER LIST!</Link>
 			<div className="d-flex justify-content-between mt-3">
 				<i
 					className="fa fa-arrow-left mx-3 mb-1"

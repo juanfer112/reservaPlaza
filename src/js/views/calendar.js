@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../../styles/home.scss";
 import arrowButton from "../../../assets/right.png";
 import { Scheduler } from "../component/scheduler";
@@ -15,9 +15,16 @@ export const Calendar = () => {
 	const toggle = () => setOpen(!dropdownOpen);
 
 	return (
-		<div className="scheduler">
+		<>
+			{store.token != null && store.admin ? (
+				<>
+					<Redirect to="/listOfUsers" />
+				</>
+			) : (
+				<div className="scheduler">
+					<div className="scheduler">
 			<Navbar />
-
+      <Link to={"/profile/:theid"}>PROFILE!</Link>
 			<div className="list-group-horizontal my-4">
 				<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
 					<DropdownToggle className="btnDropdown" caret="lg" color="success">
@@ -65,9 +72,7 @@ export const Calendar = () => {
 					}}
 				/>
 			</div>
-
-			<Scheduler />
-			<ConfirModal />
-		</div>
+			)}
+		</>
 	);
 };
