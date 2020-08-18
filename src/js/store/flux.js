@@ -82,7 +82,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.setItem("access_token", null);
 			},
 			pullEnterprises: async () => {
-
 				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
 					method: "GET",
