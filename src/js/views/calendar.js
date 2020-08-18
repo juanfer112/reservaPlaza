@@ -71,6 +71,8 @@ export const Calendar = () => {
 							}}
 						/>
 					</div>
+					<Scheduler />
+					<ConfirModal />
 				</div>
 			)}
 		</>
