@@ -20,7 +20,6 @@ export const Profile = () => {
 					className="avatarProfile float-left rounded-circle mr-2 shadow"
 				/>
 
-
 				<div className="col-sm-10 col-md-8 shadow">
 					<div className="row justify-content">
 						{Object.keys(store.user)
@@ -28,12 +27,10 @@ export const Profile = () => {
 							.map((element, index) => {
 								if (element == "name" || element == "phone") {
 									return (
-
 										<div className="row justify-content">
 											<p className="col-sm-12 col-md-6 mx-2" key={index}>
 												{element}:{store.user[element]}
 											</p>
-
 										</div>
 									);
 								} else if (element == "tot_hours" || element == "cif") {
@@ -42,7 +39,6 @@ export const Profile = () => {
 											<p className="col-sm-12 col-md-6 mx-2 " key={index}>
 												{element}:{store.user[element]}
 											</p>
-
 										</div>
 									);
 								} else if (element == "brands") {

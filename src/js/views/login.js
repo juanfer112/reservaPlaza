@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, Redirect } from "react-router-dom";
-import "../../styles/home.scss";
+import "../../styles/login.scss";
 
 export const Login = () => {
 	const { actions, store } = useContext(Context);
@@ -34,78 +34,52 @@ export const Login = () => {
 					<Redirect to="/reserva" />
 				</>
 			) : (
-				<div className="justify-content-center">
-					<div className="text-center mt-3">
-						<p>
-							<img
-								className="form-img w-5 mt-5"
-								src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
-							/>
-						</p>
+				<div className="limiter">
+					<div className="container-login100">
+						<div className="wrap-login100">
+							<form className="login100-form validate-form">
+								<span className="login100-pic">
+									<img
+										src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
+										alt="IMG"
+									/>
+								</span>
 
-						<div className="container d-flex justify-content-center mx-auto">
-							<form>
-								<div className="rowLogin">
-									<div className="col-4 col-md-4 mt-4 text-center">
-										{!forgot ? (
-											<div className="card card-body my-3 p-5">
-												<div className=" input-group">
-													<input
-														required
-														className="form-control"
-														name="email"
-														aria-describedby="emailHelp"
-														type="email"
-														placeholder="USUARIO"
-														onChange={e => setUser((user = e.target.value))}
-													/>
-												</div>
-												<div className="input-group my-2">
-													<input
-														required
-														className="form-control"
-														type="password"
-														placeholder="CONTRASEÑA"
-														onChange={e => setPassword((password = e.target.value))}
-													/>
-												</div>
-												<a
-													className="forgotPasword"
-													onClick={() => {
-														setForgot(true);
-													}}>
-													¿Olvido su contraseña?
-												</a>
-												<div className="text-center mt-4">
-													<button
-														type="submit"
-														className="btn btn-primary mx-auto "
-														onClick={e => {
-															e.preventDefault();
-															actions.checkUser(user, password);
-														}}>
-														Login
-													</button>
-												</div>
-											</div>
-										) : (
-											<>
-												<input
-													className="form-control "
-													type="email"
-													placeholder="Correo electronico"
-												/>
-												<button
-													type="button"
-													className="btn btn-primary mx-auto my-5"
-													onClick={() => {
-														setForgot(false);
-													}}>
-													Restablecer
-												</button>
-											</>
-										)}
-									</div>
+								<div
+									className="wrap-input100 validate-input"
+									data-validate="Valid email is required: ex@abc.xyz">
+									<input className="input100" type="text" name="email" placeholder="Email" />
+									<span className="focus-input100" />
+									<span className="symbol-input100">
+										<i className="fa fa-envelope fa-icon-login" aria-hidden="true" />
+									</span>
+								</div>
+
+								<div className="wrap-input100 validate-input" data-validate="Password is required">
+									<input className="input100" type="password" name="pass" placeholder="Password" />
+									<span className="focus-input100" />
+									<span className="symbol-input100">
+										<i className="fa fa-lock fa-icon-login" aria-hidden="true" />
+									</span>
+								</div>
+
+								<div className="container-login100-form-btn">
+									<button className="login100-form-btn">Login</button>
+								</div>
+
+								<div className="text-center p-t-12">
+									<span className="txt1">Olvidó su</span>
+									<a className="txt2" href="#">
+										{" "}
+										Password?
+									</a>
+								</div>
+
+								<div className="text-center p-t-136">
+									<a className="txt2" href="#">
+										{" "}
+										<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
+									</a>
 								</div>
 							</form>
 						</div>
