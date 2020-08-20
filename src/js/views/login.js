@@ -48,7 +48,15 @@ export const Login = () => {
 								<div
 									className="wrap-input100 validate-input"
 									data-validate="Valid email is required: ex@abc.xyz">
-									<input className="input100" type="text" name="email" placeholder="Email" />
+									<input
+										className="input100"
+										type="email"
+										name="email"
+										placeholder="Email"
+										required
+										aria-describedby="emailHelp"
+										onChange={e => setUser((user = e.target.value))}
+									/>
 									<span className="focus-input100" />
 									<span className="symbol-input100">
 										<i className="fa fa-envelope fa-icon-login" aria-hidden="true" />
@@ -56,7 +64,14 @@ export const Login = () => {
 								</div>
 
 								<div className="wrap-input100 validate-input" data-validate="Password is required">
-									<input className="input100" type="password" name="pass" placeholder="Password" />
+									<input
+										className="input100"
+										type="password"
+										name="pass"
+										required
+										placeholder="CONTRASEÑA"
+										onChange={e => setPassword((password = e.target.value))}
+									/>
 									<span className="focus-input100" />
 									<span className="symbol-input100">
 										<i className="fa fa-lock fa-icon-login" aria-hidden="true" />
@@ -64,7 +79,15 @@ export const Login = () => {
 								</div>
 
 								<div className="container-login100-form-btn">
-									<button className="login100-form-btn">Login</button>
+									<button
+										className="login100-form-btn"
+										type="submit"
+										onClick={e => {
+											e.preventDefault();
+											actions.checkUser(user, password);
+										}}>
+										Login
+									</button>
 								</div>
 
 								<div className="text-center p-t-12">
