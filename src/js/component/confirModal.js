@@ -33,14 +33,14 @@ export const ConfirModal = () => {
 				)}
 				<ModalFooter className="m-auto">
 					<Button
-						color="primary"
+						className="btn-confirm"
 						onClick={() => {
 							actions.postSchedules();
 							setShow(!show);
 						}}>
 						Confirmar
 					</Button>
-					<Button color="secondary" onClick={() => setShow(!show)}>
+					<Button className="btn-close" onClick={() => setShow(!show)}>
 						Cancelar
 					</Button>
 				</ModalFooter>

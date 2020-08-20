@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import setting from "../../../assets/home.png";
 import { Link } from "react-router-dom";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
@@ -21,23 +22,14 @@ export const Navbar = () => {
 	];
 
 	return (
-		<nav className="navbar bg-white">
-			<div className="d-flex align-items-center">
-				<Link to={"/login"}>
-					<img
-						className="logo"
-						src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png"
-					/>
-				</Link>
+		<nav className="navbar">
+			<Link className="mx-auto" to={"/login"}>
 				<h1 className="scheduler-title">B-Chicken</h1>
-			</div>
+			</Link>
 
 			<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
 				<DropdownToggle caret="md" color="d-none">
-					<img
-						className="perfil"
-						src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
-					/>
+					<img className="perfil" src={setting} />
 				</DropdownToggle>
 				<DropdownMenu className="text-center font-weight-bold">
 					{settings.map((item, index) => {

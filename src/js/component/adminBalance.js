@@ -14,8 +14,8 @@ export const AdminBalance = n => {
 	var scheduleDateHourToChange;
 
 	const [show, setShow] = useState(false);
-
 	var hoursOptions = [];
+
 	for (let hour = 0; hour < 24; hour++) {
 		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
 		hoursOptions.push(
@@ -91,7 +91,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-center p-2 my-2 bg-white w-100">
+			<div className="d-flex fixed justify-content-center p-2 my-2 bg-white w-100">
 				<p>
 					{" "}
 					Pincha
@@ -159,7 +159,7 @@ export const AdminBalance = n => {
 				</ModalBody>
 				<ModalFooter className="m-auto">
 					<Button
-						color="primary"
+						className="btn-confirm"
 						onClick={
 							store.scheduleToChange
 								? () => {
@@ -175,7 +175,7 @@ export const AdminBalance = n => {
 						Confirmar
 					</Button>
 					<Button
-						color="secondary"
+						className="btn-close"
 						onClick={() => {
 							setShow(!show);
 						}}>

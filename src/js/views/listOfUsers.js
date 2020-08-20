@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Navbar } from "../component/navbar";
 import { CreateOrEditUser } from "../component/createOrEditUser";
+import { Link } from "react-router-dom";
 
 export const ListOfUsers = () => {
 	const { store, actions } = useContext(Context);
@@ -17,6 +18,7 @@ export const ListOfUsers = () => {
 	return (
 		<>
 			<Navbar />
+			<Link to={"/balance"}>BALANCE!</Link>
 			<div className="container container-userList">
 				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
 				<table className="table mr-auto table-responsive table-bordered table-striped">
