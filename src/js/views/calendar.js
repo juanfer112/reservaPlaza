@@ -3,7 +3,6 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reac
 import { Context } from "../store/appContext";
 import { Link, Redirect } from "react-router-dom";
 import "../../styles/home.scss";
-import arrowButton from "../../../assets/right.png";
 import { Scheduler } from "../component/scheduler";
 import { Navbar } from "../component/navbar";
 import { ConfirModal } from "../component/confirModal";
@@ -21,12 +20,11 @@ export const Calendar = () => {
 					<Redirect to="/listOfUsers" />
 				</>
 			) : (
-				<div className="scheduler">
+				<div className="container-fluid p-0">
 					<Navbar />
-					<Link to={"/profile/:theid"}>PROFILE!</Link>
-					<div className="list-group-horizontal my-4">
+					<div className="list-group-horizontal my-4 align-items-center">
 						<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
-							<DropdownToggle className="btnDropdown" caret="lg" color="success">
+							<DropdownToggle className="btnDropdown" color caret="lg">
 								<SpacesModal />
 								{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 							</DropdownToggle>
@@ -41,35 +39,42 @@ export const Calendar = () => {
 							</DropdownMenu>
 						</ButtonDropdown>
 						<p className="availableHours mr-auto ml-4">
-							{(store.user != undefined ? store.user["current_hours"] : "loading...") + "/H restantes"}
+							{store.user != undefined ? (
+								<p>
+									Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
+									{store.user["current_hours"]} horas
+								</p>
+							) : (
+								"loading..."
+							)}
 						</p>
 					</div>
-					<p className="nightHours ml-4">
-						<p>
+					<p className="text-center">
+						{" "}
+						Servicio 24H disponible, pincha
+						<i className="text-primary" onClick={() => actions.changeNight()}>
 							{" "}
-							Servicio 24H disponible, pincha
-							<i className="text-primary" onClick={() => actions.changeNight()}>
-								{" "}
-								aqui{" "}
-							</i>
-							para reservar horas de noche
-						</p>
+							aqui{" "}
+						</i>
+						para reservar horas de noche
 					</p>
-					<div className="d-flex align-items-center justify-content-between w-75">
-						<img
-							className="arrowButtonLeft"
-							src={arrowButton}
-							onClick={() => {
-								actions.changeWeekOrDay("beforeWeek");
-							}}
-						/>
-						<img
-							className="arrowButtonRight"
-							src={arrowButton}
-							onClick={() => {
-								actions.changeWeekOrDay("afterWeek");
-							}}
-						/>
+					<div className="month-navigate d-flex align-items-center justify-content-around">
+						<h5>{actions.currentMonth()}</h5>
+						<div />
+						<div>
+							<i
+								className="fa fa-angle-left base-green"
+								onClick={() => {
+									actions.changeWeekOrDay("beforeWeek");
+								}}
+							/>
+							<i
+								className="fa fa-angle-right base-green ml-3"
+								onClick={() => {
+									actions.changeWeekOrDay("afterWeek");
+								}}
+							/>
+						</div>
 					</div>
 					<Scheduler />
 					<ConfirModal />

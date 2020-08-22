@@ -12,7 +12,7 @@ export const NewDay = n => {
 	for (let x = 0; x < 25; x++) {
 		if (x == 0) {
 			holder.push(
-				<div key={x} className="title text-center font-weight-bold">
+				<div key={x} className="title text-center">
 					{actions.transformDay(day)}
 				</div>
 			);

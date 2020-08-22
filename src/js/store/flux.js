@@ -1,5 +1,16 @@
 import url from "../endpoints/url.js";
-import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
+import {
+	format,
+	startOfWeek,
+	endOfDay,
+	addDays,
+	subDays,
+	subHours,
+	addWeeks,
+	subWeeks,
+	startOfDay,
+	getMonth
+} from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	const urlBase = url;
@@ -17,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			enterprises: [],
 			reservedByMonth: [],
 			admin: false,
-			token: null
+			token: sessionStorage.access_token ? sessionStorage.access_token : null
 		},
 
 		actions: {
@@ -95,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			pullSpaces: async () => {
 				let data = await getActions().newFetch("spaces");
+				data = data.sort((space1, space2) => space1.spacetype_id - space2.spacetype_id);
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 			pullScheduler: async () => {
@@ -182,11 +194,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			transformDay: day => {
 				var dayNumber = format(day, "d");
-				var month = format(day, "LL").toString();
-				var dayAndMonth = dayNumber + "/" + month;
 				var dayNameIndex = format(day, "i").toString();
 				const arrayDayNames = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
-				return arrayDayNames[dayNameIndex - 1] + dayAndMonth;
+				return arrayDayNames[dayNameIndex - 1] + dayNumber;
 			},
 
 			addSchedules: date => {
@@ -324,6 +334,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				date ? (newScheduleToChange.date = date) : "";
 				space_name ? (newScheduleToChange.space_name = space_name) : "";
 				setStore({ scheduleToChange: newScheduleToChange });
+			},
+
+			currentMonth: () => {
+				const store = getStore();
+				const arrayMonthsNames = [
+					"Enero",
+					"Febrero",
+					"Marzo",
+					"Abril",
+					"Mayo",
+					"Junio",
+					"Julio",
+					"Agosto",
+					"Septiembre",
+					"Octubre",
+					"Noviembre",
+					"Diciembre"
+				];
+				if (getMonth(store.week[0]) == getMonth(store.week[store.week.length - 1])) {
+					return arrayMonthsNames[getMonth(store.week[0])];
+				} else {
+					return (
+						arrayMonthsNames[getMonth(store.week[0])] +
+						" - " +
+						arrayMonthsNames[getMonth(store.week[store.week.length - 1])]
+					);
+				}
 			}
 		}
 	};

@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 .title-font{
     font-family: 'Abril Fatface', cursive;
 }
+.base-green{
+    color: #35553e;
+}
 .invalid::placeholder{
-    color: #ff3636;
+    color: #c52233;
 }
 .img-space{
     width: 10rem;
@@ -13,18 +15,7 @@ i, u, td.reserved{
     cursor: pointer;
 }
 .navbar{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    background-color: #E3F0B8;
-    justify-content: space-between;
-}
-.scheduler{
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
+    background-color: #9dd981;
 }
 .rowLogin{
     display: flex;
@@ -43,14 +34,24 @@ i, u, td.reserved{
     cursor: pointer;
 }
 p{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin: 0;
     padding: 0;
 }
-.btnDropdown{
+.btnDropdown, .btnDropdown:focus{
     height: 4rem;
-    width: 13rem;
-    font-size: 2rem; 
+    width: 10rem;
+    color: white;
+    font-size: 1.5rem;
+    background-color: #35553e;
+    border-radius: 10px;
+    box-shadow: none;
+}
+.btnDropdown:hover{
+  background-color: #fff;
+  color:#35553e;
+  font-weight: bold;
+  border: 2px solid #35553e;
 }
 .list-group-horizontal{
     display: flex;
@@ -69,8 +70,7 @@ input::placeholder{
     font-size: 1rem;
 }
 .scheduler-title{
-    font-size: 2rem;
-    color: #35553e;
+    font-size: 2.5rem;
     margin-bottom: 0;
 }
 .fa{
@@ -94,11 +94,7 @@ input::placeholder{
     margin: 2rem;
 }
 .dropD{
-    width: 7rem;
-}
-.nightHours{
-    display: flex;
-    align-items: center;
+    width: 10rem;
 }
 .footer{
     display: flex;
@@ -110,12 +106,23 @@ input::placeholder{
 .confirm{    
     margin: auto;
     margin-bottom: 1rem;
-    height: 1.2rem;
+    height: 2rem;
     width: 10rem;
-    font-size: 2rem; 
+    font-size: 1.5rem;
+    background-color: #32C421;
+    border: 0;
+    border-radius: 100px;
+    color: white;
+    line-height: 40px;
+}
+.confirm:hover{
+    background-color: #fff;
+    color:#32C421;
+    font-weight: bold;
+    border: 2px solid #32C421;
 }
 .reserved {
-  background-color: #a3acb2;
+  background-color: #BCBDC0;
 }
 .rowSched {
     overflow-x: auto;
@@ -127,23 +134,24 @@ input::placeholder{
 .day {
     display: inline-table;
     white-space:normal;
-    max-width: 12.5rem;
+    max-width: 10rem;
 }
 .title{
     border: solid 0.05rem #dee2e6;
-    font-size: 1.4rem;
-    height: 2rem;
+    font-size: 1.2rem;
+    height: 2rem;//.3rem 0;
+    background-color: #9dd981;
 }
 .titleH{
     border: solid 0.05rem #dee2e6;
-    font-size: 1.4rem;
-    height: 2rem;
+    font-size: 1.2rem;
+    height: 2rem; //.3rem 0;
+    background-color: #9dd981;
 }
 .hours{
     height: 2rem;
-    border-bottom: solid 0.05rem #dee2e6; 
-    border-left: solid 0.05rem #dee2e6; 
-    border-right: solid 0.05rem #dee2e6;
+    background-color: #efefef;
+    border: solid .05rem #dadcec;
 }
 .cell{
     cursor: copy;
@@ -203,11 +211,32 @@ Table{
 .btn-close{
     background-color: #c52233;
 }
+.btn-close:hover{
+  background-color: #fff;
+  color:#c52233;
+  font-weight: bold;
+  border: 2px solid #c52233;
+}
 .btn-confirm{
     background-color: #2B3800;
 }
+.btn-confirm:hover{
+  background-color: #fff;
+  color:#2B3800;
+  font-weight: bold;
+  border: 2px solid #2B3800;
+}
 .container-userList{
     margin-top: 2rem;
+}
+.home-dropDown:focus{
+    box-shadow: none;
+}
+.close:focus{
+    border: 0;
+}
+.bg-odd{
+    background-color: #efefef;
 }
 @media screen and (min-width: 1000px){
     body{
@@ -216,10 +245,9 @@ Table{
 }
 @media screen and (max-width: 600px){
     div.rowSched > div:first-child{
-        width: 6rem;
+        width: 10rem;
         position: absolute;
         z-index: 1;
-        background-color: white;
     }
     div.rowSched > div:nth-child(2){
         margin-left: 6rem;
@@ -238,6 +266,12 @@ Table{
     }
     .container-userList{
         padding: 0;
+    }
+    .fa-angle-right{
+        margin-right: 0;
+    }
+    .hours, .titleH{
+        width: 6rem;
     }
 }
 /*css RESUMEN RESERVAS*/
@@ -324,17 +358,15 @@ Table{
 .legend-details{
     padding: 0.3em;
 }
-.legend-green{
-    
+.legend-green{    
     background: #9efc91;
     border: 0.05rem solid #999
 }
 .legend-blue{
-    background: #4285f4;
-    
+    background: #4285f4;    
     border: 0.05rem solid #999
 }
-span:before {
+.span-style:before {
   content: "";
   display: inline-block;
   width:0.938em;

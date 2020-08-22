@@ -11,24 +11,29 @@ export const Navbar = () => {
 	const toggle = () => setOpen(!dropdownOpen);
 	const settings = [
 		{
-			text: "My Profile"
+			text: (
+				<p className="text-dark d-flex justify-content-around align-items-center">
+					Perfil
+					<i className="fas fa-user" />
+				</p>
+			)
 		},
 		{
-			text: "email"
-		},
-		{
-			text: "Log Out"
+			text: (
+				<p className="text-danger d-flex justify-content-around align-items-center">
+					Salir
+					<i className="fas fa-sign-out-alt" />
+				</p>
+			)
 		}
 	];
 
 	return (
-		<nav className="navbar">
-			<Link className="mx-auto" to={"/login"}>
-				<h1 className="scheduler-title">B-Chicken</h1>
-			</Link>
-
+		<nav className="navbar d-flex justify-content-around">
+			<div className="d-hidden" />
+			<h1 className="scheduler-title title-font base-green">B-Chicken</h1>
 			<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-				<DropdownToggle caret="md" color="d-none">
+				<DropdownToggle className="home-dropDown" caret="md" color="d-none">
 					<img className="perfil" src={setting} />
 				</DropdownToggle>
 				<DropdownMenu className="text-center font-weight-bold">
