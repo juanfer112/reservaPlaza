@@ -5,7 +5,7 @@
     color: #35553e;
 }
 .select-green{
-    background-color: #32C421;
+    background-color: #2ea44f;
 }
 .invalid::placeholder{
     color: #c52233;
@@ -46,15 +46,15 @@ p{
     width: 10rem;
     color: white;
     font-size: 1.5rem;
-    background-color: #35553e;
+    background-color: #2ea44f;
     border-radius: 10px;
     box-shadow: none;
 }
 .btnDropdown:hover{
   background-color: #fff;
-  color:#35553e;
+  color:#2ea44f;
   font-weight: bold;
-  border: 2px solid #35553e;
+  border: 2px solid #2ea44f;
 }
 .list-group-horizontal{
     display: flex;
@@ -112,7 +112,7 @@ input::placeholder{
     height: 2rem;
     width: 10rem;
     font-size: 1.5rem;
-    background-color: #32C421;
+    background-color: #2ea44f;
     border: 0;
     border-radius: 100px;
     color: white;
@@ -120,9 +120,9 @@ input::placeholder{
 }
 .confirm:hover{
     background-color: #fff;
-    color:#32C421;
+    color:#2ea44f;
     font-weight: bold;
-    border: 2px solid #32C421;
+    border: 2px solid #2ea44f;
 }
 .reserved {
   background-color: #BCBDC0;
