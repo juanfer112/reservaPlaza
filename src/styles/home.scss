@@ -4,6 +4,9 @@
 .base-green{
     color: #35553e;
 }
+.select-green{
+    background-color: #32C421;
+}
 .invalid::placeholder{
     color: #c52233;
 }
@@ -123,6 +126,9 @@ input::placeholder{
 }
 .reserved {
   background-color: #BCBDC0;
+}
+.self-reserved{
+ background-color: #36213E;
 }
 .rowSched {
     overflow-x: auto;
