@@ -24,11 +24,11 @@ export const Calendar = () => {
 					<Navbar />
 					<div className="list-group-horizontal my-4 align-items-center">
 						<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
-							<DropdownToggle className="btnDropdown" color caret="lg">
+							<DropdownToggle className="btnDropdown" color caret="xs">
 								<SpacesModal />
 								{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 							</DropdownToggle>
-							<DropdownMenu className="dropD text-center font-weight-bold">
+							<DropdownMenu className="text-center font-weight-bold">
 								{store.spaces.map((space, index) => {
 									return (
 										<DropdownItem onClick={() => actions.selectedSpace(index)} key={index}>
@@ -49,7 +49,7 @@ export const Calendar = () => {
 							)}
 						</p>
 					</div>
-					<p className="text-center">
+					<h4 className="text-center">
 						{" "}
 						Servicio 24H disponible, pincha
 						<i className="text-primary" onClick={() => actions.changeNight()}>
@@ -57,7 +57,7 @@ export const Calendar = () => {
 							aqui{" "}
 						</i>
 						para reservar horas de noche
-					</p>
+					</h4>
 					<div className="month-navigate d-flex align-items-center justify-content-around">
 						<h5>{actions.currentMonth()}</h5>
 						<div />

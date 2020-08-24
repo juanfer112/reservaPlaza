@@ -41,19 +41,22 @@ p{
     margin: 0;
     padding: 0;
 }
+.dropdown-toggle::after{
+    content: none;
+}
 .btnDropdown, .btnDropdown:focus{
-    height: 4rem;
+    height: 3rem;
     width: 10rem;
-    color: white;
+    color: #2ea44f;
     font-size: 1.5rem;
-    background-color: #2ea44f;
+    background-color: white;
     border-radius: 10px;
+    border: 2px solid #2ea44f;
     box-shadow: none;
 }
 .btnDropdown:hover{
   background-color: #fff;
   color:#2ea44f;
-  font-weight: bold;
   border: 2px solid #2ea44f;
 }
 .list-group-horizontal{
@@ -96,8 +99,12 @@ input::placeholder{
 .arrowButtonRight{
     margin: 2rem;
 }
-.dropD{
-    width: 10rem;
+.dropdown-menu{
+    width: 3rem;
+}
+.dropdown-item{
+    padding: 0;
+    width: 3rem;
 }
 .footer{
     display: flex;
@@ -108,13 +115,13 @@ input::placeholder{
 }
 .confirm{    
     margin: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     height: 2rem;
     width: 10rem;
     font-size: 1.5rem;
     background-color: #2ea44f;
     border: 0;
-    border-radius: 100px;
+    border-radius: 20px;
     color: white;
     line-height: 40px;
 }

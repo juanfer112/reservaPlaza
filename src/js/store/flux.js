@@ -9,7 +9,8 @@ import {
 	addWeeks,
 	subWeeks,
 	startOfDay,
-	getMonth
+	getMonth,
+	getYear
 } from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -364,12 +365,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"Diciembre"
 				];
 				if (getMonth(store.week[0]) == getMonth(store.week[store.week.length - 1])) {
-					return arrayMonthsNames[getMonth(store.week[0])];
+					return arrayMonthsNames[getMonth(store.week[0])] + "  " + getYear(store.week[0]);
 				} else {
 					return (
 						arrayMonthsNames[getMonth(store.week[0])] +
+						"  " +
+						getYear(store.week[0]) +
 						" - " +
-						arrayMonthsNames[getMonth(store.week[store.week.length - 1])]
+						arrayMonthsNames[getMonth(store.week[store.week.length - 1])] +
+						"  " +
+						getYear(store.week[store.week.length - 1])
 					);
 				}
 			}
