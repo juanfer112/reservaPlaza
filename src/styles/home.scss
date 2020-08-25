@@ -24,7 +24,11 @@ i, u, td.reserved{
     cursor: pointer;
 }
 .navbar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     background-color: #9dd981;
+    margin: 0;
 }
 .rowLogin{
     display: flex;
@@ -41,11 +45,6 @@ i, u, td.reserved{
 }
 .perfil{
     cursor: pointer;
-}
-p{
-    font-size: 1.2rem;
-    margin: 0;
-    padding: 0;
 }
 .dropdown-toggle::after{
     content: none;
@@ -102,11 +101,11 @@ input::placeholder{
 }
 .dropdown-item{
     padding: 0;
-    width: 3rem;
     white-space: normal;
     word-wrap: break-word
 }
 th{
+    background-color: #9dd981;
     white-space: nowrap;
 }
 .footer{
@@ -177,8 +176,11 @@ th{
 }
 Button{
     min-height: 2rem;
-    min-width: 8rem;
+    max-width: 8rem;
     text-align: center;
+}
+.home-dropDown:focus{
+    box-shadow: none;
 }
 .modalChange {
     position: relative;
@@ -207,6 +209,10 @@ td{
     display: table;
     border-right: solid 0.05rem #dee2e6;
     margin-bottom: 6rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space:nowrap;
+    width: 100vw;
 }
 Table{
     border-collapse: separate;
@@ -245,10 +251,7 @@ Table{
   border: 2px solid #2B3800;
 }
 .container-userList{
-    margin-top: 2rem;
-}
-.home-dropDown:focus{
-    box-shadow: none;
+    margin: 2rem;
 }
 .close:focus{
     border: 0;
@@ -271,9 +274,27 @@ Table{
     margin: 2rem;
     margin-left:auto;
 }
+.userName{
+    overflow: auto;
+}
+.fa-pencil-alt::before, .fa-trash-alt::before{
+    color:grey;
+}
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
+    }
+    .container-userList{
+        margin: 2rem;
+    }
+}
+@media screen and (max-width: 1000px){
+    .table-responsive{
+        display: inline;
+        border-right: solid 0.05rem #dee2e6;
+    }
+    .container-userList{
+        margin: 2rem 0;
     }
 }
 @media screen and (max-width: 600px){
@@ -297,19 +318,14 @@ Table{
     .availableHours{
         margin: 0 !important;
     }
-    .container-userList{
-        padding: 0;
-    }
     .fa-angle-right{
         margin-right: 0;
     }
     .hours, .titleH{
         width: 6rem;
     }
-    .table-responsive{
-        display: table;
-        border-right: solid 0.05rem #dee2e6;
-        margin-bottom: 0 0 6rem 0;
+    .container-userList{
+        overflow-x: auto;
     }
 }
 /*css RESUMEN RESERVAS*/

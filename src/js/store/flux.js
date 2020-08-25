@@ -187,6 +187,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().pullEnterprises();
 			},
 
+			softDelete: async enterprise => {
+				enterprise.is_active = false;
+				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
+					method: "PUT",
+					headers: {},
+					body: JSON.stringify(enterprise)
+				});
+				getActions().pullEnterprises();
+			},
+
 			cellID: day => {
 				var arr = [];
 				var firstWeekDay = startOfWeek(endOfDay(day), {

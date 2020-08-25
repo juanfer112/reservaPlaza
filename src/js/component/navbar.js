@@ -12,7 +12,7 @@ export const Navbar = () => {
 	const settings = [
 		{
 			text: (
-				<p className="text-dark d-flex justify-content-around align-items-center">
+				<p className="text-dark d-flex justify-content-around align-items-center m-0">
 					Perfil
 					<i className="fas fa-user" />
 				</p>
@@ -20,7 +20,7 @@ export const Navbar = () => {
 		},
 		{
 			text: (
-				<p className="text-danger d-flex justify-content-around align-items-center">
+				<p className="text-danger d-flex justify-content-around align-items-center m-0">
 					Salir
 					<i className="fas fa-sign-out-alt" />
 				</p>
@@ -29,10 +29,10 @@ export const Navbar = () => {
 	];
 
 	return (
-		<nav className="navbar row w-100">
-			<h1 className="scheduler-title title-font base-green col-4 offset-4 text-center">B-Chicken</h1>
-			<ButtonDropdown className="col-1 offset-3 p-0" isOpen={dropdownOpen} toggle={toggle}>
-				<DropdownToggle className="home-dropDown text-end" caret="md" color="d-none">
+		<nav className="navbar row">
+			<h1 className="scheduler-title title-font base-green col-lg-4 offset-lg-4 col-8 text-center">B-Chicken</h1>
+			<ButtonDropdown className="col-lg-1 offset-lg-3 col-2" isOpen={dropdownOpen} toggle={toggle}>
+				<DropdownToggle className="home-dropDown" caret="md" color="d-none">
 					<img className="perfil" src={setting} />
 				</DropdownToggle>
 				<DropdownMenu className="text-center font-weight-bold">
