@@ -22,8 +22,11 @@ export const Calendar = () => {
 			) : (
 				<div className="container-fluid p-0">
 					<Navbar />
-					<div className="list-group-horizontal my-4 align-items-center">
-						<ButtonDropdown className="btnDropdown ml-5" isOpen={dropdownOpen} toggle={toggle}>
+					<div className="row my-4 align-items-center">
+						<ButtonDropdown
+							className="btnDropdown col-1 offset-1 border-0"
+							isOpen={dropdownOpen}
+							toggle={toggle}>
 							<DropdownToggle className="btnDropdown" color caret="xs">
 								<SpacesModal />
 								{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
@@ -38,7 +41,7 @@ export const Calendar = () => {
 								})}
 							</DropdownMenu>
 						</ButtonDropdown>
-						<p className="availableHours mr-auto ml-4">
+						<p className="availableHours ml-4">
 							{store.user != undefined ? (
 								<p>
 									Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
@@ -58,22 +61,26 @@ export const Calendar = () => {
 						</i>
 						para reservar horas de noche
 					</h4>
-					<div className="month-navigate d-flex align-items-center justify-content-around">
-						<h5>{actions.currentMonth()}</h5>
-						<div />
-						<div>
-							<i
-								className="fa fa-angle-left base-green"
+					<div className="month-navigate row">
+						<h5 className="col-3 offset-1">{actions.currentMonth()}</h5>
+						<div className="col-2 offset-5 p-0 d-flex">
+							<div
+								className="navSchedulerDays"
 								onClick={() => {
 									actions.changeWeekOrDay("beforeWeek");
-								}}
-							/>
-							<i
-								className="fa fa-angle-right base-green ml-3"
+								}}>
+								<i className="fa fa-angle-left base-green" />
+							</div>
+							<div className="navSchedulerDays mx-1" onClick={() => actions.goToCurrentDay()}>
+								Hoy
+							</div>
+							<div
+								className="navSchedulerDays"
 								onClick={() => {
 									actions.changeWeekOrDay("afterWeek");
-								}}
-							/>
+								}}>
+								<i className="fa fa-angle-right base-green" />
+							</div>
 						</div>
 					</div>
 					<Scheduler />

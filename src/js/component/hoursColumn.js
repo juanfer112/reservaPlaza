@@ -9,7 +9,7 @@ export const HoursColumn = () => {
 		let header = "HORAS";
 		if (hours == 0) {
 			array.push(
-				<div key={hours} className="titleH text-center">
+				<div key={hours} className="titleH text-center py-1">
 					{header}
 				</div>
 			);

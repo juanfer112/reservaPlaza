@@ -299,12 +299,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
-
-				if (beforeAfter == "afterDay") {
-					setStore({ currentDay: addDays(day, 1) });
-				} else if (beforeAfter == "beforeDay") {
-					setStore({ currentDay: subDays(day, 1) });
-				}
 			},
 
 			selectedSpace: i => {
@@ -377,6 +371,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getYear(store.week[store.week.length - 1])
 					);
 				}
+			},
+
+			goToCurrentDay: () => {
+				const current = startOfDay(new Date());
+				var arrWeek = [];
+				var firstWeekDay = startOfWeek(endOfDay(startOfDay(new Date())), {
+					weekStartsOn: 1
+				});
+				for (let x = 0; x < 7; x++) {
+					arrWeek.push(firstWeekDay);
+					firstWeekDay = addDays(firstWeekDay, 1);
+				}
+				setStore({ week: arrWeek });
 			}
 		}
 	};

@@ -19,24 +19,24 @@ export const ListOfUsers = () => {
 		<>
 			<Navbar />
 			<Link to={"/balance"}>BALANCE!</Link>
-			<div className="container container-userList">
+			<div className="container-userList mx-5">
 				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
-				<table className="table mr-auto table-responsive table-bordered table-striped">
+				<table className="table table-responsive table-bordered table-striped">
 					<thead>
-						<tr>
-							<th className="text-center align-middle text-secondary" scope="col">
+						<tr className="w-100">
+							<th className="px-5 text-center align-middle" scope="col">
 								Nombre
 							</th>
-							<th className="text-center align-middle text-secondary" scope="col">
+							<th className="px-5 text-center align-middle" scope="col">
 								Horas restantes
 							</th>
-							<th className="text-center align-middle text-secondary" scope="col">
+							<th className="px-5 text-center align-middle" scope="col">
 								Horas contratadas
 							</th>
-							<th className="text-center align-middle text-secondary" scope="col">
+							<th className="px-5 text-center align-middle" scope="col">
 								Número de teléfono
 							</th>
-							<th className="text-center align-middle text-secondary" scope="col">
+							<th className="px-5 text-center align-middle" scope="col">
 								Email
 							</th>
 						</tr>

@@ -36,18 +36,18 @@ export const AdminBalance = n => {
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 thFirst bg-white" />
-						<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-5 thFirst bg-white" />
+						<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
 				holderSpacesHours.push(
-					<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+					<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 				);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 text-center tHours bg-white">{titleHour}</th>
+						<th className="px-5 text-center tHours bg-white">{titleHour}</th>
 						<td
 							onClick={e => {
 								if (className == " reserved") {

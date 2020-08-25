@@ -49,7 +49,7 @@ export const Balance = () => {
 					);
 				})}
 			</div>
-			<button className="fixed-bottom btn-up btn-md m-5 ml-auto" onClick={() => window.scrollTo(0, 0)}>
+			<button className="fixed-bottom btn btn-md btn-secondary btn-up" onClick={() => window.scrollTo(0, 0)}>
 				UP
 			</button>
 			{store.week.map((item, index) => {

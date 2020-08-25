@@ -29,18 +29,17 @@ export const Navbar = () => {
 	];
 
 	return (
-		<nav className="navbar d-flex justify-content-around">
-			<div className="d-hidden" />
-			<h1 className="scheduler-title title-font base-green">B-Chicken</h1>
-			<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-				<DropdownToggle className="home-dropDown" caret="md" color="d-none">
+		<nav className="navbar row w-100">
+			<h1 className="scheduler-title title-font base-green col-4 offset-4 text-center">B-Chicken</h1>
+			<ButtonDropdown className="col-1 offset-3 p-0" isOpen={dropdownOpen} toggle={toggle}>
+				<DropdownToggle className="home-dropDown text-end" caret="md" color="d-none">
 					<img className="perfil" src={setting} />
 				</DropdownToggle>
 				<DropdownMenu className="text-center font-weight-bold">
 					{settings.map((item, index) => {
 						return (
 							<DropdownItem
-								onClick={e => {
+								onClick={() => {
 									actions.logout();
 								}}
 								key={index}>
