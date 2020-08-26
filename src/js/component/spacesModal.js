@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import cucina from "../../../assets/cucina.jpg";
-import barra from "../../../assets/barra.jpg";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import cocina from "../../../assets/cocina.jpeg";
+import barra from "../../../assets/barra.jpeg";
+import formacion from "../../../assets/formacion.jpeg";
+
 export const SpacesModal = () => {
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
@@ -17,35 +19,44 @@ export const SpacesModal = () => {
 				}}
 			/>
 			<Modal className="modal-lg" backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
-				<ModalBody>
-					<h2 className="text-center">Informacion de salas</h2>
+				<ModalHeader toggle={() => setShow(!show)}>
+					<h2 className="text-center title-font base-green">Informacion de salas</h2>
+				</ModalHeader>
+				<ModalBody className="py-0">
 					{store.spaces.map((space, index) => {
-						let src = space.spacetype_id == 1 ? barra : cucina;
+						let src = "";
+						if (space.spacetype_id == 2) {
+							src = cocina;
+						} else if (space.spacetype_id == 1) {
+							src = barra;
+						} else if (space.spacetype_id == 3) {
+							src = formacion;
+						}
 						if (index % 2 == 0) {
 							return (
-								<div className="row d-flex py-4 border-top" key={index}>
-									<img className="col-3 img-space" src={src} />
-									<div className="col-9 align-self-center ">
-										<h4>{space.name}</h4>
-										<p className="text-break">{space.description}</p>
+								<div className="py-2 border-bottom" key={index}>
+									<h4 className="mx-5 font-weight-bold">{space.name}</h4>
+									<div className="row align-self-center">
+										<img className="col-3 img-space pr-0" src={src} />
+										<p className="col-9 text-break align-middle">{space.description}</p>
 									</div>
 								</div>
 							);
 						} else {
 							return (
-								<div className="row d-flex py-4 border-top" key={index}>
-									<div className="col-9 align-self-center text-right">
-										<h4>{space.name}</h4>
-										<p className="text-break">{space.description}</p>
+								<div className="py-2 border-bottom bg-odd" key={index}>
+									<h4 className="mx-5 text-right font-weight-bold">{space.name}</h4>
+									<div className="row d-flex align-self-center text-right">
+										<p className="col-9 text-break align-middle">{space.description}</p>
+										<img className="col-3 img-space pl-0" src={src} />
 									</div>
-									<img className="col-3 img-space" src={src} />
 								</div>
 							);
 						}
 					})}
 				</ModalBody>
-				<ModalFooter className="m-auto">
-					<Button color="secondary" onClick={() => setShow(!show)}>
+				<ModalFooter className="m-auto border-0">
+					<Button className="btn-close" onClick={() => setShow(!show)}>
 						Cerrar
 					</Button>
 				</ModalFooter>

@@ -1,5 +1,17 @@
 import url from "../endpoints/url.js";
-import { format, startOfWeek, endOfDay, addDays, subDays, subHours, addWeeks, subWeeks, startOfDay } from "date-fns";
+import {
+	format,
+	startOfWeek,
+	endOfDay,
+	addDays,
+	subDays,
+	subHours,
+	addWeeks,
+	subWeeks,
+	startOfDay,
+	getMonth,
+	getYear
+} from "date-fns";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	const urlBase = url;
@@ -17,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			enterprises: [],
 			reservedByMonth: [],
 			admin: false,
-			token: null
+			token: sessionStorage.access_token != "null" ? sessionStorage.access_token : null
 		},
 
 		actions: {
@@ -39,6 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return null;
 				} else return response_json;
 			},
+
 			checkUser: async (email, password) => {
 				let data = await getActions().newFetch("login", {
 					method: "POST",
@@ -50,11 +63,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
+						console.log(typeof data.access_token, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 						setStore({ token: data.access_token, admin: data.is_admin });
 						sessionStorage.setItem("access_token", data.access_token);
 					}
 				}
 			},
+
 			isLogged: async () => {
 				const store = getStore();
 				if (store.token != "") {
@@ -68,6 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data.logged_in_as;
 				}
 			},
+
 			logout: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("logout", {
@@ -77,10 +93,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						authorization: "Bearer " + store.token
 					}
 				});
-				console.log(data);
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
+
 			pullEnterprises: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
@@ -93,10 +109,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ user: data[0], enterprises: data });
 			},
+
 			pullSpaces: async () => {
 				let data = await getActions().newFetch("spaces");
+				data = data.sort((space1, space2) => space1.spacetype_id - space2.spacetype_id);
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
+
 			pullScheduler: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch(
@@ -137,6 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					getActions().pullScheduler();
 				}
+				setStore({ schedules: [] });
 			},
 
 			postEnterprises: async body => {
@@ -168,6 +188,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().pullEnterprises();
 			},
 
+			softDelete: async enterprise => {
+				enterprise.is_active = false;
+				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
+					method: "PUT",
+					headers: {},
+					body: JSON.stringify(enterprise)
+				});
+				getActions().pullEnterprises();
+			},
+
 			cellID: day => {
 				var arr = [];
 				var firstWeekDay = startOfWeek(endOfDay(day), {
@@ -182,11 +212,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			transformDay: day => {
 				var dayNumber = format(day, "d");
-				var month = format(day, "LL").toString();
-				var dayAndMonth = dayNumber + "/" + month;
 				var dayNameIndex = format(day, "i").toString();
 				const arrayDayNames = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
-				return arrayDayNames[dayNameIndex - 1] + dayAndMonth;
+				return arrayDayNames[dayNameIndex - 1] + dayNumber;
 			},
 
 			addSchedules: date => {
@@ -227,20 +255,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reservedDate: (cellDate, spaceID) => {
 				const store = getStore();
 				var reserved = [];
+				var selfReserved = [];
 				var selectedSpaceID = spaceID ? spaceID : store.selectedSpace ? store.selectedSpace["id"] : "wait";
 				store.selectedSpace
 					? store.reserved.map(date => {
-							if (date["space_id"] == selectedSpaceID) {
+							if (date["space_id"] == selectedSpaceID && date["enterprise_id"] == store.user["id"]) {
+								selfReserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
+							} else if (date["space_id"] == selectedSpaceID) {
 								reserved.push(format(subHours(new Date(date["date"]), 2), "yyyy-MM-dd HH:mm:ss"));
 							}
 					  })
 					: "wait";
-				if (reserved.includes(cellDate)) {
+				if (selfReserved.includes(cellDate)) {
+					return " self-reserved";
+				} else if (reserved.includes(cellDate)) {
 					return " reserved";
 				} else if (cellDate < format(new Date(), "yyyy-MM-dd HH:mm:ss") && spaceID == undefined) {
 					return " reserved";
 				} else if (store.selectedCellHolder.includes(cellDate)) {
-					return " bg-success";
+					return " select-green";
 				} else {
 					return "";
 				}
@@ -277,12 +310,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				arrWeek.length > 0 ? setStore({ week: arrWeek }) : "";
-
-				if (beforeAfter == "afterDay") {
-					setStore({ currentDay: addDays(day, 1) });
-				} else if (beforeAfter == "beforeDay") {
-					setStore({ currentDay: subDays(day, 1) });
-				}
 			},
 
 			selectedSpace: i => {
@@ -324,6 +351,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 				date ? (newScheduleToChange.date = date) : "";
 				space_name ? (newScheduleToChange.space_name = space_name) : "";
 				setStore({ scheduleToChange: newScheduleToChange });
+			},
+
+			currentMonth: () => {
+				const store = getStore();
+				const arrayMonthsNames = [
+					"Enero",
+					"Febrero",
+					"Marzo",
+					"Abril",
+					"Mayo",
+					"Junio",
+					"Julio",
+					"Agosto",
+					"Septiembre",
+					"Octubre",
+					"Noviembre",
+					"Diciembre"
+				];
+				if (getMonth(store.week[0]) == getMonth(store.week[store.week.length - 1])) {
+					return arrayMonthsNames[getMonth(store.week[0])] + "  " + getYear(store.week[0]);
+				} else {
+					return (
+						arrayMonthsNames[getMonth(store.week[0])] +
+						"  " +
+						getYear(store.week[0]) +
+						" - " +
+						arrayMonthsNames[getMonth(store.week[store.week.length - 1])] +
+						"  " +
+						getYear(store.week[store.week.length - 1])
+					);
+				}
+			},
+
+			goToCurrentDay: () => {
+				const current = startOfDay(new Date());
+				var arrWeek = [];
+				var firstWeekDay = startOfWeek(endOfDay(startOfDay(new Date())), {
+					weekStartsOn: 1
+				});
+				for (let x = 0; x < 7; x++) {
+					arrWeek.push(firstWeekDay);
+					firstWeekDay = addDays(firstWeekDay, 1);
+				}
+				setStore({ week: arrWeek, currentDay: current });
 			}
 		}
 	};

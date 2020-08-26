@@ -82,7 +82,7 @@ export const MonthNav = () => {
 					<thead>
 						<tr className="calendar-header">
 							<td colSpan="5">
-								<span className="label-month" onClick={e => showMonthpopup(!showListMonth)}>
+								<span className="label-month span-style" onClick={e => showMonthpopup(!showListMonth)}>
 									{arrayMonthsNames[showMonth]}
 									{"  "}
 

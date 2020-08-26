@@ -9,8 +9,8 @@ export const ConfirModal = () => {
 
 	return (
 		<>
-			<button className="confirm fixed-bottom btn btn-success pb-5" onClick={() => setShow(!show)}>
-				Finalizar
+			<button className="fixed-bottom btn btn-success pb-5 confirm" onClick={() => setShow(!show)}>
+				Reservar
 			</button>
 			<Modal backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
 				{store.confirModal ? (
@@ -33,14 +33,14 @@ export const ConfirModal = () => {
 				)}
 				<ModalFooter className="m-auto">
 					<Button
-						color="primary"
+						className="btn-confirm"
 						onClick={() => {
 							actions.postSchedules();
 							setShow(!show);
 						}}>
 						Confirmar
 					</Button>
-					<Button color="secondary" onClick={() => setShow(!show)}>
+					<Button className="btn-close" onClick={() => setShow(!show)}>
 						Cancelar
 					</Button>
 				</ModalFooter>

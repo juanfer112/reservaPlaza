@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import house from "../../../assets/home.png";
 import { Link } from "react-router-dom";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
@@ -8,49 +9,34 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
-	const settings = [
-		{
-			text: "My Profile"
-		},
-		{
-			text: "email"
-		},
-		{
-			text: "Log Out"
-		}
-	];
 
 	return (
-		<nav className="navbar bg-white">
-			<div className="d-flex align-items-center">
-				<Link to={"/login"}>
-					<img
-						className="logo"
-						src="https://dkitchenincubator.com/wp-content/uploads/2020/01/cocinero-1.png"
-					/>
-				</Link>
-				<h1 className="scheduler-title">B-Chicken</h1>
-			</div>
-
-			<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-				<DropdownToggle caret="md" color="d-none">
-					<img
-						className="perfil"
-						src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
-					/>
+		<nav className="navbar row">
+			<h1 className="scheduler-title title-font base-green col-lg-4 offset-lg-4 col-8 text-center">B-Chicken</h1>
+			<ButtonDropdown className="col-lg-1 offset-lg-3 col-2" isOpen={dropdownOpen} toggle={toggle}>
+				<DropdownToggle className="home-dropDown" caret="md" color="d-none">
+					<img className="perfil" src={house} />
 				</DropdownToggle>
 				<DropdownMenu className="text-center font-weight-bold">
-					{settings.map((item, index) => {
-						return (
-							<DropdownItem
-								onClick={e => {
-									actions.logout();
-								}}
-								key={index}>
-								<Link to={"/login"}>{item["text"]}</Link>
-							</DropdownItem>
-						);
-					})}
+					<Link to={"/profile"}>
+						<DropdownItem>
+							<p className="text-dark d-flex justify-content-around align-items-center m-0">
+								Perfil
+								<i className="fas fa-user" />
+							</p>
+						</DropdownItem>
+					</Link>
+					<Link to={"/"}>
+						<DropdownItem
+							onClick={() => {
+								actions.logout();
+							}}>
+							<p className="text-danger d-flex justify-content-around align-items-center m-0">
+								Salir
+								<i className="fas fa-sign-out-alt" />
+							</p>
+						</DropdownItem>
+					</Link>
 				</DropdownMenu>
 			</ButtonDropdown>
 		</nav>

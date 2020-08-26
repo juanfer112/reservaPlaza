@@ -220,7 +220,7 @@ export const CreateOrEditUser = props => {
 					<Button
 						type="submit"
 						form="nameform"
-						color="primary"
+						className="btn-confirm"
 						onClick={e => {
 							e.preventDefault();
 							if (validateInputs(e)) {
@@ -235,7 +235,7 @@ export const CreateOrEditUser = props => {
 						Confirmar
 					</Button>
 					<Button
-						color="secondary"
+						className="btn-close"
 						onClick={() => {
 							setError([]);
 							props.toggleModalCallback(false);
