@@ -208,7 +208,6 @@ td{
 .table-responsive{
     display: table;
     border-right: solid 0.05rem #dee2e6;
-    margin-bottom: 6rem;
     overflow-x: auto;
     overflow-y: hidden;
     white-space:nowrap;
@@ -252,6 +251,7 @@ Table{
 }
 .container-userList{
     margin: 2rem;
+    overflow-x: auto;
 }
 .close:focus{
     border: 0;
@@ -278,23 +278,11 @@ Table{
     overflow: auto;
 }
 .fa-pencil-alt::before, .fa-trash-alt::before{
-    color:grey;
+    color: #35553e;
 }
 @media screen and (min-width: 1000px){
     body{
         overflow-x: hidden;
-    }
-    .container-userList{
-        margin: 2rem;
-    }
-}
-@media screen and (max-width: 1000px){
-    .table-responsive{
-        display: inline;
-        border-right: solid 0.05rem #dee2e6;
-    }
-    .container-userList{
-        margin: 2rem 0;
     }
 }
 @media screen and (max-width: 600px){

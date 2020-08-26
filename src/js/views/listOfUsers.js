@@ -20,8 +20,15 @@ export const ListOfUsers = () => {
 	return (
 		<>
 			<Navbar />
-			<Link to={"/balance"}>BALANCE!</Link>
-			<div className="container-userList d-flex justify-content-center">
+			<nav className="nav nav-tabs" role="tablist">
+				<Link role="tab" className="nav-item nav-link active" to={"/listOfUsers"}>
+					Lista de los usuarios!
+				</Link>
+				<Link role="tab" className="nav-item nav-link" to={"/listOfUsers"}>
+					Balance!
+				</Link>
+			</nav>
+			<div className="container-userList">
 				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
 				<table className="table table-responsive table-bordered table-striped">
 					<thead>
