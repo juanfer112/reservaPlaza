@@ -32,7 +32,7 @@ export const AdminBalance = n => {
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
-			let className = actions.reservedDate(id, spaceID);
+			let className = actions.reservedDate(id, spaceID) + " text-white font-weight-bold";
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>

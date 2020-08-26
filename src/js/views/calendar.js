@@ -17,7 +17,7 @@ export const Calendar = () => {
 		<>
 			{store.token != null && store.admin ? (
 				<>
-					<Redirect to="/listOfUsers" />
+					<Redirect to="/adminView" />
 				</>
 			) : (
 				<div className="container-fluid p-0">

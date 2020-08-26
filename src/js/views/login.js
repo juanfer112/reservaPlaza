@@ -10,23 +10,6 @@ export const Login = () => {
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
 
-	const redirectUser = e => {
-		/*	e.preventDefault();*/
-		if (store.token != null && store.admin) {
-			return (
-				<>
-					<Redirect to="/reserva" />
-				</>
-			);
-		} else if (store.token != null && !store.admin) {
-			return (
-				<>
-					<Redirect to="/profile" />
-				</>
-			);
-		}
-	};
-
 	return (
 		<>
 			{store.token != null ? (

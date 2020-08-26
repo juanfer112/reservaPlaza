@@ -108,6 +108,9 @@ th{
     background-color: #9dd981;
     white-space: nowrap;
 }
+.thOdd{
+    background-color: #c0e4b0;
+}
 .footer{
     display: flex;
     justify-content: center;
@@ -137,7 +140,7 @@ th{
   background-color: #BCBDC0;
 }
 .self-reserved{
- background-color: #36213E;
+ background-color: #488683;
 }
 .rowSched {
     overflow-x: auto;
@@ -251,6 +254,7 @@ Table{
 }
 .container-userList{
     margin: 2rem;
+    margin-bottom: 6rem;
     overflow-x: auto;
 }
 .close:focus{
@@ -279,6 +283,9 @@ Table{
 }
 .fa-pencil-alt::before, .fa-trash-alt::before{
     color: #35553e;
+}
+.nav-link{
+    cursor: pointer;
 }
 @media screen and (min-width: 1000px){
     body{

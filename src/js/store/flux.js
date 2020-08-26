@@ -393,7 +393,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					arrWeek.push(firstWeekDay);
 					firstWeekDay = addDays(firstWeekDay, 1);
 				}
-				setStore({ week: arrWeek });
+				setStore({ week: arrWeek, currentDay: current });
 			}
 		}
 	};

@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import cucina from "../../../assets/cucina.jpg";
-import barra from "../../../assets/barra.jpg";
+import cocina from "../../../assets/cocina.jpeg";
+import barra from "../../../assets/barra.jpeg";
+import formacion from "../../../assets/formacion.jpeg";
+
 export const SpacesModal = () => {
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
@@ -22,7 +24,14 @@ export const SpacesModal = () => {
 				</ModalHeader>
 				<ModalBody className="py-0">
 					{store.spaces.map((space, index) => {
-						let src = space.spacetype_id == 1 ? barra : cucina;
+						let src = "";
+						if (space.spacetype_id == 2) {
+							src = cocina;
+						} else if (space.spacetype_id == 1) {
+							src = barra;
+						} else if (space.spacetype_id == 3) {
+							src = formacion;
+						}
 						if (index % 2 == 0) {
 							return (
 								<div className="py-2 border-bottom" key={index}>

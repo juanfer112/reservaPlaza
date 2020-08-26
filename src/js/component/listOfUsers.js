@@ -12,22 +12,18 @@ export const ListOfUsers = () => {
 	const [show, setShow] = useState(false);
 	const [enterprise, setEdit] = useState(null);
 	const [deleteUser, setDeleteUser] = useState(false);
-
+	const userList = [];
+	store.enterprises.map((user, index) => {
+		if (user.is_active == true) {
+			userList.push(user);
+		}
+	});
 	const toggleModalCallback = hideOrShow => {
 		setShow(hideOrShow);
 	};
 
 	return (
 		<>
-			<Navbar />
-			<nav className="nav nav-tabs" role="tablist">
-				<Link role="tab" className="nav-item nav-link active" to={"/listOfUsers"}>
-					Lista de los usuarios!
-				</Link>
-				<Link role="tab" className="nav-item nav-link" to={"/listOfUsers"}>
-					Balance!
-				</Link>
-			</nav>
 			<div className="container-userList">
 				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
 				<table className="table table-responsive table-bordered table-striped">
@@ -51,11 +47,13 @@ export const ListOfUsers = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{store.enterprises.map((user, index) => {
+						{userList.map((user, index) => {
 							if (user.is_active == true)
 								return (
 									<tr key={user + index}>
-										<th scope="row" className="d-flex mb-0">
+										<th
+											scope="row"
+											className={index % 2 != 0 ? "d-flex mb-0" : "d-flex mb-0 thOdd"}>
 											<p className="p-0 m-0 userName">{user["name"]}</p>
 											<div className="ml-auto">
 												<i
