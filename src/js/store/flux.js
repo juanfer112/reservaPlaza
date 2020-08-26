@@ -28,7 +28,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			enterprises: [],
 			reservedByMonth: [],
-			admin: false,
 			token: sessionStorage.access_token != "null" ? sessionStorage.access_token : null
 		},
 
@@ -60,11 +59,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					})
 				});
-
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
-						console.log(typeof data.access_token, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-						setStore({ token: data.access_token, admin: data.is_admin });
+						setStore({ token: data.access_token, user: data.user });
 						sessionStorage.setItem("access_token", data.access_token);
 					}
 				}
@@ -107,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 
-				setStore({ user: data[0], enterprises: data });
+				setStore({ enterprises: data });
 			},
 
 			pullSpaces: async () => {

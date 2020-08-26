@@ -13,11 +13,11 @@ export const Calendar = () => {
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
 	console.log(typeof store.token);
-	if (store.token != null && store.admin) {
+	if (store.token != null && store.user["is_admin"] == true) {
 		return <Redirect to="/adminView" />;
 	} else if (store.token == null) {
 		return <Redirect to="/" />;
-	} else if (store.token != null && !store.admin) {
+	} else if (store.token != null && store.user["is_admin"] == false) {
 		return (
 			<div className="container-fluid p-0">
 				<Navbar />
