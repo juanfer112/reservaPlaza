@@ -236,8 +236,6 @@ Table{
     text-align: center;
     height: 1rem;
 }
-
-
 .week-day{
     font-size: 0.8em;
 }
@@ -249,13 +247,11 @@ Table{
     width: 24px;
     height: 24px;
     line-height: 24px;
-  
 }
 .current-day{
     background-color: #4285f4;
     width:28px;
     height: 28px;
-   
     border-radius: 50%;
     color:white;
 }
@@ -272,7 +268,6 @@ Table{
     padding: 5px;
     background:white;
     border:2px solid skyblue;
-
 }
 .month-popup div{
     padding: 0.3em;
@@ -326,5 +321,294 @@ span:before {
 }
 .forgotPasword{
     cursor: pointer;
+}
+
+/*-----------------------------login-------------------*/
+
+// body, html {
+// 	height: 100%;
+// 	font-family: Poppins-Regular, sans-serif;
+// }
+
+/*---------------------------------------------*/
+.txt-pass {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+.txt-pass:focus {
+	outline: none !important;
+}
+
+.txt-pass:hover {
+    text-decoration: none;
+    color: #9DD981;
+}
+
+/*---------------------------------------------*/
+
+// p {
+// 	font-family: Poppins-Regular;
+// 	font-size: 14px;
+// 	line-height: 1.7;
+// 	color: #666666;
+// 	margin: 0px;
+// }
+
+/*---------------------------------------------*/
+.wrap-login100 input {
+	outline: none;
+	border: none;
+}
+
+// textarea {
+//   outline: none;
+//   border: none;
+// }
+
+// textarea:focus, input:focus {
+//   border-color: transparent !important;
+// }
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+
+input::-webkit-input-placeholder { color: #999999; }
+input:-moz-placeholder { color: #999999; }
+input::-moz-placeholder { color: #999999; }
+input:-ms-input-placeholder { color: #999999; }
+
+textarea::-webkit-input-placeholder { color: #999999; }
+textarea:-moz-placeholder { color: #999999; }
+textarea::-moz-placeholder { color: #999999; }
+textarea:-ms-input-placeholder { color: #999999; }
+
+/*---------------------------------------------*/
+.login100-form-btn {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+.login100-form-btn:hover {
+	cursor: pointer;
+}
+
+// iframe {
+// 	border: none !important;
+// }
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
+.txt-pass {
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #666666;
+}
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+  width: 100%;
+  margin: auto;
+}
+.container-login100 {
+  width: 100%;  
+ // min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+//   background: #9053c7;
+//   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+//   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+//   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+//   background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+.wrap-login100 {
+  width: 30rem;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+//   padding: 177px 130px 33px 95px;
+padding: 1rem 4rem 2rem 4rem;
+border: 0.05px solid #2B3800;
+}
+
+/*------------------------------------------------------------------
+[  ]*/
+.login100-pic {
+  width: 316px;
+}
+
+.login100-pic img {
+  max-width: 100%;
+  margin-right:auto;
+  margin-left: auto;
+  margin-bottom: 1rem; 
+}
+
+
+/*------------------------------------------------------------------
+[  ]*/
+.login100-form {
+  width: 290px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.login100-form-title {
+  font-family: Poppins-Bold;
+  font-size: 24px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+
+  width: 100%;
+  display: block;
+  padding-bottom: 54px;
+}
+
+
+/*---------------------------------------------*/
+.wrap-input100 {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 10px;
+}
+
+.input100 {
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+  display: block;
+  width: 100%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 48px;
+}
+
+
+/*------------------------------------------------------------------
+[ Focus ]*/
+.focus-input100 {
+  display: block;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(87,184,70, 0.8);
+}
+
+.input100:focus + .focus-input100 {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
+}
+.symbol-input100 {
+  font-size: 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 5px;
+  pointer-events: none;
+  color: #666666;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.input100:focus + .focus-input100 + .symbol-input100 {
+  color: #9DD981;
+  padding-left: 28px;
+}
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.login100-form-btn {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 50px;
+  border-radius: 0.3rem;
+  background: #9DD981;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+  background:#2B3800;
+}
+.fa-icon-login{
+    font-size: 1.8em;
 }
 

@@ -26,8 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				data.headers = {
 					...{
 						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*",
-						authorization: "Bearer " + sessionStorage.access_token
+						"Access-Control-Allow-Origin": "*"
+
 						/* token */
 					},
 					...data.headers
@@ -51,7 +51,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
-						setStore({ token: data.access_token, admin: data.is_admin });
+						setStore({ token: data.access_token, admin: data.is_admin, user: data.user });
+						console.log(getStore().user);
 						sessionStorage.setItem("access_token", data.access_token);
 					}
 				}
@@ -77,13 +78,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pullEnterprises: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
-					method: "GET"
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					}
 				});
 
-				setStore({ user: data[0], enterprises: data });
+				setStore({ enterprises: data }); //user: data
 			},
 			pullSpaces: async () => {
-				let data = await getActions().newFetch("spaces");
+				let data = await getActions().newFetch("spaces", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					}
+				});
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
 			pullScheduler: async () => {
@@ -91,7 +102,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let data = await getActions().newFetch(
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString(),
 					{
-						method: "GET"
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + getStore().token
+						}
 					}
 				);
 				setStore({ reserved: data });
@@ -102,7 +117,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let data = await getActions().newFetch(
 					"schedules_by_month_and_year/" + format(date, "yyyy-MM-dd HH:mm:ss").toString(),
 					{
-						method: "GET"
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + getStore().token
+						}
 					}
 				);
 				setStore({ reservedByMonth: data });
@@ -113,7 +132,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
 					let response_json = await getActions().newFetch("schedules", {
 						method: "POST",
-						headers: {},
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + store.token
+						},
 						body: JSON.stringify(store.schedules)
 					});
 				}
@@ -123,7 +145,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					},
 					body: JSON.stringify(body)
 				});
 				window.location.reload(false);
@@ -133,7 +158,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + store.token
+					},
 					body: JSON.stringify(store.scheduleToChange)
 				});
 				window.location.reload(false);
@@ -143,7 +171,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(enterprise);
 				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					},
 					body: JSON.stringify(enterprise)
 				});
 				window.location.reload(false);

@@ -10,7 +10,7 @@ export const Profile = () => {
 	const sortStringKeys = (a, b) => (a[4] < b[0] ? 1 : -1);
 	/*--------------------------------------------------------------------------------------------*/
 	var newArray = [];
-	console.log(store.user);
+	console.log(Object.keys(store.user));
 
 	return (
 		<div className="container mt-3 mb-3">
