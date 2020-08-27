@@ -12,7 +12,7 @@ export const NewDay = n => {
 	for (let x = 0; x < 25; x++) {
 		if (x == 0) {
 			holder.push(
-				<div key={x} className="title text-center font-weight-bold">
+				<div key={x} className="title text-center py-1">
 					{actions.transformDay(day)}
 				</div>
 			);
@@ -25,11 +25,11 @@ export const NewDay = n => {
 					key={x}
 					id={id}
 					onClick={e => {
-						if (e.target.className != "cell reserved") {
+						if (e.target.className != "cell reserved" && e.target.className != "cell self-reserved") {
 							if (e.target.className == "cell") {
 								actions.addSchedules(id);
 								console.log("id:", id);
-								e.target.className += " bg-success";
+								e.target.className += " select-green";
 							} else {
 								e.target.className = "cell";
 								actions.removeSchedules(id);

@@ -64,7 +64,7 @@ export const ResumeModal = props => {
 
 				<ModalFooter className="m-auto">
 					<Button
-						color="secondary"
+						className="btn-close"
 						onClick={() => {
 							props.showModalCallback(false);
 						}}>

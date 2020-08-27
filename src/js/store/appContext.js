@@ -20,13 +20,21 @@ const injectContext = PassedComponent => {
 		useEffect(
 			() => {
 				if (state.store.token != null) {
-					state.actions.pullEnterprises();
 					state.actions.pullScheduler();
 					state.actions.cellID(new Date());
 					state.actions.pullSpaces();
 				}
 			},
 			[state.store.token]
+		);
+
+		useEffect(
+			() => {
+				if (state.store.user["is_admin"] == true) {
+					state.actions.pullEnterprises();
+				}
+			},
+			[state.store.user]
 		);
 
 		useEffect(

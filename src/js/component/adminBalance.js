@@ -14,8 +14,8 @@ export const AdminBalance = n => {
 	var scheduleDateHourToChange;
 
 	const [show, setShow] = useState(false);
-
 	var hoursOptions = [];
+
 	for (let hour = 0; hour < 24; hour++) {
 		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
 		hoursOptions.push(
@@ -32,22 +32,22 @@ export const AdminBalance = n => {
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
-			let className = actions.reservedDate(id, spaceID);
+			let className = actions.reservedDate(id, spaceID) + " text-white font-weight-bold";
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 thFirst bg-white" />
-						<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-5 thFirst bg-white" />
+						<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
 				holderSpacesHours.push(
-					<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+					<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 				);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 text-center tHours bg-white">{titleHour}</th>
+						<th className="px-5 text-center tHours bg-white">{titleHour}</th>
 						<td
 							onClick={e => {
 								if (className == " reserved") {
@@ -91,7 +91,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-center p-2 my-2 bg-white w-100">
+			<div className="d-flex fixed justify-content-center p-2 my-2 bg-white w-100">
 				<p>
 					{" "}
 					Pincha
@@ -159,7 +159,7 @@ export const AdminBalance = n => {
 				</ModalBody>
 				<ModalFooter className="m-auto">
 					<Button
-						color="primary"
+						className="btn-confirm"
 						onClick={
 							store.scheduleToChange
 								? () => {
@@ -175,7 +175,7 @@ export const AdminBalance = n => {
 						Confirmar
 					</Button>
 					<Button
-						color="secondary"
+						className="btn-close"
 						onClick={() => {
 							setShow(!show);
 						}}>

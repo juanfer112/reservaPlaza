@@ -71,7 +71,7 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span>{d}</span>
+					<span className="span-style">{d}</span>
 				</td>
 			);
 		} else {
@@ -87,7 +87,7 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span className="current-day">{d}</span>
+					<span className="current-day span-style">{d}</span>
 				</td>
 			);
 		}
