@@ -17,82 +17,115 @@ export const Login = () => {
 					<Redirect to="/reserva" />
 				</>
 			) : (
-				<div className="justify-content-center">
-					<div className="text-center mt-3">
-						<p>
-							<img
-								className="form-img w-5 mt-5"
-								src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
-							/>
-						</p>
+				<div className="limiter">
+					{!forgot ? (
+						<div className="container-login100">
+							<div className="wrap-login100">
+								<form className="login100-form validate-form">
+									<span className="login100-pic">
+										<img
+											src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
+											alt="IMG"
+										/>
+									</span>
 
-						<div className="container d-flex justify-content-center mx-auto">
-							<form>
-								<div className="rowLogin">
-									<div className="col-4 col-md-4 mt-4 text-center">
-										{!forgot ? (
-											<div className="card card-body my-3 p-5">
-												<div className=" input-group">
-													<input
-														required
-														className="form-control"
-														name="email"
-														aria-describedby="emailHelp"
-														type="email"
-														placeholder="USUARIO"
-														onChange={e => setUser((user = e.target.value))}
-													/>
-												</div>
-												<div className="input-group my-2">
-													<input
-														required
-														className="form-control"
-														type="password"
-														placeholder="CONTRASEÑA"
-														onChange={e => setPassword((password = e.target.value))}
-													/>
-												</div>
-												<a
-													className="forgotPasword"
-													onClick={() => {
-														setForgot(true);
-													}}>
-													¿Olvido su contraseña?
-												</a>
-												<div className="text-center mt-4">
-													<button
-														type="submit"
-														className="btn btn-primary mx-auto "
-														onClick={e => {
-															e.preventDefault();
-															actions.checkUser(user, password);
-														}}>
-														Login
-													</button>
-												</div>
-											</div>
-										) : (
-											<>
-												<input
-													className="form-control "
-													type="email"
-													placeholder="Correo electronico"
-												/>
-												<button
-													type="button"
-													className="btn btn-primary mx-auto my-5"
-													onClick={() => {
-														setForgot(false);
-													}}>
-													Restablecer
-												</button>
-											</>
-										)}
+									<div
+										className="wrap-input100 validate-input"
+										data-validate="Valid email is required: ex@abc.xyz">
+										<input
+											required
+											className="input100"
+											type="email"
+											name="email"
+											placeholder="Email"
+											aria-describedby="emailHelp"
+											onChange={e => setUser((user = e.target.value))}
+										/>
+										<span className="focus-input100" />
+										<span className="symbol-input100">
+											<i className="fa fa-envelope fa-icon-login" aria-hidden="true" />
+										</span>
 									</div>
-								</div>
-							</form>
+
+									<div className="wrap-input100 validate-input" data-validate="Password is required">
+										<input
+											required
+											className="input100"
+											type="password"
+											name="pass"
+											placeholder="Contraseña"
+											onChange={e => setPassword((password = e.target.value))}
+										/>
+										<span className="focus-input100" />
+										<span className="symbol-input100">
+											<i className="fa fa-lock fa-icon-login" aria-hidden="true" />
+										</span>
+									</div>
+
+									<div className="container-login100-form-btn">
+										<button
+											className="login100-form-btn"
+											type="submit"
+											onClick={e => {
+												e.preventDefault();
+												actions.checkUser(user, password);
+											}}>
+											Login
+										</button>
+									</div>
+
+									<div className="text-center p-t-12">
+										<a
+											className="txt-pass"
+											href="#"
+											onClick={() => {
+												setForgot(true);
+											}}>
+											Olvidó su Password?
+										</a>
+									</div>
+								</form>
+							</div>
 						</div>
-					</div>
+					) : (
+						<div className=" container-recover-password mx-auto p-3">
+							<div>
+								<img
+									className="d-flex login100-pic mx-auto"
+									src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
+								/>
+							</div>
+							<div className=" ">
+								<p>
+									<span> {"  "}</span>
+									Si no recuerdas tu contraseña, por favor, contacta con B-Kitchen para reestablecerla
+									y poder acceder a tu perfil. Solicitalo:
+								</p>
+								<p>
+									<span className="fas fa-mobile-alt mr-3" />
+									Llamando al <strong>(+34) 644 94 06 29</strong>
+								</p>
+								<p>
+									<span className="far fa-envelope mb-3 mr-3" />
+									Contactando por:
+								</p>
+								<p>
+									<strong>info@dkitchenincubator.com</strong>
+								</p>
+								<span
+									className="d-flex justify-content-end"
+									onClick={() => {
+										setForgot(false);
+									}}>
+									<span className="fas fa-step-backward" />
+									<a className="txt-pass" href="#">
+										{" "}
+										Volver
+									</a>
+								</span>
+							</div>
+						</div>
+					)}
 				</div>
 			)}
 		</>

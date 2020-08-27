@@ -28,6 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			enterprises: [],
 			reservedByMonth: [],
+
 			token: sessionStorage.access_token != "null" ? sessionStorage.access_token : null
 		},
 
@@ -38,6 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					...{
 						"Content-Type": "application/json",
 						"Access-Control-Allow-Origin": "*"
+
 						/* token */
 					},
 					...data.headers
@@ -61,7 +63,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
+
 						setStore({ token: data.access_token, user: data.user });
+
 						sessionStorage.setItem("access_token", data.access_token);
 					}
 				}
@@ -71,11 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				if (store.token != "") {
 					let data = await getActions().newFetch("protected", {
-						method: "GET",
-						headers: {
-							"Content-Type": "application/json",
-							authorization: "Bearer " + sessionStorage.access_token
-						}
+						method: "GET"
 					});
 					return data.logged_in_as;
 				}
@@ -84,31 +84,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("logout", {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json",
-						authorization: "Bearer " + store.token
-					}
+					method: "DELETE"
 				});
 				setStore({ token: null });
 				sessionStorage.setItem("access_token", null);
 			},
-
 			pullEnterprises: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: "Bearer " + store.token
+						authorization: "Bearer " + getStore().token
 					}
 				});
 
 				setStore({ enterprises: data });
+
 			},
 
 			pullSpaces: async () => {
-				let data = await getActions().newFetch("spaces");
+
+				let data = await getActions().newFetch("spaces", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					}
+				});
 				data = data.sort((space1, space2) => space1.spacetype_id - space2.spacetype_id);
 				setStore({ spaces: data, selectedSpace: data[0] });
 			},
@@ -121,7 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
-							authorization: "Bearer " + store.token
+							authorization: "Bearer " + getStore().token
 						}
 					}
 				);
@@ -136,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
-							authorization: "Bearer " + store.token
+							authorization: "Bearer " + getStore().token
 						}
 					}
 				);
@@ -148,7 +151,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
 					let response_json = await getActions().newFetch("schedules", {
 						method: "POST",
-						headers: {},
+						headers: {
+							"Content-Type": "application/json",
+							authorization: "Bearer " + store.token
+						},
 						body: JSON.stringify(store.schedules)
 					});
 					getActions().pullScheduler();
@@ -159,7 +165,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postEnterprises: async body => {
 				let response_json = await getActions().newFetch("enterprises", {
 					method: "POST",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					},
 					body: JSON.stringify(body)
 				});
 				getActions().pullEnterprises();
@@ -170,7 +179,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + store.token
+					},
 					body: JSON.stringify(store.scheduleToChange)
 				});
 				getActions().pullScheduler();
@@ -179,7 +191,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			changeEnterprisePUT: async enterprise => {
 				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
-					headers: {},
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + getStore().token
+					},
 					body: JSON.stringify(enterprise)
 				});
 				getActions().pullEnterprises();
@@ -215,7 +230,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addSchedules: date => {
-				console.log("date:", date);
 				const store = getStore();
 				const check = [];
 				store.schedules.map(sched => {
