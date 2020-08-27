@@ -12,12 +12,13 @@ export const Calendar = () => {
 	const { store, actions } = useContext(Context);
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
-	console.log(typeof store.token);
-	if (store.token != null && store.user["is_admin"] == true) {
+
+	console.log(sessionStorage.access_token, store.user["is_admin"]);
+	if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "true") {
 		return <Redirect to="/adminView" />;
-	} else if (store.token == null) {
+	} else if (sessionStorage["access_token"] == "null" || sessionStorage["access_token"] == undefined) {
 		return <Redirect to="/" />;
-	} else if (store.token != null && store.user["is_admin"] == false) {
+	} else if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "false") {
 		return (
 			<div className="container-fluid p-0">
 				<Navbar />
@@ -41,7 +42,7 @@ export const Calendar = () => {
 						</DropdownMenu>
 					</ButtonDropdown>
 					<p className="availableHours ml-4">
-						{store.user != undefined ? (
+						{store.user != undefined && store.user != {} ? (
 							<p>
 								Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
 								{store.user["current_hours"]} horas

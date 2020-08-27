@@ -12,7 +12,7 @@ export const Login = () => {
 
 	return (
 		<>
-			{store.token != null ? (
+			{sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined ? (
 				<>
 					<Redirect to="/reserva" />
 				</>

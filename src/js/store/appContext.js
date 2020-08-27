@@ -19,34 +19,36 @@ const injectContext = PassedComponent => {
 
 		useEffect(
 			() => {
-				if (state.store.token != null) {
+				if (sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined) {
 					state.actions.pullScheduler();
 					state.actions.cellID(new Date());
 					state.actions.pullSpaces();
 				}
 			},
-			[state.store.token]
+			[sessionStorage["access_token"]]
 		);
 
 		useEffect(
 			() => {
-				if (state.store.user["is_admin"] == true) {
+				if (sessionStorage["access_user"] != "null") {
 					state.actions.pullEnterprises();
+					console.log(sessionStorage["access_user"], "1");
 				}
+				console.log(sessionStorage["access_user"], "2");
 			},
-			[state.store.user]
+			[sessionStorage["access_user"]]
 		);
 
 		useEffect(
 			() => {
-				if (state.store.token != null) {
+				if (sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined) {
 					state.actions.pullScheduler();
 				}
 			},
 			[state.store.currentDay]
 		);
 		useEffect(() => {
-			if (state.store.token != null) {
+			if (sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined) {
 				state.actions.pullSchedulerByMonth(state.store.currentDay);
 			}
 		}, []);

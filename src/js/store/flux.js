@@ -28,13 +28,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			schedules: [],
 			enterprises: [],
 			reservedByMonth: [],
-
 			token: sessionStorage.access_token != "null" ? sessionStorage.access_token : null
 		},
 
 		actions: {
 			newFetch: async (endpoint, data = {}) => {
-				const store = getStore();
 				data.headers = {
 					...{
 						"Content-Type": "application/json",
@@ -63,10 +61,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				if (data != null) {
 					if (typeof data.access_token != "undefined") {
-
 						setStore({ token: data.access_token, user: data.user });
-
 						sessionStorage.setItem("access_token", data.access_token);
+						sessionStorage.setItem("access_user", data.user["is_admin"]);
 					}
 				}
 			},
@@ -87,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE"
 				});
 				setStore({ token: null });
-				sessionStorage.setItem("access_token", null);
+				sessionStorage.setItem("access_token", "null");
 			},
 			pullEnterprises: async () => {
 				const store = getStore();
@@ -100,11 +97,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 
 				setStore({ enterprises: data });
-
 			},
 
 			pullSpaces: async () => {
-
 				let data = await getActions().newFetch("spaces", {
 					method: "GET",
 					headers: {
