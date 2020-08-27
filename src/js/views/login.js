@@ -10,23 +10,6 @@ export const Login = () => {
 	var [forgot, setForgot] = useState(false);
 	var [mail, setMail] = useState("");
 
-	const redirectUser = e => {
-		/*	e.preventDefault();*/
-		if (store.token != null && store.admin) {
-			return (
-				<>
-					<Redirect to="/reserva" />
-				</>
-			);
-		} else if (store.token != null && !store.admin) {
-			return (
-				<>
-					<Redirect to="/profile" />
-				</>
-			);
-		}
-	};
-
 	return (
 		<>
 			{store.token != null ? (
@@ -105,19 +88,44 @@ export const Login = () => {
 							</div>
 						</div>
 					) : (
-						<>
-							<input className="form-control " type="email" placeholder="Correo electronico" />
-							<button
-								type="button"
-								className="btn btn-primary mx-auto my-5"
-								onClick={() => {
-									setForgot(false);
-								}}>
-								Restablecer
-							</button>
-						</>
+						<div className=" container-recover-password mx-auto p-3">
+							<div>
+								<img
+									className="d-flex login100-pic mx-auto"
+									src="https://dkitchenincubator.com/wp-content/uploads/2020/02/Logo-DK-con-texto.png"
+								/>
+							</div>
+							<div className=" ">
+								<p>
+									<span> {"  "}</span>
+									Si no recuerdas tu contraseña, por favor, contacta con B-Kitchen para reestablecerla
+									y poder acceder a tu perfil. Solicitalo:
+								</p>
+								<p>
+									<span className="fas fa-mobile-alt mr-3" />
+									Llamando al <strong>(+34) 644 94 06 29</strong>
+								</p>
+								<p>
+									<span className="far fa-envelope mb-3 mr-3" />
+									Contactando por:
+								</p>
+								<p>
+									<strong>info@dkitchenincubator.com</strong>
+								</p>
+								<span
+									className="d-flex justify-content-end"
+									onClick={() => {
+										setForgot(false);
+									}}>
+									<span className="fas fa-step-backward" />
+									<a className="txt-pass" href="#">
+										{" "}
+										Volver
+									</a>
+								</span>
+							</div>
+						</div>
 					)}
-					)
 				</div>
 			)}
 		</>
