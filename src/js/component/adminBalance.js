@@ -6,16 +6,14 @@ import { Table, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
-	var adminScheduler = [];
-	var currentDay = n.day;
-	var night = !store.night ? " d-none" : "";
-	var scheduleSpaceIDToChange;
-	var scheduleDateToChange;
-	var scheduleDateHourToChange;
-
 	const [show, setShow] = useState(false);
+	let adminScheduler = [];
+	let currentDay = n.day;
+	let scheduleSpaceIDToChange;
+	let scheduleDateToChange;
+	let scheduleDateHourToChange;
+	let hoursOptions = [];
 
-	var hoursOptions = [];
 	for (let hour = 0; hour < 24; hour++) {
 		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
 		hoursOptions.push(
@@ -26,8 +24,8 @@ export const AdminBalance = n => {
 	}
 
 	for (let hour = 0; hour < 25; hour++) {
-		var holderSpacesHours = [];
-		var titleHour = hour < 11 ? `0${hour - 1}:00` : `${hour - 1}:00`;
+		let holderSpacesHours = [];
+		let titleHour = hour < 11 ? `0${hour - 1}:00` : `${hour - 1}:00`;
 
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
@@ -85,23 +83,12 @@ export const AdminBalance = n => {
 				);
 			}
 		}
-		adminScheduler.push(<tr className={hour > 0 && hour < 9 ? night : ""}>{holderSpacesHours}</tr>);
+		adminScheduler.push(<tr>{holderSpacesHours}</tr>);
 		currentDay = addHours(currentDay, 1);
 	}
 
 	return (
 		<>
-			<div className="d-flex justify-content-center sticky-top p-2 my-2 bg-white w-100">
-				<p>
-					{" "}
-					Pincha
-					<i className="text-primary" onClick={() => actions.changeNight()}>
-						{" "}
-						aqui{" "}
-					</i>
-					para ver todas las horas!
-				</p>
-			</div>
 			<div className="title text-center font-weight-bold mx-5">
 				{actions.transformDay(subDays(currentDay, 1))}
 			</div>

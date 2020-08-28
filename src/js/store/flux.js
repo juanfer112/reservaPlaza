@@ -84,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE"
 				});
 				setStore({ token: null });
-				sessionStorage.setItem("access_token", "null");
+				sessionStorage.clear();
 			},
 			pullEnterprises: async () => {
 				const store = getStore();
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: "Bearer " + getStore().token
+						authorization: "Bearer " + store.token
 					}
 				});
 				setStore({ enterprises: data });
