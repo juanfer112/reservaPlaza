@@ -43,7 +43,7 @@ export const Login = () => {
 										/>
 										<span className="focus-input100" />
 										<span className="symbol-input100">
-											<i className="fa fa-envelope fa-icon-login" aria-hidden="true" />
+											<i className="fa fa-envelope fa-icon-login ml-2" aria-hidden="true" />
 										</span>
 									</div>
 
@@ -58,7 +58,7 @@ export const Login = () => {
 										/>
 										<span className="focus-input100" />
 										<span className="symbol-input100">
-											<i className="fa fa-lock fa-icon-login" aria-hidden="true" />
+											<i className="fa fa-lock fa-icon-login ml-2" aria-hidden="true" />
 										</span>
 									</div>
 

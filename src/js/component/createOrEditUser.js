@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import FormControl from "reactstrap";
 import { array } from "prop-types";
 
@@ -126,91 +126,97 @@ export const CreateOrEditUser = props => {
 				}}>
 				<i className="fas fa-plus" />
 			</button>
-			<Modal isOpen={props.show} toggle={() => props.toggleModalCallback(false)}>
+			<Modal
+				isOpen={props.show}
+				toggle={() => {
+					props.toggleModalCallback(false), props.cleanEnterprise();
+				}}>
+				<ModalHeader className="d-flex justify-content-center">
+					{enterprise == null ? (
+						<h2 className="title-font base-green">Alta nuevo usuario</h2>
+					) : (
+						<h2 className="title-font base-green">Edicion usuario</h2>
+					)}
+				</ModalHeader>
 				<ModalBody>
 					<form id="nameform">
-						{enterprise == null ? (
-							<h2 className="text-center">Alta nuevo usuario</h2>
-						) : (
-							<h2>Edicion usuario</h2>
-						)}
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Nombre de usuario</lable>
 							<input
 								required
 								type="text"
 								name="name"
 								className="form-control"
-								placeholder="Nombre de usuario"
 								defaultValue={enterprise ? enterprise.name : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Apellido</lable>
 							<input
 								required
 								type="text"
 								name="last_name"
 								className="form-control"
-								placeholder="Apellido"
 								defaultValue={enterprise ? enterprise.last_name : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Correo Electronico</lable>
 							<input
 								required
 								type="email"
 								name="email"
 								className="form-control"
-								placeholder="Correo Electronico"
 								defaultValue={enterprise ? enterprise.email : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Contraseña</lable>
 							<input
 								required
 								type="text"
 								name="password"
 								className="form-control"
-								placeholder="Contraseña"
 								defaultValue={enterprise ? enterprise.password : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">CIF</lable>
 							<input
 								required
 								type="text"
 								name="cif"
 								className="form-control"
-								placeholder="CIF"
 								defaultValue={enterprise ? enterprise.cif : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Nombre de usuario</lable>
 							<input
 								required
 								type="tel"
 								name="phone"
 								className="form-control"
-								placeholder="Teléfono"
 								defaultValue={enterprise ? enterprise.phone : ""}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Horas contratadas</lable>
 							<input
 								required
 								type="number"
 								name="tot_hours"
 								className="form-control"
-								placeholder="Horas contratadas"
 								defaultValue={enterprise ? enterprise.tot_hours : "0"}
 							/>
 						</div>
 						<div className="form-group">
+							<lable className="ml-2 text-secondary">Horas restantes</lable>
 							<input
 								required
 								type="number"
 								name="current_hours"
 								className="form-control"
-								placeholder="Horas restantes"
 								defaultValue={enterprise ? enterprise.current_hours : "0"}
 							/>
 						</div>
@@ -230,6 +236,7 @@ export const CreateOrEditUser = props => {
 									actions.postEnterprises(newEnterprise);
 								}
 								props.toggleModalCallback(false);
+								props.cleanEnterprise();
 							}
 						}}>
 						Confirmar
@@ -239,6 +246,7 @@ export const CreateOrEditUser = props => {
 						onClick={() => {
 							setError([]);
 							props.toggleModalCallback(false);
+							props.cleanEnterprise();
 						}}>
 						Cancelar
 					</button>

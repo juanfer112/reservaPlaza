@@ -21,11 +21,18 @@ export const ListOfUsers = () => {
 	const toggleModalCallback = hideOrShow => {
 		setShow(hideOrShow);
 	};
-
+	const cleanEnterprise = () => {
+		setEdit({});
+	};
 	return (
 		<>
 			<div className="container-userList">
-				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
+				<CreateOrEditUser
+					show={show}
+					enterprise={enterprise}
+					cleanEnterprise={cleanEnterprise}
+					toggleModalCallback={toggleModalCallback}
+				/>
 				<table className="table table-responsive table-bordered table-striped">
 					<thead>
 						<tr>

@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { format, startOfMonth, getDaysInMonth, getMonth, getYear } from "date-fns";
+import { format } from "date-fns";
 import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 
 export const ResumeModal = props => {
@@ -21,7 +21,6 @@ export const ResumeModal = props => {
 	});
 	const reservedSpace = store.reservedByMonth.map((space, i) => {
 		if (format(new Date(props.dataPickerdate), "d") == format(new Date(space["date"]), "d")) {
-			console.log("hours:", space);
 			arraySpace.push(space["space_name"]);
 			return (
 				<li className="list-group-item border-0 p-0" key={space + i}>
@@ -33,7 +32,11 @@ export const ResumeModal = props => {
 
 	return (
 		<>
-			<Modal isOpen={props.show} toggle={() => props.showModalCallback(false)}>
+			<Modal
+				isOpen={props.show}
+				toggle={() => {
+					props.showModalCallback(false);
+				}}>
 				{arrayHours.length > 0 ? (
 					<ModalBody>
 						<table className="table mr-auto table-responsive table-bordered table-striped">

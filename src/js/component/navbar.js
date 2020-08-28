@@ -11,7 +11,7 @@ export const Navbar = () => {
 
 	return (
 		<nav className="navbar row">
-			<h1 className="scheduler-title title-font base-green col-lg-4 offset-lg-4 col-8 text-center">B-Chicken</h1>
+			<h1 className="scheduler-title title-font base-green col-lg-4 offset-lg-4 col-8 text-center">D-Kitchen</h1>
 			<Link to={"/"}>
 				<i
 					className="fas fa-sign-out-alt base-green mr-3"

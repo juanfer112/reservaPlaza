@@ -95,7 +95,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						authorization: "Bearer " + getStore().token
 					}
 				});
-
 				setStore({ enterprises: data });
 			},
 

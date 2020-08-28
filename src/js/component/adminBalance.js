@@ -32,7 +32,7 @@ export const AdminBalance = n => {
 		for (let currentSpace = 0; currentSpace < store.spaces.length; currentSpace++) {
 			let spaceID = store.spaces[currentSpace]["id"];
 			let id = format(subHours(currentDay, 1), "yyyy-MM-dd HH:mm:ss").toString();
-			let className = actions.reservedDate(id, spaceID) + " text-white font-weight-bold";
+			let className = actions.reservedDate(id, spaceID);
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
@@ -55,7 +55,7 @@ export const AdminBalance = n => {
 										actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 								}
 							}}
-							className={"px-2 text-center" + className}
+							className={"px-2 text-center" + className + " text-white font-weight-bold"}
 							id={id}>
 							{store.spaces[currentSpace]["schedules"].map(schedule => {
 								if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
@@ -74,7 +74,7 @@ export const AdminBalance = n => {
 									actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 							}
 						}}
-						className={"px-2 text-center" + className}
+						className={"px-2 text-center" + className + " text-white font-weight-bold"}
 						id={id}>
 						{store.spaces[currentSpace]["schedules"].map(schedule => {
 							if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {

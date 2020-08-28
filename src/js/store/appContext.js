@@ -36,7 +36,7 @@ const injectContext = PassedComponent => {
 				}
 				console.log(sessionStorage["access_user"], "2");
 			},
-			[sessionStorage["access_user"]]
+			[state.store.user]
 		);
 
 		useEffect(
