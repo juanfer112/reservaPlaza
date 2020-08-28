@@ -98,8 +98,8 @@ export const Login = () => {
 							<div className=" ">
 								<p>
 									<span> {"  "}</span>
-									Si no recuerdas tu contraseña, por favor, contacta con B-Kitchen para reestablecerla
-									y poder acceder a tu perfil. Solicitalo:
+									Si no recuerdas tu contraseña, por favor, contacta con D-Kitchen para recuperarla y
+									poder acceder a tu perfil. Solicitalo:
 								</p>
 								<p>
 									<span className="fas fa-mobile-alt mr-3" />
@@ -107,11 +107,10 @@ export const Login = () => {
 								</p>
 								<p>
 									<span className="far fa-envelope mb-3 mr-3" />
-									Contactando por:
-								</p>
-								<p>
+									Contactando por: <span>{""}</span>
 									<strong>info@dkitchenincubator.com</strong>
 								</p>
+
 								<span
 									className="d-flex justify-content-end"
 									onClick={() => {
