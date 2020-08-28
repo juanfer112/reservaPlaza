@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { format, addHours, subHours, subDays } from "date-fns";
-import { Table, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Table, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
@@ -14,8 +14,8 @@ export const AdminBalance = n => {
 	var scheduleDateHourToChange;
 
 	const [show, setShow] = useState(false);
-	var hoursOptions = [];
 
+	var hoursOptions = [];
 	for (let hour = 0; hour < 24; hour++) {
 		let value = hour < 10 ? (value = "0" + hour.toString() + ":00") : (value = hour.toString() + ":00");
 		hoursOptions.push(
@@ -36,21 +36,21 @@ export const AdminBalance = n => {
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-5 thFirst bg-white" />
-						<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+						<th className="px-2 thFirst bg-white" />
+						<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
 			} else if (hour == 0) {
 				holderSpacesHours.push(
-					<th className="px-5 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
+					<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 				);
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-5 text-center tHours bg-white">{titleHour}</th>
+						<th className="px-2 text-center tHours bg-white">{titleHour}</th>
 						<td
 							onClick={e => {
-								if (className == " reserved") {
+								if (className == " reserved" || className == " self-reserved") {
 									setShow(!show),
 										actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 								}
@@ -69,7 +69,7 @@ export const AdminBalance = n => {
 				holderSpacesHours.push(
 					<td
 						onClick={e => {
-							if (className == " reserved") {
+							if (className == " reserved" || className == " self-reserved") {
 								setShow(!show),
 									actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 							}
@@ -91,7 +91,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="d-flex fixed justify-content-center p-2 my-2 bg-white w-100">
+			<div className="d-flex justify-content-center sticky-top p-2 my-2 bg-white w-100">
 				<p>
 					{" "}
 					Pincha
@@ -102,7 +102,7 @@ export const AdminBalance = n => {
 					para ver todas las horas!
 				</p>
 			</div>
-			<div ref={n.ref} className="title text-center font-weight-bold mx-5">
+			<div className="title text-center font-weight-bold mx-5">
 				{actions.transformDay(subDays(currentDay, 1))}
 			</div>
 			<div className="row mb-5">
@@ -158,8 +158,8 @@ export const AdminBalance = n => {
 					)}
 				</ModalBody>
 				<ModalFooter className="m-auto">
-					<Button
-						className="btn-confirm"
+					<button
+						className="btn btn-confirm text-white"
 						onClick={
 							store.scheduleToChange
 								? () => {
@@ -173,14 +173,14 @@ export const AdminBalance = n => {
 								: ""
 						}>
 						Confirmar
-					</Button>
-					<Button
-						className="btn-close"
+					</button>
+					<button
+						className="btn btn-close text-white"
 						onClick={() => {
 							setShow(!show);
 						}}>
 						Cancelar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>

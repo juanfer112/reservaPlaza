@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import cocina from "../../../assets/cocina.jpeg";
 import barra from "../../../assets/barra.jpeg";
 import formacion from "../../../assets/formacion.jpeg";
@@ -56,9 +56,9 @@ export const SpacesModal = () => {
 					})}
 				</ModalBody>
 				<ModalFooter className="m-auto border-0">
-					<Button className="btn-close" onClick={() => setShow(!show)}>
+					<button className="btn btn-close text-white" onClick={() => setShow(!show)}>
 						Cerrar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>

@@ -14,7 +14,9 @@ export const AdminView = () => {
 				<li
 					role="tab"
 					className={
-						view.type.name == "ListOfUsers" ? "nav-item nav-link active text-primary" : "nav-item nav-link"
+						view.type.name == "ListOfUsers"
+							? "nav-item nav-link active base-green font-weight-bold"
+							: "nav-item nav-link base-green font-weight-bold"
 					}
 					onClick={() => {
 						setView(<ListOfUsers />);
@@ -24,7 +26,9 @@ export const AdminView = () => {
 				<li
 					role="tab"
 					className={
-						view.type.name == "Balance" ? "nav-item nav-link active text-primary" : "nav-item nav-link"
+						view.type.name == "Balance"
+							? "nav-item nav-link active base-green font-weight-bold"
+							: "nav-item nav-link base-green font-weight-bold"
 					}
 					onClick={() => {
 						setView(<Balance />);

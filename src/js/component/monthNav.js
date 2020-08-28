@@ -4,7 +4,6 @@ import "../../styles/home.scss";
 import { ResumeReserve } from "./resumeReserve";
 import { ResumeModal } from "../component/resumeModal";
 import { format, addMonths, getYear, getDaysInMonth, getMonth, setMonth, set } from "date-fns";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const MonthNav = () => {
 	const { actions, store } = useContext(Context);

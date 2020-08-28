@@ -33,7 +33,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			newFetch: async (endpoint, data = {}) => {
-				const store = getStore();
 				data.headers = {
 					...{
 						"Content-Type": "application/json",

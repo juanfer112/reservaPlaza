@@ -4,6 +4,34 @@ body{
 .title-font{
     font-family: 'Abril Fatface', cursive;
 }
+.fa-sign-out-alt{
+    font-size: 1.7rem;
+}
+.nav-tabs {
+    border-bottom: 1px solid #9dd981;
+}
+ .nav-link:hover{
+    color: #35553e;
+    background-color: #ffffff;
+    border-color: #9dd981 #9dd981 #fff;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    color: #35553e;
+    background-color: #ffffff;
+    border-color: #9dd981 #9dd981 #fff;
+}
+.btn-new-user, .btn-new-user:focus{
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: #81b4d9;
+    border-radius: 100%;
+    color: white;
+    outline: 0;
+    border: 0;
+}
+.fa-plus{
+    font-size: 2rem;
+}
 .btn{
     border-radius: .5rem
 }
@@ -141,6 +169,7 @@ th{
 }
 .self-reserved{
  background-color: #488683;
+ cursor: pointer;
 }
 .rowSched {
     overflow-x: auto;
@@ -177,11 +206,6 @@ th{
     border-bottom: solid 0.05rem #dee2e6;
     border-right: solid 0.05rem #dee2e6;
 }
-Button{
-    min-height: 2rem;
-    max-width: 8rem;
-    text-align: center;
-}
 .home-dropDown:focus{
     box-shadow: none;
 }
@@ -214,7 +238,6 @@ td{
     overflow-x: auto;
     overflow-y: hidden;
     white-space:nowrap;
-    width: 100vw;
 }
 Table{
     border-collapse: separate;
@@ -234,31 +257,18 @@ Table{
 .btn-md{
     min-width: 0;
 }
-.btn-close{
+.btn-close, .btn-close:hover{
     background-color: #c52233;
+    border: 0;
 }
-.btn-close:hover{
-  background-color: #fff;
-  color:#c52233;
-  font-weight: bold;
-  border: 2px solid #c52233;
-}
-.btn-confirm{
-    background-color: #2B3800;
-}
-.btn-confirm:hover{
-  background-color: #fff;
-  color:#2B3800;
-  font-weight: bold;
-  border: 2px solid #2B3800;
+.btn-confirm, .btn-confirm:hover, .btn-confirm:active, .btn-confirm:focus{
+    background-color: #81b4d9;
+    border: 0;
 }
 .container-userList{
     margin: 2rem;
     margin-bottom: 6rem;
     overflow-x: auto;
-}
-.close:focus{
-    border: 0;
 }
 .bg-odd{
     background-color: #efefef;
