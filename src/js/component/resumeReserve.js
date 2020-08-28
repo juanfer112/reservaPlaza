@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { MonthNav } from "./monthNav";
 import { format, startOfMonth, subHours, getDaysInMonth, getMonth, getYear } from "date-fns";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);

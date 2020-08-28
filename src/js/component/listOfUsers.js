@@ -5,7 +5,7 @@ import "../../styles/home.scss";
 import { Navbar } from "../component/navbar";
 import { CreateOrEditUser } from "../component/createOrEditUser";
 import { Link } from "react-router-dom";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ListOfUsers = () => {
 	const { store, actions } = useContext(Context);
@@ -28,20 +28,20 @@ export const ListOfUsers = () => {
 				<CreateOrEditUser show={show} enterprise={enterprise} toggleModalCallback={toggleModalCallback} />
 				<table className="table table-responsive table-bordered table-striped">
 					<thead>
-						<tr className="w-100">
-							<th className="px-2 text-center align-middle" scope="col">
+						<tr>
+							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Nombre</p>
 							</th>
-							<th className="px-2 text-center align-middle" scope="col">
+							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Horas restantes</p>
 							</th>
-							<th className="px-2 text-center align-middle" scope="col">
+							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Horas contratadas</p>
 							</th>
-							<th className="px-2 text-center align-middle" scope="col">
+							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Número de teléfono</p>
 							</th>
-							<th className="px-2 text-center align-middle" scope="col">
+							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Email</p>
 							</th>
 						</tr>
@@ -87,21 +87,21 @@ export const ListOfUsers = () => {
 					<h1>Eliminar definitivamente el usuario {enterprise ? enterprise.name : ""} ?</h1>
 				</ModalBody>
 				<ModalFooter className="m-auto">
-					<Button
-						className="btn-confirm"
+					<button
+						className="btn btn-confirm text-white"
 						onClick={() => {
 							actions.softDelete(enterprise);
 							setDeleteUser(false);
 						}}>
 						Confirmar
-					</Button>
-					<Button
-						className="btn-close"
+					</button>
+					<button
+						className="btn btn-close text-white"
 						onClick={() => {
 							setDeleteUser(false);
 						}}>
 						Cancelar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>

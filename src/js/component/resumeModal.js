@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
 import { format, startOfMonth, getDaysInMonth, getMonth, getYear } from "date-fns";
-import { Button, Modal, ModalBody, ModalFooter, Form } from "reactstrap";
-import FormControl from "reactstrap";
+import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 
 export const ResumeModal = props => {
 	const { store, actions } = useContext(Context);
@@ -63,13 +62,13 @@ export const ResumeModal = props => {
 				)}
 
 				<ModalFooter className="m-auto">
-					<Button
-						className="btn-close"
+					<button
+						className="btn btn-close text-white"
 						onClick={() => {
 							props.showModalCallback(false);
 						}}>
 						Cancelar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>
