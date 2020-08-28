@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ConfirModal = () => {
 	const { store, actions } = useContext(Context);
@@ -32,17 +32,17 @@ export const ConfirModal = () => {
 					</ModalBody>
 				)}
 				<ModalFooter className="m-auto">
-					<Button
-						className="btn-confirm"
+					<button
+						className="btn btn-confirm text-white"
 						onClick={() => {
 							actions.postSchedules();
 							setShow(!show);
 						}}>
 						Confirmar
-					</Button>
-					<Button className="btn-close" onClick={() => setShow(!show)}>
+					</button>
+					<button className="btn btn-close text-white" onClick={() => setShow(!show)}>
 						Cancelar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>

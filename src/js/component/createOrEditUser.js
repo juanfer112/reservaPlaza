@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { Button, Modal, ModalBody, ModalFooter, Form } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 import FormControl from "reactstrap";
 import { array } from "prop-types";
 
@@ -119,12 +119,12 @@ export const CreateOrEditUser = props => {
 	return (
 		<>
 			<button
-				className="font-weight-bold btn btn-success fixed-bottom p-3 m-4"
+				className="btn-new-user fixed-bottom m-5 ml-auto"
 				onClick={() => {
 					setEnterprise(null);
 					props.toggleModalCallback(true);
 				}}>
-				Nuevo Usuario
+				<i className="fas fa-plus" />
 			</button>
 			<Modal isOpen={props.show} toggle={() => props.toggleModalCallback(false)}>
 				<ModalBody>
@@ -217,10 +217,10 @@ export const CreateOrEditUser = props => {
 					</form>
 				</ModalBody>
 				<ModalFooter className="m-auto">
-					<Button
+					<button
 						type="submit"
 						form="nameform"
-						className="btn-confirm"
+						className="btn btn-confirm text-white"
 						onClick={e => {
 							e.preventDefault();
 							if (validateInputs(e)) {
@@ -233,15 +233,15 @@ export const CreateOrEditUser = props => {
 							}
 						}}>
 						Confirmar
-					</Button>
-					<Button
-						className="btn-close"
+					</button>
+					<button
+						className="btn btn-close text-white"
 						onClick={() => {
 							setError([]);
 							props.toggleModalCallback(false);
 						}}>
 						Cancelar
-					</Button>
+					</button>
 				</ModalFooter>
 			</Modal>
 		</>
