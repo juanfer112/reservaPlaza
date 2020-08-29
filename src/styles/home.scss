@@ -458,8 +458,6 @@ Table{
 // 	height: 100%;
 // 	font-family: Poppins-Regular, sans-serif;
 // }
-
-/*---------------------------------------------*/
 .txt-pass {
     font-family: Poppins-Regular;
     font-size: 14px;
@@ -785,4 +783,68 @@ border: 0.05px solid #2B3800;
 .fc-state-default.fc-corner-left {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+}
+/*--------------------------------------------------*/
+
+// body {
+//   background-color: #f9f9f9;
+//   padding-top: 20px;
+//   padding-left: 20px;
+// }
+
+.contact-card-container {
+  display: inline-block;
+  width: 100%;
+  .row{
+    margin-bottom: 0;
+  }
+  .card-content {
+    z-index: 0;
+    position: relative;
+    padding: 0px 12px 12px 12px;
+    .close-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 1.05em;
+      cursor: pointer;
+      &:hover {
+        color: red;
+      }
+    }
+    .background-holder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 85%!important;
+      background-color:#9dd981;
+      z-index: 1;
+    }
+    .card-header {
+      font-size: 20px;
+      //border-bottom: 1px solid darkgrey;
+      padding-left: 100px;
+    }
+    .profile-picture {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      img {
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+        border: 4px solid #fff;
+      }
+    }
+    .personal-information {
+      display: inline-block;
+      label {
+        font-size: 0.9em;
+        display: inline-block;
+        color: rgb(117, 117, 117);
+        width: 100px;
+      }
+    }
+  }
 }
