@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "../../styles/home.scss";
 
 export const Login = () => {
@@ -8,7 +8,6 @@ export const Login = () => {
 	var [user, setUser] = useState("");
 	var [password, setPassword] = useState("");
 	var [forgot, setForgot] = useState(false);
-	var [mail, setMail] = useState("");
 
 	return (
 		<>
@@ -44,7 +43,7 @@ export const Login = () => {
 											/>
 											<span className="focus-input100" />
 											<span className="symbol-input100">
-												<i className="fa fa-envelope fa-icon-login" aria-hidden="true" />
+												<i className="fa fa-envelope fa-icon-login ml-3" aria-hidden="true" />
 											</span>
 										</div>
 
@@ -61,7 +60,7 @@ export const Login = () => {
 											/>
 											<span className="focus-input100" />
 											<span className="symbol-input100">
-												<i className="fa fa-lock fa-icon-login" aria-hidden="true" />
+												<i className="fa fa-lock fa-icon-login ml-3" aria-hidden="true" />
 											</span>
 										</div>
 

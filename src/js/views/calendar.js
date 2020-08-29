@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { Context } from "../store/appContext";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "../component/scheduler";
 import { Navbar } from "../component/navbar";
@@ -13,12 +13,23 @@ export const Calendar = () => {
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
 
-	console.log(sessionStorage.access_token, store.user["is_admin"]);
-	if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "true") {
+	if (
+		sessionStorage["access_token"] &&
+		sessionStorage["access_token"] != "null" &&
+		sessionStorage["is_admin"] == "true"
+	) {
 		return <Redirect to="/adminView" />;
-	} else if (sessionStorage["access_token"] == "null" || sessionStorage["access_token"] == undefined) {
+	} else if (
+		!sessionStorage["access_token"] ||
+		sessionStorage["access_token"] == "null" ||
+		sessionStorage["access_token"] == undefined
+	) {
 		return <Redirect to="/" />;
-	} else if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "false") {
+	} else if (
+		sessionStorage["access_token"] &&
+		sessionStorage["access_token"] != "null" &&
+		sessionStorage["is_admin"] == "false"
+	) {
 		return (
 			<div className="container-fluid p-0">
 				<Navbar />
@@ -27,7 +38,7 @@ export const Calendar = () => {
 						className="btnDropdown col-1 offset-1 border-0"
 						isOpen={dropdownOpen}
 						toggle={toggle}>
-						<DropdownToggle className="btnDropdown" color caret="xs">
+						<DropdownToggle className="btnDropdown" caret={true}>
 							<SpacesModal />
 							{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 						</DropdownToggle>
@@ -41,16 +52,15 @@ export const Calendar = () => {
 							})}
 						</DropdownMenu>
 					</ButtonDropdown>
-					<p className="availableHours ml-4">
-						{store.user != undefined && store.user != {} ? (
-							<p>
-								Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
-								{store.user["current_hours"]} horas
-							</p>
-						) : (
-							"loading..."
-						)}
-					</p>
+					{sessionStorage["is_admin"] ? (
+						<p className="col ml-3">
+							{"Hola "}
+							<span className="title-font base-green">{store.user["name"]}</span>
+							{" , le quedan " + store.user["current_hours"] + " horas"}
+						</p>
+					) : (
+						"loading..."
+					)}
 				</div>
 				<h4 className="text-center">
 					{" "}
@@ -71,7 +81,7 @@ export const Calendar = () => {
 							}}>
 							<i className="fa fa-angle-left base-green" />
 						</div>
-						<div className="navSchedulerDays mx-1" onClick={() => actions.goToCurrentDay()}>
+						<div className="navSchedulerDays mx-2" onClick={() => actions.goToCurrentDay()}>
 							Hoy
 						</div>
 						<div

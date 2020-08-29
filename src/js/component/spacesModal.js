@@ -18,7 +18,7 @@ export const SpacesModal = () => {
 					setShow(!show), event.stopPropagation();
 				}}
 			/>
-			<Modal className="modal-lg" backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+			<Modal className="modal-lg" isOpen={show} toggle={() => setShow(!show)}>
 				<ModalHeader className="d-flex justify-content-center" toggle={() => setShow(!show)}>
 					<h2 className="text-center title-font base-green">Informacion de salas</h2>
 				</ModalHeader>
