@@ -13,46 +13,39 @@ export const Profile = () => {
 	console.log(Object.keys(store.user));
 
 	return (
-		<div className="container mt-3 mb-3">
+		<div className="container pr-0 mt-3 mb-3">
 			<div className="row justify-content">
-				<img
-					src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
-					className="avatarProfile float-left rounded-circle mr-2 shadow"
-				/>
+				<div className="col-sm-10 col-md-8 p-0 shadow">
+					<div className="contact-card-container card">
+						<div className="card-content">
+							<div className="background-holder" />
 
-				<div className="col-sm-10 col-md-8 shadow">
-					<div className="row justify-content">
-						{Object.keys(store.user)
-							.sort(sortStringKeys)
-							.map((element, index) => {
-								if (element == "name" || element == "phone") {
-									return (
-										<div className="row justify-content">
-											<p className="col-sm-12 col-md-6 mx-2" key={index}>
-												{element}:{store.user[element]}
-											</p>
-										</div>
-									);
-								} else if (element == "tot_hours" || element == "cif") {
-									return (
-										<div className="row justify-content">
-											<p className="col-sm-12 col-md-6 mx-2 " key={index}>
-												{element}:{store.user[element]}
-											</p>
-										</div>
-									);
-								} else if (element == "brands") {
-									Object.values(store.user[element]).map((brand, index) => {
-										let array = [];
-										newArray += array.concat(brand["name"], " ");
-									});
-									return (
-										<div className="col-sm-12 text-nowrap " key={index}>
-											{element}: {newArray}
-										</div>
-									);
-								}
-							})}
+							<div className="card-header row ">
+								<label>Nombre :</label> <span>{store.user.name}</span>
+							</div>
+							<div className="row">
+								<div className="profile-picture col-3">
+									<img
+										src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1024px-Placeholder_no_text.svg.png"
+										alt=""
+									/>
+								</div>
+								<ul className="personal-information col-9">
+									<li>
+										<label>CIF:</label> <span>{store.user.cif}</span>
+									</li>
+									<li>
+										<label>Horas contratadas :</label> <span>{store.user.tot_hours}</span>
+									</li>
+									<li>
+										<label>Phone :</label> <span>{store.user.phone}</span>
+									</li>
+									<li>
+										<label>Email :</label> <span>{store.user.email}</span>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
