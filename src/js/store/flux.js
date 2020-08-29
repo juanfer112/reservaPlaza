@@ -86,7 +86,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				setStore({ token: null });
 				sessionStorage.clear();
-				window.location.reload();
 			},
 
 			pullEnterprises: async () => {
