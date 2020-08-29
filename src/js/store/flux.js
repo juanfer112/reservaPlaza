@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (typeof data.access_token != "undefined") {
 						setStore({ token: data.access_token, user: data.user });
 						sessionStorage.setItem("access_token", data.access_token);
-						sessionStorage.setItem("access_user", data.user["is_admin"]);
+						sessionStorage.setItem("is_admin", data.user["is_admin"]);
 					}
 				}
 			},
@@ -79,13 +79,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: async () => {
-				const store = getStore();
 				let data = await getActions().newFetch("logout", {
 					method: "DELETE"
 				});
 				setStore({ token: null });
 				sessionStorage.clear();
+				window.location.reload();
 			},
+
 			pullEnterprises: async () => {
 				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
@@ -95,7 +96,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						authorization: "Bearer " + store.token
 					}
 				});
-				setStore({ enterprises: data });
+				setStore({
+					enterprises: data.sort((a, b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1))
+				});
 			},
 
 			pullSpaces: async () => {
