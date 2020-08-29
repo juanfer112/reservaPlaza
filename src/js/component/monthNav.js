@@ -98,8 +98,19 @@ export const MonthNav = () => {
 									value={showYear}
 								/>
 							</td>
-							<td colSpan="2" className="nav-month">
-								<i className="prev fa fa-fw fa-chevron-left" />
+							<td colSpan="2">
+								<div className="fc-button-group">
+									<button
+										type="button"
+										className="fc-prev-button fc-button fc-state-default fc-corner-left">
+										<i className="fa fa-angle-left base-green" />
+									</button>
+									<button
+										type="button"
+										className="fc-next-button fc-button fc-state-default fc-corner-right">
+										<i className="fa fa-angle-right base-green" />
+									</button>
+								</div>
 							</td>
 						</tr>
 					</thead>

@@ -1,13 +1,12 @@
 import React, { useState, useContext, useReducer } from "react";
 import { Context } from "../store/appContext";
 import { Link, Redirect } from "react-router-dom";
-import { Profile } from "../component/profile";
-
-import { Navbar } from "../component/navbar";
-import { ResumeReserve } from "../component/resumeReserve";
-import { MonthNav } from "../component/monthNav";
+import { Profile } from "./profile";
+import { Navbar } from "./navbar";
+import { ResumeReserve } from "./resumeReserve";
+import { MonthNav } from "./monthNav";
 import "../../styles/home.scss";
-import { ResumeModal } from "../component/resumeModal";
+import { ResumeModal } from "./resumeModal";
 
 export const ProfileUsers = () => {
 	const { store, actions } = useContext(Context);
@@ -20,9 +19,6 @@ export const ProfileUsers = () => {
 	return (
 		<div>
 			<div>
-				<Navbar />
-			</div>
-			<div>
 				<Profile />
 			</div>
 			<div>
@@ -30,7 +26,7 @@ export const ProfileUsers = () => {
 			</div>
 			<div className="legend">
 				<div className="legend-details">
-					Dias reservados <span className="legend-green span-style">{""}</span>
+					Dias reservados <span className="legend-reserved span-style">{""}</span>
 				</div>
 				<div className="legend-details">
 					Día actual <span className="legend-blue span-style">{""}</span>
