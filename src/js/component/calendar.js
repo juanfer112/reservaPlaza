@@ -13,8 +13,6 @@ export const Calendar = () => {
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
 
-	console.log(sessionStorage.access_token, store.user["is_admin"]);
-
 	return (
 		<div className="container-fluid p-0">
 			<div className="row my-4 align-items-center">

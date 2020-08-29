@@ -7,11 +7,11 @@ import { Calendar } from "../component/calendar";
 
 export const UserView = () => {
 	const [view, setView] = useState(<Calendar />);
-	if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "true") {
+	if (sessionStorage["access_token"] != "null" && sessionStorage["is_admin"] == "true") {
 		return <Redirect to="/adminView" />;
 	} else if (sessionStorage["access_token"] == "null" || sessionStorage["access_token"] == undefined) {
 		return <Redirect to="/" />;
-	} else if (sessionStorage["access_token"] != "null" && sessionStorage["access_user"] == "false") {
+	} else if (sessionStorage["access_token"] != "null" && sessionStorage["is_admin"] == "false") {
 		return (
 			<>
 				<Navbar />

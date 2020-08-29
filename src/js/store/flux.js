@@ -79,9 +79,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: async () => {
-				let data = await getActions().newFetch("logout", {
+				{
+					/*let data = await getActions().newFetch("logout", {
 					method: "DELETE"
-				});
+				});*/
+				}
 				setStore({ token: null });
 				sessionStorage.clear();
 				window.location.reload();
