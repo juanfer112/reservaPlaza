@@ -139,7 +139,7 @@ export const CreateOrEditUser = props => {
 					)}
 				</ModalHeader>
 				<ModalBody>
-					<form id="namefor">
+					<form id="nameform">
 						<div className="form-group mb-1">
 							<label className="ml-2 text-secondary font-weight-bold">
 								Nombre de usuario
@@ -252,6 +252,7 @@ export const CreateOrEditUser = props => {
 						form="nameform"
 						className="btn btn-confirm text-white"
 						onClick={e => {
+							console.log(e.target.form);
 							e.preventDefault();
 							if (validateInputs(e)) {
 								if (enterprise && enterprise.id) {

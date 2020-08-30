@@ -62,9 +62,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (typeof data.access_token != "undefined") {
 						setStore({ token: data.access_token, user: data.user });
 						sessionStorage.setItem("access_token", data.access_token);
-						sessionStorage.setItem("is_admin", data.user["is_admin"]);
+						sessionStorage.setItem("is_admin", data.user.is_admin);
 					}
 				}
+				window.location.reload(false);
 			},
 
 			isLogged: async () => {

@@ -4,15 +4,15 @@ import { Redirect } from "react-router-dom";
 import { Navbar } from "../component/navbar";
 import { ListOfUsers } from "../component/listOfUsers";
 import { Balance } from "../component/balance";
+import { Context } from "../store/appContext";
 
 export const AdminView = () => {
 	const [view, setView] = useState(<ListOfUsers />);
+	const { store, actions } = useContext(Context);
 
-	if (
-		sessionStorage["access_token"] &&
-		sessionStorage["access_token"] != "null" &&
-		sessionStorage["is_admin"] == "false"
-	) {
+	let is_admin = store.user["is_admin"] == true ? true : false;
+
+	if (sessionStorage["access_token"] && sessionStorage["access_token"] != "null" && is_admin == false) {
 		return <Redirect to="/reserva" />;
 	} else if (
 		!sessionStorage["access_token"] ||
@@ -20,11 +20,7 @@ export const AdminView = () => {
 		sessionStorage["access_token"] == undefined
 	) {
 		return <Redirect to="/" />;
-	} else if (
-		sessionStorage["access_token"] &&
-		sessionStorage["access_token"] != "null" &&
-		sessionStorage["is_admin"] == "true"
-	) {
+	} else if (sessionStorage["access_token"] && sessionStorage["access_token"] != "null" && is_admin == true) {
 		return (
 			<>
 				<Navbar />
