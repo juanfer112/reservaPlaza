@@ -18,7 +18,7 @@ export const ProfileUsers = () => {
 
 	return (
 		<div>
-			<div>
+			<div className="container pr-0 mt-3 mb-3">
 				<Profile />
 			</div>
 			<div>

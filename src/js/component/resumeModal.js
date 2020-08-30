@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
-import { format } from "date-fns";
+import { format, subHours } from "date-fns";
 import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 
 export const ResumeModal = props => {
@@ -14,17 +14,16 @@ export const ResumeModal = props => {
 			arrayHours.push(hours["date"]);
 			return (
 				<li className="list-group-item border-0 p-0" key={hours + i}>
-					<h4>{format(new Date(hours["date"]), "hh:mm aaaa")}</h4>
+					<h4>{format(subHours(new Date(hours["date"]), 2), "hh:mm aaaa")}</h4>
 				</li>
 			);
 		}
 	});
 	const reservedSpace = store.reservedByMonth.map((space, i) => {
 		if (format(new Date(props.dataPickerdate), "d") == format(new Date(space["date"]), "d")) {
-			arraySpace.push(space["space_name"]);
 			return (
 				<li className="list-group-item border-0 p-0" key={space + i}>
-					<h4>{arraySpace}</h4>
+					<h4>{space["space_name"]}</h4>
 				</li>
 			);
 		}
@@ -43,10 +42,10 @@ export const ResumeModal = props => {
 							<thead>
 								<tr>
 									<th className="text-center align-middle text-secondary" scope="col">
-										Salas seleccionadas
+										Salas reservada
 									</th>
 									<th className="text-center align-middle text-secondary" scope="col">
-										Horario seleccionado
+										Hora de la reserva
 									</th>
 								</tr>
 							</thead>

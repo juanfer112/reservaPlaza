@@ -489,7 +489,7 @@ Table{
 // }
 
 /*---------------------------------------------*/
-.wrap-login100 input {
+.wrap-login100 input{
 	outline: none;
 	border: none;
 }
@@ -503,28 +503,28 @@ Table{
 //   border-color: transparent !important;
 // }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
+input:focus::-webkit-input-placeholder{ color:transparent; }
+input:focus:-moz-placeholder{ color:transparent; }
+input:focus::-moz-placeholder{ color:transparent; }
+input:focus:-ms-input-placeholder{ color:transparent; }
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
+textarea:focus::-webkit-input-placeholder{ color:transparent; }
+textarea:focus:-moz-placeholder{ color:transparent; }
+textarea:focus::-moz-placeholder{ color:transparent; }
+textarea:focus:-ms-input-placeholder{ color:transparent; }
 
-input::-webkit-input-placeholder { color: #999999; }
-input:-moz-placeholder { color: #999999; }
-input::-moz-placeholder { color: #999999; }
-input:-ms-input-placeholder { color: #999999; }
+input::-webkit-input-placeholder{ color: #999999; }
+input:-moz-placeholder{ color: #999999; }
+input::-moz-placeholder{ color: #999999; }
+input:-ms-input-placeholder{ color: #999999; }
 
-textarea::-webkit-input-placeholder { color: #999999; }
-textarea:-moz-placeholder { color: #999999; }
-textarea::-moz-placeholder { color: #999999; }
-textarea:-ms-input-placeholder { color: #999999; }
+textarea::-webkit-input-placeholder{ color: #999999; }
+textarea:-moz-placeholder{ color: #999999; }
+textarea::-moz-placeholder{ color: #999999; }
+textarea:-ms-input-placeholder{ color: #999999; }
 
 /*---------------------------------------------*/
-.login100-form-btn {
+.login100-form-btn{
 	outline: none !important;
 	border: none;
 	background: transparent;
@@ -824,6 +824,10 @@ border: 0.05px solid #2B3800;
       font-size: 20px;
       //border-bottom: 1px solid darkgrey;
       padding-left: 100px;
+      padding-bottom: 0px;
+        li{
+            list-style-type: none;
+      }
     }
     .profile-picture {
       display: inline-block;
@@ -838,11 +842,15 @@ border: 0.05px solid #2B3800;
     }
     .personal-information {
       display: inline-block;
-      label {
+        label {
         font-size: 0.9em;
         display: inline-block;
         color: rgb(117, 117, 117);
-        width: 100px;
+        width: fit-content;
+
+      }
+        li{
+        list-style-type: none;
       }
     }
   }

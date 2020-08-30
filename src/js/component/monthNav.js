@@ -88,6 +88,7 @@ export const MonthNav = () => {
 									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
 								</span>
 								<input
+									onKeydown="false"
 									defaultValue={getYear(currentDay)}
 									className="editor-year"
 									type="number"
