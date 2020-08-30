@@ -89,7 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullEnterprises: async () => {
-				const store = getStore();
 				let data = await getActions().newFetch("enterprises", {
 					method: "GET",
 					headers: {
@@ -115,7 +114,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullScheduler: async () => {
-				const store = getStore();
 				let data = await getActions().newFetch(
 					"schedules/" + format(getStore().currentDay, "yyyy-MM-dd HH:mm:ss").toString(),
 					{
@@ -130,7 +128,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			pullSchedulerByMonth: async date => {
-				const store = getStore();
 				let data = await getActions().newFetch(
 					"schedules_by_month_and_year/" + format(date, "yyyy-MM-dd HH:mm:ss").toString(),
 					{
@@ -147,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			postSchedules: async () => {
 				const store = getStore();
 				if (store.schedules.length > 0 && store.schedules.length <= store.user.current_hours) {
-					let response_json = await getActions().newFetch("schedules", {
+					await getActions().newFetch("schedules", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -175,7 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			changeSchedulePUT: async () => {
 				const store = getStore();
-				let response = await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
+				await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -184,10 +181,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(store.scheduleToChange)
 				});
 				getActions().pullScheduler();
+				getActions().pullSpaces();
 			},
 
 			changeEnterprisePUT: async enterprise => {
-				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
+				await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -360,6 +358,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				date ? (newScheduleToChange.date = date) : "";
 				space_name ? (newScheduleToChange.space_name = space_name) : "";
 				setStore({ scheduleToChange: newScheduleToChange });
+				getActions().changeSchedulePUT();
 			},
 
 			currentMonth: () => {

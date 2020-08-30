@@ -9,9 +9,13 @@ export const AdminBalance = n => {
 	const [show, setShow] = useState(false);
 	let adminScheduler = [];
 	let currentDay = n.day;
-	let scheduleSpaceIDToChange;
-	let scheduleDateToChange;
-	let scheduleDateHourToChange;
+	let scheduleSpaceIDToChange = store.scheduleToChange["date"] ? store.scheduleToChange["space_id"] : "";
+	let scheduleDateToChange = store.scheduleToChange["date"]
+		? format(subHours(new Date(store.scheduleToChange["date"]), 2), "yyyy-MM-dd")
+		: "";
+	let scheduleDateHourToChange = store.scheduleToChange["date"]
+		? format(subHours(new Date(store.scheduleToChange["date"]), 2), "HH:mm")
+		: "";
 	let hoursOptions = [];
 
 	for (let hour = 0; hour < 24; hour++) {
@@ -99,82 +103,89 @@ export const AdminBalance = n => {
 					</Table>
 				</div>
 			</div>
-			<Modal className="modalChange" isOpen={show} toggle={() => setShow(!show)}>
-				<ModalBody>
-					{store.scheduleToChange != {} ? (
-						<ul className="list-group">
-							<li className="d-flex justify-content-center py-2">
-								<h3 className="text-center">{store.scheduleToChange["enterprise_name"]}</h3>
-							</li>
-							<li className="d-flex row list-group-item text-left text-capitalize">
-								<h3 className="col-2">Salas:</h3>
-								<select onChange={e => (scheduleSpaceIDToChange = e.target.value)} className="col-9">
-									{store.spaces.map(space => {
-										if (store.scheduleToChange["space_id"] == space["id"]) {
-											return (
-												<option selected key={space["id"]} value={space["id"]}>
-													{space["name"]}
-												</option>
-											);
-										} else {
+			{store.scheduleToChange["date"] ? (
+				<Modal className="modalChange" isOpen={show} toggle={() => setShow(!show)}>
+					<ModalBody>
+						{store.scheduleToChange != {} ? (
+							<ul className="list-group">
+								<li className="d-flex justify-content-center py-2">
+									<h3 className="text-center">{store.scheduleToChange["enterprise_name"]}</h3>
+								</li>
+								<li className="d-flex row list-group-item text-left text-capitalize">
+									<h3 className="col-2">Salas:</h3>
+									<select
+										className="col-9"
+										defaultValue={scheduleSpaceIDToChange}
+										onChange={e => (scheduleSpaceIDToChange = e.target.value)}>
+										{store.spaces.map(space => {
 											return (
 												<option key={space["id"]} value={space["id"]}>
 													{space["name"]}
 												</option>
 											);
-										}
-									})}
-								</select>
-							</li>
-							<li className="d-flex row list-group-item text-left text-capitalize">
-								<h3 className="col-2">Fecha:</h3>
-								<input
-									onChange={e => (scheduleDateToChange = e.target.value)}
-									className="col-6"
-									type="date"
-									onKeyDown={e => e.preventDefault()}
-								/>
-								<h3 className="col-1 ml-3">H:</h3>
-								<select onChange={e => (scheduleDateHourToChange = e.target.value)} className="col-2">
-									{hoursOptions}
-								</select>
-							</li>
-						</ul>
-					) : (
-						""
-					)}
-				</ModalBody>
-				<ModalFooter className="m-auto">
-					<button
-						className="btn btn-confirm text-white"
-						onClick={
-							store.scheduleToChange
-								? () => {
-										console.log(
-											scheduleSpaceIDToChange,
-											scheduleDateToChange,
-											scheduleDateHourToChange
-										);
-										actions.changeSchedule(
-											scheduleSpaceIDToChange,
-											scheduleDateToChange,
-											scheduleDateHourToChange
-										);
-										actions.changeSchedulePUT();
-								  }
-								: ""
-						}>
-						Confirmar
-					</button>
-					<button
-						className="btn btn-close text-white"
-						onClick={() => {
-							setShow(false);
-						}}>
-						Cancelar
-					</button>
-				</ModalFooter>
-			</Modal>
+										})}
+									</select>
+								</li>
+								<li className="d-flex row list-group-item text-left text-capitalize">
+									<h3 className="col-2">Fecha:</h3>
+									<input
+										onChange={e => {
+											scheduleDateToChange = e.target.value;
+										}}
+										className="col-6"
+										defaultValue={scheduleDateToChange}
+										type="date"
+										onKeyDown={e => e.preventDefault()}
+									/>
+									<h3 className="col-1 ml-3">H:</h3>
+									<select
+										className="col-2"
+										defaultValue={scheduleDateHourToChange}
+										onChange={e => (scheduleDateHourToChange = e.target.value)}>
+										{hoursOptions}
+									</select>
+								</li>
+							</ul>
+						) : (
+							""
+						)}
+					</ModalBody>
+					<ModalFooter className="m-auto">
+						<button
+							className="btn btn-confirm text-white"
+							onClick={() => {
+								if (
+									parseInt(scheduleSpaceIDToChange) == store.scheduleToChange["space_id"] &&
+									scheduleDateToChange + " " + scheduleDateHourToChange ==
+										format(
+											subHours(new Date(store.scheduleToChange["date"]), 2),
+											"yyyy-MM-dd HH:mm"
+										)
+								) {
+									setShow(false);
+								} else {
+									actions.changeSchedule(
+										scheduleSpaceIDToChange,
+										scheduleDateToChange,
+										scheduleDateHourToChange
+									);
+									setShow(false);
+								}
+							}}>
+							Confirmar
+						</button>
+						<button
+							className="btn btn-close text-white"
+							onClick={() => {
+								setShow(false);
+							}}>
+							Cancelar
+						</button>
+					</ModalFooter>
+				</Modal>
+			) : (
+				""
+			)}
 		</>
 	);
 };
