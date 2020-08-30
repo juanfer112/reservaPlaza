@@ -7,28 +7,18 @@ import { Modal, ModalBody, ModalFooter, Form } from "reactstrap";
 export const ResumeModal = props => {
 	const { store, actions } = useContext(Context);
 	var arrayHours = [];
-	var arraySpace = [];
 
-	const reservedHours = store.reservedByMonth.map((hours, i) => {
-		if (format(new Date(props.dataPickerdate), "d") == format(new Date(hours["date"]), "d")) {
-			arrayHours.push(hours["date"]);
+	const reservedSpaceAndHours = store.reservedByMonth.map((reserves, i) => {
+		if (format(new Date(props.dataPickerdate), "d") == format(new Date(reserves["date"]), "d")) {
+			arrayHours.push(reserves["date"]);
 			return (
-				<li className="list-group-item border-0 p-0" key={hours + i}>
-					<h4>{format(subHours(new Date(hours["date"]), 2), "hh:mm aaaa")}</h4>
-				</li>
+				<tr>
+					<td key={reserves + i}>{reserves["space_name"]}</td>
+					<td key={reserves + i}>{format(subHours(new Date(reserves["date"]), 2), "hh:mm aaaa")}</td>
+				</tr>
 			);
 		}
 	});
-	const reservedSpace = store.reservedByMonth.map((space, i) => {
-		if (format(new Date(props.dataPickerdate), "d") == format(new Date(space["date"]), "d")) {
-			return (
-				<li className="list-group-item border-0 p-0" key={space + i}>
-					<h4>{space["space_name"]}</h4>
-				</li>
-			);
-		}
-	});
-
 	return (
 		<>
 			<Modal
@@ -49,12 +39,7 @@ export const ResumeModal = props => {
 									</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>{reservedSpace}</td>
-									<td>{reservedHours}</td>
-								</tr>
-							</tbody>
+							<tbody>{reservedSpaceAndHours}</tbody>
 						</table>
 					</ModalBody>
 				) : (
