@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			night: false,
 			currentDay: startOfDay(new Date()),
 			selectedCellHolder: [],
+			scheduleToChange: {},
 			confirModal: false,
 			schedules: [],
 			enterprises: [],
@@ -37,8 +38,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					...{
 						"Content-Type": "application/json",
 						"Access-Control-Allow-Origin": "*"
-
-						/* token */
 					},
 					...data.headers
 				};
@@ -69,13 +68,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			isLogged: async () => {
-				const store = getStore();
-				if (store.token != "") {
-					let data = await getActions().newFetch("protected", {
-						method: "GET"
-					});
-					return data.logged_in_as;
-				}
+				let data = await getActions().newFetch("protected", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: "Bearer " + sessionStorage["access_token"]
+					}
+				});
+				setStore({ user: data });
 			},
 
 			logout: async () => {
@@ -94,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: "Bearer " + store.token
+						authorization: "Bearer " + sessionStorage["access_token"]
 					}
 				});
 				setStore({

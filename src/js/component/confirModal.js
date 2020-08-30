@@ -12,7 +12,7 @@ export const ConfirModal = () => {
 			<button className="fixed-bottom btn btn-success pb-5 confirm" onClick={() => setShow(!show)}>
 				Reservar
 			</button>
-			<Modal backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+			<Modal isOpen={show} toggle={() => setShow(!show)}>
 				{store.confirModal ? (
 					<ModalBody>
 						<h2 className="text-center">Quieres confirmar las siguientes reservas?</h2>

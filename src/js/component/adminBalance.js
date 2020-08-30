@@ -49,7 +49,7 @@ export const AdminBalance = n => {
 						<td
 							onClick={e => {
 								if (className == " reserved" || className == " self-reserved") {
-									setShow(!show),
+									setShow(true),
 										actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 								}
 							}}
@@ -68,7 +68,7 @@ export const AdminBalance = n => {
 					<td
 						onClick={e => {
 							if (className == " reserved" || className == " self-reserved") {
-								setShow(!show),
+								setShow(true),
 									actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 							}
 						}}
@@ -92,16 +92,16 @@ export const AdminBalance = n => {
 			<div className="title text-center font-weight-bold mx-5">
 				{actions.transformDay(subDays(currentDay, 1))}
 			</div>
-			<div className="row mb-5">
+			<div className="row mb-5 mr-0">
 				<div className="container-fluid container-balance mx-5">
 					<Table responsive striped bordered hover variant="dark">
 						{adminScheduler}
 					</Table>
 				</div>
 			</div>
-			<Modal className="modalChange" backdrop="false" isOpen={show} toggle={() => setShow(!show)}>
+			<Modal className="modalChange" isOpen={show} toggle={() => setShow(!show)}>
 				<ModalBody>
-					{store.scheduleToChange ? (
+					{store.scheduleToChange != {} ? (
 						<ul className="list-group">
 							<li className="d-flex justify-content-center py-2">
 								<h3 className="text-center">{store.scheduleToChange["enterprise_name"]}</h3>
@@ -150,6 +150,11 @@ export const AdminBalance = n => {
 						onClick={
 							store.scheduleToChange
 								? () => {
+										console.log(
+											scheduleSpaceIDToChange,
+											scheduleDateToChange,
+											scheduleDateHourToChange
+										);
 										actions.changeSchedule(
 											scheduleSpaceIDToChange,
 											scheduleDateToChange,
@@ -164,7 +169,7 @@ export const AdminBalance = n => {
 					<button
 						className="btn btn-close text-white"
 						onClick={() => {
-							setShow(!show);
+							setShow(false);
 						}}>
 						Cancelar
 					</button>

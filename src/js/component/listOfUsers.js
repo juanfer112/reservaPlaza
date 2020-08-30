@@ -89,7 +89,7 @@ export const ListOfUsers = () => {
 					</tbody>
 				</table>
 			</div>
-			<Modal isOpen={deleteUser} toggle={deleteUser}>
+			<Modal isOpen={deleteUser} toggle={() => setDeleteUser(!deleteUser)}>
 				<ModalBody className="text-center">
 					<h1>Eliminar definitivamente el usuario {enterprise ? enterprise.name : ""} ?</h1>
 				</ModalBody>

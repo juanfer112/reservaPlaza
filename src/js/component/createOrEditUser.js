@@ -139,9 +139,12 @@ export const CreateOrEditUser = props => {
 					)}
 				</ModalHeader>
 				<ModalBody>
-					<form id="nameform">
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Nombre de usuario</lable>
+					<form id="namefor">
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Nombre de usuario
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="text"
@@ -150,8 +153,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.name : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Apellido</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Apellido
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="text"
@@ -160,8 +166,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.last_name : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Correo Electronico</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Correo Electronico
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="email"
@@ -170,8 +179,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.email : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Contraseña</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Contraseña
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="text"
@@ -180,8 +192,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.password : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">CIF</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								CIF
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="text"
@@ -190,8 +205,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.cif : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Nombre de usuario</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Nombre de usuario
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="tel"
@@ -200,8 +218,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.phone : ""}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Horas contratadas</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Horas contratadas
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="number"
@@ -210,8 +231,11 @@ export const CreateOrEditUser = props => {
 								defaultValue={enterprise ? enterprise.tot_hours : "0"}
 							/>
 						</div>
-						<div className="form-group">
-							<lable className="ml-2 text-secondary">Horas restantes</lable>
+						<div className="form-group mb-1">
+							<label className="ml-2 text-secondary font-weight-bold">
+								Horas restantes
+								<span className="text-danger"> *</span>
+							</label>
 							<input
 								required
 								type="number"

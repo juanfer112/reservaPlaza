@@ -1,10 +1,8 @@
 import React, { useState, useContext } from "react";
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { Context } from "../store/appContext";
-import { Link, Redirect } from "react-router-dom";
 import "../../styles/home.scss";
 import { Scheduler } from "./scheduler";
-import { Navbar } from "./navbar";
 import { ConfirModal } from "./confirModal";
 import { SpacesModal } from "./spacesModal";
 
@@ -16,8 +14,11 @@ export const Calendar = () => {
 	return (
 		<div className="container-fluid p-0">
 			<div className="row my-4 align-items-center">
-				<ButtonDropdown className="btnDropdown col-1 offset-1 border-0" isOpen={dropdownOpen} toggle={toggle}>
-					<DropdownToggle className="btnDropdown" color caret="xs">
+				<ButtonDropdown
+					className="btnDropdown col-1 offset-1 border-0 pl-1"
+					isOpen={dropdownOpen}
+					toggle={toggle}>
+					<DropdownToggle className="btnDropdown pl-1" caret={true}>
 						<SpacesModal />
 						{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 					</DropdownToggle>
@@ -31,16 +32,14 @@ export const Calendar = () => {
 						})}
 					</DropdownMenu>
 				</ButtonDropdown>
-				<p className="availableHours ml-4">
-					{store.user != undefined && store.user != {} ? (
-						<p>
-							Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
-							{store.user["current_hours"]} horas
-						</p>
-					) : (
-						"loading..."
-					)}
-				</p>
+				{store.user != undefined && store.user != {} ? (
+					<p className="availableHours ml-4">
+						Hola <span className="title-font base-green">{store.user["name"]}</span>, le quedan{" "}
+						{store.user["current_hours"]} horas
+					</p>
+				) : (
+					"loading..."
+				)}
 			</div>
 			<h4 className="text-center">
 				{" "}

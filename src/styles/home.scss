@@ -78,7 +78,8 @@ i, u, td.reserved{
     content: none;
 }
 .btnDropdown, .btnDropdown:focus{
-    height: 3rem;
+    white-space: normal;
+    min-height: 3rem;
     min-width: 10rem;
     max-width: 10rem;
     color: #2ea44f;
@@ -316,7 +317,7 @@ Table{
         justify-content: space-evenly;
     }
     .btnDropdown{
-        height: 3rem;
+        min-height: 3rem;
         min-width: 10rem;
         max-width: 10rem;
         font-size: 1.5rem;

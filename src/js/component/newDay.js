@@ -28,7 +28,6 @@ export const NewDay = n => {
 						if (e.target.className != "cell reserved" && e.target.className != "cell self-reserved") {
 							if (e.target.className == "cell") {
 								actions.addSchedules(id);
-								console.log("id:", id);
 								e.target.className += " select-green";
 							} else {
 								e.target.className = "cell";

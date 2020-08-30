@@ -17,6 +17,12 @@ const injectContext = PassedComponent => {
 			})
 		);
 
+		useEffect(() => {
+			if (sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined) {
+				state.actions.isLogged(sessionStorage["access_token"]);
+			}
+		}, []);
+
 		useEffect(
 			() => {
 				if (sessionStorage["access_token"] != "null" && sessionStorage["access_token"] != undefined) {
