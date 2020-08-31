@@ -10,17 +10,11 @@ export const AdminView = () => {
 	const [view, setView] = useState(<ListOfUsers />);
 	const { store, actions } = useContext(Context);
 
-	let is_admin = store.user["is_admin"] == true ? true : false;
-
-	if (sessionStorage["access_token"] && sessionStorage["access_token"] != "null" && is_admin == false) {
-		return <Redirect to="/reserva" />;
-	} else if (
-		!sessionStorage["access_token"] ||
-		sessionStorage["access_token"] == "null" ||
-		sessionStorage["access_token"] == undefined
-	) {
+	if (store.user.is_admin == false) {
+		return <Redirect to="/userView" />;
+	} else if (store.user.is_admin == null) {
 		return <Redirect to="/" />;
-	} else if (sessionStorage["access_token"] && sessionStorage["access_token"] != "null" && is_admin == true) {
+	} else if (store.user.is_admin == true) {
 		return (
 			<>
 				<Navbar />

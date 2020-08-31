@@ -252,7 +252,6 @@ export const CreateOrEditUser = props => {
 						form="nameform"
 						className="btn btn-confirm text-white"
 						onClick={e => {
-							console.log(e.target.form);
 							e.preventDefault();
 							if (validateInputs(e)) {
 								if (enterprise && enterprise.id) {

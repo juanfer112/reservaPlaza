@@ -29,6 +29,15 @@ body{
     outline: 0;
     border: 0;
 }
+.btn-up{
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: #81b4d9;
+    border-radius: 100%;
+    color: white;
+    outline: 0;
+    border: 0;
+}
 .fa-plus{
     font-size: 2rem;
 }
@@ -292,10 +301,6 @@ Table{
     text-align: center;
     border: 1px solid #bcbdc0;
     border-radius: .25rem;
-}
-.btn-up{
-    margin: 2rem;
-    margin-left:auto;
 }
 .userName{
     overflow: auto;

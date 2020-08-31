@@ -16,7 +16,7 @@ export const Layout = () => {
 				<ScrollToTop>
 					<Switch>
 						<Route exact path="/" component={Login} />
-						<Route path="/reserva" component={UserView} />
+						<Route path="/userView" component={UserView} />
 						<Route path="/adminView" component={AdminView} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>

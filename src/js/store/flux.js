@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE"
 				});*/
 				}
-				setStore({ token: null });
+				setStore({ token: null, user: { is_admin: null } });
 				sessionStorage.clear();
 			},
 
@@ -95,12 +95,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: "Bearer " + sessionStorage["access_token"]
+						authorization: "Bearer " + getStore().token
 					}
 				});
 				setStore({
 					enterprises: data.sort((a, b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1))
 				});
+				console.log(new Date(), data);
 			},
 
 			pullSpaces: async () => {
@@ -155,6 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(store.schedules)
 					});
 					getActions().pullScheduler();
+					getActions().isLogged();
 				}
 				setStore({ schedules: [] });
 			},

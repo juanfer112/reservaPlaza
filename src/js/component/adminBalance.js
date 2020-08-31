@@ -93,7 +93,7 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<p className="title admin-title text-center font-weight-bold">
+			<p className="title admin-title text-center font-weight-bold pt-1">
 				{actions.transformDay(subDays(currentDay, 1))}
 			</p>
 			<div className="container-userList m-0">
@@ -127,7 +127,7 @@ export const AdminBalance = n => {
 										onChange={e => {
 											scheduleDateToChange = e.target.value;
 										}}
-										className="col-md-6 mr-3"
+										className="col-md-6"
 										defaultValue={scheduleDateToChange}
 										type="date"
 										onKeyDown={e => e.preventDefault()}

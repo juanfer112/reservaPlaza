@@ -14,10 +14,10 @@ export const Balance = () => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-between mt-3">
+			<div className="d-flex justify-content-between mt-4 mx-5">
 				<div className="d-flex">
 					<i
-						className="fa fa-arrow-left mx-3 mb-1"
+						className="fa fa-arrow-left pt-1 mx-3 mb-1"
 						aria-hidden="true"
 						onClick={() => actions.changeWeekOrDay("beforeWeek")}
 					/>
@@ -26,13 +26,13 @@ export const Balance = () => {
 				<div className="d-flex">
 					<p>{store.week ? format(addWeeks(store.week[0], 1), "dd-MM") : ""}</p>
 					<i
-						className="fa fa-arrow-right mx-3 mb-1"
+						className="fa fa-arrow-right pt-1 mx-3 mb-1"
 						aria-hidden="true"
 						onClick={() => actions.changeWeekOrDay("afterWeek")}
 					/>
 				</div>
 			</div>
-			<div className="btn-toolbar m-3">
+			<div className="btn-toolbar my-3 mx-5">
 				{store.week.map((week, index) => {
 					return (
 						<button
@@ -45,7 +45,9 @@ export const Balance = () => {
 					);
 				})}
 			</div>
-			<button className="fixed-bottom btn btn-md btn-secondary btn-up" onClick={() => window.scrollTo(0, 0)}>
+			<button
+				className="btn-new-user btn-secondary fixed-bottom m-5 ml-auto"
+				onClick={() => window.scrollTo(0, 0)}>
 				UP
 			</button>
 			{store.week.map((item, index) => {

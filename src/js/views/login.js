@@ -9,8 +9,12 @@ export const Login = () => {
 	var [password, setPassword] = useState("");
 	var [forgot, setForgot] = useState(false);
 
-	return (
-		<>
+	if (store.user.is_admin == false) {
+		return <Redirect to="/userView" />;
+	} else if (store.user.is_admin == true) {
+		return <Redirect to="/adminView" />;
+	} else if (store.user.is_admin == null) {
+		return (
 			<div className="d-flex flex-column">
 				<div className="limiter">
 					{!forgot ? (
@@ -122,6 +126,6 @@ export const Login = () => {
 					)}
 				</div>
 			</div>
-		</>
-	);
+		);
+	}
 };
