@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { addDays, subDays, startOfDay, format, addWeeks, subWeeks } from "date-fns";
+import React, { useContext, useRef } from "react";
+import { format, addWeeks, subWeeks } from "date-fns";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { Navbar } from "../component/navbar";
 import { AdminBalance } from "../component/adminBalance";
-import { Link } from "react-router-dom";
 
 export const Balance = () => {
 	const { store, actions } = useContext(Context);
@@ -52,7 +50,7 @@ export const Balance = () => {
 			</button>
 			{store.week.map((item, index) => {
 				return (
-					<div key={item} ref={listRefs[index]}>
+					<div key={item} ref={listRefs[index]} className="mx-5">
 						<AdminBalance day={item} />
 					</div>
 				);

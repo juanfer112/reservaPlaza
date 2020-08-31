@@ -10,17 +10,17 @@ export const UserView = () => {
 	const [view, setView] = useState(<Calendar />);
 	const { store, actions } = useContext(Context);
 
-	let is_admin = store.user["is_admin"] == true ? true : false;
+	console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", store.user, sessionStorage["access_token"]);
 
-	if (sessionStorage["access_token"] != "null" && is_admin == true) {
-		return <Redirect to="/adminView" />;
-	} else if (
+	if (
 		sessionStorage["access_token"] == "null" ||
 		sessionStorage["access_token"] == undefined ||
-		is_admin == undefined
+		store.user["is_admin"] == undefined
 	) {
 		return <Redirect to="/" />;
-	} else if (sessionStorage["access_token"] != "null" && is_admin == false) {
+	} else if (sessionStorage["access_token"] != "null" && store.user["is_admin"] == true) {
+		return <Redirect to="/adminView" />;
+	} else if (sessionStorage["access_token"] != "null" && store.user["is_admin"] == false) {
 		return (
 			<>
 				<Navbar />
