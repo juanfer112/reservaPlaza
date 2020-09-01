@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { UserView } from "./views/userView";
@@ -16,7 +16,7 @@ export const Layout = () => {
 				<ScrollToTop>
 					<Switch>
 						<Route exact path="/" component={Login} />
-						<Route path="/reserva" component={UserView} />
+						<Route path="/userView" component={UserView} />
 						<Route path="/adminView" component={AdminView} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>

@@ -29,6 +29,15 @@ body{
     outline: 0;
     border: 0;
 }
+.btn-up{
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: #81b4d9;
+    border-radius: 100%;
+    color: white;
+    outline: 0;
+    border: 0;
+}
 .fa-plus{
     font-size: 2rem;
 }
@@ -186,6 +195,7 @@ th{
     max-width: 10rem;
 }
 .title{
+    width: 100%;
     border: solid 0.05rem #dee2e6;
     font-size: 1.2rem;
     height: 2.5rem;
@@ -196,6 +206,10 @@ th{
     font-size: 1.2rem;
     height: 2.5rem;
     background-color: #9dd981;
+}
+.admin-title{
+    position: relative;
+    margin: 0;
 }
 .hours{
     height: 2rem;
@@ -253,8 +267,9 @@ Table{
     background-clip: padding-box;
     z-index: 2;
 }
-.container-balance{
-    overflow: auto;
+.table-admin{
+    overflow-x: auto;
+    overflow-y: scroll;
 }
 .btn-md{
     min-width: 0;
@@ -271,6 +286,7 @@ Table{
     margin: 2rem;
     margin-bottom: 6rem;
     overflow-x: auto;
+    overflow-y: scroll;
 }
 .bg-odd{
     background-color: #efefef;
@@ -286,10 +302,6 @@ Table{
     border: 1px solid #bcbdc0;
     border-radius: .25rem;
 }
-.btn-up{
-    margin: 2rem;
-    margin-left:auto;
-}
 .userName{
     overflow: auto;
 }
@@ -298,6 +310,9 @@ Table{
 }
 .nav-link{
     cursor: pointer;
+}
+.modal-select{
+    border-color: #e4e6e8;
 }
 @media screen and (min-width: 1000px){
     body{

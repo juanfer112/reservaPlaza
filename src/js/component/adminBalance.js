@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { format, addHours, subHours, subDays } from "date-fns";
-import { Table, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Table, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
@@ -93,28 +93,23 @@ export const AdminBalance = n => {
 
 	return (
 		<>
-			<div className="title text-center font-weight-bold mx-5">
+			<p className="title admin-title text-center font-weight-bold pt-1">
 				{actions.transformDay(subDays(currentDay, 1))}
-			</div>
-			<div className="row mb-5 mr-0">
-				<div className="container-fluid container-balance mx-5">
-					<Table responsive striped bordered hover variant="dark">
-						{adminScheduler}
-					</Table>
-				</div>
-			</div>
-			{store.scheduleToChange["date"] ? (
-				<Modal className="modalChange" isOpen={show} toggle={() => setShow(!show)}>
-					<ModalBody>
+			</p>
+			<div className="container-userList m-0">
+				<table className="table table-responsive table-bordered table-striped">{adminScheduler}</table>
+				{store.scheduleToChange["date"] ? (
+					<Modal className="modalChange p-0" isOpen={show} toggle={() => setShow(!show)}>
+						<ModalHeader className="d-flex justify-content-center">
+							<h2 className="text-center">{store.scheduleToChange["enterprise_name"]}</h2>
+						</ModalHeader>
+
 						{store.scheduleToChange != {} ? (
-							<ul className="list-group">
-								<li className="d-flex justify-content-center py-2">
-									<h3 className="text-center">{store.scheduleToChange["enterprise_name"]}</h3>
-								</li>
-								<li className="d-flex row list-group-item text-left text-capitalize">
-									<h3 className="col-2">Salas:</h3>
+							<ModalBody className="">
+								<div className="row text-left text-capitalize mb-2">
+									<h3 className="col-md-2">Salas:</h3>
 									<select
-										className="col-9"
+										className="col-md-9 modal-select"
 										defaultValue={scheduleSpaceIDToChange}
 										onChange={e => (scheduleSpaceIDToChange = e.target.value)}>
 										{store.spaces.map(space => {
@@ -125,67 +120,67 @@ export const AdminBalance = n => {
 											);
 										})}
 									</select>
-								</li>
-								<li className="d-flex row list-group-item text-left text-capitalize">
-									<h3 className="col-2">Fecha:</h3>
+								</div>
+								<div className="row text-left text-capitalize">
+									<h3 className="col-md-2">Fecha:</h3>
 									<input
 										onChange={e => {
 											scheduleDateToChange = e.target.value;
 										}}
-										className="col-6"
+										className="col-md-6"
 										defaultValue={scheduleDateToChange}
 										type="date"
 										onKeyDown={e => e.preventDefault()}
 									/>
-									<h3 className="col-1 ml-3">H:</h3>
+									<h3 className="col-md-1">H:</h3>
 									<select
-										className="col-2"
+										className="col-md-2 modal-select"
 										defaultValue={scheduleDateHourToChange}
 										onChange={e => (scheduleDateHourToChange = e.target.value)}>
 										{hoursOptions}
 									</select>
-								</li>
-							</ul>
+								</div>
+							</ModalBody>
 						) : (
 							""
 						)}
-					</ModalBody>
-					<ModalFooter className="m-auto">
-						<button
-							className="btn btn-confirm text-white"
-							onClick={() => {
-								if (
-									parseInt(scheduleSpaceIDToChange) == store.scheduleToChange["space_id"] &&
-									scheduleDateToChange + " " + scheduleDateHourToChange ==
-										format(
-											subHours(new Date(store.scheduleToChange["date"]), 2),
-											"yyyy-MM-dd HH:mm"
-										)
-								) {
+						<ModalFooter className="mx-auto">
+							<button
+								className="btn btn-confirm text-white"
+								onClick={() => {
+									if (
+										parseInt(scheduleSpaceIDToChange) == store.scheduleToChange["space_id"] &&
+										scheduleDateToChange + " " + scheduleDateHourToChange ==
+											format(
+												subHours(new Date(store.scheduleToChange["date"]), 2),
+												"yyyy-MM-dd HH:mm"
+											)
+									) {
+										setShow(false);
+									} else {
+										actions.changeSchedule(
+											scheduleSpaceIDToChange,
+											scheduleDateToChange,
+											scheduleDateHourToChange
+										);
+										setShow(false);
+									}
+								}}>
+								Confirmar
+							</button>
+							<button
+								className="btn btn-close text-white"
+								onClick={() => {
 									setShow(false);
-								} else {
-									actions.changeSchedule(
-										scheduleSpaceIDToChange,
-										scheduleDateToChange,
-										scheduleDateHourToChange
-									);
-									setShow(false);
-								}
-							}}>
-							Confirmar
-						</button>
-						<button
-							className="btn btn-close text-white"
-							onClick={() => {
-								setShow(false);
-							}}>
-							Cancelar
-						</button>
-					</ModalFooter>
-				</Modal>
-			) : (
-				""
-			)}
+								}}>
+								Cancelar
+							</button>
+						</ModalFooter>
+					</Modal>
+				) : (
+					""
+				)}
+			</div>
 		</>
 	);
 };

@@ -36,11 +36,11 @@ const injectContext = PassedComponent => {
 
 		useEffect(
 			() => {
-				if (state.store.user["is_admin"] && state.store.user["is_admin"] != "null") {
+				if (state.store.user["is_admin"] == true) {
 					state.actions.pullEnterprises();
 				}
 			},
-			[state.store.user]
+			[state.store.user, sessionStorage["access_token"]]
 		);
 
 		useEffect(

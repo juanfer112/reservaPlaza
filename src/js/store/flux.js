@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	const urlBase = url;
 	return {
 		store: {
-			user: {},
+			user: { is_admin: null },
 			week: [],
 			reserved: [],
 			spaces: [],
@@ -45,6 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let response_json = await response.json();
 				if (!response.ok) {
 					let msg = response_json.msg ? response_json.msg : response_json.message;
+					if (msg == "Token has expired") {
+						getActions().logout();
+					}
 					alert(msg);
 					return null;
 				} else return response_json;
@@ -62,10 +65,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (typeof data.access_token != "undefined") {
 						setStore({ token: data.access_token, user: data.user });
 						sessionStorage.setItem("access_token", data.access_token);
-						sessionStorage.setItem("is_admin", data.user.is_admin);
 					}
 				}
-				window.location.reload(false);
 			},
 
 			isLogged: async () => {
@@ -85,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE"
 				});*/
 				}
-				setStore({ token: null });
+				setStore({ token: null, user: { is_admin: null } });
 				sessionStorage.clear();
 			},
 
@@ -94,12 +95,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						authorization: "Bearer " + sessionStorage["access_token"]
+						authorization: "Bearer " + getStore().token
 					}
 				});
 				setStore({
 					enterprises: data.sort((a, b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1))
 				});
+				console.log(new Date(), data);
 			},
 
 			pullSpaces: async () => {
@@ -154,6 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(store.schedules)
 					});
 					getActions().pullScheduler();
+					getActions().isLogged();
 				}
 				setStore({ schedules: [] });
 			},
