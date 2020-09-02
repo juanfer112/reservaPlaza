@@ -49,6 +49,22 @@ export const MonthNav = () => {
 		let monthNo = arrayMonthsNames.indexOf(month);
 		setMonthDatapicker(monthNo);
 	};
+	const prevMonth = month => {
+		let monthNo = month - 1;
+		if (monthNo < 0) {
+			setMonthDatapicker(11);
+		} else {
+			setMonthDatapicker(monthNo);
+		}
+	};
+	const postMonth = month => {
+		let monthNo = month + 1;
+		if (monthNo > 11) {
+			setMonthDatapicker(0);
+		} else {
+			setMonthDatapicker(monthNo);
+		}
+	};
 	/*seteo de año en la cabecera*/
 	const setYear = e => {
 		setYearDatapicker(getYear(new Date(e.target.value, showMonth, format(currentDay, "d"))));
@@ -88,8 +104,6 @@ export const MonthNav = () => {
 									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
 								</span>
 								<input
-									onKeydown="false"
-									defaultValue={getYear(currentDay)}
 									className="editor-year"
 									type="number"
 									placeholder="year"
@@ -103,12 +117,18 @@ export const MonthNav = () => {
 								<div className="fc-button-group">
 									<button
 										type="button"
-										className="fc-prev-button fc-button fc-state-default fc-corner-left">
+										className="fc-prev-button fc-button fc-state-default fc-corner-left"
+										onClick={() => {
+											prevMonth(showMonth);
+										}}>
 										<i className="fa fa-angle-left base-green" />
 									</button>
 									<button
 										type="button"
-										className="fc-next-button fc-button fc-state-default fc-corner-right">
+										className="fc-next-button fc-button fc-state-default fc-corner-right"
+										onClick={() => {
+											postMonth(showMonth);
+										}}>
 										<i className="fa fa-angle-right base-green" />
 									</button>
 								</div>
@@ -127,7 +147,7 @@ export const MonthNav = () => {
 					<ResumeModal
 						showModalCallback={showModalCallback}
 						show={show}
-						dataPickerdate={dates}
+						dates={dates}
 						updatedDate={updatedDate}
 					/>
 				</table>

@@ -381,6 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"Noviembre",
 					"Diciembre"
 				];
+
 				if (getMonth(store.week[0]) == getMonth(store.week[store.week.length - 1])) {
 					return arrayMonthsNames[getMonth(store.week[0])] + "  " + getYear(store.week[0]);
 				} else {
