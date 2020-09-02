@@ -1,10 +1,7 @@
 import React, { useState, useContext } from "react";
-import { addDays, subDays, startOfDay, format } from "date-fns";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { Navbar } from "../component/navbar";
 import { CreateOrEditUser } from "../component/createOrEditUser";
-import { Link } from "react-router-dom";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export const ListOfUsers = () => {
@@ -26,7 +23,7 @@ export const ListOfUsers = () => {
 	};
 	return (
 		<>
-			<div className="container-userList">
+			<div className="container-userList mx-xl-5 mt-5">
 				<CreateOrEditUser
 					show={show}
 					enterprise={enterprise}

@@ -6,9 +6,8 @@ import FormControl from "reactstrap";
 import { array } from "prop-types";
 
 export const CreateOrEditUser = props => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	const [enterprise, setEnterprise] = useState(props.enterprise);
-	const [error, setError] = useState([]);
 	const newEnterprise = {};
 
 	useEffect(
@@ -111,8 +110,6 @@ export const CreateOrEditUser = props => {
 				}
 			}
 		});
-
-		setError(arrayError);
 		return arrayError.length === 0;
 	};
 
@@ -268,7 +265,6 @@ export const CreateOrEditUser = props => {
 					<button
 						className="btn btn-close text-white"
 						onClick={() => {
-							setError([]);
 							props.toggleModalCallback(false);
 							props.cleanEnterprise();
 						}}>

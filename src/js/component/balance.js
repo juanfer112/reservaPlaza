@@ -14,45 +14,53 @@ export const Balance = () => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-between mt-4 mx-5">
-				<div className="d-flex">
-					<i
-						className="fa fa-arrow-left pt-1 mx-3 mb-1"
-						aria-hidden="true"
-						onClick={() => actions.changeWeekOrDay("beforeWeek")}
-					/>
-					<p>{store.week ? format(subWeeks(store.week[0], 1), "dd-MM") : ""}</p>
+			<div className="row mt-2 mx-xl-5 mx-2 justify-content-between">
+				<div className="btn-toolbar my-xl-3 p-0">
+					{store.week.map((week, index) => {
+						return (
+							<button
+								className="btn btn-md font-weight-bold mx-1 mt-1"
+								key={week}
+								onClick={() => executeScroll(listRefs[index])}>
+								{arrayDays[index]}
+							</button>
+						);
+					})}
 				</div>
-				<div className="d-flex">
-					<p>{store.week ? format(addWeeks(store.week[0], 1), "dd-MM") : ""}</p>
-					<i
-						className="fa fa-arrow-right pt-1 mx-3 mb-1"
-						aria-hidden="true"
-						onClick={() => actions.changeWeekOrDay("afterWeek")}
-					/>
+				<div className="d-flex align-items-end mb-xl-2 mt-2 px-0">
+					<div
+						className="d-flex navSchedulerDays newWeek justify-content-center pt-1"
+						onClick={() => {
+							actions.changeWeek("beforeWeek");
+						}}>
+						<p className="font-weight-bold">
+							<i className="fa fa-angle-left mr-2 pt-1" aria-hidden="true" />
+							{store.week ? format(subWeeks(store.week[0], 1), "dd- MM") : ""}
+						</p>
+					</div>
+					<div
+						className="navSchedulerDays current-week newWeek pt-1 mx-2 "
+						onClick={() => actions.goToCurrentDay()}>
+						<p className="font-weight-bold">Semana corriente</p>
+					</div>
+					<div
+						className="d-flex navSchedulerDays newWeek justify-content-center pt-1"
+						onClick={() => {
+							actions.changeWeek("afterWeek");
+						}}>
+						<p className="font-weight-bold">
+							{store.week ? format(addWeeks(store.week[0], 1), "dd- MM") : ""}
+							<i className="fa fa-angle-right  ml-2 pt-1" aria-hidden="true" />
+						</p>
+					</div>
 				</div>
 			</div>
-			<div className="btn-toolbar my-3 mx-5">
-				{store.week.map((week, index) => {
-					return (
-						<button
-							type="button"
-							className="btn btn-md btn-secondary border"
-							key={week}
-							onClick={() => executeScroll(listRefs[index])}>
-							{arrayDays[index]}
-						</button>
-					);
-				})}
-			</div>
-			<button
-				className="btn-new-user btn-secondary fixed-bottom m-5 ml-auto"
-				onClick={() => window.scrollTo(0, 0)}>
-				UP
+			<button className="btn-new-user fixed-bottom m-5 ml-auto" onClick={() => window.scrollTo(0, 0)}>
+				<i className="fa fa-arrow-up" />
 			</button>
 			{store.week.map((item, index) => {
 				return (
-					<div key={item} ref={listRefs[index]} className="mx-5">
+					<div key={item} ref={listRefs[index]} className="mx-xl-5">
 						<AdminBalance day={item} />
 					</div>
 				);

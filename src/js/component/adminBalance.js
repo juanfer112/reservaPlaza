@@ -7,6 +7,7 @@ import { Table, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 export const AdminBalance = n => {
 	const { actions, store } = useContext(Context);
 	const [show, setShow] = useState(false);
+	const [deleteSchedule, setDeleteSchedule] = useState(false);
 	let adminScheduler = [];
 	let currentDay = n.day;
 	let scheduleSpaceIDToChange = store.scheduleToChange["date"] ? store.scheduleToChange["space_id"] : "";
@@ -94,22 +95,24 @@ export const AdminBalance = n => {
 	return (
 		<>
 			<p className="title admin-title text-center font-weight-bold pt-1">
-				{actions.transformDay(subDays(currentDay, 1))}
+				{actions.transformDay(subDays(currentDay, 1)) + format(subDays(currentDay, 1), "/MM")}
 			</p>
 			<div className="container-userList m-0">
 				<table className="table table-responsive table-bordered table-striped">{adminScheduler}</table>
 				{store.scheduleToChange["date"] ? (
 					<Modal className="modalChange p-0" isOpen={show} toggle={() => setShow(!show)}>
 						<ModalHeader className="d-flex justify-content-center">
-							<h2 className="text-center">{store.scheduleToChange["enterprise_name"]}</h2>
+							<h2 className="text-center title-font base-green">
+								{store.scheduleToChange["enterprise_name"]}
+							</h2>
 						</ModalHeader>
 
 						{store.scheduleToChange != {} ? (
-							<ModalBody className="">
-								<div className="row text-left text-capitalize mb-2">
-									<h3 className="col-md-2">Salas:</h3>
+							<ModalBody>
+								<div className="row text-left text-capitalize">
+									<h4 className="col-md-2 text-center p-0 mb-0">Salas:</h4>
 									<select
-										className="col-md-9 modal-select"
+										className="col-md-9 modal-select py-1"
 										defaultValue={scheduleSpaceIDToChange}
 										onChange={e => (scheduleSpaceIDToChange = e.target.value)}>
 										{store.spaces.map(space => {
@@ -121,20 +124,20 @@ export const AdminBalance = n => {
 										})}
 									</select>
 								</div>
-								<div className="row text-left text-capitalize">
-									<h3 className="col-md-2">Fecha:</h3>
+								<div className="row text-left text-capitalize mt-4">
+									<h4 className="col-md-2 text-center p-0 mb-0">Fecha:</h4>
 									<input
 										onChange={e => {
 											scheduleDateToChange = e.target.value;
 										}}
-										className="col-md-6"
+										className="col-md-6 py-1"
 										defaultValue={scheduleDateToChange}
 										type="date"
 										onKeyDown={e => e.preventDefault()}
 									/>
-									<h3 className="col-md-1">H:</h3>
+									<h4 className="col-md-1 text-center p-0 mb-0">H:</h4>
 									<select
-										className="col-md-2 modal-select"
+										className="col-md-2 modal-select py-1"
 										defaultValue={scheduleDateHourToChange}
 										onChange={e => (scheduleDateHourToChange = e.target.value)}>
 										{hoursOptions}
@@ -144,7 +147,7 @@ export const AdminBalance = n => {
 						) : (
 							""
 						)}
-						<ModalFooter className="mx-auto">
+						<ModalFooter className="scheduleChangeOrDeleteModal">
 							<button
 								className="btn btn-confirm text-white"
 								onClick={() => {
@@ -175,7 +178,36 @@ export const AdminBalance = n => {
 								}}>
 								Cancelar
 							</button>
+							<i
+								className="fas fa-trash-alt bin"
+								onClick={() => {
+									setDeleteSchedule(true);
+								}}
+							/>
 						</ModalFooter>
+						{deleteSchedule ? (
+							<Modal isOpen={deleteSchedule} toggle={() => setDeleteSchedule(false)}>
+								<ModalBody>Eliminar definitivamente esta reserva?</ModalBody>
+								<ModalFooter className="m-auto">
+									<button
+										className="btn btn-confirm text-white"
+										onClick={() => {
+											actions.deleteSchedule();
+											setDeleteSchedule(false);
+											setShow(false);
+										}}>
+										Confirmar
+									</button>
+									<button
+										className="btn btn-close text-white"
+										onClick={() => setDeleteSchedule(false)}>
+										Cancelar
+									</button>
+								</ModalFooter>
+							</Modal>
+						) : (
+							""
+						)}
 					</Modal>
 				) : (
 					""

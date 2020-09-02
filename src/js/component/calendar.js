@@ -50,23 +50,23 @@ export const Calendar = () => {
 				</i>
 				para reservar horas de noche
 			</h4>
-			<div className="month-navigate row">
-				<h5 className="col-3 offset-1">{actions.currentMonth()}</h5>
-				<div className="col-2 offset-5 p-0 d-flex">
+			<div className="row mt-4">
+				<h5 className="col-5 offset-1 ">{actions.currentMonth()}</h5>
+				<div className="col-2 offset-3 p-0 d-flex">
 					<div
-						className="navSchedulerDays"
+						className="navSchedulerDays px-2 px-lg-0"
 						onClick={() => {
-							actions.changeWeekOrDay("beforeWeek");
+							actions.changeWeek("beforeWeek");
 						}}>
 						<i className="fa fa-angle-left base-green" />
 					</div>
-					<div className="navSchedulerDays mx-1" onClick={() => actions.goToCurrentDay()}>
-						Hoy
+					<div className="navSchedulerDays mx-1 px-2 px-lg-0" onClick={() => actions.goToCurrentDay()}>
+						<p>Hoy</p>
 					</div>
 					<div
-						className="navSchedulerDays"
+						className="navSchedulerDays px-2 px-lg-0"
 						onClick={() => {
-							actions.changeWeekOrDay("afterWeek");
+							actions.changeWeek("afterWeek");
 						}}>
 						<i className="fa fa-angle-right base-green" />
 					</div>
