@@ -11,7 +11,7 @@ export const ResumeReserve = n => {
 	const showMonth = n.showMonth;
 	const selectedYear = n.showYear;
 	const updatedDate = n.updatedDate;
-	const currentDay = store.currentDay;
+	const currentDay = n.currentDay;
 	const currentMonth = n.currentMonth;
 	const fechas = n.fechas;
 	useEffect(
@@ -48,8 +48,8 @@ export const ResumeReserve = n => {
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
 		let id = new Date(selectedYear, showMonth, d);
 
-		let className =
-			d == format(currentDay, "d") && showMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
+		// let className =
+		// 	d == format(currentDay, "d") && showMonth == getMonth(currentDay, "M") ? "current-day span-style" : "days";
 
 		const result = fechas.filter(
 			fecha =>
@@ -70,11 +70,12 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span className="span-style">{d}</span>
+					{d}
 				</td>
 			);
 		} else {
 			let className = result.length > 0 ? "reserved-day days" : "days";
+			let className2 = result.length > 0 && showMonth == getMonth(currentDay, "M") ? "current-day " : "";
 
 			daysInMonth.push(
 				<td
@@ -86,7 +87,7 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span className="current-day span-style">{d}</span>
+					<div className={className2}>{d}</div>
 				</td>
 			);
 		}

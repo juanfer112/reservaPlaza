@@ -123,6 +123,7 @@ export const AdminBalance = n => {
 								</div>
 								<div className="row text-left text-capitalize">
 									<h3 className="col-md-2">Fecha:</h3>
+
 									<input
 										onChange={e => {
 											scheduleDateToChange = e.target.value;
