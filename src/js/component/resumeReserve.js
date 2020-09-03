@@ -8,17 +8,17 @@ export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
 
 	const dataMonthPickerdate = n.dataMonthPickerdate;
-	const selectedMonth = n.showMonth;
+	const showMonth = n.showMonth;
 	const selectedYear = n.showYear;
 	const updatedDate = n.updatedDate;
-	const currentDay = store.currentDay;
+	const currentDay = n.currentDay;
 	const currentMonth = n.currentMonth;
 	const fechas = n.fechas;
 	useEffect(
 		() => {
 			actions.pullSchedulerByMonth(updatedDate);
 		},
-		[selectedMonth, selectedYear]
+		[showMonth, selectedYear]
 	);
 
 	/*renderizado de los dias de la semana*/
@@ -46,15 +46,15 @@ export const ResumeReserve = n => {
 	var result = [];
 
 	for (let d = 1; d <= getDaysInMonth(updatedDate); d++) {
-		let id = new Date(selectedYear, selectedMonth, d);
+		let id = new Date(selectedYear, showMonth, d);
 
-		let className =
-			d == format(currentDay, "d") && selectedMonth == getMonth(currentDay, "M") ? "days current-day" : "days";
+		// let className =
+		// 	d == format(currentDay, "d") && showMonth == getMonth(currentDay, "M") ? "current-day span-style" : "days";
 
 		const result = fechas.filter(
 			fecha =>
 				format(subHours(new Date(fecha.date), 2), "yyyy-MM-dd") ===
-				format(new Date(selectedYear, selectedMonth, d), "yyyy-MM-dd")
+				format(new Date(selectedYear, showMonth, d), "yyyy-MM-dd")
 		);
 
 		if (d != format(currentDay, "d")) {
@@ -70,11 +70,12 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span className="span-style">{d}</span>
+					{d}
 				</td>
 			);
 		} else {
 			let className = result.length > 0 ? "reserved-day days" : "days";
+			let className2 = result.length > 0 && showMonth == getMonth(currentDay, "M") ? "current-day " : "";
 
 			daysInMonth.push(
 				<td
@@ -86,7 +87,7 @@ export const ResumeReserve = n => {
 						n.showModalCallback(true);
 						n.updateDateCallback(id);
 					}}>
-					<span className="current-day span-style">{d}</span>
+					<div className={className2}>{d}</div>
 				</td>
 			);
 		}

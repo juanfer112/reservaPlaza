@@ -18,19 +18,11 @@ export const ProfileUsers = () => {
 
 	return (
 		<div>
-			<div className="container pr-0 mt-3 mb-3">
+			<div className="container pr-0 mt-3 mb-3 px-2">
 				<Profile />
 			</div>
-			<div>
+			<div className="px-2">
 				<MonthNav style={style} />
-			</div>
-			<div className="legend">
-				<div className="legend-details">
-					Dias reservados <span className="legend-reserved span-style">{""}</span>
-				</div>
-				<div className="legend-details">
-					Día actual <span className="legend-blue span-style">{""}</span>
-				</div>
 			</div>
 		</div>
 	);

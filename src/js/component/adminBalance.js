@@ -124,6 +124,7 @@ export const AdminBalance = n => {
 										})}
 									</select>
 								</div>
+
 								<div className="row text-left text-capitalize mt-4">
 									<h4 className="col-md-2 text-center p-0 mb-0">Fecha:</h4>
 									<input
