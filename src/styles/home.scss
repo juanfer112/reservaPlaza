@@ -121,7 +121,7 @@ select{
 .dropdown-toggle::after{
     content: none;
 }
-.btnDropdown, .btnDropdown:focus, .btnDropdown:active{
+.btnDropdown, .btnDropdown:focus, .btnDropdown:active, .btnDropdown:hover{
     white-space: normal;
     min-height: 3rem;
     min-width: 10rem;
@@ -132,11 +132,7 @@ select{
     border-radius: 0.5rem;
     border: 2px solid #2ea44f;
     box-shadow: none;
-}
-.btnDropdown:hover{
-  background-color: #fff;
-  color:#2ea44f;
-  border: 2px solid #2ea44f;
+    outline: none;
 }
 input{
     border-color: #e4e6e8;

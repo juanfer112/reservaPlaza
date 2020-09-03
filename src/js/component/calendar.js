@@ -15,10 +15,10 @@ export const Calendar = () => {
 		<div className="container-fluid p-0">
 			<div className="row my-4 align-items-center">
 				<ButtonDropdown
-					className="btnDropdown col-1 offset-1 border-0 pl-1"
+					className="btnDropdown col-1 offset-1 border-0 pl-1 btn-white"
 					isOpen={dropdownOpen}
 					toggle={toggle}>
-					<DropdownToggle className="btnDropdown pl-1" caret={true}>
+					<DropdownToggle tag="button" type="button" className="btnDropdown pl-1" caret={true}>
 						<SpacesModal />
 						{store.selectedSpace != undefined ? store.selectedSpace["name"] : "loading..."}
 					</DropdownToggle>

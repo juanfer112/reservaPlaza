@@ -12,10 +12,14 @@ export const ConfirModal = () => {
 			<button className="fixed-bottom btn btn-success pb-5 confirm" onClick={() => setShow(!show)}>
 				Reservar
 			</button>
-			<Modal isOpen={show} toggle={() => setShow(!show)}>
-				{store.confirModal ? (
+			{store.schedules.length <= store.user.current_hours ? (
+				<Modal isOpen={show} toggle={() => setShow(!show)}>
 					<ModalBody>
-						<h2 className="text-center">Quieres confirmar las siguientes reservas?</h2>
+						{store.schedules.length > 0 ? (
+							<h2 className="text-center">Quieres confirmar las siguientes reservas?</h2>
+						) : (
+							<h2 className="text-center">No tienes horas seleccionadas</h2>
+						)}
 						<ul className="text-center list-group">
 							{store.schedules.map((date, index) => {
 								return (
@@ -26,25 +30,32 @@ export const ConfirModal = () => {
 							})}
 						</ul>
 					</ModalBody>
-				) : (
+					<ModalFooter className="m-auto">
+						<button
+							className="btn btn-confirm text-white"
+							onClick={() => {
+								actions.postSchedules();
+								setShow(!show);
+							}}>
+							Confirmar
+						</button>
+						<button className="btn btn-close text-white" onClick={() => setShow(!show)}>
+							Cancelar
+						</button>
+					</ModalFooter>
+				</Modal>
+			) : (
+				<Modal isOpen={show} toggle={() => setShow(!show)}>
 					<ModalBody>
 						<h1>No tienes suficientes horas disponibles! (PHONE NUMBER)</h1>
 					</ModalBody>
-				)}
-				<ModalFooter className="m-auto">
-					<button
-						className="btn btn-confirm text-white"
-						onClick={() => {
-							actions.postSchedules();
-							setShow(!show);
-						}}>
-						Confirmar
-					</button>
-					<button className="btn btn-close text-white" onClick={() => setShow(!show)}>
-						Cancelar
-					</button>
-				</ModalFooter>
-			</Modal>
+					<ModalFooter className="m-auto">
+						<button className="btn btn-close text-white" onClick={() => setShow(!show)}>
+							Cancelar
+						</button>
+					</ModalFooter>
+				</Modal>
+			)}
 		</>
 	);
 };
