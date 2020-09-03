@@ -80,11 +80,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: async () => {
-				{
-					/*let data = await getActions().newFetch("logout", {
-					method: "DELETE"
-				});*/
-				}
 				setStore({ token: null, user: { is_admin: null } });
 				sessionStorage.clear();
 			},
@@ -208,12 +203,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().pullEnterprises();
 			},
 
-			softDelete: async enterprise => {
-				enterprise.is_active = false;
-				let response = await getActions().newFetch("enterprises/" + enterprise["id"], {
+			softDelete: async id => {
+				let response = await getActions().newFetch("enterprises/" + id, {
 					method: "PUT",
 					headers: {},
-					body: JSON.stringify(enterprise)
+					body: JSON.stringify({ is_active: false })
 				});
 				getActions().pullEnterprises();
 			},

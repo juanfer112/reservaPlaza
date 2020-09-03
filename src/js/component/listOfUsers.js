@@ -58,7 +58,7 @@ export const ListOfUsers = () => {
 										<th
 											scope="row"
 											className={index % 2 != 0 ? "d-flex mb-0" : "d-flex mb-0 thOdd"}>
-											<p className="p-0 m-0 userName">{user["name"]}</p>
+											<p className="p-0 m-0 userName">{user["name"] + " " + user["last_name"]}</p>
 											<div className="ml-auto">
 												<i
 													className="fas fa-pencil-alt p-0"
@@ -85,29 +85,32 @@ export const ListOfUsers = () => {
 						})}
 					</tbody>
 				</table>
+				<Modal isOpen={deleteUser} toggle={() => setDeleteUser(!deleteUser)}>
+					<ModalBody className="text-center">
+						<h1>
+							Eliminar definitivamente el usuario{" "}
+							{enterprise ? enterprise.name + enterprise.last_name : ""} ?
+						</h1>
+					</ModalBody>
+					<ModalFooter className="m-auto">
+						<button
+							className="btn btn-confirm text-white"
+							onClick={() => {
+								actions.softDelete(enterprise.id);
+								setDeleteUser(false);
+							}}>
+							Confirmar
+						</button>
+						<button
+							className="btn btn-close text-white"
+							onClick={() => {
+								setDeleteUser(false);
+							}}>
+							Cancelar
+						</button>
+					</ModalFooter>
+				</Modal>
 			</div>
-			<Modal isOpen={deleteUser} toggle={() => setDeleteUser(!deleteUser)}>
-				<ModalBody className="text-center">
-					<h1>Eliminar definitivamente el usuario {enterprise ? enterprise.name : ""} ?</h1>
-				</ModalBody>
-				<ModalFooter className="m-auto">
-					<button
-						className="btn btn-confirm text-white"
-						onClick={() => {
-							actions.softDelete(enterprise);
-							setDeleteUser(false);
-						}}>
-						Confirmar
-					</button>
-					<button
-						className="btn btn-close text-white"
-						onClick={() => {
-							setDeleteUser(false);
-						}}>
-						Cancelar
-					</button>
-				</ModalFooter>
-			</Modal>
 		</>
 	);
 };
