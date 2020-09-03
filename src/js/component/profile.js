@@ -13,7 +13,7 @@ export const Profile = () => {
 
 	return (
 		<div className="row justify-content mt-3 mb-3 mr-0">
-			<div className="col-sm-10 col-md-8 p-0 shadow">
+			<div className="col-sm-10 col-md-7 p-0 shadow">
 				<div className="contact-card-container card">
 					<div className="card-content">
 						<div className="background-holder" />

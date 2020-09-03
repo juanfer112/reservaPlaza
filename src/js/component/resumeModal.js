@@ -9,12 +9,12 @@ export const ResumeModal = props => {
 	var arrayHours = [];
 
 	const reservedSpaceAndHours = store.reservedByMonth.map((reserves, i) => {
-		if (format(new Date(props.dataPickerdate), "d") == format(new Date(reserves["date"]), "d")) {
+		if (format(new Date(props.dates), "d") == format(new Date(reserves["date"]), "d")) {
 			arrayHours.push(reserves["date"]);
 			return (
-				<tr>
-					<td key={reserves + i}>{reserves["space_name"]}</td>
-					<td key={reserves + i}>{format(subHours(new Date(reserves["date"]), 2), "hh:mm aaaa")}</td>
+				<tr key={i}>
+					<td>{reserves["space_name"]}</td>
+					<td>{format(subHours(new Date(reserves["date"]), 2), "hh:mm aaaa")}</td>
 				</tr>
 			);
 		}

@@ -409,7 +409,11 @@ Table{
     margin: 0
 }
 .calendar-container{ 
-    border: 2px solid skyblue;
+    border: 2px solid #9dd981;
+    border-radius: 5px;
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
     }
 .calendar{
     background-color: white;
@@ -435,22 +439,31 @@ Table{
 .days{
     cursor: pointer;
     font-size: 0.8em;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-}
-.current-day{
-    background-color: #4285f4;
-    width:28px;
-    height: 28px;
-    border-radius: 50%;
-    color:white;
-}
-.reserved-day{
-    background-color: #488683;
-    width:28px;
+    width: 28px;
     height: 28px;
     line-height: 28px;
+}
+.current-day{
+    // background-color: #4285f4;
+    // width:28px;
+    // height: 28px;
+    // border-radius: 50%;
+    // color:white;
+    background: #81b4d9;
+    color: #f3f4f5;
+    box-shadow: 0 0 0 0.1em;
+    padding: 0;
+    border-radius: 100%;
+    margin: .3em auto;
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.reserved-day{
+    background-color: #488683;
+    width:32px;
+    height: 32px;
+    line-height: 32px;
     border-radius: 2%;
     color:white;
 }
@@ -491,7 +504,7 @@ Table{
     border: 0.05rem solid #999
 }
 .legend-blue{
-    background: #4285f4;    
+    background: #81b4d9;    
     border: 0.05rem solid #999
 }
 .span-style:before {
@@ -574,25 +587,25 @@ Table{
 //   border-color: transparent !important;
 // }
 
-input:focus::-webkit-input-placeholder{ color:transparent; }
-input:focus:-moz-placeholder{ color:transparent; }
-input:focus::-moz-placeholder{ color:transparent; }
-input:focus:-ms-input-placeholder{ color:transparent; }
+// input:focus::-webkit-input-placeholder{ color:transparent; }
+// input:focus:-moz-placeholder{ color:transparent; }
+// input:focus::-moz-placeholder{ color:transparent; }
+// input:focus:-ms-input-placeholder{ color:transparent; }
 
-textarea:focus::-webkit-input-placeholder{ color:transparent; }
-textarea:focus:-moz-placeholder{ color:transparent; }
-textarea:focus::-moz-placeholder{ color:transparent; }
-textarea:focus:-ms-input-placeholder{ color:transparent; }
+// textarea:focus::-webkit-input-placeholder{ color:transparent; }
+// textarea:focus:-moz-placeholder{ color:transparent; }
+// textarea:focus::-moz-placeholder{ color:transparent; }
+// textarea:focus:-ms-input-placeholder{ color:transparent; }
 
-input::-webkit-input-placeholder{ color: #999999; }
-input:-moz-placeholder{ color: #999999; }
-input::-moz-placeholder{ color: #999999; }
-input:-ms-input-placeholder{ color: #999999; }
+// input::-webkit-input-placeholder{ color: #999999; }
+// input:-moz-placeholder{ color: #999999; }
+// input::-moz-placeholder{ color: #999999; }
+// input:-ms-input-placeholder{ color: #999999; }
 
-textarea::-webkit-input-placeholder{ color: #999999; }
-textarea:-moz-placeholder{ color: #999999; }
-textarea::-moz-placeholder{ color: #999999; }
-textarea:-ms-input-placeholder{ color: #999999; }
+// textarea::-webkit-input-placeholder{ color: #999999; }
+// textarea:-moz-placeholder{ color: #999999; }
+// textarea::-moz-placeholder{ color: #999999; }
+// textarea:-ms-input-placeholder{ color: #999999; }
 
 /*---------------------------------------------*/
 .login100-form-btn{
@@ -859,65 +872,67 @@ textarea:-ms-input-placeholder{ color: #999999; }
 // }
 
 .contact-card-container {
-    display: inline-block;
-    width: 100%;
-    .row{
-        margin-bottom: 0;
+  display: inline-block;
+  width: 100%;
+  .row{
+    margin-bottom: 0;
+  }
+  .card-content {
+    z-index: 0;
+    position: relative;
+    padding: 0px 12px 0px 12px;
+    
+    .background-holder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 85%!important;
+      background-color:#9dd981;
+      z-index: 1;
     }
-    .card-content {
-        z-index: 0;
-        position: relative;
-        padding: 0px 12px 12px 12px;
-        .close-button {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            font-size: 1.05em;
-            cursor: pointer;
-            &:hover {
-                color: red;
-            }
-        }
-        .background-holder {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 85%!important;
-            background-color:#9dd981;
-            z-index: 1;
-        }
-        .card-header {
-            font-size: 20px;
-            //border-bottom: 1px solid darkgrey;
-            padding-left: 100px;
-            padding-bottom: 0px;
-                li{
-                    list-style-type: none;
-            }
-        }
-        .profile-picture {
-            display: inline-block;
-            position: relative;
-            z-index: 2;
-            img {
-                width: 100px;
-                height: auto;
-                border-radius: 50%;
-                border: 4px solid #fff;
-            }
-        }
-        .personal-information {
-            display: inline-block;
-            label {
-                font-size: 0.9em;
-                display: inline-block;
-                color: rgb(117, 117, 117);
-                width: fit-content;
-            }
-            li{
-                list-style-type: none;
-            }
-        }
+    .card-header {
+      font-size: 20px;
+      //border-bottom: 1px solid darkgrey;
+      padding-left: 100px;
+      padding-bottom: 0px;
+      padding-top: 0.2rem;
+        li{
+            list-style-type: none;
+      }
     }
+    .profile-picture {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      img {
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+        border: 4px solid #fff;
+      }
+    }
+    .personal-information {
+      display: inline-block;
+        label {
+        font-size: 0.9em;
+        display: inline-block;
+        color: rgb(117, 117, 117);
+        width: fit-content;
+        margin-bottom: 0.3rem;
+
+      }
+        li{
+        list-style-type: none;
+      }
+    }
+     label {
+        font-size: 1em;
+        display: inline-block;
+        color: rgb(117, 117, 117);
+        width: fit-content;
+
+      }
+  }
+
 }

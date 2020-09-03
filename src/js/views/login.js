@@ -15,7 +15,7 @@ export const Login = () => {
 		return <Redirect to="/adminView" />;
 	} else if (store.user.is_admin == null) {
 		return (
-			<div className="d-flex flex-column">
+			<div className="d-flex flex-column h-100">
 				<div className="limiter">
 					{!forgot ? (
 						<div className="container-login100">
