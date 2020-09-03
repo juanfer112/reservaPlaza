@@ -8,7 +8,7 @@ export const Scheduler = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<div className="rowSched">
-			<div className="day col offset-lg-1 p-0">
+			<div className="day col offset-xl-1 p-0">
 				<HoursColumn />
 			</div>
 			{store.week.map(item => {

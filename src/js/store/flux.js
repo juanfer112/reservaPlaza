@@ -25,7 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentDay: startOfDay(new Date()),
 			selectedCellHolder: [],
 			scheduleToChange: {},
-			confirModal: false,
 			schedules: [],
 			enterprises: [],
 			reservedByMonth: [],
@@ -188,6 +187,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().pullSpaces();
 			},
 
+			deleteSchedule: async () => {
+				const store = getStore();
+				await getActions().newFetch("schedules/" + store.scheduleToChange["id"], {
+					method: "DELETE",
+					headers: { authorization: "Bearer " + sessionStorage["access_token"] }
+				});
+				getActions().pullScheduler();
+			},
+
 			changeEnterprisePUT: async enterprise => {
 				await getActions().newFetch("enterprises/" + enterprise["id"], {
 					method: "PUT",
@@ -307,10 +315,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				store.night ? setStore({ night: false }) : setStore({ night: true });
 			},
 
-			changeWeekOrDay: beforeAfter => {
+			changeWeek: beforeAfter => {
 				const store = getStore();
 				var arrWeek = [];
-				var day = store.currentDay;
 				store.week.map(day => {
 					if (beforeAfter == "afterWeek") {
 						arrWeek.push(addWeeks(day, 1));

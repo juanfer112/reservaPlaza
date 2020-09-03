@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "../../styles/home.scss";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Navbar } from "../component/navbar";
 import { ProfileUsers } from "../component/profileUsers";
 import { Calendar } from "../component/calendar";
@@ -8,7 +8,7 @@ import { Context } from "../store/appContext";
 
 export const UserView = () => {
 	const [view, setView] = useState(<Calendar />);
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 
 	if (store.user.is_admin == true) {
 		return <Redirect to="/adminView" />;

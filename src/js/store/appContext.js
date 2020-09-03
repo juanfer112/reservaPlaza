@@ -57,17 +57,6 @@ const injectContext = PassedComponent => {
 			}
 		}, []);
 
-		useEffect(
-			() => {
-				if (state.store.schedules.length > state.store.user.current_hours) {
-					state.store.confirModal = false;
-				} else {
-					state.store.confirModal = true;
-				}
-			},
-			[state.store.schedules]
-		);
-
 		return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />
