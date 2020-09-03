@@ -25,7 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentDay: startOfDay(new Date()),
 			selectedCellHolder: [],
 			scheduleToChange: {},
-			confirModal: false,
 			schedules: [],
 			enterprises: [],
 			reservedByMonth: [],
