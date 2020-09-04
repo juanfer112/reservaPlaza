@@ -108,7 +108,7 @@ export const MonthNav = () => {
 						<div className="front front-left">
 							<h2>Hoy</h2>
 							<h1>{format(currentDay, "d")}</h1>
-							<h2>jueves</h2>
+							<h2>Viernes</h2>
 						</div>
 					</div>
 				</div>
@@ -171,6 +171,7 @@ export const MonthNav = () => {
 					/>
 				</div>
 			</div>
+
 			<div className="legend">
 				<div className="legend-details">
 					Dias reservados <span className="legend-reserved span-style">{""}</span>

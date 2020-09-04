@@ -378,69 +378,26 @@ Table{
     height: 1rem;
 }
 .flip-container-right .flipper .select-month {
-    height: 2vw;
+    height: 1.5rem;
     cursor: pointer;
-    font-size: 1.5vw;
+    font-size: 1.3rem;
     border: none;
-    border-left: 0.25vw solid #195499;
-    border-right: 0.25vw solid #195499;
+    border-left: 0.25vw solid #35553e;
+    border-right: 0.25vw solid #35553e;
 }
 .option-month{
     color: #eeeeee;
     background-color: #195499;
 }
-// .week-day{
-//     font-size: 0.8em;
-// }
-// .days{
-//     cursor: pointer;
-//     font-size: 0.8em;
-//     width: 28px;
-//     height: 28px;
-//     line-height: 28px;
-// }
+
 .current-day{
-    background-color: #4285f4;
-    width:24px;
-    height: 24px;
+    background-color:#81b4d9 !important;   ;
+    width:22px;
+    height: 22px;
     border-radius: 50%;
-    color:white;
+    color:white !important;
     margin: auto;
-
-    // background: #81b4d9;
-    // color: #f3f4f5;
-    // box-shadow: 0 0 0 0.1em;
-    // padding: 0;
-    // border-radius: 100%;
-    // margin: .3em auto;
-    // width: 2.5em;
-    // height: 2.5em;
 }
-
-// .reserved-day{
-//     background-color: #488683;
-//     width:32px;
-//     height: 32px;
-//     line-height: 32px;
-//     border-radius: 2%;
-//     color:white;
-// }
-// .month-popup{
-//     position: absolute;
-//     padding: 5px;
-//     background:white;
-//     border:2px solid skyblue;
-// }
-
-// .month-popup div{
-//     padding: 0.3em;
-// }
-// .nav-month{
-//     position: absolute;
-//     top: 0.6em;
-//     font-size: 0.6em;
-//     right: 3px;
-// }
 .wrapper-datapicker{
     margin: auto;
     position: static;
@@ -489,11 +446,11 @@ Table{
     height: inherit;
 }
 .flip-container-left .flipper .front * {
-    background-color: #195499;
+    background-color: #9dd981;
     color: #eeeeee;
 }
 .flip-container-left .flipper .front {
-    background-color: #195499;
+    background-color: #9dd981;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -542,8 +499,8 @@ Table{
     height: 2vw;
     cursor: pointer;
     border: none;
-    border-left: 0.25vw solid #195499;
-    border-right: 0.25vw solid #195499;
+    border-left: 0.25vw solid #35553e;
+    border-right: 0.25vw solid #35553e;
 }
 .label-month,.label-year{
     font-size: 0.6em;
@@ -559,9 +516,9 @@ Table{
     justify-content: space-around;
 }
 .btn-prev,.btn-next{
-    border: 0.25vw #195499 solid;
+    border: 0.25vw #9dd981 solid;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 1rem;
 }
 .flipper .btn {
     width: 2.5rem;
@@ -572,25 +529,28 @@ Table{
  .flipper .btn:focus{
     outline: 0;
 }
+.flipper .select-month:focus{
+    outline: 0;
+}
  .flip-container-right .flipper .btn:hover {
     opacity: 0.5;
 }
 .flip-container-right .flipper .front *{
     background-color: #eeeeee;
-    color: #195499;
+    color: #9dd981;
 }
 .container-right .flipper .option-month *{
     color: #eeeeee;
-    background-color: #195499;
+    background-color: #9dd981;
 }
 
 .flip-container-right .flipper .edit-year {
-    width: 4vw;
-    height: 2vw;
-    font-size: 1.5vw;
+    width: 3.3rem;
+    height: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
     border: none;
-    border-bottom: 0.25vw solid #195499;
+    border-bottom: 0.25vw solid #35553e;
 }
 .flip-container-right .flipper .front * {
     overflow: hidden;
@@ -643,8 +603,9 @@ Table{
 //     color:white;
 // }
 .flip-container-right .flipper .front .container-day .reserved-day {
-    background-color: #195499;
+    background-color:  #488683;
     // border: 0.7vw solid #195499;
+    border: 0.05rem solid #999;
     color:white;
     // border-radius: 50%;
 }
@@ -653,6 +614,8 @@ Table{
 /*leyenda para vista .perfil cliente*/
 .legend{
     display: flex;
+    margin: auto;
+    width: 300px;
 }
 .legend-details{
     padding: 0.3em;
@@ -700,7 +663,7 @@ Table{
 // 	font-family: Poppins-Regular, sans-serif;
 // }
 .txt-pass {
-    font-family: Poppins-Regular;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
@@ -755,7 +718,7 @@ Table{
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt-pass {
-  font-family: Poppins-Regular;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #666666;
