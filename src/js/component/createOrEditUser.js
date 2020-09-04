@@ -29,7 +29,7 @@ export const CreateOrEditUser = props => {
 		Array.prototype.forEach.call(e.target.form.elements, (element, index) => {
 			let name = element.name;
 			if (name == "name") {
-				if (element.value.length > 4 && element.value.length < 80) {
+				if (element.value.length > 1 && element.value.length < 80) {
 					newEnterprise["name"] = element.value;
 				} else {
 					arrayError.push("El nombre es invalido");
@@ -40,7 +40,7 @@ export const CreateOrEditUser = props => {
 				}
 			}
 			if (name == "last_name") {
-				if (element.value.length > 4 && element.value.length < 80) {
+				if (element.value.length > 1 && element.value.length < 80) {
 					newEnterprise["last_name"] = element.value;
 				} else {
 					arrayError.push("El apellido es invalido");
@@ -60,7 +60,7 @@ export const CreateOrEditUser = props => {
 				}
 			}
 			if (name == "password") {
-				if (element.value.length > 8 && element.value.length < 80) {
+				if (element.value.length > 7 && element.value.length < 80) {
 					newEnterprise["password"] = element.value;
 				} else {
 					arrayError.push("La contrasseña es invalida");
@@ -204,7 +204,7 @@ export const CreateOrEditUser = props => {
 						</div>
 						<div className="form-group mb-1">
 							<label className="ml-2 text-secondary font-weight-bold">
-								Nombre de usuario
+								Número de móvil
 								<span className="text-danger"> *</span>
 							</label>
 							<input

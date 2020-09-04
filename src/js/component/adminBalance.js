@@ -39,7 +39,7 @@ export const AdminBalance = n => {
 			if (hour == 0 && currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 thFirst bg-white" />
+						<th className="px-2 thFirst bg-white py-1" />
 						<th className="px-2 text-center thSpace bg-white">{store.spaces[currentSpace]["name"]}</th>
 					</>
 				);
@@ -50,7 +50,7 @@ export const AdminBalance = n => {
 			} else if (currentSpace == 0) {
 				holderSpacesHours.push(
 					<>
-						<th className="px-2 text-center tHours bg-white">{titleHour}</th>
+						<th className="px-2 text-center tHours bg-white py-1">{titleHour}</th>
 						<td
 							onClick={e => {
 								if (className == " reserved" || className == " self-reserved") {
@@ -58,7 +58,7 @@ export const AdminBalance = n => {
 										actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 								}
 							}}
-							className={"px-2 text-center" + className + " text-white font-weight-bold"}
+							className={"px-2 text-center py-1" + className + " text-white font-weight-bold"}
 							id={id}>
 							{store.spaces[currentSpace]["schedules"].map(schedule => {
 								if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {
@@ -77,7 +77,7 @@ export const AdminBalance = n => {
 									actions.selectScheduleToChange(e.target.id, store.spaces[currentSpace]["id"]);
 							}
 						}}
-						className={"px-2 text-center" + className + " text-white font-weight-bold"}
+						className={"px-2 text-center py-1" + className + " text-white font-weight-bold"}
 						id={id}>
 						{store.spaces[currentSpace]["schedules"].map(schedule => {
 							if (id == format(subHours(new Date(schedule["date"]), 2), "yyyy-MM-dd HH:mm:ss")) {

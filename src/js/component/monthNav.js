@@ -102,7 +102,7 @@ export const MonthNav = () => {
 
 	return (
 		<>
-			<div className="calendar-container">
+			<div className="calendar-container mx-5">
 				<table className="calendar">
 					<thead>
 						<tr className="calendar-header">

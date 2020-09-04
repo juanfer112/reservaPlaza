@@ -89,7 +89,7 @@ export const ListOfUsers = () => {
 					<ModalBody className="text-center">
 						<h1>
 							Eliminar definitivamente el usuario{" "}
-							{enterprise ? enterprise.name + enterprise.last_name : ""} ?
+							{enterprise ? enterprise.name + " " + enterprise.last_name : ""} ?
 						</h1>
 					</ModalBody>
 					<ModalFooter className="m-auto">
