@@ -109,14 +109,6 @@ export const MonthNav = () => {
 							<h2>Hoy</h2>
 							<h1>{format(currentDay, "d")}</h1>
 							<h2>jueves</h2>
-							<button
-								type="button"
-								className="btn btn-flip"
-								onClick={e => {
-									console.log("flip");
-								}}>
-								+
-							</button>
 						</div>
 					</div>
 				</div>

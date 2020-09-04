@@ -348,31 +348,31 @@ Table{
     }
 }
 /*css RESUMEN RESERVAS*/
-.calendar-container,.calendar,.calendar-header, td, tr{
-    padding: 0;
-    margin: 0
-}
-.calendar-container{ 
-    border: 2px solid #9dd981;
-    border-radius: 5px;
-    width:100%;
-    margin-left: auto;
-    margin-right: auto;
-    }
-.calendar{
-    background-color: white;
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
-}
-.calendar-header{
-    border-bottom: 1px dashed skyblue;
-    font-size: 1.6em;
-}
-.calendar-header td{
-    border-spacing: 0;
-    padding-left: 5px;
-}
+// .calendar-container,.calendar,.calendar-header, td, tr{
+//     padding: 0;
+//     margin: 0
+// }
+// .calendar-container{ 
+//     border: 2px solid #9dd981;
+//     border-radius: 5px;
+//     width:100%;
+//     margin-left: auto;
+//     margin-right: auto;
+//     }
+// .calendar{
+//     background-color: white;
+//     border-spacing: 0;
+//     border-collapse: collapse;
+//     width: 100%;
+// }
+// .calendar-header{
+//     border-bottom: 1px dashed skyblue;
+//     font-size: 1.6em;
+// }
+// .calendar-header td{
+//     border-spacing: 0;
+//     padding-left: 5px;
+// }
 .days, .empty-slot, .week-day{
     text-align: center;
     height: 1rem;
@@ -399,21 +399,23 @@ Table{
 //     height: 28px;
 //     line-height: 28px;
 // }
-// .current-day{
-//     // background-color: #4285f4;
-//     // width:28px;
-//     // height: 28px;
-//     // border-radius: 50%;
-//     // color:white;
-//     background: #81b4d9;
-//     color: #f3f4f5;
-//     box-shadow: 0 0 0 0.1em;
-//     padding: 0;
-//     border-radius: 100%;
-//     margin: .3em auto;
-//     width: 2.5em;
-//     height: 2.5em;
-// }
+.current-day{
+    background-color: #4285f4;
+    width:24px;
+    height: 24px;
+    border-radius: 50%;
+    color:white;
+    margin: auto;
+
+    // background: #81b4d9;
+    // color: #f3f4f5;
+    // box-shadow: 0 0 0 0.1em;
+    // padding: 0;
+    // border-radius: 100%;
+    // margin: .3em auto;
+    // width: 2.5em;
+    // height: 2.5em;
+}
 
 // .reserved-day{
 //     background-color: #488683;
@@ -443,6 +445,8 @@ Table{
     margin: auto;
     position: static;
     display: flex;
+    max-width: 800px;
+    max-height: 240px;
 }
 
 .front{
@@ -454,21 +458,21 @@ Table{
     overflow: hidden;
 } 
 .flip-container-right .flipper .front-right{
-    border-bottom-right-radius: 3vw;
-    border-top-right-radius: 3vw;
+    border-bottom-right-radius: 1.4rem;
+    border-top-right-radius: 1.4rem;
 }
 .flip-container-left .flipper .front-left{
-    border-bottom-left-radius: 3vw;
-    border-top-left-radius: 3vw;
+    border-bottom-left-radius: 1.4rem;
+    border-top-left-radius: 1.4rem;
  }
 
 .flip-container-right{
-    width: 50vw;
-    height: 28vw;
+    width: 85%;
+    height: 240px;
 }
 .flip-container-left{
-    width: 19vw;
-    height: 28vw;
+    width: 15%;
+    height: 240px;
 }
 .front-right{
     width:100%;
@@ -497,13 +501,13 @@ Table{
 
     h2{    
         margin: 0;
-        font-size: 1.5vw;
+        font-size: 0.9em;
         font-family: arial;
         font-weight: normal;
     }
     h1 {
         margin: 0;
-        font-size: 9vw;
+        font-size: 4.3em;
         font-family: arial;
         font-weight: normal;
     }
@@ -519,19 +523,20 @@ Table{
     width: 100%;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(7,6vw);
+    grid-template-columns: repeat(7,5.4rem);
 }
 .weekday{
-    height: 2vw;
+    height: 28px;
     font-family: arial;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: 1rem;
 }
 .day-block {
-    height: 2vw;
+    height: 24px;
     font-family: arial;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: 1rem;
+    cursor: pointer;
 }
 .label-month{
     height: 2vw;
@@ -559,8 +564,8 @@ Table{
     font-size: 1vw;
 }
 .flipper .btn {
-    width: 4vw;
-    height: 4vw;
+    width: 2.5rem;
+    height: 2.5rem;
     cursor: pointer;
     border-radius: 50%
 }
@@ -589,6 +594,59 @@ Table{
 }
 .flip-container-right .flipper .front * {
     overflow: hidden;
+}
+
+@media screen and (max-width: 720px){
+.container-day {
+    grid-template-columns: repeat(7, 4.4rem);
+    }
+.weekday {
+    font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 587px){
+.flip-container-left{
+    display: none;
+}
+.flip-container-right{
+    width:100%;
+}
+.flip-container-right .flipper .front-right {
+    border-bottom-left-radius: 1.4rem;
+    border-top-left-radius: 1.4rem;
+}
+
+}
+@media screen and (max-width: 500px){
+.container-day {
+    grid-template-columns: repeat(7, 3.6rem);
+    }
+.weekday {
+    font-size: 0.8em;
+    }
+}
+@media screen and (max-width: 416px){
+.container-day {
+    grid-template-columns: repeat(7, 3.1rem);
+    }
+.weekday {
+    font-size: 0.7em;
+    }
+}
+
+// .reserved-day{
+//     background-color: #488683;
+    
+//     height: 20px;
+    
+//     border-radius: 2%;
+//     color:white;
+// }
+.flip-container-right .flipper .front .container-day .reserved-day {
+    background-color: #195499;
+    // border: 0.7vw solid #195499;
+    color:white;
+    // border-radius: 50%;
 }
 
 
