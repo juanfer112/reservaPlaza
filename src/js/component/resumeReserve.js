@@ -6,7 +6,6 @@ import { format, startOfMonth, subHours, getDaysInMonth, getMonth, getYear } fro
 
 export const ResumeReserve = n => {
 	const { actions, store } = useContext(Context);
-
 	const dataMonthPickerdate = n.dataMonthPickerdate;
 	const showMonth = n.showMonth;
 	const selectedYear = n.showYear;
@@ -25,9 +24,9 @@ export const ResumeReserve = n => {
 	const arrayDay = ["Lunes ", "Martes ", "Miercoles ", "Jueves ", "Viernes ", "Sabado ", "Domingo "];
 	const weekdays = arrayDay.map(day => {
 		return (
-			<td key={day} className="week-day">
+			<div key={day} className="weekday">
 				{day}
-			</td>
+			</div>
 		);
 	});
 
@@ -35,9 +34,9 @@ export const ResumeReserve = n => {
 	var blanks = [];
 	for (let i = 0; i < format(startOfMonth(updatedDate), "i") - 1; i++) {
 		blanks.push(
-			<td key={i * 20} className="empty-slot">
+			<div key={i * 20} className="empty-slot">
 				{""}
-			</td>
+			</div>
 		);
 	}
 	/*-----------------------------------------------------------------------------------------------------*/
@@ -58,10 +57,10 @@ export const ResumeReserve = n => {
 		);
 
 		if (d != format(currentDay, "d")) {
-			let className = result.length > 0 ? "reserved-day days" : "days";
+			let className = result.length > 0 ? "reserved-day day-block" : "day-block";
 
 			daysInMonth.push(
-				<td
+				<div
 					id={id}
 					key={d}
 					className={className}
@@ -71,14 +70,14 @@ export const ResumeReserve = n => {
 						n.updateDateCallback(id);
 					}}>
 					{d}
-				</td>
+				</div>
 			);
 		} else {
-			let className = result.length > 0 ? "reserved-day days" : "days";
+			let className = result.length > 0 ? "reserved-day day-block" : "day-block";
 			let className2 = result.length > 0 && showMonth == getMonth(currentDay, "M") ? "current-day " : "";
 
 			daysInMonth.push(
-				<td
+				<div
 					id={id}
 					key={d}
 					className={className}
@@ -88,7 +87,7 @@ export const ResumeReserve = n => {
 						n.updateDateCallback(id);
 					}}>
 					<div className={className2}>{d}</div>
-				</td>
+				</div>
 			);
 		}
 	}
@@ -115,14 +114,14 @@ export const ResumeReserve = n => {
 		}
 	});
 
-	var trElems = rows.map((d, i) => {
-		return <tr key={i * 80}>{d}</tr>;
+	var trElems = totalSlots.map((d, i) => {
+		return <div key={i * 80}>{d}</div>;
 	});
 	/*------------------------------------------------------------------------------------------------------------*/
 	return (
-		<tbody>
-			<tr>{weekdays}</tr>
+		<div className="container-day">
+			{weekdays}
 			{trElems}
-		</tbody>
+		</div>
 	);
 };

@@ -39,6 +39,8 @@ export const MonthNav = () => {
 		"Noviembre ",
 		"Diciembre "
 	];
+	var xxx = arrayMonthsNames[showMonth];
+
 	/*traductor de meses de ingles a español de los meses renderizados*/
 
 	const monthsTranslator = n => {
@@ -50,7 +52,7 @@ export const MonthNav = () => {
 	};
 	/*Seteo de meses en listado*/
 	const setMonths = (e, month) => {
-		let monthNo = arrayMonthsNames.indexOf(month);
+		let monthNo = arrayMonthsNames.indexOf(e.target.value);
 		setMonthDatapicker(monthNo);
 	};
 	const prevMonth = (e, month) => {
@@ -80,89 +82,96 @@ export const MonthNav = () => {
 	/*seteo de año en la cabecera*/
 
 	/*Seleccion de mes del año en lista menu*/
-	const selectMonthList = () => {
-		let popup = arrayMonthsNames.map(month => {
-			return (
-				<div key={month}>
-					<a
-						href="#"
-						onClick={e => {
-							setMonths(e, month);
-						}}>
-						{month}
-					</a>
-				</div>
-			);
-		});
-		return <div className="month-popup">{popup}</div>;
-	};
+	const selectMonthList = arrayMonthsNames.map((month, index) => {
+		return (
+			<option
+				key={index * 33}
+				value={month}
+				className="option-month"
+				onClick={e => {
+					console.log(e.target.value);
+				}}>
+				{month}
+			</option>
+		);
+	});
+
 	const fechas = store.reservedByMonth.map((reservadas, item) => {
 		return reservadas;
 	});
 
 	return (
 		<>
-			<div className="calendar-container">
-				<table className="calendar">
-					<thead>
-						<tr className="calendar-header">
-							<td colSpan="5">
-								<span className="label-month span-style" onClick={() => showMonthpopup(!showListMonth)}>
-									{arrayMonthsNames[showMonth]}
-									{"  "}
-
-									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
-								</span>
+			<div className="wrapper-datapicker">
+				<div className="flip-container-left">
+					<div className="flipper">
+						<div className="front front-left">
+							<h2>Hoy</h2>
+							<h1>{format(currentDay, "d")}</h1>
+							<h2>Viernes</h2>
+						</div>
+					</div>
+				</div>
+				<div className="flip-container-right">
+					<div className="flipper">
+						<div className="front front-right">
+							<div className="container-date-picker">
+								<button
+									type="button"
+									className="btn btn-prev"
+									onClick={e => {
+										prevMonth(e, showMonth);
+									}}>
+									&lt;
+								</button>
+								<select
+									className="select-month"
+									value={arrayMonthsNames[showMonth]}
+									onChange={e => {
+										setMonths(e);
+									}}>
+									{selectMonthList}
+								</select>
 								<input
-									className="editor-year"
-									type="number"
+									className="edit-year"
+									type="text"
 									placeholder="year"
 									onChange={e => {
 										setYear(e);
 									}}
 									value={showYear}
 								/>
-							</td>
-							<td colSpan="2">
-								<div className="fc-button-group">
-									<button
-										type="button"
-										className="fc-prev-button fc-button fc-state-default fc-corner-left"
-										onClick={e => {
-											prevMonth(e, showMonth);
-										}}>
-										<i className="fa fa-angle-left base-green" />
-									</button>
-									<button
-										type="button"
-										className="fc-next-button fc-button fc-state-default fc-corner-right"
-										onClick={e => {
-											postMonth(e, showMonth);
-										}}>
-										<i className="fa fa-angle-right base-green" />
-									</button>
-								</div>
-							</td>
-						</tr>
-					</thead>
-					<ResumeReserve
-						currentMonth={currentMonth}
-						showModalCallback={showModalCallback}
-						updateDateCallback={updateDateCallback}
-						updatedDate={updatedDate}
-						showMonth={showMonth}
-						showYear={showYear}
-						fechas={fechas}
-						currentDay={currentDay}
-					/>
+								<button
+									type="button"
+									className="btn btn-next"
+									onClick={e => {
+										postMonth(e, showMonth);
+									}}>
+									&gt;
+								</button>
+							</div>
+							<ResumeReserve
+								currentMonth={currentMonth}
+								showModalCallback={showModalCallback}
+								updateDateCallback={updateDateCallback}
+								updatedDate={updatedDate}
+								showMonth={showMonth}
+								showYear={showYear}
+								fechas={fechas}
+								currentDay={currentDay}
+							/>
+						</div>
+					</div>
+
 					<ResumeModal
 						showModalCallback={showModalCallback}
 						show={show}
 						dates={dates}
 						updatedDate={updatedDate}
 					/>
-				</table>
+				</div>
 			</div>
+
 			<div className="legend">
 				<div className="legend-details">
 					Dias reservados <span className="legend-reserved span-style">{""}</span>

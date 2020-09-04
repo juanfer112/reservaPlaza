@@ -43,7 +43,7 @@ export const Profile = () => {
 									<span className="font-weight-bold">{store.user.current_hours}</span>
 								</li>
 								<li>
-									<label>Phone :</label> <span type="phone">{store.user.phone}</span>
+									<label>Telefono :</label> <span type="phone">{store.user.phone}</span>
 								</li>
 								<li>
 									<label>Email :</label> <span>{store.user.email}</span>

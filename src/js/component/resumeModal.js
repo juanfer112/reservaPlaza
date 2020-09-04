@@ -13,8 +13,8 @@ export const ResumeModal = props => {
 			arrayHours.push(reserves["date"]);
 			return (
 				<tr key={i}>
-					<td>{reserves["space_name"]}</td>
-					<td>{format(subHours(new Date(reserves["date"]), 2), "hh:mm aaaa")}</td>
+					<td className="text-center p-1">{reserves["space_name"]}</td>
+					<td className="text-center p-1">{format(subHours(new Date(reserves["date"]), 2), "hh:mm aaaa")}</td>
 				</tr>
 			);
 		}
