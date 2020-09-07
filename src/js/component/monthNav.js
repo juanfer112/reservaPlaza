@@ -102,19 +102,6 @@ export const MonthNav = () => {
 
 	return (
 		<>
-<<<<<<< HEAD
-			<div className="calendar-container mx-5">
-				<table className="calendar">
-					<thead>
-						<tr className="calendar-header">
-							<td colSpan="5">
-								<span className="label-month span-style" onClick={() => showMonthpopup(!showListMonth)}>
-									{arrayMonthsNames[showMonth]}
-									{"  "}
-
-									<>{showListMonth ? <>{selectMonthList()}</> : <>{}</>}</>
-								</span>
-=======
 			<div className="wrapper-datapicker">
 				<div className="flip-container-left">
 					<div className="flipper">
@@ -145,7 +132,6 @@ export const MonthNav = () => {
 									}}>
 									{selectMonthList}
 								</select>
->>>>>>> 08deced07b7ca48057978e693b78a59d85204980
 								<input
 									className="edit-year"
 									type="text"
