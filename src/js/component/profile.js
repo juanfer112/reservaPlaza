@@ -28,13 +28,13 @@ export const Profile = () => {
 							</ul>
 						</div>
 						<div className="row">
-							<div className="profile-picture col-4">
+							<div className="profile-picture col-4 offset-2">
 								<img
 									src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1024px-Placeholder_no_text.svg.png"
 									alt=""
 								/>
 							</div>
-							<ul className="personal-information col-8">
+							<ul className="personal-information col-6">
 								<li>
 									<label>Horas contratadas :</label> <span>{store.user.tot_hours}</span>
 								</li>

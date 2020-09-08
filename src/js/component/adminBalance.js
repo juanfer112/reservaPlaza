@@ -188,7 +188,9 @@ export const AdminBalance = n => {
 						</ModalFooter>
 						{deleteSchedule ? (
 							<Modal isOpen={deleteSchedule} toggle={() => setDeleteSchedule(false)}>
-								<ModalBody>Eliminar definitivamente esta reserva?</ModalBody>
+								<ModalBody>
+									<p className="text-center">Eliminar definitivamente esta reserva?</p>
+								</ModalBody>
 								<ModalFooter className="m-auto">
 									<button
 										className="btn btn-confirm text-white"

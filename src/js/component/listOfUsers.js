@@ -52,7 +52,7 @@ export const ListOfUsers = () => {
 					</thead>
 					<tbody>
 						{userList.map((user, index) => {
-							if (user.is_active == true)
+							if (user.is_active == true && user.is_admin == false)
 								return (
 									<tr key={user + index}>
 										<th
