@@ -25,9 +25,9 @@ export const SpacesModal = () => {
 				<ModalBody className="py-0">
 					{store.spaces.map((space, index) => {
 						let src = "";
-						if (space.spacetype_id == 2) {
+						if (space.spacetype_id == 1) {
 							src = cocina;
-						} else if (space.spacetype_id == 1) {
+						} else if (space.spacetype_id == 2) {
 							src = barra;
 						} else if (space.spacetype_id == 3) {
 							src = formacion;
