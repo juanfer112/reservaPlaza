@@ -84,13 +84,7 @@ export const MonthNav = () => {
 	/*Seleccion de mes del año en lista menu*/
 	const selectMonthList = arrayMonthsNames.map((month, index) => {
 		return (
-			<option
-				key={index * 33}
-				value={month}
-				className="option-month"
-				onClick={e => {
-					console.log(e.target.value);
-				}}>
+			<option key={index * 33} value={month} className="option-month">
 				{month}
 			</option>
 		);

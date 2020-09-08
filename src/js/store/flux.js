@@ -95,7 +95,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					enterprises: data.sort((a, b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1))
 				});
-				console.log(new Date(), data);
 			},
 
 			pullSpaces: async () => {
