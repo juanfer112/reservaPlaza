@@ -37,10 +37,10 @@ export const ListOfUsers = () => {
 								<p className="align-middle mb-0">Nombre</p>
 							</th>
 							<th className="px-2 align-middle" scope="col">
-								<p className="align-middle mb-0">Horas restantes</p>
+								<p className="align-middle mb-0">Horas contratadas</p>
 							</th>
 							<th className="px-2 align-middle" scope="col">
-								<p className="align-middle mb-0">Horas contratadas</p>
+								<p className="align-middle mb-0">Horas restantes</p>
 							</th>
 							<th className="px-2 align-middle" scope="col">
 								<p className="align-middle mb-0">Número de teléfono</p>

@@ -1,2 +1,2 @@
-const url = "https://3000-fdf3b7e1-cfb0-4b1a-b906-c0f1e00814a0.ws-eu01.gitpod.io/";
+const url = "https://3000-f3217ebf-dcaa-40ec-a085-30e8cbdc0393.ws-eu01.gitpod.io/";
 export default url;
